@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
-import chalk from 'chalk';
 import figlet from 'figlet';
 import gradient from 'gradient-string';
 import boxen from 'boxen';
@@ -14,7 +13,6 @@ import { configCommand } from './commands/config';
 import { testCommand } from './commands/test';
 import { listModelsCommand } from './commands/list-models';
 import { logger } from './utils/logger';
-import { ConfigManager } from './utils/config';
 
 // Display banner
 function displayBanner() {
@@ -50,6 +48,10 @@ async function main() {
     .version(version, '-v, --version')
     .option('-d, --debug', 'Enable debug mode')
     .option('-c, --config <path>', 'Path to configuration file')
+    .configureOutput({
+      writeOut: (str) => process.stdout.write(str),
+      writeErr: (str) => process.stderr.write(str),
+    })
     .hook('preAction', (thisCommand) => {
       const options = thisCommand.opts();
       if (options.debug) {
@@ -79,9 +81,12 @@ async function main() {
     await program.parseAsync();
   } catch (error) {
     if (error instanceof Error) {
-      logger.error('Command failed:', error.message);
-      if (process.argv.includes('--debug')) {
-        console.error(error.stack);
+      // Don't log errors for help and version commands
+      if (!process.argv.includes('--help') && !process.argv.includes('-h') && !process.argv.includes('--version') && !process.argv.includes('-v')) {
+        logger.error('Command failed:', error.message);
+        if (process.argv.includes('--debug')) {
+          console.error(error.stack);
+        }
       }
     } else {
       logger.error('An unexpected error occurred:', error);
