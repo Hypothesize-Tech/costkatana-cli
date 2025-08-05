@@ -111,9 +111,14 @@ async function optimizePrompt(prompt: string, options: any) {
   try {
     const requestData = {
       prompt,
-      targetModel: options.model || configManager.get('defaultModel'),
-      targetCostReduction: options.targetCost ? parseFloat(options.targetCost) : 20,
-      includeAnalysis: options.verbose || false,
+      service: 'openai', 
+      model: options.model || 'gpt-4o-mini', 
+      context: options.context,
+      options: {
+        targetReduction: options.targetCost ? parseFloat(options.targetCost) : 20,
+        preserveIntent: true,
+        suggestAlternatives: options.verbose || false,
+      },
     };
 
     const response = await axios.post(`${baseUrl}/api/optimizations`, requestData, {
