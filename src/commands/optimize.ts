@@ -109,17 +109,21 @@ async function optimizePrompt(prompt: string, options: any) {
   const spinner = ora('Optimizing prompt...').start();
 
   try {
-    const requestData = {
+    const requestData: any = {
       prompt,
       service: 'openai', 
       model: options.model || 'gpt-4o-mini', 
-      context: options.context,
       options: {
         targetReduction: options.targetCost ? parseFloat(options.targetCost) : 20,
         preserveIntent: true,
         suggestAlternatives: options.verbose || false,
       },
     };
+
+    // Only include context if it's provided
+    if (options.context) {
+      requestData.context = options.context;
+    }
 
     const response = await axios.post(`${baseUrl}/api/optimizations`, requestData, {
       headers: {
@@ -129,12 +133,18 @@ async function optimizePrompt(prompt: string, options: any) {
       timeout: 60000, // 60 seconds for optimization
     });
 
-    if (response.status !== 200) {
+    if (response.status !== 200 && response.status !== 201) {
       throw new Error(`API returned status ${response.status}`);
     }
 
     spinner.succeed('Optimization completed');
-    return response.data;
+    
+    // Handle the backend's response format
+    if (response.data.success && response.data.data) {
+      return response.data.data;
+    } else {
+      throw new Error(response.data.message || 'Invalid response format');
+    }
   } catch (error: any) {
     spinner.fail('Optimization failed');
     if (error.response) {
@@ -152,43 +162,37 @@ function displayOptimizationResults(optimization: any, options: any) {
   console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
 
   // Original vs Optimized
-  if (optimization.original && optimization.optimized) {
+  if (optimization.originalPrompt && optimization.optimizedPrompt) {
     console.log(chalk.yellow.bold('\n📝 Original Prompt'));
     console.log(chalk.gray('─'.repeat(20)));
-    console.log(chalk.white(optimization.original.prompt));
-    console.log(chalk.gray(`Tokens: ${optimization.original.tokens?.toLocaleString() || 'N/A'}`));
-    console.log(chalk.gray(`Estimated Cost: $${optimization.original.cost?.toFixed(4) || 'N/A'}`));
+    console.log(chalk.white(optimization.originalPrompt));
 
     console.log(chalk.yellow.bold('\n🚀 Optimized Prompt'));
     console.log(chalk.gray('─'.repeat(20)));
-    console.log(chalk.white(optimization.optimized.prompt));
-    console.log(chalk.gray(`Tokens: ${optimization.optimized.tokens?.toLocaleString() || 'N/A'}`));
-    console.log(chalk.gray(`Estimated Cost: $${optimization.optimized.cost?.toFixed(4) || 'N/A'}`));
+    console.log(chalk.white(optimization.optimizedPrompt));
   }
 
   // Savings
-  if (optimization.savings) {
+  if (optimization.improvementPercentage || optimization.costSaved || optimization.tokensSaved) {
     console.log(chalk.yellow.bold('\n💰 Cost Savings'));
     console.log(chalk.gray('─'.repeat(20)));
     
-    const savings = optimization.savings;
-    console.log(chalk.green(`Token Reduction: ${savings.tokenReduction?.toFixed(1) || 0}%`));
-    console.log(chalk.green(`Cost Reduction: ${savings.costReduction?.toFixed(1) || 0}%`));
-    console.log(chalk.green(`Tokens Saved: ${savings.tokensSaved?.toLocaleString() || 0}`));
-    console.log(chalk.green(`Cost Saved: $${savings.costSaved?.toFixed(4) || '0.00'}`));
+    console.log(chalk.green(`Improvement: ${optimization.improvementPercentage?.toFixed(1) || 0}%`));
+    console.log(chalk.green(`Tokens Saved: ${optimization.tokensSaved?.toLocaleString() || 0}`));
+    console.log(chalk.green(`Cost Saved: $${optimization.costSaved?.toFixed(8) || '0.00'}`));
   }
 
   // Optimization Techniques
-  if (optimization.techniques && optimization.techniques.length > 0) {
+  if (optimization.suggestions && optimization.suggestions.length > 0) {
     console.log(chalk.yellow.bold('\n🔧 Applied Techniques'));
     console.log(chalk.gray('─'.repeat(20)));
     
-    optimization.techniques.forEach((technique: any) => {
-      const name = chalk.white(technique.name);
-      const impact = chalk.green(`${technique.impact?.toFixed(1) || 0}% reduction`);
-      const description = chalk.gray(technique.description || '');
+    optimization.suggestions.forEach((suggestion: any) => {
+      const type = chalk.white(suggestion.type || 'Unknown');
+      const impact = chalk.green(suggestion.impact || 'N/A');
+      const description = chalk.gray(suggestion.description || '');
       
-      console.log(`${name}: ${impact}`);
+      console.log(`${type}: ${impact} impact`);
       if (description) {
         console.log(chalk.gray(`  ${description}`));
       }
