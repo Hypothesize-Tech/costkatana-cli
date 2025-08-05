@@ -1,0 +1,88 @@
+# Source files (not needed in published package)
+src/
+tests/
+test/
+
+# Development files
+*.test.ts
+*.spec.ts
+*.test.js
+*.spec.js
+test-*.js
+test-*.ts
+
+# Configuration files
+jest.config.js
+.eslintrc*
+.prettierrc*
+tsconfig.json
+tsconfig.build.json
+tsconfig.node.json
+
+# Documentation (keep README and LICENSE)
+docs/
+*.md
+!README.md
+!LICENSE
+!CHANGELOG.md
+
+# Development scripts
+scripts/
+.github/
+.vscode/
+.idea/
+
+# Build tools
+webpack.config.js
+rollup.config.js
+vite.config.ts
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+.travis.yml
+.circleci/
+
+# Local development
+.env*
+.local/
+tmp/
+temp/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Dependencies (already in package.json)
+node_modules/
+
+# TypeScript source maps
+*.tsbuildinfo
+
+# Test files
+test-results/
+test-coverage/
+
+# Config files that might contain secrets
+config.json
+config.local.json
+secrets.json
+
+# CLI specific development files
+.cost-katana/
+.cost-katana-cli/
+cli-config.json 
