@@ -41,7 +41,22 @@ async function fetchAnalysis(options: any) {
   const apiKey = configManager.get('apiKey');
 
   if (!baseUrl || !apiKey) {
-    throw new Error('Missing configuration. Run "cost-katana init" to set up.');
+    console.log(chalk.red.bold('\n❌ Configuration Missing'));
+    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+    
+    if (!apiKey) {
+      console.log(chalk.yellow('• API Key is not set'));
+    }
+    if (!baseUrl) {
+      console.log(chalk.yellow('• Base URL is not set'));
+    }
+    
+    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+    console.log(chalk.cyan('To set up your configuration, run:'));
+    console.log(chalk.white('  cost-katana init'));
+    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'));
+    
+    throw new Error('Configuration incomplete. Please run "cost-katana init" to set up your API key and base URL.');
   }
 
   const params = new URLSearchParams({
@@ -58,7 +73,7 @@ async function fetchAnalysis(options: any) {
   }
 
   try {
-    const response = await axios.get(`${baseUrl}/analytics/costs?${params}`, {
+    const response = await axios.get(`${baseUrl}/api/analytics/costs?${params}`, {
       headers: {
         'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',

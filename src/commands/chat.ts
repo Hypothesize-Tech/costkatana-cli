@@ -53,7 +53,22 @@ class ChatSession {
     this.historyEnabled = options.history !== false;
 
     if (!this.baseUrl || !this.apiKey) {
-      throw new Error('Missing configuration. Run "cost-katana init" to set up.');
+      console.log(chalk.red.bold('\n❌ Configuration Missing'));
+      console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+      
+      if (!this.apiKey) {
+        console.log(chalk.yellow('• API Key is not set'));
+      }
+      if (!this.baseUrl) {
+        console.log(chalk.yellow('• Base URL is not set'));
+      }
+      
+      console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+      console.log(chalk.cyan('To set up your configuration, run:'));
+      console.log(chalk.white('  cost-katana init'));
+      console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'));
+      
+      throw new Error('Configuration incomplete. Please run "cost-katana init" to set up your API key and base URL.');
     }
 
     // Add system message
@@ -249,7 +264,7 @@ class ChatSession {
       max_tokens: configManager.get('defaultMaxTokens') || 2000,
     };
 
-    const response = await axios.post(`${this.baseUrl}/chat/completions`, requestData, {
+    const response = await axios.post(`${this.baseUrl}/api/chat/completions`, requestData, {
       headers: {
         'Authorization': `Bearer ${this.apiKey}`,
         'Content-Type': 'application/json',
