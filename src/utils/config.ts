@@ -191,15 +191,54 @@ export class ConfigManager {
       enableOptimization: true,
       enableFailover: true,
                    modelMappings: {
-               gpt4: 'gpt-4o',
-               claude: 'claude-3-5-sonnet-20241022',
-               gemini: 'gemini-2.5-flash',
-             },
-               providers: {
-           openai: { priority: 1, models: ['gpt-4o', 'gpt-4o-mini', 'gpt-3.5-turbo'] },
-           anthropic: { priority: 2, models: ['claude-3-5-sonnet-20241022', 'claude-3-5-haiku-20241022'] },
-           google: { priority: 3, models: ['gemini-2.5-flash', 'gemini-2.5-pro'] },
-         },
+        gpt4: 'gpt-4o',
+        claude: 'claude-3-5-sonnet-20241022',
+        gemini: 'gemini-2.5-flash',
+        mistral: 'mistral-large-latest',
+        deepseek: 'deepseek-chat',
+        groq: 'llama-3.1-8b-instant',
+        cohere: 'command-r-plus',
+        xai: 'x-1-mini',
+        aws: 'anthropic.claude-3-5-sonnet-20241022-v1:0',
+      },
+      providers: {
+        openai: { 
+          priority: 1, 
+          models: ['gpt-4o', 'gpt-4o-mini', 'gpt-4o-mini-2024-07-18', 'gpt-4-turbo', 'gpt-4', 'gpt-3.5-turbo', 'gpt-4.1-2025-04-14'] 
+        },
+        anthropic: { 
+          priority: 2, 
+          models: ['claude-opus-4-20250514', 'claude-sonnet-4-20250514', 'claude-3-7-sonnet-20250219', 'claude-3-5-sonnet-20241022', 'claude-3-5-haiku-20241022'] 
+        },
+        google: { 
+          priority: 3, 
+          models: ['gemini-2.5-pro', 'gemini-2.5-flash', 'gemini-2.5-flash-lite-preview', 'gemini-2.0-flash', 'gemini-1.5-pro'] 
+        },
+        aws: { 
+          priority: 4, 
+          models: ['ai21.jamba-1-5-large-v1:0', 'ai21.jamba-1-5-mini-v1:0', 'amazon.nova-micro-v1:0', 'amazon.nova-lite-v1:0', 'anthropic.claude-3-5-sonnet-20241022-v1:0', 'anthropic.claude-3-5-haiku-20241022-v1:0'] 
+        },
+        cohere: { 
+          priority: 5, 
+          models: ['command-r-plus', 'command-r', 'command-light'] 
+        },
+        mistral: { 
+          priority: 6, 
+          models: ['mistral-large-latest', 'mistral-medium-latest', 'mistral-small-latest'] 
+        },
+        deepseek: { 
+          priority: 7, 
+          models: ['deepseek-chat', 'deepseek-coder'] 
+        },
+        groq: { 
+          priority: 8, 
+          models: ['llama-3.1-8b-instant', 'llama-3.1-70b-version', 'mixtral-8x7b-32768'] 
+        },
+        xai: { 
+          priority: 9, 
+          models: ['x-1-mini', 'x-1-hybrid'] 
+        },
+      },
       theme: 'auto',
       outputFormat: 'table',
       debugMode: false,

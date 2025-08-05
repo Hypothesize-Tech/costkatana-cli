@@ -61,7 +61,8 @@ async function handleSetConfig(keyValue: string) {
   const validKeys = [
     'apiKey', 'baseUrl', 'defaultModel', 'defaultTemperature',
     'defaultMaxTokens', 'costLimitPerDay', 'enableAnalytics',
-    'enableOptimization', 'enableFailover', 'theme', 'outputFormat'
+    'enableOptimization', 'enableFailover', 'theme', 'outputFormat',
+    'modelMappings', 'providers', 'debugMode'
   ];
 
   if (!validKeys.includes(key)) {
@@ -81,6 +82,13 @@ async function handleSetConfig(keyValue: string) {
     }
   } else if (key === 'enableAnalytics' || key === 'enableOptimization' || key === 'enableFailover') {
     typedValue = value.toLowerCase() === 'true';
+  } else if (key === 'modelMappings' || key === 'providers') {
+    try {
+      typedValue = JSON.parse(value);
+    } catch (error) {
+      logger.error(`Invalid JSON value for ${key}: ${value}`);
+      return;
+    }
   }
 
   configManager.set(key as any, typedValue);
@@ -89,7 +97,8 @@ async function handleSetConfig(keyValue: string) {
 
 async function handleGetConfig(key: string) {
   if (!configManager.has(key as any)) {
-    logger.error(`Configuration key not found: ${key}`);
+    logger.warn(`Configuration key not found: ${key}`);
+    logger.info('Use "cost-katana init" to set up your configuration');
     return;
   }
 
@@ -113,13 +122,18 @@ async function handleListConfig() {
   console.log(chalk.cyan.bold('\n📋 Current Configuration'));
   console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
   
-  Object.entries(config).forEach(([key, value]) => {
-    const displayValue = key === 'apiKey' && value ? 
-      `${value.substring(0, 8)}...` : 
-      JSON.stringify(value);
-    
-    console.log(`${chalk.yellow(key)}: ${chalk.white(displayValue)}`);
-  });
+  if (Object.keys(config).length === 0) {
+    console.log(chalk.yellow('No configuration set yet.'));
+    console.log(chalk.gray('Use "cost-katana init" to set up your configuration'));
+  } else {
+    Object.entries(config).forEach(([key, value]) => {
+      const displayValue = key === 'apiKey' && value ? 
+        `${value.substring(0, 8)}...` : 
+        JSON.stringify(value);
+      
+      console.log(`${chalk.yellow(key)}: ${chalk.white(displayValue)}`);
+    });
+  }
   
   console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
   console.log(chalk.gray(`Configuration file: ${configManager.getPath()}`));
