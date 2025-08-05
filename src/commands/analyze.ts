@@ -73,7 +73,7 @@ async function fetchAnalysis(options: any) {
   }
 
   try {
-    const response = await axios.get(`${baseUrl}/api/analytics/costs?${params}`, {
+    const response = await axios.get(`${baseUrl}/api/analytics?${params}`, {
       headers: {
         'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',

@@ -116,7 +116,7 @@ async function optimizePrompt(prompt: string, options: any) {
       includeAnalysis: options.verbose || false,
     };
 
-    const response = await axios.post(`${baseUrl}/api/optimization/optimize`, requestData, {
+    const response = await axios.post(`${baseUrl}/api/optimizations`, requestData, {
       headers: {
         'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',

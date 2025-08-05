@@ -258,13 +258,13 @@ class ChatSession {
       : [this.messages[0], this.messages[this.messages.length - 1]];
 
     const requestData = {
-      model: this.model,
-      messages: messages.map(m => ({ role: m.role, content: m.content })),
+      modelId: this.model,
+      message: messages[messages.length - 1].content, 
       temperature: this.temperature,
-      max_tokens: configManager.get('defaultMaxTokens') || 2000,
+      maxTokens: configManager.get('defaultMaxTokens') || 2000,
     };
 
-    const response = await axios.post(`${this.baseUrl}/api/chat/completions`, requestData, {
+    const response = await axios.post(`${this.baseUrl}/api/chat/message`, requestData, {
       headers: {
         'Authorization': `Bearer ${this.apiKey}`,
         'Content-Type': 'application/json',
@@ -277,11 +277,17 @@ class ChatSession {
     }
 
     const data = response.data;
-    return {
-      content: data.choices[0]?.message?.content || 'No response received',
-      cost: data.usage?.cost || 0,
-      tokens: data.usage?.total_tokens || 0,
-    };
+    
+    // Handle the backend's response format
+    if (data.success && data.data) {
+      return {
+        content: data.data.response || 'No response received',
+        cost: data.data.cost || 0,
+        tokens: data.data.tokenCount || 0,
+      };
+    } else {
+      throw new Error(data.message || 'Invalid response format');
+    }
   }
 
   private endSession() {
