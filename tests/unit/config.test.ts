@@ -227,7 +227,7 @@ describe('ConfigManager', () => {
 
       const env = configManager.exportAsEnv();
 
-      expect(env.COST_KATANA_API_KEY).toBe('test-key');
+      expect(env.API_KEY).toBe('test-key');
       expect(env.COST_KATANA_BASE_URL).toBe('https://test.com');
       expect(env.COST_KATANA_DEFAULT_MODEL).toBe('gpt-4');
       expect(env.COST_KATANA_TEMPERATURE).toBe('0.7');
@@ -238,7 +238,7 @@ describe('ConfigManager', () => {
     it('should only export set values', () => {
       const env = configManager.exportAsEnv();
 
-      expect(env.COST_KATANA_API_KEY).toBeUndefined();
+      expect(env.API_KEY).toBeUndefined();
       expect(env.COST_KATANA_BASE_URL).toBe('https://cost-katana-backend.store');
     });
   });

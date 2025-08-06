@@ -155,7 +155,7 @@ When in a chat session, you can use these commands:
 
 You can also set configuration via environment variables:
 
-- `COST_KATANA_API_KEY` - API key
+- `API_KEY` - API key
 - `COST_KATANA_BASE_URL` - Base URL
 - `COST_KATANA_DEFAULT_MODEL` - Default model
 - `COST_KATANA_TEMPERATURE` - Default temperature

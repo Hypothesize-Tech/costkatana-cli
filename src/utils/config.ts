@@ -277,7 +277,7 @@ export class ConfigManager {
     const config = this.getAll();
     const env: Record<string, string> = {};
 
-    if (config.apiKey) env.COST_KATANA_API_KEY = config.apiKey;
+    if (config.apiKey) env.API_KEY = config.apiKey;
     if (config.baseUrl) env.COST_KATANA_BASE_URL = config.baseUrl;
     if (config.defaultModel) env.COST_KATANA_DEFAULT_MODEL = config.defaultModel;
     if (config.defaultTemperature) env.COST_KATANA_TEMPERATURE = config.defaultTemperature.toString();
