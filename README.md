@@ -10,6 +10,11 @@ A powerful command-line interface for AI Cost Optimizer - Track, analyze, and op
 - **Model Management** - List and compare available AI models
 - **Configuration Management** - Easy setup and configuration management
 - **Rich Output Formats** - Support for table, JSON, and CSV output formats
+- **Multi-step Workflows** - Compose and evaluate complex AI workflows
+- **Cost Simulation** - Run "what-if" scenarios for cost optimization
+- **Bulk Optimization** - Optimize multiple prompts simultaneously
+- **Intelligent Prompt Rewriting** - Rewrite prompts for different styles and audiences
+- **Budget Management** - Set budget caps with real-time alerts and notifications
 
 ## 📦 Installation
 
@@ -140,6 +145,74 @@ Options:
 - `-i, --import <path>` - Import configuration from file
 - `-r, --reset` - Reset configuration to defaults
 
+#### Craft Multi-step Workflows
+```bash
+cost-katana craft-workflow [options]
+```
+Options:
+- `--name <name>` - Workflow name
+- `--interactive` - Start interactive workflow builder
+- `--template <template>` - Use predefined template
+- `--evaluate` - Evaluate workflow cost and performance
+- `--export-json` - Export workflow as JSON
+- `--export-yaml` - Export workflow as YAML
+- `--templates` - List available templates
+
+#### Simulate Cost Scenarios
+```bash
+cost-katana simulate-cost [options]
+```
+Options:
+- `--prompt-id <id>` - Prompt ID to simulate
+- `--what-if <scenario>` - JSON scenario to simulate
+- `--batch` - Run batch simulations
+- `--compare-models` - Compare different models
+- `--optimize-retries` - Optimize retry strategies
+- `--optimize-prompt` - Optimize prompt structure
+- `--historical` - Historical simulation analysis
+
+#### Bulk Optimize Prompts
+```bash
+cost-katana bulk-optimize [options]
+```
+Options:
+- `--file <path>` - CSV file with prompts to optimize
+- `--strategies` - Apply optimization strategies
+- `--priority` - Priority-based optimization
+- `--models` - Model-specific optimization
+- `--frequency` - Frequency-based optimization
+- `--cost` - Cost-based optimization
+
+#### Rewrite Prompts Intelligently
+```bash
+cost-katana rewrite-prompt [options]
+```
+Options:
+- `--prompt <text>` - Original prompt to rewrite
+- `--style <style>` - Rewrite style (short, concise, extractive)
+- `--audience <audience>` - Target audience (technical, business, general)
+- `--batch` - Rewrite multiple prompts in batch
+- `--compare` - Compare different rewrite styles
+- `--optimize` - Optimize for specific model
+
+#### Set Budget and Alerts
+```bash
+cost-katana set-budget [options]
+```
+Options:
+- `--project <name>` - Project name for budget tracking
+- `--tokens <number>` - Token budget limit
+- `--cost <amount>` - Cost budget limit in USD
+- `--notify <type>` - Notification type (slack, email, webhook)
+- `--thresholds <thresholds>` - Alert thresholds (e.g., 80,95)
+- `--enforce` - Enable hard cap enforcement
+- `--list` - List all configured budgets
+- `--update` - Update existing budget
+- `--delete` - Delete budget configuration
+- `--status` - Check budget status and usage
+- `--alerts` - Configure budget alerts
+- `--test` - Test budget notifications
+
 ## 💬 Chat Commands
 
 When in a chat session, you can use these commands:
@@ -165,6 +238,41 @@ When in a chat session, you can use these commands:
 - `enableFailover` - Enable failover features
 - `theme` - UI theme (light, dark, auto)
 - `outputFormat` - Default output format
+
+### Advanced Features
+
+#### Workflow Templates
+Predefined templates for common AI workflows:
+- `legal_analysis` - Legal document analysis workflow
+- `content_generation` - Content creation workflow
+- `data_analysis` - Data analysis workflow
+- `code_review` - Code review workflow
+
+#### Notification Channels
+Multiple notification options for budget alerts:
+- **Slack** - Direct channel notifications
+- **Email** - Email alerts with detailed reports
+- **Webhook** - Custom webhook endpoints
+- **Multi-channel** - Combine multiple notification types
+
+#### Optimization Strategies
+Different approaches for bulk optimization:
+- `aggressive` - Maximum cost reduction
+- `balanced` - Balance cost and quality
+- `conservative` - Minimal quality impact
+- `quality_first` - Prioritize quality over cost
+
+#### Rewrite Styles
+Intelligent prompt rewriting styles:
+- `short` - Minimal token usage
+- `concise` - Balanced approach
+- `extractive` - Information extraction focus
+
+#### Target Audiences
+Audience-specific prompt optimization:
+- `technical` - Technical professionals
+- `business` - Business stakeholders
+- `general` - General audience
 
 ### Environment Variables
 
@@ -227,6 +335,93 @@ cost-katana list-models --provider openai
 cost-katana list-models --format json --export models.json
 ```
 
+### Multi-step Workflows
+```bash
+# Create workflow interactively
+cost-katana craft-workflow interactive
+
+# Use predefined template
+cost-katana craft-workflow --template legal_analysis
+
+# Evaluate workflow cost
+cost-katana craft-workflow evaluate --workflow workflow.json
+
+# Export workflow
+cost-katana craft-workflow export --workflow workflow.json --export-json --export-yaml
+
+# List available templates
+cost-katana craft-workflow templates
+```
+
+### Cost Simulation
+```bash
+# Simulate cost scenario
+cost-katana simulate-cost --prompt-id prompt-123 --what-if '{"model": "claude-3-haiku", "retry": 2}'
+
+# Compare models
+cost-katana simulate-cost compare-models --prompt-id prompt-123 --models "gpt-4,claude-3-sonnet,claude-3-haiku"
+
+# Optimize retries
+cost-katana simulate-cost optimize-retries --prompt-id prompt-123
+
+# Batch simulation
+cost-katana simulate-cost batch --file scenarios.csv
+```
+
+### Bulk Optimization
+```bash
+# Optimize prompts from CSV file
+cost-katana bulk-optimize --file prompts.csv
+
+# Apply optimization strategies
+cost-katana bulk-optimize strategies --file prompts.csv --strategy aggressive
+
+# Priority-based optimization
+cost-katana bulk-optimize priority --file prompts.csv --priority high
+
+# Model-specific optimization
+cost-katana bulk-optimize models --file prompts.csv --models "gpt-4,claude-3-sonnet"
+```
+
+### Intelligent Prompt Rewriting
+```bash
+# Rewrite prompt with different styles
+cost-katana rewrite-prompt --prompt "Explain quantum computing" --style concise
+
+# Target specific audience
+cost-katana rewrite-prompt --prompt "Explain quantum computing" --audience technical
+
+# Compare rewrite styles
+cost-katana rewrite-prompt compare --prompt "Explain quantum computing" --styles "short,concise,extractive"
+
+# Optimize for specific model
+cost-katana rewrite-prompt optimize --prompt "Explain quantum computing" --model gpt-4
+
+# Batch rewrite
+cost-katana rewrite-prompt batch --file prompts.txt --style concise
+```
+
+### Budget Management
+```bash
+# Set budget with webhook notifications
+cost-katana set-budget --project my-project --tokens 500000 --notify webhook --webhook-url https://hooks.slack.com/test
+
+# Set budget with Slack notifications
+cost-katana set-budget --project my-project --cost 1000 --notify slack --slack-channel #alerts
+
+# List all budgets
+cost-katana set-budget list
+
+# Check budget status
+cost-katana set-budget status --project my-project
+
+# Configure alerts
+cost-katana set-budget alerts --project my-project --enable-slack --enable-email
+
+# Test notifications
+cost-katana set-budget test --project my-project --type slack
+```
+
 ## 🛠️ Development
 
 ### Prerequisites
@@ -247,6 +442,24 @@ npm run build
 
 # Run in development mode
 npm run dev
+```
+
+### Testing New Commands
+```bash
+# Test all new commands
+cost-katana craft-workflow --help
+cost-katana simulate-cost --help
+cost-katana bulk-optimize --help
+cost-katana rewrite-prompt --help
+cost-katana set-budget --help
+
+# Test with sample data
+echo "prompt_id,prompt_text,model
+1,Explain quantum computing,claude-3-sonnet
+2,Write a business plan,gpt-4" > test-prompts.csv
+
+cost-katana bulk-optimize --file test-prompts.csv
+cost-katana rewrite-prompt --prompt "Explain quantum computing" --style concise
 ```
 
 ### Available Scripts
