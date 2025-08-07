@@ -11,16 +11,17 @@ import * as path from 'path';
 export function optimizeCommand(program: Command) {
   program
     .command('optimize')
-    .description('Optimize prompts for cost reduction and performance')
-    .option('-p, --prompt <text>', 'Prompt to optimize')
+    .description('✂️ Optimize prompts for cost reduction and performance')
+    .argument('[prompt]', 'Prompt to optimize')
     .option('-f, --file <path>', 'File containing prompt to optimize')
     .option('-m, --model <model>', 'Target model for optimization')
     .option('-t, --target-cost <cost>', 'Target cost reduction percentage')
     .option('-o, --output <path>', 'Output file for optimized prompt')
     .option('-v, --verbose', 'Show detailed optimization steps')
-    .action(async (options) => {
+    .option('--format <format>', 'Output format (table, json, csv)', 'table')
+    .action(async (prompt, options) => {
       try {
-        await handleOptimize(options);
+        await handleOptimize(prompt, options);
       } catch (error) {
         logger.error('Optimization failed:', error);
         process.exit(1);
@@ -28,13 +29,13 @@ export function optimizeCommand(program: Command) {
     });
 }
 
-async function handleOptimize(options: any) {
+async function handleOptimize(promptArg: string | undefined, options: any) {
   logger.info('🔧 Starting prompt optimization...');
 
   try {
-    const prompt = await getPrompt(options);
+    const prompt = await getPrompt(promptArg, options);
     if (!prompt) {
-      logger.error('No prompt provided. Use --prompt or --file option.');
+      logger.error('No prompt provided. Use a prompt argument or --file option.');
       return;
     }
 
@@ -46,9 +47,9 @@ async function handleOptimize(options: any) {
   }
 }
 
-async function getPrompt(options: any): Promise<string | null> {
-  if (options.prompt) {
-    return options.prompt;
+async function getPrompt(promptArg: string | undefined, options: any): Promise<string | null> {
+  if (promptArg) {
+    return promptArg;
   }
 
   if (options.file) {
@@ -158,28 +159,57 @@ async function optimizePrompt(prompt: string, options: any) {
 }
 
 function displayOptimizationResults(optimization: any, options: any) {
-  console.log(chalk.cyan.bold('\n⚡ Optimization Results'));
+  const format = options.format || 'table';
+  
+  if (format === 'json') {
+    displayOptimizationJson(optimization);
+    return;
+  } else if (format === 'csv') {
+    displayOptimizationCsv(optimization);
+    return;
+  }
+
+  console.log(chalk.cyan.bold('\n✂️ Optimization Results'));
   console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
 
-  // Original vs Optimized
-  if (optimization.originalPrompt && optimization.optimizedPrompt) {
-    console.log(chalk.yellow.bold('\n📝 Original Prompt'));
-    console.log(chalk.gray('─'.repeat(20)));
-    console.log(chalk.white(optimization.originalPrompt));
-
-    console.log(chalk.yellow.bold('\n🚀 Optimized Prompt'));
-    console.log(chalk.gray('─'.repeat(20)));
+  // 1. Optimized Version
+  if (optimization.optimizedPrompt) {
+    console.log(chalk.yellow.bold('\n🚀 Optimized Version'));
+    console.log(chalk.gray('─'.repeat(30)));
     console.log(chalk.white(optimization.optimizedPrompt));
   }
 
-  // Savings
-  if (optimization.improvementPercentage || optimization.costSaved || optimization.tokensSaved) {
-    console.log(chalk.yellow.bold('\n💰 Cost Savings'));
-    console.log(chalk.gray('─'.repeat(20)));
+  // 2. Token Delta
+  if (optimization.tokenDelta !== undefined || optimization.tokensSaved !== undefined) {
+    console.log(chalk.yellow.bold('\n🔢 Token Delta'));
+    console.log(chalk.gray('─'.repeat(30)));
     
-    console.log(chalk.green(`Improvement: ${optimization.improvementPercentage?.toFixed(1) || 0}%`));
-    console.log(chalk.green(`Tokens Saved: ${optimization.tokensSaved?.toLocaleString() || 0}`));
-    console.log(chalk.green(`Cost Saved: $${optimization.costSaved?.toFixed(8) || '0.00'}`));
+    const originalTokens = optimization.originalTokens || 0;
+    const optimizedTokens = optimization.optimizedTokens || 0;
+    const tokenDelta = optimization.tokenDelta || (originalTokens - optimizedTokens);
+    const tokenSavings = optimization.tokensSaved || Math.abs(tokenDelta);
+    
+    console.log(chalk.white('Original Tokens:'), chalk.cyan(originalTokens.toLocaleString()));
+    console.log(chalk.white('Optimized Tokens:'), chalk.cyan(optimizedTokens.toLocaleString()));
+    console.log(chalk.white('Token Delta:'), chalk.green(`${tokenDelta > 0 ? '+' : ''}${tokenDelta.toLocaleString()}`));
+    console.log(chalk.white('Tokens Saved:'), chalk.green(`${tokenSavings.toLocaleString()}`));
+  }
+
+  // 3. Estimated Cost Savings
+  if (optimization.costSaved !== undefined || optimization.improvementPercentage !== undefined) {
+    console.log(chalk.yellow.bold('\n💰 Estimated Cost Savings'));
+    console.log(chalk.gray('─'.repeat(30)));
+    
+    const originalCost = optimization.originalCost || 0;
+    const optimizedCost = optimization.optimizedCost || 0;
+    const costSaved = optimization.costSaved || (originalCost - optimizedCost);
+    const improvementPercentage = optimization.improvementPercentage || 
+      (originalCost > 0 ? (costSaved / originalCost) * 100 : 0);
+    
+    console.log(chalk.white('Original Cost:'), chalk.red(`$${originalCost.toFixed(6)}`));
+    console.log(chalk.white('Optimized Cost:'), chalk.green(`$${optimizedCost.toFixed(6)}`));
+    console.log(chalk.white('Cost Saved:'), chalk.green(`$${costSaved.toFixed(6)}`));
+    console.log(chalk.white('Savings:'), chalk.green(`${improvementPercentage.toFixed(1)}%`));
   }
 
   // Optimization Techniques
@@ -237,6 +267,45 @@ function displayOptimizationResults(optimization: any, options: any) {
   }
 
   console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+}
+
+function displayOptimizationJson(optimization: any) {
+  const output = {
+    optimizedVersion: optimization.optimizedPrompt,
+    tokenDelta: {
+      originalTokens: optimization.originalTokens || 0,
+      optimizedTokens: optimization.optimizedTokens || 0,
+      tokenDelta: optimization.tokenDelta || (optimization.originalTokens - optimization.optimizedTokens),
+      tokensSaved: optimization.tokensSaved || Math.abs(optimization.tokenDelta || 0)
+    },
+    estimatedCostSavings: {
+      originalCost: optimization.originalCost || 0,
+      optimizedCost: optimization.optimizedCost || 0,
+      costSaved: optimization.costSaved || (optimization.originalCost - optimization.optimizedCost),
+      savingsPercentage: optimization.improvementPercentage || 0
+    }
+  };
+
+  console.log(JSON.stringify(output, null, 2));
+}
+
+function displayOptimizationCsv(optimization: any) {
+  console.log('Optimized Version,Original Tokens,Optimized Tokens,Token Delta,Tokens Saved,Original Cost,Optimized Cost,Cost Saved,Savings %');
+  
+  const originalTokens = optimization.originalTokens || 0;
+  const optimizedTokens = optimization.optimizedTokens || 0;
+  const tokenDelta = optimization.tokenDelta || (originalTokens - optimizedTokens);
+  const tokensSaved = optimization.tokensSaved || Math.abs(tokenDelta);
+  
+  const originalCost = optimization.originalCost || 0;
+  const optimizedCost = optimization.optimizedCost || 0;
+  const costSaved = optimization.costSaved || (originalCost - optimizedCost);
+  const savingsPercentage = optimization.improvementPercentage || 
+    (originalCost > 0 ? (costSaved / originalCost) * 100 : 0);
+  
+  const optimizedVersion = optimization.optimizedPrompt || '';
+  
+  console.log(`"${optimizedVersion.replace(/"/g, '""')}",${originalTokens},${optimizedTokens},${tokenDelta},${tokensSaved},${originalCost},${optimizedCost},${costSaved},${savingsPercentage.toFixed(1)}`);
 }
 
 function exportOptimizationResults(optimization: any, filePath: string) {

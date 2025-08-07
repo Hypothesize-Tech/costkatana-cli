@@ -8,7 +8,29 @@ import { version } from '../package.json';
 import { initCommand } from './commands/init';
 import { chatCommand } from './commands/chat';
 import { analyzeCommand } from './commands/analyze';
+import { analyticsCommand } from './commands/analytics';
 import { optimizeCommand } from './commands/optimize';
+import { checkCacheCommand } from './commands/check-cache';
+import { budgetCommand } from './commands/budget';
+import { trackCommand } from './commands/track';
+import { projectCommand } from './commands/project';
+import { keyCommand } from './commands/key';
+import { traceCommand } from './commands/trace';
+import { traceWorkflowCommand } from './commands/trace-workflow';
+import { debugPromptCommand } from './commands/debug-prompt';
+import { diffPromptsCommand } from './commands/diff-prompts';
+import { agentInspectCommand } from './commands/agent-inspect';
+import { replaySessionCommand } from './commands/replay-session';
+import { promptMetricsCommand } from './commands/prompt-metrics';
+import { retryLogCommand } from './commands/retry-log';
+import { auditFirewallCommand } from './commands/audit-firewall';
+import { suggestModelsCommand } from './commands/suggest-models';
+import { highCostPromptsCommand } from './commands/high-cost-prompts';
+import { craftWorkflowCommand } from './commands/craft-workflow';
+import { simulateCostCommand } from './commands/simulate-cost';
+import { bulkOptimizeCommand } from './commands/bulk-optimize';
+import { rewritePromptCommand } from './commands/rewrite-prompt';
+import { setBudgetCommand } from './commands/set-budget';
 import { configCommand } from './commands/config';
 import { testCommand } from './commands/test';
 import { listModelsCommand } from './commands/list-models';
@@ -23,7 +45,7 @@ function displayBanner() {
   });
 
   const subtitle = gradient.pastel.multiline([
-    'AI Cost Optimization CLI',
+    'Cost Katana CLI',
     `Version ${version}`,
   ]);
 
@@ -66,7 +88,29 @@ async function main() {
   listModelsCommand(program);
   chatCommand(program);
   analyzeCommand(program);
+  analyticsCommand(program);
   optimizeCommand(program);
+  checkCacheCommand(program);
+  budgetCommand(program);
+  trackCommand(program);
+  projectCommand(program);
+  keyCommand(program);
+  traceCommand(program);
+  traceWorkflowCommand(program);
+  debugPromptCommand(program);
+  diffPromptsCommand(program);
+  agentInspectCommand(program);
+  replaySessionCommand(program);
+  promptMetricsCommand(program);
+  retryLogCommand(program);
+  auditFirewallCommand(program);
+  suggestModelsCommand(program);
+  highCostPromptsCommand(program);
+  craftWorkflowCommand(program);
+  simulateCostCommand(program);
+  bulkOptimizeCommand(program);
+  rewritePromptCommand(program);
+  setBudgetCommand(program);
 
   // Global error handler
   program.exitOverride();

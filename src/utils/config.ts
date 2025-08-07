@@ -6,10 +6,12 @@ import * as path from 'path';
 export interface CLIConfig {
   apiKey?: string;
   baseUrl?: string;
+  projectName?: string;
   defaultModel?: string;
   defaultTemperature?: number;
   defaultMaxTokens?: number;
   costLimitPerDay?: number;
+  monthlyTokenBudget?: number;
   enableAnalytics?: boolean;
   enableOptimization?: boolean;
   enableFailover?: boolean;
@@ -18,6 +20,11 @@ export interface CLIConfig {
   theme?: 'light' | 'dark' | 'auto';
   outputFormat?: 'table' | 'json' | 'csv';
   debugMode?: boolean;
+  currentProject?: {
+    id: string;
+    name: string;
+    switchedAt: string;
+  };
 }
 
 export class ConfigManager {
@@ -38,6 +45,10 @@ export class ConfigManager {
           type: 'string',
           default: 'https://cost-katana-backend.store',
         },
+        projectName: {
+          type: 'string',
+          default: 'My AI Project',
+        },
         defaultModel: {
           type: 'string',
           default: 'gpt-4',
@@ -53,6 +64,10 @@ export class ConfigManager {
         costLimitPerDay: {
           type: 'number',
           default: 50.0,
+        },
+        monthlyTokenBudget: {
+          type: 'number',
+          default: 10000000, // 10 million tokens
         },
         enableAnalytics: {
           type: 'boolean',
@@ -95,6 +110,10 @@ export class ConfigManager {
         debugMode: {
           type: 'boolean',
           default: false,
+        },
+        currentProject: {
+          type: 'object',
+          default: undefined,
         },
       },
     });
@@ -183,10 +202,12 @@ export class ConfigManager {
     return {
       apiKey: 'your_api_key_here',
       baseUrl: 'https://cost-katana-backend.store',
+      projectName: 'My AI Project',
       defaultModel: 'gpt-4',
       defaultTemperature: 0.7,
       defaultMaxTokens: 2000,
       costLimitPerDay: 50.0,
+      monthlyTokenBudget: 10000000, // 10 million tokens
       enableAnalytics: true,
       enableOptimization: true,
       enableFailover: true,
@@ -254,6 +275,10 @@ export class ConfigManager {
       errors.push('API key is required');
     }
 
+    if (!config.projectName) {
+      errors.push('Project name is required');
+    }
+
     if (config.defaultTemperature && (config.defaultTemperature < 0 || config.defaultTemperature > 2)) {
       errors.push('Default temperature must be between 0 and 2');
     }
@@ -264,6 +289,10 @@ export class ConfigManager {
 
     if (config.costLimitPerDay && config.costLimitPerDay <= 0) {
       errors.push('Cost limit per day must be greater than 0');
+    }
+
+    if (config.monthlyTokenBudget && config.monthlyTokenBudget <= 0) {
+      errors.push('Monthly token budget must be greater than 0');
     }
 
     return {
@@ -279,10 +308,12 @@ export class ConfigManager {
 
     if (config.apiKey) env.API_KEY = config.apiKey;
     if (config.baseUrl) env.COST_KATANA_BASE_URL = config.baseUrl;
+    if (config.projectName) env.COST_KATANA_PROJECT_NAME = config.projectName;
     if (config.defaultModel) env.COST_KATANA_DEFAULT_MODEL = config.defaultModel;
     if (config.defaultTemperature) env.COST_KATANA_TEMPERATURE = config.defaultTemperature.toString();
     if (config.defaultMaxTokens) env.COST_KATANA_MAX_TOKENS = config.defaultMaxTokens.toString();
     if (config.costLimitPerDay) env.COST_KATANA_COST_LIMIT = config.costLimitPerDay.toString();
+    if (config.monthlyTokenBudget) env.COST_KATANA_MONTHLY_TOKEN_BUDGET = config.monthlyTokenBudget.toString();
 
     return env;
   }

@@ -33,11 +33,26 @@ npm run build
 cost-katana init
 ```
 
-This will guide you through setting up:
-- API key
-- Base URL
-- Default model
-- Advanced settings (temperature, max tokens, etc.)
+This enhanced setup will guide you through:
+
+#### 🔐 Required Setup
+- **Project Name** - Identify your project for cost tracking
+- **API Key** - Secure authentication to Cost Katana backend
+- **Default Model** - Choose your preferred AI model (GPT-4, Claude, Gemini, etc.)
+- **Monthly Token Budget** - Set your monthly token consumption limit
+
+#### ⚙️ Optional Configuration
+- **Base URL** - Backend API endpoint
+- **Advanced Settings** - Temperature, max tokens, cost limits, features
+
+#### 📋 Interactive Experience
+- Secure password input for API keys
+- Model selection with popular options
+- Budget configuration in millions of tokens
+- Configuration summary display
+- Next steps guidance
+
+For detailed setup instructions, see [INIT_COMMAND.md](./INIT_COMMAND.md).
 
 ### 2. Test Configuration
 ```bash

@@ -53,6 +53,9 @@ async function handleInit(options: any) {
   // Collect configuration
   const config = await collectConfiguration(options);
 
+  // Display configuration summary
+  displayConfigurationSummary(config);
+
   // Save configuration
   if (configManager.saveToFile(fullOutputPath)) {
     logger.success(`✅ Configuration saved to: ${fullOutputPath}`);
@@ -67,6 +70,23 @@ async function handleInit(options: any) {
 
 async function collectConfiguration(options: any): Promise<any> {
   const config: any = {};
+
+  // Project Name
+  const { projectName } = await inquirer.prompt([
+    {
+      type: 'input',
+      name: 'projectName',
+      message: 'Enter your project name:',
+      default: 'My AI Project',
+      validate: (input: string) => {
+        if (!input.trim()) {
+          return 'Project name is required';
+        }
+        return true;
+      },
+    },
+  ]);
+  config.projectName = projectName;
 
   // API Key
   if (options.apiKey) {
@@ -88,6 +108,48 @@ async function collectConfiguration(options: any): Promise<any> {
     config.apiKey = apiKey;
   }
 
+  // Default Model
+  if (options.model) {
+    config.defaultModel = options.model;
+  } else {
+    const { defaultModel } = await inquirer.prompt([
+      {
+        type: 'list',
+        name: 'defaultModel',
+        message: 'Set default model:',
+        choices: [
+          { name: 'GPT-4 Turbo', value: 'gpt-4-turbo-preview' },
+          { name: 'Claude 3 Sonnet', value: 'anthropic.claude-3-sonnet-20240229-v1:0' },
+          { name: 'Gemini 2.0 Flash', value: 'gemini-2.0-flash-exp' },
+          { name: 'Nova Pro', value: 'nova-pro' },
+          { name: 'GPT-4', value: 'gpt-4' },
+          { name: 'Claude 3 Haiku', value: 'anthropic.claude-3-haiku-20240307-v1:0' },
+        ],
+      },
+    ]);
+    config.defaultModel = defaultModel;
+  }
+
+  // Monthly Token Budget
+  const { monthlyTokenBudget } = await inquirer.prompt([
+    {
+      type: 'number',
+      name: 'monthlyTokenBudget',
+      message: 'Define monthly token budget (in millions):',
+      default: 10,
+      validate: (input: number) => {
+        if (input <= 0) {
+          return 'Monthly token budget must be greater than 0';
+        }
+        if (input > 1000) {
+          return 'Monthly token budget cannot exceed 1000 million tokens';
+        }
+        return true;
+      },
+    },
+  ]);
+  config.monthlyTokenBudget = monthlyTokenBudget * 1000000; // Convert to actual tokens
+
   // Base URL
   if (options.baseUrl) {
     config.baseUrl = options.baseUrl;
@@ -98,37 +160,9 @@ async function collectConfiguration(options: any): Promise<any> {
         name: 'baseUrl',
         message: 'Enter base URL:',
         default: 'https://cost-katana-backend.store',
-        validate: (input: string) => {
-          try {
-            new URL(input);
-            return true;
-          } catch {
-            return 'Please enter a valid URL';
-          }
-        },
       },
     ]);
     config.baseUrl = baseUrl;
-  }
-
-  // Default Model
-  if (options.model) {
-    config.defaultModel = options.model;
-  } else {
-    const { defaultModel } = await inquirer.prompt([
-      {
-        type: 'list',
-        name: 'defaultModel',
-        message: 'Select default model:',
-        choices: [
-          { name: 'GPT-4 Turbo', value: 'gpt-4-turbo-preview' },
-          { name: 'Claude 3 Sonnet', value: 'anthropic.claude-3-sonnet-20240229-v1:0' },
-          { name: 'Gemini 2.0 Flash', value: 'gemini-2.0-flash-exp' },
-          { name: 'Nova Pro', value: 'nova-pro' },
-        ],
-      },
-    ]);
-    config.defaultModel = defaultModel;
   }
 
   // Advanced Configuration
@@ -253,6 +287,34 @@ function displayNextSteps() {
   console.log(chalk.yellow('5.') + ' View available models:');
   console.log(chalk.gray('   cost-katana list-models'));
   
+  console.log(chalk.yellow('6.') + ' View your configuration:');
+  console.log(chalk.gray('   cost-katana config show'));
+  
   console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
   console.log(chalk.blue('💡 Tip: Run "cost-katana --help" for more commands'));
+  console.log(chalk.blue('💡 Tip: Run "cost-katana config edit" to modify settings'));
+}
+
+function displayConfigurationSummary(config: any) {
+  console.log('\n' + chalk.green.bold('📋 Configuration Summary:'));
+  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+  
+  console.log(chalk.cyan('Project Name:') + ' ' + chalk.white(config.projectName));
+  console.log(chalk.cyan('Default Model:') + ' ' + chalk.white(config.defaultModel));
+  console.log(chalk.cyan('Monthly Token Budget:') + ' ' + chalk.white(`${(config.monthlyTokenBudget / 1000000).toFixed(1)}M tokens`));
+  console.log(chalk.cyan('Base URL:') + ' ' + chalk.white(config.baseUrl));
+  
+  if (config.defaultTemperature) {
+    console.log(chalk.cyan('Default Temperature:') + ' ' + chalk.white(config.defaultTemperature));
+  }
+  
+  if (config.defaultMaxTokens) {
+    console.log(chalk.cyan('Default Max Tokens:') + ' ' + chalk.white(config.defaultMaxTokens));
+  }
+  
+  if (config.costLimitPerDay) {
+    console.log(chalk.cyan('Daily Cost Limit:') + ' ' + chalk.white(`$${config.costLimitPerDay}`));
+  }
+  
+  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
 } 
