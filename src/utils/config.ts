@@ -218,7 +218,7 @@ export class ConfigManager {
         mistral: 'mistral-large-latest',
         deepseek: 'deepseek-chat',
         groq: 'llama-3.1-8b-instant',
-        cohere: 'command-r-plus',
+        cohere: 'command-a-03-2025',
         xai: 'x-1-mini',
         aws: 'anthropic.claude-3-5-sonnet-20241022-v1:0',
       },
@@ -241,7 +241,7 @@ export class ConfigManager {
         },
         cohere: { 
           priority: 5, 
-          models: ['command-r-plus', 'command-r', 'command-light'] 
+          models: ['command-a-03-2025', 'command-r7b-12-2024', 'command-a-reasoning-08-2025', 'command-a-vision-07-2025', 'command-r-plus-04-2024', 'command-r-08-2024'] 
         },
         mistral: { 
           priority: 6, 
