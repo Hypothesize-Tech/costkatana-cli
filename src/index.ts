@@ -34,6 +34,7 @@ import { setBudgetCommand } from './commands/set-budget';
 import { configCommand } from './commands/config';
 import { testCommand } from './commands/test';
 import { listModelsCommand } from './commands/list-models';
+import { sastCommand } from './commands/sast';
 import { logger } from './utils/logger';
 
 // Display banner
@@ -90,6 +91,7 @@ async function main() {
   analyzeCommand(program);
   analyticsCommand(program);
   optimizeCommand(program);
+  sastCommand(program);
   checkCacheCommand(program);
   budgetCommand(program);
   trackCommand(program);

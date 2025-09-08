@@ -19,6 +19,14 @@ export function optimizeCommand(program: Command) {
     .option('-o, --output <path>', 'Output file for optimized prompt')
     .option('-v, --verbose', 'Show detailed optimization steps')
     .option('--format <format>', 'Output format (table, json, csv)', 'table')
+    .option('--cortex', 'Enable Cortex meta-language processing')
+    .option('--sast', 'Enable SAST (Semantic Abstract Syntax Tree) mode')
+    .option('--cortex-operation <op>', 'Cortex operation: optimize, compress, analyze, transform, sast', 'optimize')
+    .option('--cortex-style <style>', 'Output style: formal, casual, technical, conversational', 'conversational')
+    .option('--cortex-format <format>', 'Output format: plain, markdown, structured, json', 'plain')
+    .option('--semantic-cache', 'Enable semantic caching')
+    .option('--ambiguity-resolution', 'Enable ambiguity resolution (SAST)')
+    .option('--cross-lingual', 'Enable cross-lingual semantic mapping (SAST)')
     .action(async (prompt, options) => {
       try {
         await handleOptimize(prompt, options);
@@ -110,6 +118,10 @@ async function optimizePrompt(prompt: string, options: any) {
   const spinner = ora('Optimizing prompt...').start();
 
   try {
+    // Determine Cortex/SAST mode
+    const enableCortex = options.cortex || options.sast;
+    const cortexOperation = options.sast ? 'sast' : (options.cortexOperation || 'optimize');
+
     const requestData: any = {
       prompt,
       service: 'openai', 
@@ -119,6 +131,18 @@ async function optimizePrompt(prompt: string, options: any) {
         preserveIntent: true,
         suggestAlternatives: options.verbose || false,
       },
+      // Cortex/SAST parameters
+      enableCortex,
+      cortexOperation,
+      cortexStyle: options.cortexStyle || 'conversational',
+      cortexFormat: options.cortexFormat || 'plain',
+      cortexSemanticCache: options.semanticCache || enableCortex,
+      cortexPreserveSemantics: true,
+      cortexIntelligentRouting: enableCortex,
+      // SAST-specific parameters
+      cortexSastProcessing: options.sast || false,
+      cortexAmbiguityResolution: options.ambiguityResolution || options.sast,
+      cortexCrossLingualMode: options.crossLingual || false,
     };
 
     // Only include context if it's provided
