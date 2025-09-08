@@ -436,7 +436,7 @@ function displaySastResults(result: any, options: any) {
       console.log(chalk.magenta('\n📊 vs Traditional Cortex:'));
       console.log(`  Token Reduction: ${chalk.green((sast.evolutionComparison.tokenReduction > 0 ? '+' : '') + sast.evolutionComparison.tokenReduction?.toFixed(1))}%`);
       console.log(`  Ambiguity Reduction: ${chalk.blue((sast.evolutionComparison.ambiguityReduction > 0 ? '+' : '') + sast.evolutionComparison.ambiguityReduction?.toFixed(1))}%`);
-      console.log(`  Semantic Clarity Gain: ${chalk.purple((sast.evolutionComparison.semanticClarityGain > 0 ? '+' : '') + (sast.evolutionComparison.semanticClarityGain * 100)?.toFixed(1))}%`);
+      console.log(`  Semantic Clarity Gain: ${chalk.magenta((sast.evolutionComparison.semanticClarityGain > 0 ? '+' : '') + (sast.evolutionComparison.semanticClarityGain * 100)?.toFixed(1))}%`);
       console.log(`  Recommended: ${chalk.cyan(sast.evolutionComparison.recommendedApproach.toUpperCase())}`);
     }
   }
@@ -515,7 +515,7 @@ function displayComparisonResults(data: any, options: any) {
   console.log(chalk.cyan('\n📈 Improvements:'));
   console.log(`  Token Reduction: ${chalk.green((data.improvements.tokenReduction > 0 ? '+' : '') + data.improvements.tokenReduction.toFixed(1))}%`);
   console.log(`  Ambiguity Reduction: ${chalk.blue((data.improvements.ambiguityReduction > 0 ? '+' : '') + data.improvements.ambiguityReduction.toFixed(1))}%`);
-  console.log(`  Semantic Clarity: ${chalk.purple((data.improvements.semanticClarityGain > 0 ? '+' : '') + (data.improvements.semanticClarityGain * 100).toFixed(1))}%`);
+  console.log(`  Semantic Clarity: ${chalk.magenta((data.improvements.semanticClarityGain > 0 ? '+' : '') + (data.improvements.semanticClarityGain * 100).toFixed(1))}%`);
   console.log(`  Cross-Lingual: ${data.improvements.crossLingualCompatibility ? chalk.green('✓') : chalk.red('✗')}`);
 
   console.log(chalk.yellow(`\n🎯 Recommended Approach: ${data.metadata.recommendedApproach.toUpperCase()}`));
@@ -552,7 +552,7 @@ function displayUniversalTestResults(data: any, options: any) {
 
   console.log(chalk.green(`\n🌍 Universal Test Results for: "${data.concept}"`));
   console.log(`Unification Score: ${chalk.blue((data.unificationScore * 100).toFixed(1))}%`);
-  console.log(`Universal Compatible: ${data.isUniversal ? chalk.green('✓') : chalk.orange('Partial')}`);
+  console.log(`Universal Compatible: ${data.isUniversal ? chalk.green('✓') : chalk.yellow('Partial')}`);
 
   console.log(chalk.cyan('\n🗣️ Translations:'));
   Object.entries(data.translations).forEach(([lang, translation]: [string, any]) => {
@@ -576,7 +576,7 @@ function displaySastStats(data: any, options: any) {
   console.log(chalk.cyan('\n🧬 Encoding Performance:'));
   console.log(`  Total Encodings: ${chalk.blue(data.encoding.totalEncodings.toLocaleString())}`);
   console.log(`  Success Rate: ${chalk.green((data.encoding.successfulEncodings / data.encoding.totalEncodings * 100).toFixed(1))}%`);
-  console.log(`  Ambiguities Resolved: ${chalk.purple(data.encoding.ambiguitiesResolved.toLocaleString())}`);
+  console.log(`  Ambiguities Resolved: ${chalk.magenta(data.encoding.ambiguitiesResolved.toLocaleString())}`);
   console.log(`  Average Processing: ${chalk.cyan(data.encoding.averageProcessingTime.toFixed(2))}ms`);
   console.log(`  Semantic Accuracy: ${chalk.green((data.encoding.semanticAccuracy * 100).toFixed(1))}%`);
 
@@ -585,7 +585,7 @@ function displaySastStats(data: any, options: any) {
   console.log(`  SAST Wins: ${chalk.green(data.comparison.sastWins)} (${data.comparison.sastWinRate.toFixed(1)}%)`);
   console.log(`  Traditional Wins: ${chalk.yellow(data.comparison.traditionalWins)}`);
   console.log(`  Average Improvement: ${chalk.blue(data.comparison.averageImprovement.toFixed(1))}%`);
-  console.log(`  Ambiguity Resolution Rate: ${chalk.purple(data.comparison.ambiguityResolutionRate.toFixed(1))}%`);
+  console.log(`  Ambiguity Resolution Rate: ${chalk.magenta(data.comparison.ambiguityResolutionRate.toFixed(1))}%`);
 
   console.log(chalk.gray(`\nLast Updated: ${data.lastUpdated}`));
 }
