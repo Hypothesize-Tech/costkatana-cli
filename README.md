@@ -4,17 +4,19 @@ A powerful command-line interface for AI Cost Optimizer - Track, analyze, and op
 
 ## 🚀 Features
 
-- **Interactive Chat Sessions** - Chat with AI models directly from the command line
-- **Cost Analysis** - Analyze usage patterns and identify cost optimization opportunities
-- **Prompt Optimization** - Automatically optimize prompts for cost reduction
-- **Model Management** - List and compare available AI models
-- **Configuration Management** - Easy setup and configuration management
-- **Rich Output Formats** - Support for table, JSON, and CSV output formats
-- **Multi-step Workflows** - Compose and evaluate complex AI workflows
-- **Cost Simulation** - Run "what-if" scenarios for cost optimization
-- **Bulk Optimization** - Optimize multiple prompts simultaneously
-- **Intelligent Prompt Rewriting** - Rewrite prompts for different styles and audiences
-- **Budget Management** - Set budget caps with real-time alerts and notifications
+- **🧠 Cortex Meta-Language** - Revolutionary 3-stage AI optimization (70-95% token reduction)
+- **⚡ Interactive Chat Sessions** - Chat with AI models directly from the command line
+- **📊 Advanced Cost Analysis** - Analyze usage patterns and identify optimization opportunities
+- **🎯 Answer Generation** - Generate complete responses in optimized LISP format
+- **🔄 Dynamic Instruction Generation** - AI-powered LISP instruction generator
+- **🤖 Model Management** - List and compare available AI models with Cortex support
+- **⚙️ Configuration Management** - Easy setup and configuration management
+- **📋 Rich Output Formats** - Support for table, JSON, and CSV output formats
+- **🔗 Multi-step Workflows** - Compose and evaluate complex AI workflows
+- **💰 Cost Simulation** - Run "what-if" scenarios with Cortex optimization
+- **📦 Bulk Optimization** - Optimize multiple queries with Cortex processing
+- **✍️ Intelligent Rewriting** - Context-aware prompt and response optimization
+- **💸 Budget Management** - Set budget caps with real-time alerts and notifications
 
 ## 📦 Installation
 
@@ -111,17 +113,23 @@ Options:
 - `-v, --verbose` - Show detailed analysis
 - `--export <path>` - Export analysis to file
 
-#### Optimize Prompts
+#### Optimize with Cortex
 ```bash
 cost-katana optimize [options]
 ```
 Options:
-- `-p, --prompt <text>` - Prompt to optimize
-- `-f, --file <path>` - File containing prompt to optimize
+- `-p, --prompt <text>` - Query to optimize with Cortex
+- `-f, --file <path>` - File containing queries to optimize
 - `-m, --model <model>` - Target model for optimization
+- `--cortex` - Enable Cortex meta-language optimization (70-95% savings)
+- `--cortex-mode <mode>` - Cortex mode: answer_generation, prompt_optimization
+- `--encoding-model <model>` - Encoder model (default: claude-3-5-sonnet)
+- `--core-model <model>` - Core processor model (default: claude-opus-4-1)
+- `--decoding-model <model>` - Decoder model (default: claude-3-5-sonnet)
+- `--dynamic-instructions` - Enable AI-powered LISP instruction generation
 - `-t, --target-cost <cost>` - Target cost reduction percentage
-- `-o, --output <path>` - Output file for optimized prompt
-- `-v, --verbose` - Show detailed optimization steps
+- `-o, --output <path>` - Output file for optimized results
+- `-v, --verbose` - Show detailed optimization steps and analytics
 
 #### List Models
 ```bash
@@ -311,16 +319,28 @@ cost-katana analyze --days 7 --verbose
 cost-katana analyze --format csv --export analysis.csv
 ```
 
-### Prompt Optimization
+### 🧠 Cortex Optimization
 ```bash
-# Optimize a prompt
-cost-katana optimize --prompt "Write a detailed essay about climate change"
+# Enable Cortex for massive token savings (70-95% reduction)
+cost-katana optimize --prompt "Write a complete REST API in Node.js" --cortex
 
-# Optimize from file
-cost-katana optimize --file prompt.txt --output optimized.txt
+# Use answer generation mode for complete responses
+cost-katana optimize --prompt "Implement binary search algorithm" --cortex --cortex-mode answer_generation
 
-# Target 30% cost reduction
-cost-katana optimize --prompt "..." --target-cost 30
+# Bulk optimization with Cortex
+cost-katana optimize --file queries.txt --cortex --dynamic-instructions --output results.json
+
+# Advanced Cortex configuration
+cost-katana optimize \
+  --prompt "Create a React authentication system" \
+  --cortex \
+  --core-model claude-opus-4-1 \
+  --encoding-model claude-3-5-sonnet \
+  --dynamic-instructions \
+  --verbose
+
+# Traditional optimization (legacy)
+cost-katana optimize --prompt "Write an essay about climate change" --target-cost 30
 ```
 
 ### Model Management
