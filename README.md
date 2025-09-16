@@ -516,7 +516,7 @@ MIT License - see LICENSE file for details.
 
 ## 🆘 Support
 
-- **Documentation**: [Link to documentation]
+- **Documentation**: [docs.costkatana.com](https://docs.costkatana.com)
 - **Issues**: [GitHub Issues](https://github.com/Hypothesize-Tech/costkatana-cli/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/Hypothesize-Tech/costkatana-cli/discussions)
 
