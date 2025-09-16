@@ -143,7 +143,7 @@ cost-katana --debug [command]
 
 - Read the full [README.md](README.md) for detailed documentation
 - Explore all available commands with `cost-katana --help`
-- Check out the [API Documentation](https://github.com/Hypothesize-Tech/ai-cost-optimizer-backend) for backend details
+- Check out the [API Documentation](https://github.com/Hypothesize-Tech/costkatana-backend) for backend details
 
 ## 🎉 You're Ready!
 

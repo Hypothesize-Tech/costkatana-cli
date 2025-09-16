@@ -1,6 +1,6 @@
 {
   "name": "ai-cost-optimizer-cli",
-  "version": "1.0.15",    
+  "version": "1.0.16",    
   "description": "Command-line interface for AI Cost Optimizer - Track, analyze, and optimize AI API costs across multiple providers",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -56,12 +56,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Hypothesize-Tech/ai-cost-optimizer-cli.git"
-  },
+    "url": "git+https://github.com/Hypothesize-Tech/costkatana-cli.git"
+  },  
   "bugs": {
-    "url": "https://github.com/Hypothesize-Tech/ai-cost-optimizer-cli/issues"
+    "url": "https://github.com/Hypothesize-Tech/costkatana-cli/issues"
   },
-  "homepage": "https://github.com/Hypothesize-Tech/ai-cost-optimizer-cli#readme",
+  "homepage": "https://github.com/Hypothesize-Tech/costkatana-cli#readme",     
   "engines": {
     "node": ">=18.0.0"
   },

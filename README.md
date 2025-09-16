@@ -517,11 +517,11 @@ MIT License - see LICENSE file for details.
 ## 🆘 Support
 
 - **Documentation**: [Link to documentation]
-- **Issues**: [GitHub Issues](https://github.com/Hypothesize-Tech/ai-cost-optimizer-cli/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/Hypothesize-Tech/ai-cost-optimizer-cli/discussions)
+- **Issues**: [GitHub Issues](https://github.com/Hypothesize-Tech/costkatana-cli/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/Hypothesize-Tech/costkatana-cli/discussions)
 
 ## 🔗 Related Projects
 
-- [AI Cost Optimizer Core](https://github.com/Hypothesize-Tech/ai-cost-optimizer-core) - Core library
-- [AI Cost Optimizer Backend](https://github.com/Hypothesize-Tech/ai-cost-optimizer-backend) - Backend API
-- [AI Cost Optimizer Frontend](https://github.com/Hypothesize-Tech/ai-cost-optimizer-frontend) - Web interface
+- [AI Cost Optimizer Core](https://github.com/Hypothesize-Tech/aicostkatana-core) - Core library
+- [AI Cost Optimizer Backend](https://github.com/Hypothesize-Tech/costkatana-backend) - Backend API
+- [AI Cost Optimizer Frontend](https://github.com/Hypothesize-Tech/costkatana-frontend) - Web interface
