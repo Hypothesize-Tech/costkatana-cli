@@ -522,6 +522,6 @@ MIT License - see LICENSE file for details.
 
 ## 🔗 Related Projects
 
-- [AI Cost Optimizer Core](https://github.com/Hypothesize-Tech/aicostkatana-core) - Core library
+- [AI Cost Optimizer Core](https://github.com/Hypothesize-Tech/costkatana-core) - Core library
 - [AI Cost Optimizer Backend](https://github.com/Hypothesize-Tech/costkatana-backend) - Backend API
 - [AI Cost Optimizer Frontend](https://github.com/Hypothesize-Tech/costkatana-frontend) - Web interface
