@@ -20,13 +20,10 @@ export function optimizeCommand(program: Command) {
     .option('-v, --verbose', 'Show detailed optimization steps')
     .option('--format <format>', 'Output format (table, json, csv)', 'table')
     .option('--cortex', 'Enable Cortex meta-language processing')
-    .option('--sast', 'Enable SAST (Semantic Abstract Syntax Tree) mode')
     .option('--cortex-operation <op>', 'Cortex operation: optimize, compress, analyze, transform, sast', 'optimize')
     .option('--cortex-style <style>', 'Output style: formal, casual, technical, conversational', 'conversational')
     .option('--cortex-format <format>', 'Output format: plain, markdown, structured, json', 'plain')
     .option('--semantic-cache', 'Enable semantic caching')
-    .option('--ambiguity-resolution', 'Enable ambiguity resolution (SAST)')
-    .option('--cross-lingual', 'Enable cross-lingual semantic mapping (SAST)')
     .action(async (prompt, options) => {
       try {
         await handleOptimize(prompt, options);
