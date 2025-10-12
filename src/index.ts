@@ -5,16 +5,33 @@ import figlet from 'figlet';
 import gradient from 'gradient-string';
 import boxen from 'boxen';
 import { version } from '../package.json';
+// Essential commands
 import { initCommand } from './commands/init';
 import { chatCommand } from './commands/chat';
 import { analyzeCommand } from './commands/analyze';
+import { configCommand } from './commands/config';
+import { testCommand } from './commands/test';
+
+// New simple commands
+import { askCommand } from './commands/ask';
+import { compareCommand } from './commands/compare';
+import { modelsCommand } from './commands/models';
+
+// Advanced commands (kept for power users)
 import { analyticsCommand } from './commands/analytics';
 import { optimizeCommand } from './commands/optimize';
-import { checkCacheCommand } from './commands/check-cache';
 import { budgetCommand } from './commands/budget';
 import { trackCommand } from './commands/track';
 import { projectCommand } from './commands/project';
 import { keyCommand } from './commands/key';
+import { craftWorkflowCommand } from './commands/craft-workflow';
+import { simulateCostCommand } from './commands/simulate-cost';
+import { bulkOptimizeCommand } from './commands/bulk-optimize';
+import { rewritePromptCommand } from './commands/rewrite-prompt';
+import { setBudgetCommand } from './commands/set-budget';
+
+// Legacy commands (deprecated but kept for compatibility)
+import { checkCacheCommand } from './commands/check-cache';
 import { traceCommand } from './commands/trace';
 import { traceWorkflowCommand } from './commands/trace-workflow';
 import { debugPromptCommand } from './commands/debug-prompt';
@@ -26,14 +43,8 @@ import { retryLogCommand } from './commands/retry-log';
 import { auditFirewallCommand } from './commands/audit-firewall';
 import { suggestModelsCommand } from './commands/suggest-models';
 import { highCostPromptsCommand } from './commands/high-cost-prompts';
-import { craftWorkflowCommand } from './commands/craft-workflow';
-import { simulateCostCommand } from './commands/simulate-cost';
-import { bulkOptimizeCommand } from './commands/bulk-optimize';
-import { rewritePromptCommand } from './commands/rewrite-prompt';
-import { setBudgetCommand } from './commands/set-budget';
-import { configCommand } from './commands/config';
-import { testCommand } from './commands/test';
 import { listModelsCommand } from './commands/list-models';
+
 import { logger } from './utils/logger';
 
 // Display banner
@@ -81,20 +92,32 @@ async function main() {
       }
     });
 
-  // Register commands
+  // Register essential commands (shown in help by default)
   initCommand(program);
-  testCommand(program);
-  configCommand(program);
-  listModelsCommand(program);
   chatCommand(program);
+  askCommand(program);
+  modelsCommand(program);
+  compareCommand(program);
   analyzeCommand(program);
+  configCommand(program);
+  testCommand(program);
+  
+  // Register advanced commands (for power users)
+  budgetCommand(program);
   analyticsCommand(program);
   optimizeCommand(program);
-  checkCacheCommand(program);
-  budgetCommand(program);
   trackCommand(program);
   projectCommand(program);
   keyCommand(program);
+  craftWorkflowCommand(program);
+  simulateCostCommand(program);
+  bulkOptimizeCommand(program);
+  rewritePromptCommand(program);
+  setBudgetCommand(program);
+  listModelsCommand(program);
+  
+  // Register legacy commands (kept for compatibility)
+  checkCacheCommand(program);
   traceCommand(program);
   traceWorkflowCommand(program);
   debugPromptCommand(program);
@@ -106,11 +129,6 @@ async function main() {
   auditFirewallCommand(program);
   suggestModelsCommand(program);
   highCostPromptsCommand(program);
-  craftWorkflowCommand(program);
-  simulateCostCommand(program);
-  bulkOptimizeCommand(program);
-  rewritePromptCommand(program);
-  setBudgetCommand(program);
 
   // Global error handler
   program.exitOverride();

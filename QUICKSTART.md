@@ -1,150 +1,142 @@
-# Cost Katana CLI - Quick Start Guide
+# Cost Katana CLI - Quick Start
 
-## 🚀 Getting Started
+Get started in 3 simple steps!
 
-### 1. Installation
+## Step 1: Install
+
 ```bash
-npm install -g ai-cost-optimizer-cli
+npm install -g cost-katana-cli
 ```
 
-### 2. Initialize Configuration
+## Step 2: Initialize
+
 ```bash
 cost-katana init
 ```
 
-Follow the prompts to set up:
-- Your API key
-- Base URL (default: https://cost-katana-backend.store)
-- Default model
-- Advanced settings (optional)
+You'll be asked for:
+1. **API Key** - Get from [costkatana.com/settings](https://costkatana.com/settings)
+2. **Default Model** - Choose your preferred AI (we'll suggest popular ones)
 
-### 3. Test Your Setup
-```bash
-cost-katana test
-```
+That's it! ✅
 
-This will verify your configuration and API connectivity.
+## Step 3: Use It
 
-### 4. Start Using the CLI
+### Start Chatting
 
-#### Chat with AI
 ```bash
 cost-katana chat
 ```
 
-#### Analyze Costs
+```
+You: Hello!
+AI: Hi! How can I help you today?
+💰 Cost: $0.0001
+
+You: Explain quantum computing
+AI: Quantum computing uses quantum mechanics principles...
+💰 Session: $0.0023
+```
+
+### Ask Quick Questions
+
+```bash
+cost-katana ask "What is the capital of France?"
+```
+
+```
+> Paris is the capital of France.
+💰 Cost: $0.0001
+```
+
+### Check Your Spending
+
 ```bash
 cost-katana analyze
 ```
 
-#### Optimize Prompts
-```bash
-cost-katana optimize --prompt "Your prompt here"
+```
+📊 Cost Analysis (Last 30 Days)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Total Cost:      $12.45
+Total Requests:  1,234
+Average/Request: $0.0101
+
+Top Models:
+• gpt-4:         $8.20 (659 requests)
+• gpt-3.5-turbo: $4.25 (575 requests)
 ```
 
-#### List Available Models
+## Common Commands
+
 ```bash
-cost-katana list-models
-```
-
-## 🎯 Key Features
-
-### Interactive Chat
-- Real-time conversation with AI models
-- Built-in commands: `help`, `clear`, `history`, `stats`
-- Cost tracking and session statistics
-
-### Cost Analysis
-- Detailed cost breakdown by model and provider
-- Usage trends and insights
-- Export to CSV, JSON, or table format
-
-### Prompt Optimization
-- Automatic cost reduction suggestions
-- Quality assessment
-- Multiple optimization techniques
-
-### Model Management
-- Browse available models
-- Compare pricing and capabilities
-- Filter by provider
-
-## 🔧 Configuration
-
-### View Current Config
-```bash
-cost-katana config --list
-```
-
-### Set Configuration
-```bash
-cost-katana config --set apiKey=your_key_here
-cost-katana config --set defaultModel=gpt-4
-```
-
-### Export/Import Config
-```bash
-cost-katana config --export config.json
-cost-katana config --import config.json
-```
-
-## 📊 Examples
-
-### Basic Usage
-```bash
-# Start a chat session
+# Chat with AI
 cost-katana chat
 
-# Analyze last 7 days
-cost-katana analyze --days 7
+# Quick question
+cost-katana ask "Your question"
 
-# Optimize a prompt for 30% cost reduction
-cost-katana optimize --prompt "Write a detailed essay" --target-cost 30
+# Analyze costs
+cost-katana analyze
 
-# List OpenAI models
-cost-katana list-models --provider openai
+# List models
+cost-katana models
+
+# Check config
+cost-katana config
 ```
 
-### Advanced Usage
+## Tips
+
+### Save Money
+
 ```bash
-# Chat with specific model and temperature
-cost-katana chat --model gpt-4 --temperature 0.8
+# Use cheaper model for simple tasks
+cost-katana chat --model gpt-3.5-turbo
 
-# Export analysis to CSV
-cost-katana analyze --format csv --export analysis.csv
+# Enable optimization
+cost-katana chat --cortex
 
-# Optimize from file
-cost-katana optimize --file prompt.txt --output optimized.txt
-
-# Verbose model listing
-cost-katana list-models --verbose --format json
+# Use caching
+cost-katana chat --cache
 ```
 
-## 🆘 Troubleshooting
+### Productivity
 
-### Common Issues
-
-1. **"Missing configuration" error**
-   - Run `cost-katana init` to set up configuration
-
-2. **API connectivity issues**
-   - Check your API key and base URL
-   - Run `cost-katana test` to diagnose
-
-3. **Permission denied**
-   - Make sure the CLI is executable: `chmod +x bin/cost-katana.js`
-
-### Debug Mode
 ```bash
-cost-katana --debug [command]
+# Use system prompts
+cost-katana chat --system "You are a Python expert"
+
+# Save conversations
+cost-katana chat --output chat.json
+
+# Load conversations
+cost-katana chat --file chat.json
 ```
 
-## 📚 Next Steps
+## Need Help?
 
-- Read the full [README.md](README.md) for detailed documentation
-- Explore all available commands with `cost-katana --help`
-- Check out the [API Documentation](https://github.com/Hypothesize-Tech/costkatana-backend) for backend details
+```bash
+# Show all commands
+cost-katana --help
 
-## 🎉 You're Ready!
+# Help for specific command
+cost-katana chat --help
 
-Your Cost Katana CLI is now set up and ready to help you optimize AI costs and improve your AI workflows! 
+# Enable debug mode
+cost-katana --debug chat
+```
+
+## What's Next?
+
+1. **Read the full README**: More features and examples
+2. **Visit your dashboard**: [costkatana.com/dashboard](https://costkatana.com/dashboard)
+3. **Join Discord**: [discord.gg/Wcwzw8wM](https://discord.gg/Wcwzw8wM)
+
+---
+
+**You're ready to chat with AI!** 🚀
+
+```bash
+cost-katana chat
+```
