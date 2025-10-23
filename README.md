@@ -166,7 +166,7 @@ cost-katana config set daily-limit 5
 
 ```bash
 # Alternative to init command
-export COST_KATANA_KEY="dak_your_key"
+export COST_KATANA_API_KEY="dak_your_key"
 export COST_KATANA_MODEL="gpt-4"
 ```
 
@@ -272,7 +272,7 @@ cost-katana chat
 cost-katana init
 
 # Or set environment variable
-export COST_KATANA_KEY="dak_your_key"
+export COST_KATANA_API_KEY="dak_your_key"
 ```
 
 ### "Model not available"
