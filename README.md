@@ -44,6 +44,32 @@ cost-katana chat
 
 That's it!
 
+---
+
+## 📚 **More Examples**
+
+**Looking for more comprehensive examples?** Check out our complete examples repository
+
+**🔗 [github.com/Hypothesize-Tech/costkatana-examples](https://github.com/Hypothesize-Tech/costkatana-examples)**
+
+**What's included:**
+- ✅ 44 feature sections covering every Cost Katana capability
+- ✅ CLI examples and guides in [Section 9](https://github.com/Hypothesize-Tech/costkatana-examples/tree/main/9-cli)
+- ✅ HTTP REST API examples (`.http` files)
+- ✅ TypeScript/Node.js examples
+- ✅ Python SDK examples
+- ✅ Framework integrations (Express, Next.js, Fastify, NestJS, FastAPI)
+- ✅ Real-world use cases with best practices
+
+**Popular examples:**
+- [CLI Examples](https://github.com/Hypothesize-Tech/costkatana-examples/tree/main/9-cli) - Complete CLI guides
+- [Cost Tracking](https://github.com/Hypothesize-Tech/costkatana-examples/tree/main/1-cost-tracking) - Track costs across all providers
+- [Webhooks](https://github.com/Hypothesize-Tech/costkatana-examples/tree/main/10-webhooks) - Real-time notifications
+- [Workflows](https://github.com/Hypothesize-Tech/costkatana-examples/tree/main/13-workflows) - Multi-step AI orchestration
+- [Semantic Caching](https://github.com/Hypothesize-Tech/costkatana-examples/tree/main/14-cache) - 30-40% cost reduction
+
+---
+
 ## Essential Commands
 
 ### Chat with AI
