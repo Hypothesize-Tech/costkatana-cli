@@ -351,7 +351,7 @@ cost-katana ask "Hello"
 - **Documentation**: https://docs.costkatana.com/cli
 - **Dashboard**: https://costkatana.com
 - **GitHub**: https://github.com/Hypothesize-Tech/costkatana-cli
-- **Discord**: https://discord.gg/Wcwzw8wM
+- **Discord**: https://discord.gg/D8nDArmKbY
 - **Email**: support@costkatana.com
 
 ## License

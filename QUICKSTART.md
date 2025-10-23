@@ -131,7 +131,7 @@ cost-katana --debug chat
 
 1. **Read the full README**: More features and examples
 2. **Visit your dashboard**: [costkatana.com/dashboard](https://costkatana.com/dashboard)
-3. **Join Discord**: [discord.gg/Wcwzw8wM](https://discord.gg/Wcwzw8wM)
+3. **Join Discord**: [discord.gg/Wcwzw8wM](https://discord.gg/D8nDArmKbY)
 
 ---
 
