@@ -1,6 +1,6 @@
 {
   "name": "cost-katana-cli",
-  "version": "2.0.3",    
+  "version": "2.0.4",    
   "description": "The simplest AI CLI. Chat with any AI model and track costs automatically.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

@@ -77,7 +77,7 @@ async function main() {
   // Set up program metadata
   program
     .name('cost-katana')
-    .description('AI Cost Optimizer CLI - Track, analyze, and optimize AI API costs')
+    .description('CostKatana CLI - Track, analyze, and optimize AI API costs')
     .version(version, '-v, --version')
     .option('-d, --debug', 'Enable debug mode')
     .option('-c, --config <path>', 'Path to configuration file')
