@@ -35,7 +35,7 @@ export class ConfigManager {
     this.configPath = configPath;
     
     this.conf = new Conf<CLIConfig>({
-      projectName: 'ai-cost-optimizer-cli',
+      projectName: 'cost-katana-cli',
       schema: {
         apiKey: {
           type: 'string',
