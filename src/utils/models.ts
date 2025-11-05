@@ -26,14 +26,14 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 128000,
     contextLength: 128000,
     pricing: { input: 1.25, output: 10.0 },
-    capabilities: ['text', 'reasoning', 'analysis', 'advanced-intelligence'],
+    capabilities: ['text', 'reasoning', 'analysis', 'coding', 'agents'],
     category: 'text',
     isLatest: true,
-    notes: 'Latest GPT-5 model with advanced intelligence and reasoning capabilities'
+    notes: 'The best model for coding and agentic tasks across domains'
   },
   {
     id: 'gpt-5-mini',
-    name: 'GPT-5 Mini',
+    name: 'GPT-5 mini',
     provider: 'OpenAI',
     available: true,
     maxTokens: 128000,
@@ -42,11 +42,11 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'reasoning', 'analysis', 'efficient'],
     category: 'text',
     isLatest: true,
-    notes: 'Efficient GPT-5 variant with balanced performance and cost'
+    notes: 'A faster, cost-efficient version of GPT-5 for well-defined tasks'
   },
   {
     id: 'gpt-5-nano',
-    name: 'GPT-5 Nano',
+    name: 'GPT-5 nano',
     provider: 'OpenAI',
     available: true,
     maxTokens: 128000,
@@ -55,11 +55,37 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'fast', 'cost-effective'],
     category: 'text',
     isLatest: true,
-    notes: 'Fastest and most cost-effective GPT-5 variant'
+    notes: 'Fastest, most cost-efficient version of GPT-5'
+  },
+  {
+    id: 'gpt-5-pro',
+    name: 'GPT-5 pro',
+    provider: 'OpenAI',
+    available: true,
+    maxTokens: 128000,
+    contextLength: 128000,
+    pricing: { input: 2.50, output: 20.0 },
+    capabilities: ['text', 'reasoning', 'analysis', 'coding', 'agents', 'premium'],
+    category: 'text',
+    isLatest: true,
+    notes: 'Version of GPT-5 that produces smarter and more precise responses'
+  },
+  {
+    id: 'gpt-5-codex',
+    name: 'GPT-5-Codex',
+    provider: 'OpenAI',
+    available: true,
+    maxTokens: 128000,
+    contextLength: 128000,
+    pricing: { input: 1.25, output: 10.0 },
+    capabilities: ['code', 'programming', 'agents', 'coding'],
+    category: 'code',
+    isLatest: true,
+    notes: 'A version of GPT-5 optimized for agentic coding in Codex'
   },
   {
     id: 'gpt-5-chat-latest',
-    name: 'GPT-5 Chat Latest',
+    name: 'GPT-5 Chat',
     provider: 'OpenAI',
     available: true,
     maxTokens: 128000,
@@ -68,7 +94,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'chat', 'reasoning', 'analysis'],
     category: 'text',
     isLatest: true,
-    notes: 'Latest GPT-5 chat model with advanced conversational capabilities'
+    notes: 'GPT-5 model used in ChatGPT (not recommended for API use)'
   },
 
   // === GPT-4o Models ===
@@ -150,18 +176,363 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     isLatest: false,
     notes: 'GPT-3.5 Turbo model'
   },
+  // === O-Series Models (Latest) ===
   {
-    id: 'gpt-4.1-2025-04-14',
+    id: 'o3-pro',
+    name: 'o3-pro',
+    provider: 'OpenAI',
+    available: true,
+    maxTokens: 128000,
+    contextLength: 128000,
+    pricing: { input: 20.0, output: 80.0 },
+    capabilities: ['text', 'reasoning', 'analysis', 'pro'],
+    category: 'reasoning',
+    isLatest: true,
+    notes: 'Version of o3 with more compute for better responses'
+  },
+  {
+    id: 'o3-deep-research',
+    name: 'o3-deep-research',
+    provider: 'OpenAI',
+    available: true,
+    maxTokens: 128000,
+    contextLength: 128000,
+    pricing: { input: 10.0, output: 40.0 },
+    capabilities: ['text', 'research', 'analysis', 'deep'],
+    category: 'research',
+    isLatest: true,
+    notes: 'Our most powerful deep research model'
+  },
+  {
+    id: 'o4-mini',
+    name: 'o4-mini',
+    provider: 'OpenAI',
+    available: true,
+    maxTokens: 128000,
+    contextLength: 128000,
+    pricing: { input: 1.10, output: 4.40 },
+    capabilities: ['text', 'reasoning', 'efficient'],
+    category: 'reasoning',
+    isLatest: true,
+    notes: 'Fast, cost-efficient reasoning model, succeeded by GPT-5 mini'
+  },
+  {
+    id: 'o4-mini-deep-research',
+    name: 'o4-mini-deep-research',
+    provider: 'OpenAI',
+    available: true,
+    maxTokens: 128000,
+    contextLength: 128000,
+    pricing: { input: 2.0, output: 8.0 },
+    capabilities: ['text', 'research', 'analysis', 'efficient'],
+    category: 'research',
+    isLatest: true,
+    notes: 'Faster, more affordable deep research model'
+  },
+  {
+    id: 'o3',
+    name: 'o3',
+    provider: 'OpenAI',
+    available: true,
+    maxTokens: 128000,
+    contextLength: 128000,
+    pricing: { input: 2.0, output: 8.0 },
+    capabilities: ['text', 'reasoning', 'analysis'],
+    category: 'reasoning',
+    isLatest: true,
+    notes: 'Reasoning model for complex tasks, succeeded by GPT-5'
+  },
+  {
+    id: 'o1-pro',
+    name: 'o1-pro',
+    provider: 'OpenAI',
+    available: true,
+    maxTokens: 128000,
+    contextLength: 128000,
+    pricing: { input: 150.0, output: 600.0 },
+    capabilities: ['text', 'reasoning', 'analysis', 'premium'],
+    category: 'reasoning',
+    isLatest: true,
+    notes: 'Version of o1 with more compute for better responses'
+  },
+  {
+    id: 'o1',
+    name: 'o1',
+    provider: 'OpenAI',
+    available: true,
+    maxTokens: 128000,
+    contextLength: 128000,
+    pricing: { input: 15.0, output: 60.0 },
+    capabilities: ['text', 'reasoning', 'analysis', 'advanced'],
+    category: 'reasoning',
+    isLatest: false,
+    notes: 'Previous full o-series reasoning model'
+  },
+  // === Video Generation Models ===
+  {
+    id: 'sora-2',
+    name: 'Sora 2',
+    provider: 'OpenAI',
+    available: true,
+    maxTokens: 0,
+    contextLength: 0,
+    pricing: { input: 0.05, output: 0.05 },
+    capabilities: ['video-generation', 'audio', 'synced-audio'],
+    category: 'video',
+    isLatest: true,
+    notes: 'Flagship video generation with synced audio (priced per second)'
+  },
+  {
+    id: 'sora-2-pro',
+    name: 'Sora 2 Pro',
+    provider: 'OpenAI',
+    available: true,
+    maxTokens: 0,
+    contextLength: 0,
+    pricing: { input: 0.10, output: 0.10 },
+    capabilities: ['video-generation', 'audio', 'synced-audio', 'advanced'],
+    category: 'video',
+    isLatest: true,
+    notes: 'Most advanced synced-audio video generation (priced per second)'
+  },
+  // === Image Generation Models ===
+  {
+    id: 'gpt-image-1',
+    name: 'GPT Image 1',
+    provider: 'OpenAI',
+    available: true,
+    maxTokens: 0,
+    contextLength: 0,
+    pricing: { input: 0.04, output: 0.04 },
+    capabilities: ['image-generation', 'text-to-image'],
+    category: 'image',
+    isLatest: true,
+    notes: 'State-of-the-art image generation model'
+  },
+  {
+    id: 'gpt-image-1-mini',
+    name: 'gpt-image-1-mini',
+    provider: 'OpenAI',
+    available: true,
+    maxTokens: 0,
+    contextLength: 0,
+    pricing: { input: 0.02, output: 0.02 },
+    capabilities: ['image-generation', 'text-to-image', 'cost-efficient'],
+    category: 'image',
+    isLatest: true,
+    notes: 'A cost-efficient version of GPT Image 1'
+  },
+  // === Audio and Realtime Models ===
+  {
+    id: 'gpt-realtime',
+    name: 'gpt-realtime',
+    provider: 'OpenAI',
+    available: true,
+    maxTokens: 128000,
+    contextLength: 128000,
+    pricing: { input: 5.0, output: 20.0 },
+    capabilities: ['text', 'audio', 'realtime', 'multimodal'],
+    category: 'realtime',
+    isLatest: true,
+    notes: 'Model capable of realtime text and audio inputs and outputs'
+  },
+  {
+    id: 'gpt-realtime-mini',
+    name: 'gpt-realtime-mini',
+    provider: 'OpenAI',
+    available: true,
+    maxTokens: 128000,
+    contextLength: 128000,
+    pricing: { input: 0.60, output: 2.40 },
+    capabilities: ['text', 'audio', 'realtime', 'efficient'],
+    category: 'realtime',
+    isLatest: true,
+    notes: 'A cost-efficient version of GPT Realtime'
+  },
+  {
+    id: 'gpt-audio',
+    name: 'gpt-audio',
+    provider: 'OpenAI',
+    available: true,
+    maxTokens: 128000,
+    contextLength: 128000,
+    pricing: { input: 2.50, output: 10.0 },
+    capabilities: ['text', 'audio', 'multimodal'],
+    category: 'audio',
+    isLatest: true,
+    notes: 'For audio inputs and outputs with Chat Completions API'
+  },
+  {
+    id: 'gpt-audio-mini',
+    name: 'gpt-audio-mini',
+    provider: 'OpenAI',
+    available: true,
+    maxTokens: 128000,
+    contextLength: 128000,
+    pricing: { input: 0.15, output: 0.60 },
+    capabilities: ['text', 'audio', 'efficient'],
+    category: 'audio',
+    isLatest: true,
+    notes: 'A cost-efficient version of GPT Audio'
+  },
+  // === Transcription Models ===
+  {
+    id: 'gpt-4o-transcribe',
+    name: 'GPT-4o Transcribe',
+    provider: 'OpenAI',
+    available: true,
+    maxTokens: 0,
+    contextLength: 0,
+    pricing: { input: 0.15, output: 0.15 },
+    capabilities: ['audio', 'transcription', 'speech-to-text'],
+    category: 'audio',
+    isLatest: true,
+    notes: 'Speech-to-text model powered by GPT-4o'
+  },
+  {
+    id: 'gpt-4o-transcribe-diarize',
+    name: 'GPT-4o Transcribe Diarize',
+    provider: 'OpenAI',
+    available: true,
+    maxTokens: 0,
+    contextLength: 0,
+    pricing: { input: 0.20, output: 0.20 },
+    capabilities: ['audio', 'transcription', 'speech-to-text', 'diarization'],
+    category: 'audio',
+    isLatest: true,
+    notes: 'Transcription model that identifies who\'s speaking when'
+  },
+  {
+    id: 'gpt-4o-mini-transcribe',
+    name: 'GPT-4o mini Transcribe',
+    provider: 'OpenAI',
+    available: true,
+    maxTokens: 0,
+    contextLength: 0,
+    pricing: { input: 0.10, output: 0.10 },
+    capabilities: ['audio', 'transcription', 'speech-to-text', 'efficient'],
+    category: 'audio',
+    isLatest: true,
+    notes: 'Speech-to-text model powered by GPT-4o mini'
+  },
+  {
+    id: 'whisper-1',
+    name: 'Whisper',
+    provider: 'OpenAI',
+    available: true,
+    maxTokens: 0,
+    contextLength: 0,
+    pricing: { input: 0.006, output: 0.006 },
+    capabilities: ['audio', 'transcription', 'speech-to-text', 'general-purpose'],
+    category: 'audio',
+    isLatest: true,
+    notes: 'General-purpose speech recognition model (priced per minute)'
+  },
+  // === Text-to-Speech Models ===
+  {
+    id: 'gpt-4o-mini-tts',
+    name: 'GPT-4o mini TTS',
+    provider: 'OpenAI',
+    available: true,
+    maxTokens: 0,
+    contextLength: 0,
+    pricing: { input: 0.15, output: 0.15 },
+    capabilities: ['audio', 'text-to-speech', 'tts'],
+    category: 'audio',
+    isLatest: true,
+    notes: 'Text-to-speech model powered by GPT-4o mini'
+  },
+  {
+    id: 'tts-1',
+    name: 'TTS-1',
+    provider: 'OpenAI',
+    available: true,
+    maxTokens: 0,
+    contextLength: 0,
+    pricing: { input: 0.015, output: 0.015 },
+    capabilities: ['audio', 'text-to-speech', 'tts', 'fast'],
+    category: 'audio',
+    isLatest: true,
+    notes: 'Text-to-speech model optimized for speed (priced per 1K characters)'
+  },
+  {
+    id: 'tts-1-hd',
+    name: 'TTS-1 HD',
+    provider: 'OpenAI',
+    available: true,
+    maxTokens: 0,
+    contextLength: 0,
+    pricing: { input: 0.030, output: 0.030 },
+    capabilities: ['audio', 'text-to-speech', 'tts', 'high-quality'],
+    category: 'audio',
+    isLatest: true,
+    notes: 'Text-to-speech model optimized for quality (priced per 1K characters)'
+  },
+  // === Open-Weight Models ===
+  {
+    id: 'gpt-oss-120b',
+    name: 'gpt-oss-120b',
+    provider: 'OpenAI',
+    available: true,
+    maxTokens: 131072,
+    contextLength: 131072,
+    pricing: { input: 0.0, output: 0.0 },
+    capabilities: ['text', 'open-source', 'open-weight'],
+    category: 'text',
+    isLatest: true,
+    notes: 'Most powerful open-weight model, fits into an H100 GPU. Licensed under Apache 2.0'
+  },
+  {
+    id: 'gpt-oss-20b',
+    name: 'gpt-oss-20b',
+    provider: 'OpenAI',
+    available: true,
+    maxTokens: 131072,
+    contextLength: 131072,
+    pricing: { input: 0.0, output: 0.0 },
+    capabilities: ['text', 'open-source', 'open-weight', 'low-latency'],
+    category: 'text',
+    isLatest: true,
+    notes: 'Medium-sized open-weight model for low latency. Licensed under Apache 2.0'
+  },
+  {
+    id: 'gpt-4.1',
     name: 'GPT-4.1',
     provider: 'OpenAI',
     available: true,
     maxTokens: 128000,
     contextLength: 128000,
     pricing: { input: 2.0, output: 8.0 },
-    capabilities: ['text', 'analysis', 'reasoning'],
+    capabilities: ['text', 'analysis', 'enhanced'],
     category: 'text',
     isLatest: true,
-    notes: 'Latest GPT-4.1 model with enhanced capabilities'
+    notes: 'Smartest non-reasoning model'
+  },
+  {
+    id: 'gpt-4.1-mini',
+    name: 'GPT-4.1 mini',
+    provider: 'OpenAI',
+    available: true,
+    maxTokens: 128000,
+    contextLength: 128000,
+    pricing: { input: 0.40, output: 1.60 },
+    capabilities: ['text', 'analysis', 'efficient'],
+    category: 'text',
+    isLatest: true,
+    notes: 'Smaller, faster version of GPT-4.1'
+  },
+  {
+    id: 'gpt-4.1-nano',
+    name: 'GPT-4.1 nano',
+    provider: 'OpenAI',
+    available: true,
+    maxTokens: 128000,
+    contextLength: 128000,
+    pricing: { input: 0.10, output: 0.40 },
+    capabilities: ['text', 'fast', 'cost-effective'],
+    category: 'text',
+    isLatest: true,
+    notes: 'Fastest, most cost-efficient version of GPT-4.1'
   },
 
   // === Anthropic Models ===
@@ -201,8 +572,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     pricing: { input: 3.0, output: 15.0 },
     capabilities: ['text', 'vision', 'multimodal', 'reasoning', 'extended-thinking', 'multilingual'],
     category: 'multimodal',
-    isLatest: true,
-    notes: 'High-performance model with exceptional reasoning (Mar 2025 cutoff, 1M context beta available)'
+    isLatest: false,
+    notes: 'High-performance model with exceptional reasoning (Mar 2025 cutoff, 1M context beta available). Use Claude Sonnet 4.5 for latest version'
   },
   {
     id: 'claude-3-7-sonnet-20250219',
@@ -214,8 +585,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     pricing: { input: 3.0, output: 15.0 },
     capabilities: ['text', 'vision', 'multimodal', 'reasoning', 'extended-thinking', 'multilingual'],
     category: 'multimodal',
-    isLatest: true,
-    notes: 'High-performance model with early extended thinking (Oct 2024 cutoff, 64k output)'
+    isLatest: false,
+    notes: 'High-performance model with early extended thinking (Oct 2024 cutoff, 64k output). Deprecated - use Claude Sonnet 4.5 instead'
   },
   {
     id: 'claude-3-5-sonnet-20241022',
@@ -231,6 +602,32 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     notes: 'Upgraded Claude 3.5 Sonnet (Apr 2024 cutoff, 8k output)'
   },
   {
+    id: 'claude-sonnet-4-5',
+    name: 'Claude Sonnet 4.5',
+    provider: 'Anthropic',
+    available: true,
+    maxTokens: 200000,
+    contextLength: 200000,
+    pricing: { input: 3.0, output: 15.0 },
+    capabilities: ['text', 'vision', 'multimodal', 'reasoning', 'extended-thinking', 'multilingual'],
+    category: 'multimodal',
+    isLatest: true,
+    notes: 'Latest Claude Sonnet model with enhanced capabilities and 1M context window support (beta)'
+  },
+  {
+    id: 'claude-haiku-4-5',
+    name: 'Claude Haiku 4.5',
+    provider: 'Anthropic',
+    available: true,
+    maxTokens: 200000,
+    contextLength: 200000,
+    pricing: { input: 1.0, output: 5.0 },
+    capabilities: ['text', 'vision', 'multimodal', 'multilingual'],
+    category: 'multimodal',
+    isLatest: true,
+    notes: 'Latest Claude Haiku model with improved performance and capabilities'
+  },
+  {
     id: 'claude-3-5-haiku-20241022',
     name: 'Claude Haiku 3.5',
     provider: 'Anthropic',
@@ -240,7 +637,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     pricing: { input: 0.8, output: 4.0 },
     capabilities: ['text', 'vision', 'multimodal', 'multilingual'],
     category: 'multimodal',
-    isLatest: true,
+    isLatest: false,
     notes: 'Fastest Claude model (July 2024 cutoff, 8k output)'
   },
 
@@ -254,10 +651,10 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 2000000,
     contextLength: 2000000,
     pricing: { input: 1.25, output: 10.0 },
-    capabilities: ['text', 'multimodal', 'reasoning', 'coding', 'complex-problems'],
+    capabilities: ['text', 'multimodal', 'reasoning', 'coding', 'complex-problems', 'thinking'],
     category: 'multimodal',
     isLatest: true,
-    notes: 'Our most advanced reasoning Gemini model, made to solve complex problems. Best for multimodal understanding, coding (web development), and complex prompts'
+    notes: 'Our state-of-the-art thinking model, capable of reasoning over complex problems in code, math, and STEM, as well as analyzing large datasets, codebases, and documents using long context'
   },
   {
     id: 'gemini-2.5-flash',
@@ -267,10 +664,10 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 1000000,
     contextLength: 1000000,
     pricing: { input: 0.3, output: 2.5 },
-    capabilities: ['text', 'image', 'video', 'multimodal', 'reasoning', 'thinking', 'live-api'],
+    capabilities: ['text', 'image', 'video', 'multimodal', 'reasoning', 'thinking', 'live-api', 'agents'],
     category: 'multimodal',
     isLatest: true,
-    notes: 'Our best model in terms of price-performance, offering well-rounded capabilities. Support for Live API included for some endpoints. See the model\'s thinking process as part of the response'
+    notes: 'Our best model in terms of price-performance, offering well-rounded capabilities. Best for large scale processing, low-latency, high volume tasks that require thinking, and agentic use cases'
   },
   {
     id: 'gemini-2.5-flash-lite-preview',
@@ -283,7 +680,20 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'image', 'video', 'multimodal', 'reasoning', 'thinking', 'high-throughput'],
     category: 'multimodal',
     isLatest: true,
-    notes: 'Our most cost effective model that supports high throughput tasks. The fastest model in the 2.5 line. Features 1M token context window and multimodal input. Outperforms 2.0 Flash on most evaluation benchmarks'
+    notes: 'Our fastest flash model optimized for cost-efficiency and high throughput. Features 1M token context window and multimodal input'
+  },
+  {
+    id: 'gemini-2.5-flash-lite',
+    name: 'Gemini 2.5 Flash-Lite',
+    provider: 'Google AI',
+    available: true,
+    maxTokens: 1000000,
+    contextLength: 1000000,
+    pricing: { input: 0.1, output: 0.4 },
+    capabilities: ['text', 'image', 'video', 'multimodal', 'reasoning', 'thinking', 'high-throughput'],
+    category: 'multimodal',
+    isLatest: true,
+    notes: 'Our fastest flash model optimized for cost-efficiency and high throughput (stable version)'
   },
   {
     id: 'gemini-2.5-flash-audio',
@@ -376,7 +786,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'image', 'video', 'multimodal', 'agents', 'next-generation'],
     category: 'multimodal',
     isLatest: false,
-    notes: 'Our newest multimodal model, with next generation features and improved capabilities. Most balanced multimodal model built for the era of Agents'
+    notes: 'Our second generation workhorse model, with a 1 million token context window'
   },
   {
     id: 'gemini-2.0-flash-lite',
@@ -389,7 +799,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'multimodal', 'cost-efficient', 'low-latency'],
     category: 'multimodal',
     isLatest: false,
-    notes: 'A Gemini 2.0 Flash model optimized for cost efficiency and low latency. Smallest and most cost effective model, built for at scale usage'
+    notes: 'Our second generation small workhorse model, with a 1 million token context window'
   },
   {
     id: 'gemini-2.0-flash-audio',
@@ -1047,6 +1457,32 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     notes: 'Claude Opus 4 via AWS Bedrock - previous flagship model'
   },
   {
+    id: 'anthropic.claude-sonnet-4-5-v1:0',
+    name: 'Claude Sonnet 4.5 (Bedrock)',
+    provider: 'AWS Bedrock',
+    available: true,
+    maxTokens: 200000,
+    contextLength: 200000,
+    pricing: { input: 3.0, output: 15.0 },
+    capabilities: ['text', 'vision', 'multimodal', 'reasoning', 'extended-thinking', 'multilingual'],
+    category: 'multimodal',
+    isLatest: true,
+    notes: 'Claude Sonnet 4.5 on AWS Bedrock - latest Claude Sonnet model with enhanced capabilities and 1M context window support (beta)'
+  },
+  {
+    id: 'anthropic.claude-haiku-4-5-v1:0',
+    name: 'Claude Haiku 4.5 (Bedrock)',
+    provider: 'AWS Bedrock',
+    available: true,
+    maxTokens: 200000,
+    contextLength: 200000,
+    pricing: { input: 1.0, output: 5.0 },
+    capabilities: ['text', 'vision', 'multimodal', 'multilingual'],
+    category: 'multimodal',
+    isLatest: true,
+    notes: 'Claude Haiku 4.5 on AWS Bedrock - latest Claude Haiku model with improved performance'
+  },
+  {
     id: 'anthropic.claude-sonnet-4-20250514-v1:0',
     name: 'Claude Sonnet 4 (Bedrock)',
     provider: 'AWS Bedrock',
@@ -1056,7 +1492,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     pricing: { input: 3.0, output: 15.0 },
     capabilities: ['text', 'vision', 'multimodal', 'reasoning', 'extended-thinking', 'multilingual'],
     category: 'multimodal',
-    isLatest: true,
+    isLatest: false,
     notes: 'Claude Sonnet 4 via AWS Bedrock - high-performance model with exceptional reasoning'
   },
   {
@@ -1069,8 +1505,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     pricing: { input: 3.0, output: 15.0 },
     capabilities: ['text', 'vision', 'multimodal', 'reasoning', 'extended-thinking', 'multilingual'],
     category: 'multimodal',
-    isLatest: true,
-    notes: 'Claude Sonnet 3.7 via AWS Bedrock - high-performance model with early extended thinking'
+    isLatest: false,
+    notes: 'Claude Sonnet 3.7 via AWS Bedrock - high-performance model with early extended thinking. Deprecated - use Claude Sonnet 4.5 instead'
   },
   {
     id: 'anthropic.claude-3-5-sonnet-20241022-v1:0',
@@ -1675,6 +2111,32 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     notes: 'Our frontier-class multimodal model released August 2025. Improving tone and performance.'
   },
   {
+    id: 'magistral-medium-2509',
+    name: 'Magistral Medium 1.2',
+    provider: 'Mistral AI',
+    available: true,
+    maxTokens: 40000,
+    contextLength: 40000,
+    pricing: { input: 2.0, output: 5.0 },
+    capabilities: ['text', 'reasoning', 'thinking', 'domain-specific', 'multilingual', 'multimodal'],
+    category: 'reasoning',
+    isLatest: true,
+    notes: 'Our frontier-class multimodal reasoning model released September 2025 (v25.09).'
+  },
+  {
+    id: 'magistral-medium-latest',
+    name: 'Magistral Medium 1.2',
+    provider: 'Mistral AI',
+    available: true,
+    maxTokens: 40000,
+    contextLength: 40000,
+    pricing: { input: 2.0, output: 5.0 },
+    capabilities: ['text', 'reasoning', 'thinking', 'domain-specific', 'multilingual', 'multimodal'],
+    category: 'reasoning',
+    isLatest: true,
+    notes: 'Our frontier-class multimodal reasoning model released September 2025 (v25.09).'
+  },
+  {
     id: 'magistral-medium-2507',
     name: 'Magistral Medium 1.1',
     provider: 'Mistral AI',
@@ -1684,21 +2146,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     pricing: { input: 2.0, output: 5.0 },
     capabilities: ['text', 'reasoning', 'thinking', 'domain-specific', 'multilingual'],
     category: 'reasoning',
-    isLatest: true,
-    notes: 'Our frontier-class reasoning model released July 2025.'
-  },
-  {
-    id: 'magistral-medium-latest',
-    name: 'Magistral Medium 1.1',
-    provider: 'Mistral AI',
-    available: true,
-    maxTokens: 40000,
-    contextLength: 40000,
-    pricing: { input: 2.0, output: 5.0 },
-    capabilities: ['text', 'reasoning', 'thinking', 'domain-specific', 'multilingual'],
-    category: 'reasoning',
-    isLatest: true,
-    notes: 'Our frontier-class reasoning model released July 2025.'
+    isLatest: false,
+    notes: 'Our frontier-class reasoning model released July 2025 (v25.07). Deprecated October 31, 2025, retirement November 30, 2025. Use Magistral Medium 1.2 instead.'
   },
   {
     id: 'codestral-2508',
@@ -1924,6 +2373,32 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
   
   // Open Models
   {
+    id: 'magistral-small-2509',
+    name: 'Magistral Small 1.2',
+    provider: 'Mistral AI',
+    available: true,
+    maxTokens: 40000,
+    contextLength: 40000,
+    pricing: { input: 0.5, output: 1.5 },
+    capabilities: ['text', 'reasoning', 'thinking', 'domain-specific', 'multilingual', 'multimodal'],
+    category: 'reasoning',
+    isLatest: true,
+    notes: 'Our small multimodal reasoning model released September 2025 (v25.09).'
+  },
+  {
+    id: 'magistral-small-latest',
+    name: 'Magistral Small 1.2',
+    provider: 'Mistral AI',
+    available: true,
+    maxTokens: 40000,
+    contextLength: 40000,
+    pricing: { input: 0.5, output: 1.5 },
+    capabilities: ['text', 'reasoning', 'thinking', 'domain-specific', 'multilingual', 'multimodal'],
+    category: 'reasoning',
+    isLatest: true,
+    notes: 'Our small multimodal reasoning model released September 2025 (v25.09).'
+  },
+  {
     id: 'magistral-small-2507',
     name: 'Magistral Small 1.1',
     provider: 'Mistral AI',
@@ -1933,21 +2408,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     pricing: { input: 0.5, output: 1.5 },
     capabilities: ['text', 'reasoning', 'thinking', 'domain-specific', 'multilingual'],
     category: 'reasoning',
-    isLatest: true,
-    notes: 'Our small reasoning model released July 2025.'
-  },
-  {
-    id: 'magistral-small-latest',
-    name: 'Magistral Small 1.1',
-    provider: 'Mistral AI',
-    available: true,
-    maxTokens: 40000,
-    contextLength: 40000,
-    pricing: { input: 0.5, output: 1.5 },
-    capabilities: ['text', 'reasoning', 'thinking', 'domain-specific', 'multilingual'],
-    category: 'reasoning',
-    isLatest: true,
-    notes: 'Our small reasoning model released July 2025.'
+    isLatest: false,
+    notes: 'Our small reasoning model released July 2025 (v25.07). Deprecated October 31, 2025, retirement November 30, 2025. Use Magistral Small 1.2 instead.'
   },
   {
     id: 'voxtral-small-2507',
@@ -1987,6 +2449,45 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     category: 'multimodal',
     isLatest: true,
     notes: 'An update to our previous small model, released June 2025.'
+  },
+  {
+    id: 'mistral-small-2503',
+    name: 'Mistral Small 3.0',
+    provider: 'Mistral AI',
+    available: true,
+    maxTokens: 128000,
+    contextLength: 128000,
+    pricing: { input: 0.1, output: 0.3 },
+    capabilities: ['text', 'multimodal', 'multilingual', 'open-source'],
+    category: 'multimodal',
+    isLatest: false,
+    notes: 'Mistral Small 3.0 model released March 2025.'
+  },
+  {
+    id: 'ministral-3b',
+    name: 'Ministral 3B',
+    provider: 'Mistral AI',
+    available: true,
+    maxTokens: 128000,
+    contextLength: 128000,
+    pricing: { input: 0.05, output: 0.15 },
+    capabilities: ['text', 'lightweight', 'edge', 'open-source'],
+    category: 'text',
+    isLatest: true,
+    notes: 'World\'s best edge model. 3B parameter model optimized for edge devices.'
+  },
+  {
+    id: 'ministral-8b',
+    name: 'Ministral 8B',
+    provider: 'Mistral AI',
+    available: true,
+    maxTokens: 128000,
+    contextLength: 128000,
+    pricing: { input: 0.10, output: 0.30 },
+    capabilities: ['text', 'edge', 'open-source', 'high-performance'],
+    category: 'text',
+    isLatest: true,
+    notes: 'Powerful edge model with extremely high performance/price ratio. 8B parameter model.'
   },
   {
     id: 'devstral-small-2507',
@@ -2158,6 +2659,47 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     notes: 'Most performant open model. A 22B sparse Mixture-of-Experts (SMoE). Uses only 39B active parameters out of 141B.'
   },
   // === Grok AI Models ===
+  // === Grok 4 Fast Series (Latest) ===
+  {
+    id: 'grok-4-fast-reasoning',
+    name: 'Grok 4 Fast Reasoning',
+    provider: 'xAI',
+    available: true,
+    maxTokens: 2000000,
+    contextLength: 2000000,
+    pricing: { input: 0.20, output: 0.50 },
+    capabilities: ['text', 'reasoning', 'function-calling', 'structured-outputs'],
+    category: 'text',
+    isLatest: true,
+    notes: 'Latest cost-efficient reasoning model with 2M context window. Lightning fast, low cost. 4M TPM, 480 RPM rate limits'
+  },
+  {
+    id: 'grok-4-fast-non-reasoning',
+    name: 'Grok 4 Fast Non-Reasoning',
+    provider: 'xAI',
+    available: true,
+    maxTokens: 2000000,
+    contextLength: 2000000,
+    pricing: { input: 0.20, output: 0.50 },
+    capabilities: ['text', 'function-calling', 'structured-outputs'],
+    category: 'text',
+    isLatest: true,
+    notes: 'Latest cost-efficient non-reasoning model with 2M context window. Lightning fast, low cost. 4M TPM, 480 RPM rate limits'
+  },
+  {
+    id: 'grok-code-fast-1',
+    name: 'Grok Code Fast 1',
+    provider: 'xAI',
+    available: true,
+    maxTokens: 256000,
+    contextLength: 256000,
+    pricing: { input: 0.20, output: 1.50 },
+    capabilities: ['code', 'programming', 'function-calling', 'structured-outputs'],
+    category: 'code',
+    isLatest: true,
+    notes: 'Cost-efficient coding model optimized for code generation and programming tasks. 2M TPM, 480 RPM rate limits'
+  },
+  // === Grok 4 Series ===
   {
     id: 'grok-4-0709',
     name: 'Grok 4',
@@ -2166,11 +2708,38 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 256000,
     contextLength: 256000,
     pricing: { input: 3.0, output: 15.0 },
-    capabilities: ['text', 'vision', 'reasoning', 'function-calling', 'structured-outputs'],
-    category: 'multimodal',
+    capabilities: ['text', 'reasoning', 'function-calling', 'structured-outputs'],
+    category: 'text',
     isLatest: true,
-    notes: 'Latest Grok 4 with reasoning, vision support coming soon. 2M TPM, 480 RPM rate limits'
+    notes: 'Latest Grok 4 reasoning model. Note: Grok 4 is always a reasoning model with no non-reasoning mode. 2M TPM, 480 RPM rate limits. Knowledge cutoff: November 2024'
   },
+  {
+    id: 'grok-4',
+    name: 'Grok 4 (Alias)',
+    provider: 'xAI',
+    available: true,
+    maxTokens: 256000,
+    contextLength: 256000,
+    pricing: { input: 3.0, output: 15.0 },
+    capabilities: ['text', 'reasoning', 'function-calling', 'structured-outputs'],
+    category: 'text',
+    isLatest: true,
+    notes: 'Alias for latest stable Grok 4 version. Points to grok-4-0709. 2M TPM, 480 RPM rate limits'
+  },
+  {
+    id: 'grok-4-latest',
+    name: 'Grok 4 Latest',
+    provider: 'xAI',
+    available: true,
+    maxTokens: 256000,
+    contextLength: 256000,
+    pricing: { input: 3.0, output: 15.0 },
+    capabilities: ['text', 'reasoning', 'function-calling', 'structured-outputs'],
+    category: 'text',
+    isLatest: true,
+    notes: 'Alias for latest Grok 4 version (may include preview features). Auto-updates with new releases. 2M TPM, 480 RPM rate limits'
+  },
+  // === Grok 3 Series ===
   {
     id: 'grok-3',
     name: 'Grok 3',
@@ -2182,7 +2751,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'vision', 'function-calling', 'structured-outputs'],
     category: 'multimodal',
     isLatest: false,
-    notes: 'Standard Grok 3 model. 600 RPM rate limits'
+    notes: 'Standard Grok 3 model. 600 RPM rate limits. Knowledge cutoff: November 2024'
   },
   {
     id: 'grok-3-mini',
@@ -2195,8 +2764,49 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'vision', 'function-calling', 'structured-outputs'],
     category: 'multimodal',
     isLatest: false,
-    notes: 'Cost-effective Grok 3 Mini. 480 RPM rate limits'
+    notes: 'Cost-effective Grok 3 Mini model. 480 RPM rate limits. Knowledge cutoff: November 2024'
   },
+  // === Grok 2 Vision Series ===
+  {
+    id: 'grok-2-vision-1212',
+    name: 'Grok 2 Vision',
+    provider: 'xAI',
+    available: true,
+    maxTokens: 32768,
+    contextLength: 32768,
+    pricing: { input: 2.0, output: 10.0 },
+    capabilities: ['text', 'vision', 'image-understanding'],
+    category: 'multimodal',
+    isLatest: false,
+    notes: 'Grok 2 Vision model for image understanding. 600 RPM rate limits (us-east-1) or 50 RPS (eu-west-1)'
+  },
+  {
+    id: 'grok-2-vision-1212-us-east-1',
+    name: 'Grok 2 Vision (US East)',
+    provider: 'xAI',
+    available: true,
+    maxTokens: 32768,
+    contextLength: 32768,
+    pricing: { input: 2.0, output: 10.0 },
+    capabilities: ['text', 'vision', 'image-understanding'],
+    category: 'multimodal',
+    isLatest: false,
+    notes: 'Grok 2 Vision model for us-east-1 region. 600 RPM rate limits'
+  },
+  {
+    id: 'grok-2-vision-1212-eu-west-1',
+    name: 'Grok 2 Vision (EU West)',
+    provider: 'xAI',
+    available: true,
+    maxTokens: 32768,
+    contextLength: 32768,
+    pricing: { input: 2.0, output: 10.0 },
+    capabilities: ['text', 'vision', 'image-understanding'],
+    category: 'multimodal',
+    isLatest: false,
+    notes: 'Grok 2 Vision model for eu-west-1 region. 50 RPS rate limits'
+  },
+  // === Grok 2 Image Generation ===
   {
     id: 'grok-2-image-1212',
     name: 'Grok 2 Image',
@@ -2208,9 +2818,36 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['image-generation'],
     category: 'image',
     isLatest: true,
-    notes: 'Grok 2 image generation model. $0.07 per image, 300 RPM rate limits'
+    notes: 'Grok 2 image generation model. $0.07 per image output, 300 RPM rate limits'
   },
-  // === Meta Llama 4 Models ===
+  {
+    id: 'grok-2-image',
+    name: 'Grok 2 Image (Alias)',
+    provider: 'xAI',
+    available: true,
+    maxTokens: 0,
+    contextLength: 0,
+    pricing: { input: 0.07, output: 0.07 },
+    capabilities: ['image-generation'],
+    category: 'image',
+    isLatest: true,
+    notes: 'Alias for latest stable Grok 2 Image version. Points to grok-2-image-1212. $0.07 per image, 300 RPM rate limits'
+  },
+  {
+    id: 'grok-2-image-latest',
+    name: 'Grok 2 Image Latest',
+    provider: 'xAI',
+    available: true,
+    maxTokens: 0,
+    contextLength: 0,
+    pricing: { input: 0.07, output: 0.07 },
+    capabilities: ['image-generation'],
+    category: 'image',
+    isLatest: true,
+    notes: 'Alias for latest Grok 2 Image version. Auto-updates with new releases. $0.07 per image, 300 RPM rate limits'
+  },
+  // === Meta Llama Models ===
+  // === Llama 4 Series (Latest) ===
   {
     id: 'llama-4-scout',
     name: 'Llama 4 Scout',
@@ -2222,7 +2859,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'vision', 'multimodal', 'long-context', 'multilingual', 'image-grounding'],
     category: 'multimodal',
     isLatest: true,
-    notes: 'Class-leading natively multimodal model with superior text and visual intelligence, single H100 GPU efficiency, and 10M context window for seamless long document analysis'
+    notes: 'Class-leading natively multimodal model with superior text and visual intelligence. 17B active params x 16 experts, 109B total params. Includes Llama Guard 4 12B, Llama Prompt Guard 2 22M and 86M. Licensed under Llama 4 Community License Agreement'
   },
   {
     id: 'llama-4-maverick',
@@ -2235,7 +2872,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'vision', 'multimodal', 'long-context', 'multilingual', 'image-grounding', 'fast-responses'],
     category: 'multimodal',
     isLatest: true,
-    notes: 'Industry-leading natively multimodal model for image and text understanding with groundbreaking intelligence and fast responses at a low cost'
+    notes: 'Industry-leading natively multimodal model with groundbreaking intelligence and fast responses at a low cost. 17B active params x 128 experts, 400B total params. Includes Llama Guard 4 12B, Llama Prompt Guard 2 22M and 86M. Licensed under Llama 4 Community License Agreement'
   },
   {
     id: 'llama-4-behemoth-preview',
@@ -2248,7 +2885,128 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'vision', 'multimodal', 'long-context', 'multilingual', 'image-grounding', 'teacher-model'],
     category: 'multimodal',
     isLatest: true,
-    notes: 'Early preview of the Llama 4 teacher model used to distill Llama 4 Scout and Llama 4 Maverick. Still in training phase'
+    notes: 'Early preview of the Llama 4 teacher model used to distill Llama 4 Scout and Llama 4 Maverick. Still in training phase. Licensed under Llama 4 Community License Agreement'
+  },
+  // === Llama 3.3 Series ===
+  {
+    id: 'llama-3.3-70b',
+    name: 'Llama 3.3 70B',
+    provider: 'Meta',
+    available: true,
+    maxTokens: 131072,
+    contextLength: 131072,
+    pricing: { input: 0.59, output: 0.79 },
+    capabilities: ['text', 'multilingual', 'open-source'],
+    category: 'text',
+    isLatest: true,
+    notes: 'Multilingual open source large language model. Experience 405B performance and quality at a fraction of the cost. Licensed under Llama 3.3 Community License Agreement'
+  },
+  // === Llama 3.2 Series ===
+  {
+    id: 'llama-3.2-11b',
+    name: 'Llama 3.2 11B',
+    provider: 'Meta',
+    available: true,
+    maxTokens: 128000,
+    contextLength: 128000,
+    pricing: { input: 0.16, output: 0.16 },
+    capabilities: ['text', 'vision', 'multimodal', 'open-source'],
+    category: 'multimodal',
+    isLatest: true,
+    notes: 'Open multimodal model that is flexible and can reason on high resolution images and output text. Includes Llama Guard 3 11B Vision. Licensed under Llama 3.2 Community License Agreement'
+  },
+  {
+    id: 'llama-3.2-90b',
+    name: 'Llama 3.2 90B',
+    provider: 'Meta',
+    available: true,
+    maxTokens: 128000,
+    contextLength: 128000,
+    pricing: { input: 0.72, output: 0.72 },
+    capabilities: ['text', 'vision', 'multimodal', 'open-source'],
+    category: 'multimodal',
+    isLatest: true,
+    notes: 'Open multimodal model that is flexible and can reason on high resolution images and output text. Includes Llama Guard 3 11B Vision. Licensed under Llama 3.2 Community License Agreement'
+  },
+  {
+    id: 'llama-3.2-3b',
+    name: 'Llama 3.2 3B',
+    provider: 'Meta',
+    available: true,
+    maxTokens: 128000,
+    contextLength: 128000,
+    pricing: { input: 0.05, output: 0.10 },
+    capabilities: ['text', 'lightweight', 'mobile', 'edge', 'open-source'],
+    category: 'text',
+    isLatest: true,
+    notes: 'Lightweight and most cost-efficient model you can run anywhere on mobile and on edge devices. Includes Llama Guard 3 1B. Quantized models available. Licensed under Llama 3.2 Community License Agreement'
+  },
+  {
+    id: 'llama-3.2-1b',
+    name: 'Llama 3.2 1B',
+    provider: 'Meta',
+    available: true,
+    maxTokens: 128000,
+    contextLength: 128000,
+    pricing: { input: 0.05, output: 0.10 },
+    capabilities: ['text', 'lightweight', 'mobile', 'edge', 'open-source'],
+    category: 'text',
+    isLatest: true,
+    notes: 'Lightweight and most cost-efficient model you can run anywhere on mobile and on edge devices. Includes Llama Guard 3 1B. Quantized models available. Licensed under Llama 3.2 Community License Agreement'
+  },
+  // === Llama 3.1 Series ===
+  {
+    id: 'llama-3.1-405b',
+    name: 'Llama 3.1 405B',
+    provider: 'Meta',
+    available: true,
+    maxTokens: 131072,
+    contextLength: 131072,
+    pricing: { input: 0.0, output: 0.0 },
+    capabilities: ['text', 'multilingual', 'open-source'],
+    category: 'text',
+    isLatest: false,
+    notes: 'Multilingual open source large language model. Includes Llama Guard 3 8B and Llama Prompt Guard 2. Licensed under Llama 3.1 Community License Agreement'
+  },
+  {
+    id: 'llama-3.1-8b',
+    name: 'Llama 3.1 8B',
+    provider: 'Meta',
+    available: true,
+    maxTokens: 131072,
+    contextLength: 131072,
+    pricing: { input: 0.05, output: 0.10 },
+    capabilities: ['text', 'multilingual', 'open-source'],
+    category: 'text',
+    isLatest: false,
+    notes: 'Multilingual open source large language model. Includes Llama Guard 3 8B and Llama Prompt Guard 2. Licensed under Llama 3.1 Community License Agreement'
+  },
+  // === Llama 3 Series (Legacy) ===
+  {
+    id: 'llama-3-70b',
+    name: 'Llama 3 70B',
+    provider: 'Meta',
+    available: true,
+    maxTokens: 8192,
+    contextLength: 8192,
+    pricing: { input: 0.59, output: 0.79 },
+    capabilities: ['text', 'open-source'],
+    category: 'text',
+    isLatest: false,
+    notes: 'Legacy Llama 3 70B model. Licensed under Llama 3 Community License Agreement'
+  },
+  {
+    id: 'llama-3-8b',
+    name: 'Llama 3 8B',
+    provider: 'Meta',
+    available: true,
+    maxTokens: 8192,
+    contextLength: 8192,
+    pricing: { input: 0.05, output: 0.10 },
+    capabilities: ['text', 'open-source'],
+    category: 'text',
+    isLatest: false,
+    notes: 'Legacy Llama 3 8B model. Licensed under Llama 3 Community License Agreement'
   }
 ];
 
