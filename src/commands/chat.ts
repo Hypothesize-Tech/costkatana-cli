@@ -1,6 +1,5 @@
 import { Command } from 'commander';
 import chalk from 'chalk';
-import inquirer from 'inquirer';
 import ora from 'ora';
 import { logger } from '../utils/logger';
 import { configManager } from '../utils/config';
@@ -187,7 +186,7 @@ class ChatSession {
     console.log(chalk.cyan.bold('\n📜 Conversation History:'));
     console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
 
-    this.messages.slice(1).forEach((message, index) => {
+    this.messages.slice(1).forEach((message) => {
       const role = message.role === 'user' ? chalk.green('You') : chalk.blue('AI');
       const time = message.timestamp.toLocaleTimeString();
       const cost = message.cost ? chalk.gray(`($${message.cost.toFixed(4)})`) : '';

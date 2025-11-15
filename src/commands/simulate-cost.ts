@@ -518,7 +518,7 @@ function displayModelComparison(comparison: any, options: any) {
   console.log(chalk.gray('─'.repeat(50)));
   
   comparison.rankings.forEach((model: any, index: number) => {
-    const rankColor = index === 0 ? chalk.green : index === 1 ? chalk.yellow : chalk.gray;
+    const _rankColor = index === 0 ? chalk.green : index === 1 ? chalk.yellow : chalk.gray;
     console.log(chalk.white(`${index + 1}. ${model.name}:`));
     console.log(chalk.gray(`   Cost: $${model.cost.toFixed(4)}`));
     console.log(chalk.gray(`   Tokens: ${model.tokens.toLocaleString()}`));

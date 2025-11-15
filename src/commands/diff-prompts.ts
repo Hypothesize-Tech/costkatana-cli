@@ -107,7 +107,7 @@ export function diffPromptsCommand(program: Command) {
     });
 }
 
-async function handleDiffPrompts(options: any) {
+async function handleDiffPrompts(_options: any) {
   console.log(chalk.cyan.bold('\n🔍 Prompt Comparison & Behavioral Analysis'));
   console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
   

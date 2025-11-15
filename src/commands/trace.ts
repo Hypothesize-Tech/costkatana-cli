@@ -74,7 +74,7 @@ export function traceCommand(program: Command) {
     });
 }
 
-async function handleTrace(options: any) {
+async function handleTrace(_options: any) {
   console.log(chalk.cyan.bold('\n🧪 Request Tracing & Debugging'));
   console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
   

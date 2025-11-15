@@ -86,7 +86,7 @@ export function replaySessionCommand(program: Command) {
     });
 }
 
-async function handleReplaySession(options: any) {
+async function handleReplaySession(_options: any) {
   console.log(chalk.cyan.bold('\n🔄 Session Replay & Conversation Analysis'));
   console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
   
@@ -475,7 +475,7 @@ async function handleReplaySessionByWorkflow(workflowId: string, options: any) {
   }
 }
 
-async function getSessionsByWorkflow(workflowId: string, options: any) {
+async function getSessionsByWorkflow(workflowId: string, _options: any) {
   const baseUrl = configManager.get('baseUrl');
   const apiKey = configManager.get('apiKey');
 

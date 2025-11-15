@@ -94,7 +94,7 @@ export function traceWorkflowCommand(program: Command) {
     });
 }
 
-async function handleTraceWorkflow(options: any) {
+async function handleTraceWorkflow(_options: any) {
   console.log(chalk.cyan.bold('\n🔁 Workflow Tracing & Lifecycle Analysis'));
   console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
   

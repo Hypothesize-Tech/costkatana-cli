@@ -86,7 +86,7 @@ export function keyCommand(program: Command) {
     });
 }
 
-async function handleKey(options: any) {
+async function handleKey(_options: any) {
   console.log(chalk.cyan.bold('\n🔐 API Key Management'));
   console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
   

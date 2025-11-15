@@ -112,7 +112,7 @@ export function retryLogCommand(program: Command) {
     });
 }
 
-async function handleRetryLog(options: any) {
+async function handleRetryLog(_options: any) {
   console.log(chalk.cyan.bold('\n🔁 Retry Log & Failure Analysis'));
   console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
   
@@ -326,7 +326,7 @@ async function handleRetryLogById(requestId: string, options: any) {
   }
 }
 
-async function getRetryLogById(requestId: string, options: any) {
+async function getRetryLogById(requestId: string, _options: any) {
   const baseUrl = configManager.get('baseUrl');
   const apiKey = configManager.get('apiKey');
 
@@ -457,7 +457,7 @@ async function handleRetryLogByFailureType(failureType: string, options: any) {
   }
 }
 
-async function getRetryLogsByFailureType(failureType: string, range: string, options: any) {
+async function getRetryLogsByFailureType(failureType: string, range: string, _options: any) {
   const baseUrl = configManager.get('baseUrl');
   const apiKey = configManager.get('apiKey');
 
@@ -526,7 +526,7 @@ async function handleRetryLogByModel(modelName: string, options: any) {
   }
 }
 
-async function getRetryLogsByModel(modelName: string, range: string, options: any) {
+async function getRetryLogsByModel(modelName: string, range: string, _options: any) {
   const baseUrl = configManager.get('baseUrl');
   const apiKey = configManager.get('apiKey');
 
@@ -595,7 +595,7 @@ async function handleRetryLogStats(options: any) {
   }
 }
 
-async function getRetryLogStats(range: string, options: any) {
+async function getRetryLogStats(range: string, _options: any) {
   const baseUrl = configManager.get('baseUrl');
   const apiKey = configManager.get('apiKey');
 

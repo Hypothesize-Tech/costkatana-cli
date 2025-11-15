@@ -123,7 +123,7 @@ export function suggestModelsCommand(program: Command) {
     });
 }
 
-async function handleSuggestModels(options: any) {
+async function handleSuggestModels(_options: any) {
   console.log(chalk.cyan.bold('\n🧠 Model Suggestion & Cost Optimization'));
   console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
   

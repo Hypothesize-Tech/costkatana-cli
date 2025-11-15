@@ -98,7 +98,7 @@ export function debugPromptCommand(program: Command) {
     });
 }
 
-async function handleDebugPrompt(options: any) {
+async function handleDebugPrompt(_options: any) {
   console.log(chalk.cyan.bold('\n🧩 Prompt Debugging & Deep Inspection'));
   console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
   
@@ -498,7 +498,7 @@ function displayRecentPromptDebug(prompts: any[], options: any) {
   }
 
   prompts.forEach((prompt, index) => {
-    const statusColor = prompt.status === 'success' ? chalk.green : chalk.red;
+    const _statusColor = prompt.status === 'success' ? chalk.green : chalk.red;
     const statusIcon = prompt.status === 'success' ? '✅' : '❌';
     const cacheIcon = prompt.cacheStatus === 'HIT' ? '💾' : '❌';
     
@@ -633,7 +633,7 @@ function displayModelPromptDebug(prompts: any[], modelName: string, options: any
   console.log(chalk.gray('─'.repeat(50)));
 
   prompts.forEach((prompt, index) => {
-    const statusColor = prompt.status === 'success' ? chalk.green : chalk.red;
+    const _statusColor = prompt.status === 'success' ? chalk.green : chalk.red;
     const statusIcon = prompt.status === 'success' ? '✅' : '❌';
     const cacheIcon = prompt.cacheStatus === 'HIT' ? '💾' : '❌';
     

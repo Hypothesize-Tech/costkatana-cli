@@ -311,7 +311,7 @@ function displayAnalyticsJson(analytics: any, verbose: boolean) {
   console.log(JSON.stringify(output, null, 2));
 }
 
-function displayAnalyticsCsv(analytics: any, verbose: boolean) {
+function displayAnalyticsCsv(analytics: any, _verbose: boolean) {
   // Total Cost CSV
   if (analytics.totalCost) {
     console.log('Total Cost');

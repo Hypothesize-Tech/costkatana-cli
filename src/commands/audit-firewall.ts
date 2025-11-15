@@ -114,7 +114,7 @@ export function auditFirewallCommand(program: Command) {
     });
 }
 
-async function handleAuditFirewall(options: any) {
+async function handleAuditFirewall(_options: any) {
   console.log(chalk.cyan.bold('\n🛡️ Firewall Audit & Security Analysis'));
   console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
   
@@ -513,7 +513,7 @@ async function handleAuditFirewallByAction(actionType: string, options: any) {
   }
 }
 
-async function getAuditFirewallByAction(actionType: string, range: string, options: any) {
+async function getAuditFirewallByAction(actionType: string, range: string, _options: any) {
   const baseUrl = configManager.get('baseUrl');
   const apiKey = configManager.get('apiKey');
 
@@ -582,7 +582,7 @@ async function handleAuditFirewallByCategory(category: string, options: any) {
   }
 }
 
-async function getAuditFirewallByCategory(category: string, range: string, options: any) {
+async function getAuditFirewallByCategory(category: string, range: string, _options: any) {
   const baseUrl = configManager.get('baseUrl');
   const apiKey = configManager.get('apiKey');
 
@@ -651,7 +651,7 @@ async function handleAuditFirewallStats(options: any) {
   }
 }
 
-async function getAuditFirewallStats(range: string, options: any) {
+async function getAuditFirewallStats(range: string, _options: any) {
   const baseUrl = configManager.get('baseUrl');
   const apiKey = configManager.get('apiKey');
 
@@ -761,7 +761,7 @@ function displayAuditFirewallStats(stats: any, options: any) {
     console.log(chalk.yellow.bold('\n⚠️  Risk Analysis'));
     console.log(chalk.gray('─'.repeat(50)));
     Object.entries(stats.riskAnalysis).forEach(([risk, data]: [string, any]) => {
-      const color = risk === 'high' ? chalk.red : 
+      const _color = risk === 'high' ? chalk.red : 
                    risk === 'medium' ? chalk.yellow : chalk.green;
       console.log(chalk.white(`\n${risk}:`));
       console.log(chalk.gray(`  Count: ${data.count.toLocaleString()}`));

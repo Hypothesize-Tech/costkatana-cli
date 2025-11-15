@@ -1,9 +1,7 @@
 import { Command } from 'commander';
 import chalk from 'chalk';
 import { logger } from '../utils/logger';
-import { configManager } from '../utils/config';
-import { AVAILABLE_MODELS, getModelsByProvider, getLatestModels, getModelsByCategory, searchModels, ModelInfo } from '../utils/models';
-import axios from 'axios';
+import { AVAILABLE_MODELS, getModelsByProvider, ModelInfo } from '../utils/models';
 
 export function listModelsCommand(program: Command) {
   program

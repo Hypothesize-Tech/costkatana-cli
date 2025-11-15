@@ -18,7 +18,7 @@ declare module 'conf' {
     path: string;
   }
 
-  interface ConfOptions<T> {
+  interface ConfOptions {
     projectName?: string;
     schema?: any;
   }

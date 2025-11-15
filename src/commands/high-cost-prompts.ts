@@ -141,7 +141,7 @@ export function highCostPromptsCommand(program: Command) {
     });
 }
 
-async function handleHighCostPrompts(options: any) {
+async function handleHighCostPrompts(_options: any) {
   console.log(chalk.cyan.bold('\n📈 High Cost Prompts Analysis'));
   console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
   

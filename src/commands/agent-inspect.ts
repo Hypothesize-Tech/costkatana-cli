@@ -100,7 +100,7 @@ export function agentInspectCommand(program: Command) {
     });
 }
 
-async function handleAgentInspect(options: any) {
+async function handleAgentInspect(_options: any) {
   console.log(chalk.cyan.bold('\n🔍 Agent Inspection & Audit Analysis'));
   console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
   

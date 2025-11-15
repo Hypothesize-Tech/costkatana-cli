@@ -2,7 +2,7 @@ import { Command } from 'commander';
 import chalk from 'chalk';
 import inquirer from 'inquirer';
 import { logger } from '../utils/logger';
-import { configManager, CLIConfig } from '../utils/config';
+import { configManager } from '../utils/config';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -85,7 +85,7 @@ async function handleSetConfig(keyValue: string) {
   } else if (key === 'modelMappings' || key === 'providers') {
     try {
       typedValue = JSON.parse(value);
-    } catch (error) {
+    } catch (_error) {
       logger.error(`Invalid JSON value for ${key}: ${value}`);
       return;
     }

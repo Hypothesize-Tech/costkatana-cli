@@ -239,7 +239,7 @@ function displayAnalysisJson(analysis: any, verbose: boolean) {
   console.log(JSON.stringify(output, null, 2));
 }
 
-function displayAnalysisCsv(analysis: any, verbose: boolean) {
+function displayAnalysisCsv(analysis: any, _verbose: boolean) {
   // Summary CSV
   if (analysis.summary) {
     console.log('Summary');

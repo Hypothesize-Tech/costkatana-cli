@@ -124,7 +124,7 @@ export function promptMetricsCommand(program: Command) {
     });
 }
 
-async function handlePromptMetrics(options: any) {
+async function handlePromptMetrics(_options: any) {
   console.log(chalk.cyan.bold('\n📊 Prompt Performance Metrics & Analysis'));
   console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
   

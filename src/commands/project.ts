@@ -74,7 +74,7 @@ export function projectCommand(program: Command) {
     });
 }
 
-async function handleProject(options: any) {
+async function handleProject(_options: any) {
   console.log(chalk.cyan.bold('\n📁 Project Management'));
   console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
   
