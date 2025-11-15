@@ -3,8 +3,18 @@ module.exports = {
   testEnvironment: 'node',
   roots: ['<rootDir>/src', '<rootDir>/tests'],
   testMatch: ['**/__tests__/**/*.ts', '**/?(*.)+(spec|test).ts'],
+  testPathIgnorePatterns: ['/node_modules/', '/dist/', '/src/commands/test.ts'],
   transform: {
-    '^.+\\.ts$': 'ts-jest',
+    '^.+\\.ts$': [
+      'ts-jest',
+      {
+        useESM: false,
+        tsconfig: {
+          esModuleInterop: true,
+          allowSyntheticDefaultImports: true,
+        },
+      },
+    ],
   },
   collectCoverageFrom: [
     'src/**/*.ts',
@@ -17,14 +27,12 @@ module.exports = {
   testTimeout: 30000,
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
+    '^chalk$': '<rootDir>/tests/__mocks__/chalk.js',
+    '^conf$': '<rootDir>/tests/__mocks__/conf.js',
+    '^ora$': '<rootDir>/tests/__mocks__/ora.js',
+    '^boxen$': '<rootDir>/tests/__mocks__/boxen.js',
   },
   transformIgnorePatterns: [
-    'node_modules/(?!(chalk|gradient-string|figlet|boxen)/)',
+    'node_modules/(?!(chalk|conf|ora|boxen|gradient-string|figlet)/)',
   ],
-  extensionsToTreatAsEsm: ['.ts'],
-  globals: {
-    'ts-jest': {
-      useESM: true,
-    },
-  },
 };

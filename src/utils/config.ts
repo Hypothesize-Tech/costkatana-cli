@@ -382,7 +382,27 @@ export class ConfigManager {
   }
 
   private isValidConfigKey(key: string): key is keyof CLIConfig {
-    return key in this.conf.store;
+    // Check if the key is a valid CLIConfig key
+    const validKeys: (keyof CLIConfig)[] = [
+      'apiKey',
+      'baseUrl',
+      'projectName',
+      'defaultModel',
+      'defaultTemperature',
+      'defaultMaxTokens',
+      'costLimitPerDay',
+      'monthlyTokenBudget',
+      'enableAnalytics',
+      'enableOptimization',
+      'enableFailover',
+      'modelMappings',
+      'providers',
+      'theme',
+      'outputFormat',
+      'debugMode',
+      'currentProject',
+    ];
+    return validKeys.includes(key as keyof CLIConfig);
   }
 }
 
