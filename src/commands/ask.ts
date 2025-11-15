@@ -12,7 +12,7 @@ export function askCommand(program: Command) {
     .description('Ask a quick question without entering chat mode')
     .option('-m, --model <model>', 'AI model to use')
     .option('-o, --output <path>', 'Save answer to file')
-    .option('--cortex', 'Enable Cortex optimization (70-95% savings)')
+    .option('--cortex', 'Enable Cortex optimization (40-75% savings)')
     .option('--cache', 'Enable caching')
     .option('-t, --temperature <temp>', 'Temperature (0-2)', '0.7')
     .option('--max-tokens <tokens>', 'Maximum response tokens', '1000')
@@ -43,7 +43,7 @@ async function handleAsk(question: string, options: any) {
   // Show what we're doing
   const spinner = ora({
     text: chalk.cyan(`Asking ${model}...`),
-    color: 'cyan'
+    color: 'cyan',
   }).start();
 
   try {
@@ -54,7 +54,7 @@ async function handleAsk(question: string, options: any) {
       temperature: parseFloat(options.temperature),
       maxTokens: parseInt(options.maxTokens),
       cache: options.cache,
-      cortex: options.cortex
+      cortex: options.cortex,
     });
 
     const responseTime = Date.now() - startTime;
@@ -72,11 +72,11 @@ async function handleAsk(question: string, options: any) {
     console.log(chalk.cyan(`   Tokens: ${response.tokens}`));
     console.log(chalk.gray(`   Time: ${responseTime}ms`));
     console.log(chalk.gray(`   Model: ${response.model}`));
-    
+
     if (response.cached) {
       console.log(chalk.green('   ✓ Cached (saved money!)'));
     }
-    
+
     if (response.optimized) {
       console.log(chalk.green('   ✓ Optimized with Cortex'));
     }
@@ -88,13 +88,12 @@ async function handleAsk(question: string, options: any) {
     }
 
     console.log(); // Empty line for spacing
-
   } catch (error) {
     spinner.fail(chalk.red('Failed to get answer'));
-    
+
     if (error instanceof Error) {
       console.log(chalk.red(`\nError: ${error.message}`));
-      
+
       // Provide helpful suggestions
       if (error.message.includes('API') || error.message.includes('key')) {
         console.log(chalk.yellow('\n💡 Tip: Check your API key with:'));
@@ -103,10 +102,12 @@ async function handleAsk(question: string, options: any) {
         console.log(chalk.yellow('\n💡 Tip: See available models with:'));
         console.log(chalk.white('   cost-katana models'));
       } else if (error.message.includes('rate limit')) {
-        console.log(chalk.yellow('\n💡 Tip: Try a different model or wait a moment'));
+        console.log(
+          chalk.yellow('\n💡 Tip: Try a different model or wait a moment')
+        );
       }
     }
-    
+
     throw error;
   }
 }

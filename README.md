@@ -140,7 +140,7 @@ While in a chat session, you can use:
 ### Cost Optimization
 
 ```bash
-# Enable Cortex (70-95% savings)
+# Enable Cortex (40-75% savings)
 cost-katana chat --cortex
 
 # Enable caching

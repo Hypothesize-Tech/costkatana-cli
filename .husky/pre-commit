@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Run lint-staged to fix and check linting errors
+npx lint-staged
+
+# Skip tests for now due to Jest ESM configuration issues
+# npm test

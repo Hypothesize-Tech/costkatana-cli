@@ -1,6 +1,6 @@
 {
   "name": "cost-katana-cli",
-  "version": "2.0.6",    
+  "version": "2.0.7",
   "description": "The simplest AI CLI. Chat with any AI model and track costs automatically.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -20,13 +20,16 @@
     "lint:fix": "eslint 'src/**/*.ts' --fix",
     "format": "prettier --write 'src/**/*.ts'",
     "prepublishOnly": "npm run build",
-    "prepare": "npm run build",
+    "prepare": "husky",
     "ci:test": "npm test",
     "ci:lint": "npm run lint",
     "ci:format": "npx prettier --check 'src/**/*.ts'",
     "ci:build": "npm run build",
     "ci:check": "npm pack --dry-run",
-    "ci:security": "npm audit --audit-level=moderate"
+    "ci:security": "npm audit --audit-level=moderate",
+    "release:patch": "npm version patch && git push origin master --follow-tags",
+    "release:minor": "npm version minor && git push origin master --follow-tags",
+    "release:major": "npm version major && git push origin master --follow-tags"
   },
   "keywords": [
     "ai",
@@ -57,11 +60,11 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Hypothesize-Tech/costkatana-cli.git"
-  },  
+  },
   "bugs": {
     "url": "https://github.com/Hypothesize-Tech/costkatana-cli/issues"
   },
-  "homepage": "https://github.com/Hypothesize-Tech/costkatana-cli#readme",     
+  "homepage": "https://github.com/Hypothesize-Tech/costkatana-cli#readme",
   "engines": {
     "node": ">=18.0.0"
   },
@@ -72,12 +75,12 @@
     "LICENSE"
   ],
   "dependencies": {
-    "cost-katana": "^2.0.0",
     "axios": "^1.6.0",
     "boxen": "^7.1.1",
     "chalk": "^5.5.0",
     "commander": "^11.1.0",
     "conf": "^12.0.0",
+    "cost-katana": "^2.0.0",
     "csv-parser": "^3.2.0",
     "csv-writer": "^1.6.0",
     "dotenv": "^16.3.1",
@@ -99,7 +102,9 @@
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.2",
     "eslint-plugin-prettier": "^5.5.3",
+    "husky": "^9.1.7",
     "jest": "^29.7.0",
+    "lint-staged": "^16.2.6",
     "prettier": "^3.1.1",
     "ts-jest": "^29.1.1",
     "typescript": "^5.3.3"
