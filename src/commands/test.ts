@@ -55,7 +55,7 @@ async function runTests(verbose: boolean) {
 
   if (verbose && !configValidation.isValid) {
     logger.error('Configuration errors:');
-    configValidation.errors.forEach(error => {
+    configValidation.errors.forEach((error) => {
       logger.error(`  - ${error}`);
     });
   }
@@ -88,7 +88,7 @@ async function runTests(verbose: boolean) {
 
 async function testConnectivity(): Promise<boolean> {
   const spinner = ora('Testing API connectivity...').start();
-  
+
   try {
     const baseUrl = configManager.get('baseUrl');
     const apiKey = configManager.get('apiKey');
@@ -100,7 +100,7 @@ async function testConnectivity(): Promise<boolean> {
 
     const response = await axios.get(`${baseUrl}/health`, {
       headers: {
-        'Authorization': `Bearer ${apiKey}`,
+        Authorization: `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
       },
       timeout: 10000,
@@ -129,7 +129,7 @@ async function testConnectivity(): Promise<boolean> {
 
 async function testModels(): Promise<boolean> {
   const spinner = ora('Testing model availability...').start();
-  
+
   try {
     const baseUrl = configManager.get('baseUrl');
     const apiKey = configManager.get('apiKey');
@@ -141,7 +141,7 @@ async function testModels(): Promise<boolean> {
 
     const response = await axios.get(`${baseUrl}/models`, {
       headers: {
-        'Authorization': `Bearer ${apiKey}`,
+        Authorization: `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
       },
       timeout: 10000,
@@ -166,7 +166,9 @@ async function testModels(): Promise<boolean> {
 
 function displayTestResults(results: any) {
   console.log('\n' + chalk.cyan.bold('📊 Test Results'));
-  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+  console.log(
+    chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
 
   const tests = [
     { name: 'Configuration', result: results.config },
@@ -175,24 +177,35 @@ function displayTestResults(results: any) {
     { name: 'Models', result: results.models },
   ];
 
-  tests.forEach(test => {
+  tests.forEach((test) => {
     const status = test.result ? chalk.green('✓') : chalk.red('✗');
     const statusText = test.result ? chalk.green('PASS') : chalk.red('FAIL');
     console.log(`${status} ${test.name}: ${statusText}`);
   });
 
-  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
-  
+  console.log(
+    chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
+
   const percentage = Math.round((results.passed / results.total) * 100);
-  const overallStatus = results.passed === results.total ? chalk.green('PASSED') : chalk.red('FAILED');
-  
-  console.log(`Overall: ${overallStatus} (${results.passed}/${results.total} tests passed - ${percentage}%)`);
+  const overallStatus =
+    results.passed === results.total
+      ? chalk.green('PASSED')
+      : chalk.red('FAILED');
+
+  console.log(
+    `Overall: ${overallStatus} (${results.passed}/${results.total} tests passed - ${percentage}%)`
+  );
 
   if (results.passed === results.total) {
-    console.log(chalk.green('\n🎉 All tests passed! Your CLI is ready to use.'));
+    console.log(
+      chalk.green('\n🎉 All tests passed! Your CLI is ready to use.')
+    );
     console.log(chalk.blue('💡 Try running: cost-katana chat'));
   } else {
-    console.log(chalk.yellow('\n⚠️  Some tests failed. Please check your configuration.'));
+    console.log(
+      chalk.yellow('\n⚠️  Some tests failed. Please check your configuration.')
+    );
     console.log(chalk.blue('💡 Run: cost-katana init --force to reconfigure'));
   }
-} 
+}

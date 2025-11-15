@@ -7,7 +7,9 @@ import axios from 'axios';
 export function promptMetricsCommand(program: Command) {
   const metricsGroup = program
     .command('prompt-metrics')
-    .description('📊 Generate performance metrics for prompts and prompt classes');
+    .description(
+      '📊 Generate performance metrics for prompts and prompt classes'
+    );
 
   // Main prompt-metrics command
   metricsGroup
@@ -126,22 +128,58 @@ export function promptMetricsCommand(program: Command) {
 
 async function handlePromptMetrics(_options: any) {
   console.log(chalk.cyan.bold('\n📊 Prompt Performance Metrics & Analysis'));
-  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
-  
+  console.log(
+    chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
+
   console.log(chalk.yellow('Available commands:'));
-  console.log(chalk.white('  costkatana prompt-metrics tag <tag>              Generate metrics by tag'));
-  console.log(chalk.white('  costkatana prompt-metrics pattern <pattern>      Generate metrics by content pattern'));
-  console.log(chalk.white('  costkatana prompt-metrics model <model>          Generate metrics by model'));
-  console.log(chalk.white('  costkatana prompt-metrics project <project>      Generate metrics by project'));
-  console.log(chalk.white('  costkatana prompt-metrics comprehensive          Generate comprehensive metrics'));
-  
+  console.log(
+    chalk.white(
+      '  costkatana prompt-metrics tag <tag>              Generate metrics by tag'
+    )
+  );
+  console.log(
+    chalk.white(
+      '  costkatana prompt-metrics pattern <pattern>      Generate metrics by content pattern'
+    )
+  );
+  console.log(
+    chalk.white(
+      '  costkatana prompt-metrics model <model>          Generate metrics by model'
+    )
+  );
+  console.log(
+    chalk.white(
+      '  costkatana prompt-metrics project <project>      Generate metrics by project'
+    )
+  );
+  console.log(
+    chalk.white(
+      '  costkatana prompt-metrics comprehensive          Generate comprehensive metrics'
+    )
+  );
+
   console.log(chalk.gray('\nExamples:'));
-  console.log(chalk.white('  costkatana prompt-metrics tag support_chat_greeting --range 30d'));
-  console.log(chalk.white('  costkatana prompt-metrics pattern "customer service" --include-roas'));
-  console.log(chalk.white('  costkatana prompt-metrics model gpt-4 --include-trends'));
-  console.log(chalk.white('  costkatana prompt-metrics project my-project --verbose'));
-  console.log(chalk.white('  costkatana prompt-metrics comprehensive --range 90d'));
-  
+  console.log(
+    chalk.white(
+      '  costkatana prompt-metrics tag support_chat_greeting --range 30d'
+    )
+  );
+  console.log(
+    chalk.white(
+      '  costkatana prompt-metrics pattern "customer service" --include-roas'
+    )
+  );
+  console.log(
+    chalk.white('  costkatana prompt-metrics model gpt-4 --include-trends')
+  );
+  console.log(
+    chalk.white('  costkatana prompt-metrics project my-project --verbose')
+  );
+  console.log(
+    chalk.white('  costkatana prompt-metrics comprehensive --range 90d')
+  );
+
   console.log(chalk.gray('\nMetrics Generated:'));
   console.log(chalk.white('  • Average token usage'));
   console.log(chalk.white('  • Average cost per prompt'));
@@ -150,8 +188,10 @@ async function handlePromptMetrics(_options: any) {
   console.log(chalk.white('  • ROAS (Return on AI Spend)'));
   console.log(chalk.white('  • Performance trends over time'));
   console.log(chalk.white('  • Model efficiency comparison'));
-  
-  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+
+  console.log(
+    chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
 }
 
 async function handlePromptMetricsByTag(tag: string, options: any) {
@@ -173,21 +213,29 @@ async function getPromptMetricsByTag(tag: string, range: string, options: any) {
 
   if (!baseUrl || !apiKey) {
     console.log(chalk.red.bold('\n❌ Configuration Missing'));
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
-    
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+    );
+
     if (!apiKey) {
       console.log(chalk.yellow('• API Key is not set'));
     }
     if (!baseUrl) {
       console.log(chalk.yellow('• Base URL is not set'));
     }
-    
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+    );
     console.log(chalk.cyan('To set up your configuration, run:'));
     console.log(chalk.white('  cost-katana init'));
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'));
-    
-    throw new Error('Configuration incomplete. Please run "cost-katana init" to set up your API key and base URL.');
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n')
+    );
+
+    throw new Error(
+      'Configuration incomplete. Please run "cost-katana init" to set up your API key and base URL.'
+    );
   }
 
   try {
@@ -198,13 +246,16 @@ async function getPromptMetricsByTag(tag: string, range: string, options: any) {
     if (options.includeTrends) params.append('includeTrends', 'true');
     if (options.includeBreakdown) params.append('includeBreakdown', 'true');
 
-    const response = await axios.get(`${baseUrl}/api/prompt-metrics/tag?${params}`, {
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      timeout: 30000,
-    });
+    const response = await axios.get(
+      `${baseUrl}/api/prompt-metrics/tag?${params}`,
+      {
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        timeout: 30000,
+      }
+    );
 
     if (response.status !== 200) {
       throw new Error(`API returned status ${response.status}`);
@@ -217,7 +268,9 @@ async function getPromptMetricsByTag(tag: string, range: string, options: any) {
     }
   } catch (error: any) {
     if (error.response) {
-      throw new Error(`API Error: ${error.response.status} - ${error.response.data?.message || 'Unknown error'}`);
+      throw new Error(
+        `API Error: ${error.response.status} - ${error.response.data?.message || 'Unknown error'}`
+      );
     } else if (error.request) {
       throw new Error('No response received from API');
     } else {
@@ -228,50 +281,99 @@ async function getPromptMetricsByTag(tag: string, range: string, options: any) {
 
 function displayPromptMetrics(metrics: any, options: any) {
   const format = options.format || 'table';
-  
+
   if (format === 'json') {
     console.log(JSON.stringify(metrics, null, 2));
     return;
   } else if (format === 'csv') {
     console.log('Metric,Value,Unit,Change');
     Object.entries(metrics.summary).forEach(([key, value]: [string, any]) => {
-      console.log(`"${key}","${value.value}","${value.unit || ''}","${value.change || ''}"`);
+      console.log(
+        `"${key}","${value.value}","${value.unit || ''}","${value.change || ''}"`
+      );
     });
     return;
   }
 
   console.log(chalk.cyan.bold('\n📊 Prompt Performance Metrics'));
-  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+  console.log(
+    chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
 
   // Summary Statistics
   console.log(chalk.yellow.bold('\n📈 Summary Statistics'));
   console.log(chalk.gray('─'.repeat(50)));
-  console.log(chalk.white('Total Prompts:'), chalk.cyan(metrics.summary.totalPrompts.toLocaleString()));
-  console.log(chalk.white('Time Range:'), chalk.cyan(metrics.summary.timeRange));
-  console.log(chalk.white('Average Tokens:'), chalk.cyan(metrics.summary.avgTokens.toLocaleString()));
-  console.log(chalk.white('Average Cost:'), chalk.green(`$${metrics.summary.avgCost.toFixed(4)}`));
-  console.log(chalk.white('Total Cost:'), chalk.green(`$${metrics.summary.totalCost.toFixed(2)}`));
+  console.log(
+    chalk.white('Total Prompts:'),
+    chalk.cyan(metrics.summary.totalPrompts.toLocaleString())
+  );
+  console.log(
+    chalk.white('Time Range:'),
+    chalk.cyan(metrics.summary.timeRange)
+  );
+  console.log(
+    chalk.white('Average Tokens:'),
+    chalk.cyan(metrics.summary.avgTokens.toLocaleString())
+  );
+  console.log(
+    chalk.white('Average Cost:'),
+    chalk.green(`$${metrics.summary.avgCost.toFixed(4)}`)
+  );
+  console.log(
+    chalk.white('Total Cost:'),
+    chalk.green(`$${metrics.summary.totalCost.toFixed(2)}`)
+  );
 
   // Performance Metrics
   console.log(chalk.yellow.bold('\n⚡ Performance Metrics'));
   console.log(chalk.gray('─'.repeat(50)));
-  console.log(chalk.white('Error Rate:'), chalk.red(`${(metrics.performance.errorRate * 100).toFixed(1)}%`));
-  console.log(chalk.white('Success Rate:'), chalk.green(`${(metrics.performance.successRate * 100).toFixed(1)}%`));
-  console.log(chalk.white('Average Latency:'), chalk.cyan(`${metrics.performance.avgLatency}ms`));
-  console.log(chalk.white('Throughput:'), chalk.cyan(`${metrics.performance.throughput} prompts/min`));
-  console.log(chalk.white('Cache Hit Rate:'), chalk.cyan(`${(metrics.performance.cacheHitRate * 100).toFixed(1)}%`));
+  console.log(
+    chalk.white('Error Rate:'),
+    chalk.red(`${(metrics.performance.errorRate * 100).toFixed(1)}%`)
+  );
+  console.log(
+    chalk.white('Success Rate:'),
+    chalk.green(`${(metrics.performance.successRate * 100).toFixed(1)}%`)
+  );
+  console.log(
+    chalk.white('Average Latency:'),
+    chalk.cyan(`${metrics.performance.avgLatency}ms`)
+  );
+  console.log(
+    chalk.white('Throughput:'),
+    chalk.cyan(`${metrics.performance.throughput} prompts/min`)
+  );
+  console.log(
+    chalk.white('Cache Hit Rate:'),
+    chalk.cyan(`${(metrics.performance.cacheHitRate * 100).toFixed(1)}%`)
+  );
 
   // Feedback Analysis
   if (metrics.feedback) {
     console.log(chalk.yellow.bold('\n🏷️  Feedback Analysis'));
     console.log(chalk.gray('─'.repeat(50)));
-    console.log(chalk.white('Average Rating:'), chalk.cyan(metrics.feedback.avgRating.toFixed(1) + '/5'));
-    console.log(chalk.white('Positive Feedback:'), chalk.green(`${(metrics.feedback.positiveRate * 100).toFixed(1)}%`));
-    console.log(chalk.white('Negative Feedback:'), chalk.red(`${(metrics.feedback.negativeRate * 100).toFixed(1)}%`));
-    console.log(chalk.white('Neutral Feedback:'), chalk.yellow(`${(metrics.feedback.neutralRate * 100).toFixed(1)}%`));
-    
+    console.log(
+      chalk.white('Average Rating:'),
+      chalk.cyan(metrics.feedback.avgRating.toFixed(1) + '/5')
+    );
+    console.log(
+      chalk.white('Positive Feedback:'),
+      chalk.green(`${(metrics.feedback.positiveRate * 100).toFixed(1)}%`)
+    );
+    console.log(
+      chalk.white('Negative Feedback:'),
+      chalk.red(`${(metrics.feedback.negativeRate * 100).toFixed(1)}%`)
+    );
+    console.log(
+      chalk.white('Neutral Feedback:'),
+      chalk.yellow(`${(metrics.feedback.neutralRate * 100).toFixed(1)}%`)
+    );
+
     if (metrics.feedback.sentiment) {
-      console.log(chalk.white('Sentiment Score:'), chalk.cyan(metrics.feedback.sentiment.toFixed(2)));
+      console.log(
+        chalk.white('Sentiment Score:'),
+        chalk.cyan(metrics.feedback.sentiment.toFixed(2))
+      );
     }
   }
 
@@ -279,17 +381,28 @@ function displayPromptMetrics(metrics: any, options: any) {
   if (options.includeRoas && metrics.roas) {
     console.log(chalk.yellow.bold('\n💰 ROAS Analysis'));
     console.log(chalk.gray('─'.repeat(50)));
-    console.log(chalk.white('ROAS Score:'), chalk.green(`${metrics.roas.score.toFixed(2)}`));
-    console.log(chalk.white('Revenue Generated:'), chalk.green(`$${metrics.roas.revenue.toFixed(2)}`));
-    console.log(chalk.white('Cost per Revenue:'), chalk.cyan(`$${metrics.roas.costPerRevenue.toFixed(4)}`));
+    console.log(
+      chalk.white('ROAS Score:'),
+      chalk.green(`${metrics.roas.score.toFixed(2)}`)
+    );
+    console.log(
+      chalk.white('Revenue Generated:'),
+      chalk.green(`$${metrics.roas.revenue.toFixed(2)}`)
+    );
+    console.log(
+      chalk.white('Cost per Revenue:'),
+      chalk.cyan(`$${metrics.roas.costPerRevenue.toFixed(4)}`)
+    );
     console.log(chalk.white('ROAS Trend:'), chalk.cyan(metrics.roas.trend));
-    
+
     if (metrics.roas.breakdown) {
       console.log(chalk.white('ROAS by Category:'));
-      Object.entries(metrics.roas.breakdown).forEach(([category, roas]: [string, any]) => {
-        const color = roas > 1 ? chalk.green : chalk.red;
-        console.log(chalk.gray(`  • ${category}: ${color(roas.toFixed(2))}`));
-      });
+      Object.entries(metrics.roas.breakdown).forEach(
+        ([category, roas]: [string, any]) => {
+          const color = roas > 1 ? chalk.green : chalk.red;
+          console.log(chalk.gray(`  • ${category}: ${color(roas.toFixed(2))}`));
+        }
+      );
     }
   }
 
@@ -297,15 +410,35 @@ function displayPromptMetrics(metrics: any, options: any) {
   if (options.includeTrends && metrics.trends) {
     console.log(chalk.yellow.bold('\n📈 Trend Analysis'));
     console.log(chalk.gray('─'.repeat(50)));
-    console.log(chalk.white('Cost Trend:'), chalk.cyan(metrics.trends.costTrend));
-    console.log(chalk.white('Usage Trend:'), chalk.cyan(metrics.trends.usageTrend));
-    console.log(chalk.white('Performance Trend:'), chalk.cyan(metrics.trends.performanceTrend));
-    console.log(chalk.white('Feedback Trend:'), chalk.cyan(metrics.trends.feedbackTrend));
-    
+    console.log(
+      chalk.white('Cost Trend:'),
+      chalk.cyan(metrics.trends.costTrend)
+    );
+    console.log(
+      chalk.white('Usage Trend:'),
+      chalk.cyan(metrics.trends.usageTrend)
+    );
+    console.log(
+      chalk.white('Performance Trend:'),
+      chalk.cyan(metrics.trends.performanceTrend)
+    );
+    console.log(
+      chalk.white('Feedback Trend:'),
+      chalk.cyan(metrics.trends.feedbackTrend)
+    );
+
     if (metrics.trends.forecast) {
       console.log(chalk.white('Forecast (Next 30d):'));
-      console.log(chalk.gray(`  • Predicted Cost: $${metrics.trends.forecast.predictedCost.toFixed(2)}`));
-      console.log(chalk.gray(`  • Predicted Usage: ${metrics.trends.forecast.predictedUsage.toLocaleString()} prompts`));
+      console.log(
+        chalk.gray(
+          `  • Predicted Cost: $${metrics.trends.forecast.predictedCost.toFixed(2)}`
+        )
+      );
+      console.log(
+        chalk.gray(
+          `  • Predicted Usage: ${metrics.trends.forecast.predictedUsage.toLocaleString()} prompts`
+        )
+      );
     }
   }
 
@@ -313,14 +446,20 @@ function displayPromptMetrics(metrics: any, options: any) {
   if (options.includeBreakdown && metrics.modelBreakdown) {
     console.log(chalk.yellow.bold('\n🤖 Model Breakdown'));
     console.log(chalk.gray('─'.repeat(50)));
-    Object.entries(metrics.modelBreakdown).forEach(([model, data]: [string, any]) => {
-      console.log(chalk.white(`\n${model}:`));
-      console.log(chalk.gray(`  Prompts: ${data.prompts.toLocaleString()}`));
-      console.log(chalk.gray(`  Avg Tokens: ${data.avgTokens.toLocaleString()}`));
-      console.log(chalk.gray(`  Avg Cost: $${data.avgCost.toFixed(4)}`));
-      console.log(chalk.gray(`  Success Rate: ${(data.successRate * 100).toFixed(1)}%`));
-      console.log(chalk.gray(`  Avg Latency: ${data.avgLatency}ms`));
-    });
+    Object.entries(metrics.modelBreakdown).forEach(
+      ([model, data]: [string, any]) => {
+        console.log(chalk.white(`\n${model}:`));
+        console.log(chalk.gray(`  Prompts: ${data.prompts.toLocaleString()}`));
+        console.log(
+          chalk.gray(`  Avg Tokens: ${data.avgTokens.toLocaleString()}`)
+        );
+        console.log(chalk.gray(`  Avg Cost: $${data.avgCost.toFixed(4)}`));
+        console.log(
+          chalk.gray(`  Success Rate: ${(data.successRate * 100).toFixed(1)}%`)
+        );
+        console.log(chalk.gray(`  Avg Latency: ${data.avgLatency}ms`));
+      }
+    );
   }
 
   // Recommendations
@@ -339,7 +478,9 @@ function displayPromptMetrics(metrics: any, options: any) {
     });
   }
 
-  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+  console.log(
+    chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
 }
 
 async function handlePromptMetricsByPattern(pattern: string, options: any) {
@@ -347,7 +488,11 @@ async function handlePromptMetricsByPattern(pattern: string, options: any) {
 
   try {
     const range = options.range || '30d';
-    const metricsData = await getPromptMetricsByPattern(pattern, range, options);
+    const metricsData = await getPromptMetricsByPattern(
+      pattern,
+      range,
+      options
+    );
     displayPromptMetrics(metricsData, options);
   } catch (error) {
     logger.error('Failed to generate metrics by pattern:', error);
@@ -355,27 +500,39 @@ async function handlePromptMetricsByPattern(pattern: string, options: any) {
   }
 }
 
-async function getPromptMetricsByPattern(pattern: string, range: string, options: any) {
+async function getPromptMetricsByPattern(
+  pattern: string,
+  range: string,
+  options: any
+) {
   const baseUrl = configManager.get('baseUrl');
   const apiKey = configManager.get('apiKey');
 
   if (!baseUrl || !apiKey) {
     console.log(chalk.red.bold('\n❌ Configuration Missing'));
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
-    
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+    );
+
     if (!apiKey) {
       console.log(chalk.yellow('• API Key is not set'));
     }
     if (!baseUrl) {
       console.log(chalk.yellow('• Base URL is not set'));
     }
-    
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+    );
     console.log(chalk.cyan('To set up your configuration, run:'));
     console.log(chalk.white('  cost-katana init'));
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'));
-    
-    throw new Error('Configuration incomplete. Please run "cost-katana init" to set up your API key and base URL.');
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n')
+    );
+
+    throw new Error(
+      'Configuration incomplete. Please run "cost-katana init" to set up your API key and base URL.'
+    );
   }
 
   try {
@@ -386,13 +543,16 @@ async function getPromptMetricsByPattern(pattern: string, range: string, options
     if (options.includeTrends) params.append('includeTrends', 'true');
     if (options.includeBreakdown) params.append('includeBreakdown', 'true');
 
-    const response = await axios.get(`${baseUrl}/api/prompt-metrics/pattern?${params}`, {
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      timeout: 30000,
-    });
+    const response = await axios.get(
+      `${baseUrl}/api/prompt-metrics/pattern?${params}`,
+      {
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        timeout: 30000,
+      }
+    );
 
     if (response.status !== 200) {
       throw new Error(`API returned status ${response.status}`);
@@ -405,7 +565,9 @@ async function getPromptMetricsByPattern(pattern: string, range: string, options
     }
   } catch (error: any) {
     if (error.response) {
-      throw new Error(`API Error: ${error.response.status} - ${error.response.data?.message || 'Unknown error'}`);
+      throw new Error(
+        `API Error: ${error.response.status} - ${error.response.data?.message || 'Unknown error'}`
+      );
     } else if (error.request) {
       throw new Error('No response received from API');
     } else {
@@ -419,7 +581,11 @@ async function handlePromptMetricsByModel(modelName: string, options: any) {
 
   try {
     const range = options.range || '30d';
-    const metricsData = await getPromptMetricsByModel(modelName, range, options);
+    const metricsData = await getPromptMetricsByModel(
+      modelName,
+      range,
+      options
+    );
     displayPromptMetrics(metricsData, options);
   } catch (error) {
     logger.error('Failed to generate metrics by model:', error);
@@ -427,27 +593,39 @@ async function handlePromptMetricsByModel(modelName: string, options: any) {
   }
 }
 
-async function getPromptMetricsByModel(modelName: string, range: string, options: any) {
+async function getPromptMetricsByModel(
+  modelName: string,
+  range: string,
+  options: any
+) {
   const baseUrl = configManager.get('baseUrl');
   const apiKey = configManager.get('apiKey');
 
   if (!baseUrl || !apiKey) {
     console.log(chalk.red.bold('\n❌ Configuration Missing'));
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
-    
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+    );
+
     if (!apiKey) {
       console.log(chalk.yellow('• API Key is not set'));
     }
     if (!baseUrl) {
       console.log(chalk.yellow('• Base URL is not set'));
     }
-    
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+    );
     console.log(chalk.cyan('To set up your configuration, run:'));
     console.log(chalk.white('  cost-katana init'));
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'));
-    
-    throw new Error('Configuration incomplete. Please run "cost-katana init" to set up your API key and base URL.');
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n')
+    );
+
+    throw new Error(
+      'Configuration incomplete. Please run "cost-katana init" to set up your API key and base URL.'
+    );
   }
 
   try {
@@ -458,13 +636,16 @@ async function getPromptMetricsByModel(modelName: string, range: string, options
     if (options.includeTrends) params.append('includeTrends', 'true');
     if (options.includeBreakdown) params.append('includeBreakdown', 'true');
 
-    const response = await axios.get(`${baseUrl}/api/prompt-metrics/model?${params}`, {
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      timeout: 30000,
-    });
+    const response = await axios.get(
+      `${baseUrl}/api/prompt-metrics/model?${params}`,
+      {
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        timeout: 30000,
+      }
+    );
 
     if (response.status !== 200) {
       throw new Error(`API returned status ${response.status}`);
@@ -477,7 +658,9 @@ async function getPromptMetricsByModel(modelName: string, range: string, options
     }
   } catch (error: any) {
     if (error.response) {
-      throw new Error(`API Error: ${error.response.status} - ${error.response.data?.message || 'Unknown error'}`);
+      throw new Error(
+        `API Error: ${error.response.status} - ${error.response.data?.message || 'Unknown error'}`
+      );
     } else if (error.request) {
       throw new Error('No response received from API');
     } else {
@@ -491,7 +674,11 @@ async function handlePromptMetricsByProject(projectName: string, options: any) {
 
   try {
     const range = options.range || '30d';
-    const metricsData = await getPromptMetricsByProject(projectName, range, options);
+    const metricsData = await getPromptMetricsByProject(
+      projectName,
+      range,
+      options
+    );
     displayPromptMetrics(metricsData, options);
   } catch (error) {
     logger.error('Failed to generate metrics by project:', error);
@@ -499,27 +686,39 @@ async function handlePromptMetricsByProject(projectName: string, options: any) {
   }
 }
 
-async function getPromptMetricsByProject(projectName: string, range: string, options: any) {
+async function getPromptMetricsByProject(
+  projectName: string,
+  range: string,
+  options: any
+) {
   const baseUrl = configManager.get('baseUrl');
   const apiKey = configManager.get('apiKey');
 
   if (!baseUrl || !apiKey) {
     console.log(chalk.red.bold('\n❌ Configuration Missing'));
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
-    
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+    );
+
     if (!apiKey) {
       console.log(chalk.yellow('• API Key is not set'));
     }
     if (!baseUrl) {
       console.log(chalk.yellow('• Base URL is not set'));
     }
-    
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+    );
     console.log(chalk.cyan('To set up your configuration, run:'));
     console.log(chalk.white('  cost-katana init'));
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'));
-    
-    throw new Error('Configuration incomplete. Please run "cost-katana init" to set up your API key and base URL.');
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n')
+    );
+
+    throw new Error(
+      'Configuration incomplete. Please run "cost-katana init" to set up your API key and base URL.'
+    );
   }
 
   try {
@@ -530,13 +729,16 @@ async function getPromptMetricsByProject(projectName: string, range: string, opt
     if (options.includeTrends) params.append('includeTrends', 'true');
     if (options.includeBreakdown) params.append('includeBreakdown', 'true');
 
-    const response = await axios.get(`${baseUrl}/api/prompt-metrics/project?${params}`, {
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      timeout: 30000,
-    });
+    const response = await axios.get(
+      `${baseUrl}/api/prompt-metrics/project?${params}`,
+      {
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        timeout: 30000,
+      }
+    );
 
     if (response.status !== 200) {
       throw new Error(`API returned status ${response.status}`);
@@ -549,7 +751,9 @@ async function getPromptMetricsByProject(projectName: string, range: string, opt
     }
   } catch (error: any) {
     if (error.response) {
-      throw new Error(`API Error: ${error.response.status} - ${error.response.data?.message || 'Unknown error'}`);
+      throw new Error(
+        `API Error: ${error.response.status} - ${error.response.data?.message || 'Unknown error'}`
+      );
     } else if (error.request) {
       throw new Error('No response received from API');
     } else {
@@ -577,21 +781,29 @@ async function getPromptMetricsComprehensive(range: string, options: any) {
 
   if (!baseUrl || !apiKey) {
     console.log(chalk.red.bold('\n❌ Configuration Missing'));
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
-    
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+    );
+
     if (!apiKey) {
       console.log(chalk.yellow('• API Key is not set'));
     }
     if (!baseUrl) {
       console.log(chalk.yellow('• Base URL is not set'));
     }
-    
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+    );
     console.log(chalk.cyan('To set up your configuration, run:'));
     console.log(chalk.white('  cost-katana init'));
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'));
-    
-    throw new Error('Configuration incomplete. Please run "cost-katana init" to set up your API key and base URL.');
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n')
+    );
+
+    throw new Error(
+      'Configuration incomplete. Please run "cost-katana init" to set up your API key and base URL.'
+    );
   }
 
   try {
@@ -601,13 +813,16 @@ async function getPromptMetricsComprehensive(range: string, options: any) {
     if (options.includeTrends) params.append('includeTrends', 'true');
     if (options.includeBreakdown) params.append('includeBreakdown', 'true');
 
-    const response = await axios.get(`${baseUrl}/api/prompt-metrics/comprehensive?${params}`, {
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      timeout: 30000,
-    });
+    const response = await axios.get(
+      `${baseUrl}/api/prompt-metrics/comprehensive?${params}`,
+      {
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        timeout: 30000,
+      }
+    );
 
     if (response.status !== 200) {
       throw new Error(`API returned status ${response.status}`);
@@ -620,7 +835,9 @@ async function getPromptMetricsComprehensive(range: string, options: any) {
     }
   } catch (error: any) {
     if (error.response) {
-      throw new Error(`API Error: ${error.response.status} - ${error.response.data?.message || 'Unknown error'}`);
+      throw new Error(
+        `API Error: ${error.response.status} - ${error.response.data?.message || 'Unknown error'}`
+      );
     } else if (error.request) {
       throw new Error('No response received from API');
     } else {
@@ -631,57 +848,94 @@ async function getPromptMetricsComprehensive(range: string, options: any) {
 
 function displayComprehensiveMetrics(metrics: any, options: any) {
   const format = options.format || 'table';
-  
+
   if (format === 'json') {
     console.log(JSON.stringify(metrics, null, 2));
     return;
   } else if (format === 'csv') {
     console.log('Category,Metric,Value,Unit,Change');
-    Object.entries(metrics.categories).forEach(([category, data]: [string, any]) => {
-      Object.entries(data).forEach(([metric, value]: [string, any]) => {
-        console.log(`"${category}","${metric}","${value.value}","${value.unit || ''}","${value.change || ''}"`);
-      });
-    });
+    Object.entries(metrics.categories).forEach(
+      ([category, data]: [string, any]) => {
+        Object.entries(data).forEach(([metric, value]: [string, any]) => {
+          console.log(
+            `"${category}","${metric}","${value.value}","${value.unit || ''}","${value.change || ''}"`
+          );
+        });
+      }
+    );
     return;
   }
 
   console.log(chalk.cyan.bold('\n📊 Comprehensive Prompt Metrics'));
-  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+  console.log(
+    chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
 
   // Overall Summary
   console.log(chalk.yellow.bold('\n📈 Overall Summary'));
   console.log(chalk.gray('─'.repeat(50)));
-  console.log(chalk.white('Total Prompts:'), chalk.cyan(metrics.summary.totalPrompts.toLocaleString()));
-  console.log(chalk.white('Total Cost:'), chalk.green(`$${metrics.summary.totalCost.toFixed(2)}`));
-  console.log(chalk.white('Average Cost:'), chalk.green(`$${metrics.summary.avgCost.toFixed(4)}`));
-  console.log(chalk.white('Success Rate:'), chalk.green(`${(metrics.summary.successRate * 100).toFixed(1)}%`));
-  console.log(chalk.white('Average Rating:'), chalk.cyan(metrics.summary.avgRating.toFixed(1) + '/5'));
+  console.log(
+    chalk.white('Total Prompts:'),
+    chalk.cyan(metrics.summary.totalPrompts.toLocaleString())
+  );
+  console.log(
+    chalk.white('Total Cost:'),
+    chalk.green(`$${metrics.summary.totalCost.toFixed(2)}`)
+  );
+  console.log(
+    chalk.white('Average Cost:'),
+    chalk.green(`$${metrics.summary.avgCost.toFixed(4)}`)
+  );
+  console.log(
+    chalk.white('Success Rate:'),
+    chalk.green(`${(metrics.summary.successRate * 100).toFixed(1)}%`)
+  );
+  console.log(
+    chalk.white('Average Rating:'),
+    chalk.cyan(metrics.summary.avgRating.toFixed(1) + '/5')
+  );
 
   // Category Breakdown
   if (options.includeBreakdown && metrics.categories) {
     console.log(chalk.yellow.bold('\n📊 Category Breakdown'));
     console.log(chalk.gray('─'.repeat(50)));
-    
-    Object.entries(metrics.categories).forEach(([category, data]: [string, any]) => {
-      console.log(chalk.white(`\n${category}:`));
-      console.log(chalk.gray(`  Prompts: ${data.prompts.toLocaleString()}`));
-      console.log(chalk.gray(`  Cost: $${data.cost.toFixed(2)}`));
-      console.log(chalk.gray(`  Success Rate: ${(data.successRate * 100).toFixed(1)}%`));
-      console.log(chalk.gray(`  Avg Rating: ${data.avgRating.toFixed(1)}/5`));
-      console.log(chalk.gray(`  Avg Tokens: ${data.avgTokens.toLocaleString()}`));
-    });
+
+    Object.entries(metrics.categories).forEach(
+      ([category, data]: [string, any]) => {
+        console.log(chalk.white(`\n${category}:`));
+        console.log(chalk.gray(`  Prompts: ${data.prompts.toLocaleString()}`));
+        console.log(chalk.gray(`  Cost: $${data.cost.toFixed(2)}`));
+        console.log(
+          chalk.gray(`  Success Rate: ${(data.successRate * 100).toFixed(1)}%`)
+        );
+        console.log(chalk.gray(`  Avg Rating: ${data.avgRating.toFixed(1)}/5`));
+        console.log(
+          chalk.gray(`  Avg Tokens: ${data.avgTokens.toLocaleString()}`)
+        );
+      }
+    );
   }
 
   // Top Performers
   if (metrics.topPerformers) {
     console.log(chalk.yellow.bold('\n🏆 Top Performers'));
     console.log(chalk.gray('─'.repeat(50)));
-    
+
     metrics.topPerformers.forEach((performer: any, index: number) => {
       console.log(chalk.white(`${index + 1}. ${performer.name}:`));
-      console.log(chalk.gray(`   Success Rate: ${(performer.successRate * 100).toFixed(1)}%`));
-      console.log(chalk.gray(`   Avg Rating: ${performer.avgRating.toFixed(1)}/5`));
-      console.log(chalk.gray(`   Cost Efficiency: $${performer.costEfficiency.toFixed(4)}`));
+      console.log(
+        chalk.gray(
+          `   Success Rate: ${(performer.successRate * 100).toFixed(1)}%`
+        )
+      );
+      console.log(
+        chalk.gray(`   Avg Rating: ${performer.avgRating.toFixed(1)}/5`)
+      );
+      console.log(
+        chalk.gray(
+          `   Cost Efficiency: $${performer.costEfficiency.toFixed(4)}`
+        )
+      );
     });
   }
 
@@ -689,7 +943,7 @@ function displayComprehensiveMetrics(metrics: any, options: any) {
   if (metrics.insights) {
     console.log(chalk.yellow.bold('\n💡 Performance Insights'));
     console.log(chalk.gray('─'.repeat(50)));
-    
+
     metrics.insights.forEach((insight: any, index: number) => {
       console.log(chalk.white(`${index + 1}. ${insight.type}:`));
       console.log(chalk.gray(`   ${insight.description}`));
@@ -699,5 +953,7 @@ function displayComprehensiveMetrics(metrics: any, options: any) {
     });
   }
 
-  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+  console.log(
+    chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
 }

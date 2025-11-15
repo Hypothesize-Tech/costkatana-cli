@@ -26,7 +26,7 @@ class Logger {
   private formatMessage(level: LogLevel, message: string): string {
     const timestamp = new Date().toISOString();
     const prefix = `[${timestamp}] [${level.toUpperCase()}]`;
-    
+
     let coloredPrefix: string;
     switch (level) {
       case 'debug':
@@ -109,4 +109,4 @@ class Logger {
   }
 }
 
-export const logger = new Logger(); 
+export const logger = new Logger();

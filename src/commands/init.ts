@@ -34,7 +34,7 @@ async function handleInit(options: any) {
   // Check if config file already exists
   if (fs.existsSync(fullOutputPath) && !options.force) {
     logger.warn(`Configuration file already exists: ${fullOutputPath}`);
-    
+
     const { overwrite } = await inquirer.prompt([
       {
         type: 'confirm',
@@ -59,7 +59,7 @@ async function handleInit(options: any) {
   // Save configuration
   if (configManager.saveToFile(fullOutputPath)) {
     logger.success(`✅ Configuration saved to: ${fullOutputPath}`);
-    
+
     // Display next steps
     displayNextSteps();
   } else {
@@ -119,11 +119,17 @@ async function collectConfiguration(options: any): Promise<any> {
         message: 'Set default model:',
         choices: [
           { name: 'GPT-4 Turbo', value: 'gpt-4-turbo-preview' },
-          { name: 'Claude 3 Sonnet', value: 'anthropic.claude-3-sonnet-20240229-v1:0' },
+          {
+            name: 'Claude 3 Sonnet',
+            value: 'anthropic.claude-3-sonnet-20240229-v1:0',
+          },
           { name: 'Gemini 2.0 Flash', value: 'gemini-2.0-flash-exp' },
           { name: 'Nova Pro', value: 'nova-pro' },
           { name: 'GPT-4', value: 'gpt-4' },
-          { name: 'Claude 3 Haiku', value: 'anthropic.claude-3-haiku-20240307-v1:0' },
+          {
+            name: 'Claude 3 Haiku',
+            value: 'anthropic.claude-3-haiku-20240307-v1:0',
+          },
         ],
       },
     ]);
@@ -270,51 +276,81 @@ async function collectAdvancedConfiguration(config: any) {
 
 function displayNextSteps() {
   console.log('\n' + chalk.cyan.bold('🎉 Setup Complete! Next steps:'));
-  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
-  
+  console.log(
+    chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
+
   console.log(chalk.yellow('1.') + ' Test your configuration:');
   console.log(chalk.gray('   cost-katana test'));
-  
+
   console.log(chalk.yellow('2.') + ' Start a chat session:');
   console.log(chalk.gray('   cost-katana chat'));
-  
+
   console.log(chalk.yellow('3.') + ' Analyze your costs:');
   console.log(chalk.gray('   cost-katana analyze'));
-  
+
   console.log(chalk.yellow('4.') + ' Optimize your prompts:');
   console.log(chalk.gray('   cost-katana optimize'));
-  
+
   console.log(chalk.yellow('5.') + ' View available models:');
   console.log(chalk.gray('   cost-katana list-models'));
-  
+
   console.log(chalk.yellow('6.') + ' View your configuration:');
   console.log(chalk.gray('   cost-katana config show'));
-  
-  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+
+  console.log(
+    chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
   console.log(chalk.blue('💡 Tip: Run "cost-katana --help" for more commands'));
-  console.log(chalk.blue('💡 Tip: Run "cost-katana config edit" to modify settings'));
+  console.log(
+    chalk.blue('💡 Tip: Run "cost-katana config edit" to modify settings')
+  );
 }
 
 function displayConfigurationSummary(config: any) {
   console.log('\n' + chalk.green.bold('📋 Configuration Summary:'));
-  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
-  
-  console.log(chalk.cyan('Project Name:') + ' ' + chalk.white(config.projectName));
-  console.log(chalk.cyan('Default Model:') + ' ' + chalk.white(config.defaultModel));
-  console.log(chalk.cyan('Monthly Token Budget:') + ' ' + chalk.white(`${(config.monthlyTokenBudget / 1000000).toFixed(1)}M tokens`));
+  console.log(
+    chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
+
+  console.log(
+    chalk.cyan('Project Name:') + ' ' + chalk.white(config.projectName)
+  );
+  console.log(
+    chalk.cyan('Default Model:') + ' ' + chalk.white(config.defaultModel)
+  );
+  console.log(
+    chalk.cyan('Monthly Token Budget:') +
+      ' ' +
+      chalk.white(`${(config.monthlyTokenBudget / 1000000).toFixed(1)}M tokens`)
+  );
   console.log(chalk.cyan('Base URL:') + ' ' + chalk.white(config.baseUrl));
-  
+
   if (config.defaultTemperature) {
-    console.log(chalk.cyan('Default Temperature:') + ' ' + chalk.white(config.defaultTemperature));
+    console.log(
+      chalk.cyan('Default Temperature:') +
+        ' ' +
+        chalk.white(config.defaultTemperature)
+    );
   }
-  
+
   if (config.defaultMaxTokens) {
-    console.log(chalk.cyan('Default Max Tokens:') + ' ' + chalk.white(config.defaultMaxTokens));
+    console.log(
+      chalk.cyan('Default Max Tokens:') +
+        ' ' +
+        chalk.white(config.defaultMaxTokens)
+    );
   }
-  
+
   if (config.costLimitPerDay) {
-    console.log(chalk.cyan('Daily Cost Limit:') + ' ' + chalk.white(`$${config.costLimitPerDay}`));
+    console.log(
+      chalk.cyan('Daily Cost Limit:') +
+        ' ' +
+        chalk.white(`$${config.costLimitPerDay}`)
+    );
   }
-  
-  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
-} 
+
+  console.log(
+    chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
+}

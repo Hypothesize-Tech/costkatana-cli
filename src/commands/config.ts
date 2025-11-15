@@ -51,7 +51,7 @@ async function handleConfig(options: any) {
 
 async function handleSetConfig(keyValue: string) {
   const [key, value] = keyValue.split('=');
-  
+
   if (!key || !value) {
     logger.error('Invalid format. Use: --set key=value');
     return;
@@ -59,10 +59,20 @@ async function handleSetConfig(keyValue: string) {
 
   // Validate key
   const validKeys = [
-    'apiKey', 'baseUrl', 'defaultModel', 'defaultTemperature',
-    'defaultMaxTokens', 'costLimitPerDay', 'enableAnalytics',
-    'enableOptimization', 'enableFailover', 'theme', 'outputFormat',
-    'modelMappings', 'providers', 'debugMode'
+    'apiKey',
+    'baseUrl',
+    'defaultModel',
+    'defaultTemperature',
+    'defaultMaxTokens',
+    'costLimitPerDay',
+    'enableAnalytics',
+    'enableOptimization',
+    'enableFailover',
+    'theme',
+    'outputFormat',
+    'modelMappings',
+    'providers',
+    'debugMode',
   ];
 
   if (!validKeys.includes(key)) {
@@ -73,14 +83,22 @@ async function handleSetConfig(keyValue: string) {
 
   // Set value with type conversion
   let typedValue: any = value;
-  
-  if (key === 'defaultTemperature' || key === 'defaultMaxTokens' || key === 'costLimitPerDay') {
+
+  if (
+    key === 'defaultTemperature' ||
+    key === 'defaultMaxTokens' ||
+    key === 'costLimitPerDay'
+  ) {
     typedValue = parseFloat(value);
     if (isNaN(typedValue)) {
       logger.error(`Invalid number value for ${key}: ${value}`);
       return;
     }
-  } else if (key === 'enableAnalytics' || key === 'enableOptimization' || key === 'enableFailover') {
+  } else if (
+    key === 'enableAnalytics' ||
+    key === 'enableOptimization' ||
+    key === 'enableFailover'
+  ) {
     typedValue = value.toLowerCase() === 'true';
   } else if (key === 'modelMappings' || key === 'providers') {
     try {
@@ -118,30 +136,37 @@ async function handleDeleteConfig(key: string) {
 
 async function handleListConfig() {
   const config = configManager.getAll();
-  
+
   console.log(chalk.cyan.bold('\n📋 Current Configuration'));
-  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
-  
+  console.log(
+    chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
+
   if (Object.keys(config).length === 0) {
     console.log(chalk.yellow('No configuration set yet.'));
-    console.log(chalk.gray('Use "cost-katana init" to set up your configuration'));
+    console.log(
+      chalk.gray('Use "cost-katana init" to set up your configuration')
+    );
   } else {
     Object.entries(config).forEach(([key, value]) => {
-      const displayValue = key === 'apiKey' && value ? 
-        `${value.substring(0, 8)}...` : 
-        JSON.stringify(value);
-      
+      const displayValue =
+        key === 'apiKey' && value
+          ? `${value.substring(0, 8)}...`
+          : JSON.stringify(value);
+
       console.log(`${chalk.yellow(key)}: ${chalk.white(displayValue)}`);
     });
   }
-  
-  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+
+  console.log(
+    chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
   console.log(chalk.gray(`Configuration file: ${configManager.getPath()}`));
 }
 
 async function handleExportConfig(filePath: string) {
   const fullPath = path.resolve(filePath);
-  
+
   if (configManager.saveToFile(fullPath)) {
     logger.success(`Configuration exported to: ${fullPath}`);
   } else {
@@ -151,7 +176,7 @@ async function handleExportConfig(filePath: string) {
 
 async function handleImportConfig(filePath: string) {
   const fullPath = path.resolve(filePath);
-  
+
   if (!fs.existsSync(fullPath)) {
     logger.error(`Configuration file not found: ${fullPath}`);
     return;
@@ -184,7 +209,9 @@ async function handleResetConfig() {
 
 async function handleInteractiveConfig() {
   console.log(chalk.cyan.bold('\n🔧 Configuration Manager'));
-  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+  console.log(
+    chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
 
   const { action } = await inquirer.prompt([
     {
@@ -226,9 +253,17 @@ async function handleInteractiveConfig() {
 
 async function handleInteractiveSet() {
   const validKeys = [
-    'apiKey', 'baseUrl', 'defaultModel', 'defaultTemperature',
-    'defaultMaxTokens', 'costLimitPerDay', 'enableAnalytics',
-    'enableOptimization', 'enableFailover', 'theme', 'outputFormat'
+    'apiKey',
+    'baseUrl',
+    'defaultModel',
+    'defaultTemperature',
+    'defaultMaxTokens',
+    'costLimitPerDay',
+    'enableAnalytics',
+    'enableOptimization',
+    'enableFailover',
+    'theme',
+    'outputFormat',
   ];
 
   const { key } = await inquirer.prompt([
@@ -236,12 +271,12 @@ async function handleInteractiveSet() {
       type: 'list',
       name: 'key',
       message: 'Select configuration key to set:',
-      choices: validKeys.map(k => ({ name: k, value: k })),
+      choices: validKeys.map((k) => ({ name: k, value: k })),
     },
   ]);
 
   let value: any;
-  
+
   if (key === 'apiKey') {
     const { apiKey } = await inquirer.prompt([
       {
@@ -263,7 +298,10 @@ async function handleInteractiveSet() {
         message: 'Select default model:',
         choices: [
           { name: 'GPT-4 Turbo', value: 'gpt-4-turbo-preview' },
-          { name: 'Claude 3 Sonnet', value: 'anthropic.claude-3-sonnet-20240229-v1:0' },
+          {
+            name: 'Claude 3 Sonnet',
+            value: 'anthropic.claude-3-sonnet-20240229-v1:0',
+          },
           { name: 'Gemini 2.0 Flash', value: 'gemini-2.0-flash-exp' },
           { name: 'Nova Pro', value: 'nova-pro' },
         ],
@@ -306,7 +344,8 @@ async function handleInteractiveSet() {
         message: 'Enter temperature (0.0 - 2.0):',
         default: 0.7,
         validate: (input: number) => {
-          if (input < 0 || input > 2) return 'Temperature must be between 0 and 2';
+          if (input < 0 || input > 2)
+            return 'Temperature must be between 0 and 2';
           return true;
         },
       },
@@ -389,4 +428,4 @@ async function handleInteractiveImport() {
   ]);
 
   await handleImportConfig(filePath);
-} 
+}

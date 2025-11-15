@@ -101,7 +101,7 @@ async function main() {
   analyzeCommand(program);
   configCommand(program);
   testCommand(program);
-  
+
   // Register advanced commands (for power users)
   budgetCommand(program);
   analyticsCommand(program);
@@ -115,7 +115,7 @@ async function main() {
   rewritePromptCommand(program);
   setBudgetCommand(program);
   listModelsCommand(program);
-  
+
   // Register legacy commands (kept for compatibility)
   checkCacheCommand(program);
   traceCommand(program);
@@ -144,7 +144,12 @@ async function main() {
   } catch (error) {
     if (error instanceof Error) {
       // Don't log errors for help and version commands
-      if (!process.argv.includes('--help') && !process.argv.includes('-h') && !process.argv.includes('--version') && !process.argv.includes('-v')) {
+      if (
+        !process.argv.includes('--help') &&
+        !process.argv.includes('-h') &&
+        !process.argv.includes('--version') &&
+        !process.argv.includes('-v')
+      ) {
         logger.error('Command failed:', error.message);
         if (process.argv.includes('--debug')) {
           console.error(error.stack);
@@ -179,4 +184,4 @@ if (require.main === module) {
   });
 }
 
-export { main }; 
+export { main };

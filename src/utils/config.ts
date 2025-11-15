@@ -33,7 +33,7 @@ export class ConfigManager {
 
   constructor(configPath?: string) {
     this.configPath = configPath;
-    
+
     this.conf = new Conf<CLIConfig>({
       projectName: 'cost-katana-cli',
       schema: {
@@ -81,22 +81,34 @@ export class ConfigManager {
           type: 'boolean',
           default: true,
         },
-                       modelMappings: {
-                 type: 'object',
-                 default: {
-                   gpt4: 'gpt-4o',
-                   claude: 'claude-3-5-sonnet-20241022',
-                   gemini: 'gemini-2.5-flash',
-                 },
-               },
-                       providers: {
-                 type: 'object',
-                 default: {
-                   openai: { priority: 1, models: ['gpt-4o', 'gpt-4o-mini', 'gpt-3.5-turbo'] },
-                   anthropic: { priority: 2, models: ['claude-3-5-sonnet-20241022', 'claude-3-5-haiku-20241022'] },
-                   google: { priority: 3, models: ['gemini-2.5-flash', 'gemini-2.5-pro'] },
-                 },
-               },
+        modelMappings: {
+          type: 'object',
+          default: {
+            gpt4: 'gpt-4o',
+            claude: 'claude-3-5-sonnet-20241022',
+            gemini: 'gemini-2.5-flash',
+          },
+        },
+        providers: {
+          type: 'object',
+          default: {
+            openai: {
+              priority: 1,
+              models: ['gpt-4o', 'gpt-4o-mini', 'gpt-3.5-turbo'],
+            },
+            anthropic: {
+              priority: 2,
+              models: [
+                'claude-3-5-sonnet-20241022',
+                'claude-3-5-haiku-20241022',
+              ],
+            },
+            google: {
+              priority: 3,
+              models: ['gemini-2.5-flash', 'gemini-2.5-pro'],
+            },
+          },
+        },
         theme: {
           type: 'string',
           enum: ['light', 'dark', 'auto'],
@@ -160,7 +172,7 @@ export class ConfigManager {
       }
 
       const configData = JSON.parse(fs.readFileSync(fullPath, 'utf8'));
-      
+
       // Validate and merge configuration
       for (const [key, value] of Object.entries(configData)) {
         if (this.isValidConfigKey(key)) {
@@ -181,7 +193,7 @@ export class ConfigManager {
     try {
       const fullPath = path.resolve(filePath);
       const configData = this.getAll();
-      
+
       // Ensure directory exists
       const dir = path.dirname(fullPath);
       if (!fs.existsSync(dir)) {
@@ -211,7 +223,7 @@ export class ConfigManager {
       enableAnalytics: true,
       enableOptimization: true,
       enableFailover: true,
-                   modelMappings: {
+      modelMappings: {
         gpt4: 'gpt-4o',
         claude: 'claude-3-5-sonnet-20241022',
         gemini: 'gemini-2.5-flash',
@@ -223,41 +235,83 @@ export class ConfigManager {
         aws: 'anthropic.claude-3-5-sonnet-20241022-v1:0',
       },
       providers: {
-        openai: { 
-          priority: 1, 
-          models: ['gpt-4o', 'gpt-4o-mini', 'gpt-4o-mini-2024-07-18', 'gpt-4-turbo', 'gpt-4', 'gpt-3.5-turbo', 'gpt-4.1-2025-04-14'] 
+        openai: {
+          priority: 1,
+          models: [
+            'gpt-4o',
+            'gpt-4o-mini',
+            'gpt-4o-mini-2024-07-18',
+            'gpt-4-turbo',
+            'gpt-4',
+            'gpt-3.5-turbo',
+            'gpt-4.1-2025-04-14',
+          ],
         },
-        anthropic: { 
-          priority: 2, 
-          models: ['claude-opus-4-20250514', 'claude-sonnet-4-20250514', 'claude-3-7-sonnet-20250219', 'claude-3-5-sonnet-20241022', 'claude-3-5-haiku-20241022'] 
+        anthropic: {
+          priority: 2,
+          models: [
+            'claude-opus-4-20250514',
+            'claude-sonnet-4-20250514',
+            'claude-3-7-sonnet-20250219',
+            'claude-3-5-sonnet-20241022',
+            'claude-3-5-haiku-20241022',
+          ],
         },
-        google: { 
-          priority: 3, 
-          models: ['gemini-2.5-pro', 'gemini-2.5-flash', 'gemini-2.5-flash-lite-preview', 'gemini-2.0-flash', 'gemini-1.5-pro'] 
+        google: {
+          priority: 3,
+          models: [
+            'gemini-2.5-pro',
+            'gemini-2.5-flash',
+            'gemini-2.5-flash-lite-preview',
+            'gemini-2.0-flash',
+            'gemini-1.5-pro',
+          ],
         },
-        aws: { 
-          priority: 4, 
-          models: ['ai21.jamba-1-5-large-v1:0', 'ai21.jamba-1-5-mini-v1:0', 'amazon.nova-micro-v1:0', 'amazon.nova-lite-v1:0', 'anthropic.claude-3-5-sonnet-20241022-v1:0', 'anthropic.claude-3-5-haiku-20241022-v1:0'] 
+        aws: {
+          priority: 4,
+          models: [
+            'ai21.jamba-1-5-large-v1:0',
+            'ai21.jamba-1-5-mini-v1:0',
+            'amazon.nova-micro-v1:0',
+            'amazon.nova-lite-v1:0',
+            'anthropic.claude-3-5-sonnet-20241022-v1:0',
+            'anthropic.claude-3-5-haiku-20241022-v1:0',
+          ],
         },
-        cohere: { 
-          priority: 5, 
-          models: ['command-a-03-2025', 'command-r7b-12-2024', 'command-a-reasoning-08-2025', 'command-a-vision-07-2025', 'command-r-plus-04-2024', 'command-r-08-2024'] 
+        cohere: {
+          priority: 5,
+          models: [
+            'command-a-03-2025',
+            'command-r7b-12-2024',
+            'command-a-reasoning-08-2025',
+            'command-a-vision-07-2025',
+            'command-r-plus-04-2024',
+            'command-r-08-2024',
+          ],
         },
-        mistral: { 
-          priority: 6, 
-          models: ['mistral-large-latest', 'mistral-medium-latest', 'mistral-small-latest'] 
+        mistral: {
+          priority: 6,
+          models: [
+            'mistral-large-latest',
+            'mistral-medium-latest',
+            'mistral-small-latest',
+          ],
         },
-        deepseek: { 
-          priority: 7, 
-          models: ['deepseek-chat', 'deepseek-coder'] 
+        deepseek: {
+          priority: 7,
+          models: ['deepseek-chat', 'deepseek-coder'],
         },
-        groq: { 
-          priority: 8, 
-          models: ['llama-3.1-8b-instant', 'llama-3.1-70b-version', 'mixtral-8x7b-32768'] 
+        groq: {
+          priority: 8,
+          models: [
+            'llama-3.1-8b-instant',
+            'llama-3.1-70b-version',
+            'mixtral-8x7b-32768',
+          ],
         },
-        xai: { 
-          priority: 9, 
-          models: ['x-1-mini', 'x-1-hybrid'] 
+        xai: {
+          priority: 9,
+          models: ['x-1-mini', 'x-1-hybrid'],
         },
       },
       theme: 'auto',
@@ -279,7 +333,10 @@ export class ConfigManager {
       errors.push('Project name is required');
     }
 
-    if (config.defaultTemperature && (config.defaultTemperature < 0 || config.defaultTemperature > 2)) {
+    if (
+      config.defaultTemperature &&
+      (config.defaultTemperature < 0 || config.defaultTemperature > 2)
+    ) {
       errors.push('Default temperature must be between 0 and 2');
     }
 
@@ -309,11 +366,17 @@ export class ConfigManager {
     if (config.apiKey) env.API_KEY = config.apiKey;
     if (config.baseUrl) env.COST_KATANA_BASE_URL = config.baseUrl;
     if (config.projectName) env.COST_KATANA_PROJECT_NAME = config.projectName;
-    if (config.defaultModel) env.COST_KATANA_DEFAULT_MODEL = config.defaultModel;
-    if (config.defaultTemperature) env.COST_KATANA_TEMPERATURE = config.defaultTemperature.toString();
-    if (config.defaultMaxTokens) env.COST_KATANA_MAX_TOKENS = config.defaultMaxTokens.toString();
-    if (config.costLimitPerDay) env.COST_KATANA_COST_LIMIT = config.costLimitPerDay.toString();
-    if (config.monthlyTokenBudget) env.COST_KATANA_MONTHLY_TOKEN_BUDGET = config.monthlyTokenBudget.toString();
+    if (config.defaultModel)
+      env.COST_KATANA_DEFAULT_MODEL = config.defaultModel;
+    if (config.defaultTemperature)
+      env.COST_KATANA_TEMPERATURE = config.defaultTemperature.toString();
+    if (config.defaultMaxTokens)
+      env.COST_KATANA_MAX_TOKENS = config.defaultMaxTokens.toString();
+    if (config.costLimitPerDay)
+      env.COST_KATANA_COST_LIMIT = config.costLimitPerDay.toString();
+    if (config.monthlyTokenBudget)
+      env.COST_KATANA_MONTHLY_TOKEN_BUDGET =
+        config.monthlyTokenBudget.toString();
 
     return env;
   }
@@ -324,4 +387,4 @@ export class ConfigManager {
 }
 
 // Global config instance
-export const configManager = new ConfigManager(); 
+export const configManager = new ConfigManager();

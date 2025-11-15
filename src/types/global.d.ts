@@ -35,4 +35,4 @@ declare module 'conf' {
   }
 
   export = Conf;
-} 
+}

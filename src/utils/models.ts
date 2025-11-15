@@ -29,7 +29,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'reasoning', 'analysis', 'coding', 'agents'],
     category: 'text',
     isLatest: true,
-    notes: 'The best model for coding and agentic tasks across domains'
+    notes: 'The best model for coding and agentic tasks across domains',
   },
   {
     id: 'gpt-5-mini',
@@ -42,7 +42,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'reasoning', 'analysis', 'efficient'],
     category: 'text',
     isLatest: true,
-    notes: 'A faster, cost-efficient version of GPT-5 for well-defined tasks'
+    notes: 'A faster, cost-efficient version of GPT-5 for well-defined tasks',
   },
   {
     id: 'gpt-5-nano',
@@ -55,7 +55,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'fast', 'cost-effective'],
     category: 'text',
     isLatest: true,
-    notes: 'Fastest, most cost-efficient version of GPT-5'
+    notes: 'Fastest, most cost-efficient version of GPT-5',
   },
   {
     id: 'gpt-5-pro',
@@ -64,11 +64,18 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     available: true,
     maxTokens: 128000,
     contextLength: 128000,
-    pricing: { input: 2.50, output: 20.0 },
-    capabilities: ['text', 'reasoning', 'analysis', 'coding', 'agents', 'premium'],
+    pricing: { input: 2.5, output: 20.0 },
+    capabilities: [
+      'text',
+      'reasoning',
+      'analysis',
+      'coding',
+      'agents',
+      'premium',
+    ],
     category: 'text',
     isLatest: true,
-    notes: 'Version of GPT-5 that produces smarter and more precise responses'
+    notes: 'Version of GPT-5 that produces smarter and more precise responses',
   },
   {
     id: 'gpt-5-codex',
@@ -81,7 +88,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['code', 'programming', 'agents', 'coding'],
     category: 'code',
     isLatest: true,
-    notes: 'A version of GPT-5 optimized for agentic coding in Codex'
+    notes: 'A version of GPT-5 optimized for agentic coding in Codex',
   },
   {
     id: 'gpt-5-chat-latest',
@@ -94,7 +101,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'chat', 'reasoning', 'analysis'],
     category: 'text',
     isLatest: true,
-    notes: 'GPT-5 model used in ChatGPT (not recommended for API use)'
+    notes: 'GPT-5 model used in ChatGPT (not recommended for API use)',
   },
 
   // === GPT-4o Models ===
@@ -109,7 +116,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'vision', 'multimodal'],
     category: 'text',
     isLatest: true,
-    notes: 'Latest GPT-4o Mini model with vision capabilities'
+    notes: 'Latest GPT-4o Mini model with vision capabilities',
   },
   {
     id: 'gpt-4o',
@@ -122,7 +129,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'vision', 'multimodal'],
     category: 'text',
     isLatest: true,
-    notes: 'Latest GPT-4o model with enhanced capabilities'
+    notes: 'Latest GPT-4o model with enhanced capabilities',
   },
   {
     id: 'gpt-4o-mini',
@@ -135,7 +142,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'vision', 'multimodal'],
     category: 'text',
     isLatest: true,
-    notes: 'GPT-4o Mini model with vision capabilities'
+    notes: 'GPT-4o Mini model with vision capabilities',
   },
   {
     id: 'gpt-4-turbo',
@@ -148,7 +155,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'vision', 'multimodal'],
     category: 'text',
     isLatest: false,
-    notes: 'GPT-4 Turbo with vision capabilities'
+    notes: 'GPT-4 Turbo with vision capabilities',
   },
   {
     id: 'gpt-4',
@@ -161,7 +168,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text'],
     category: 'text',
     isLatest: false,
-    notes: 'GPT-4 base model'
+    notes: 'GPT-4 base model',
   },
   {
     id: 'gpt-3.5-turbo',
@@ -174,7 +181,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text'],
     category: 'text',
     isLatest: false,
-    notes: 'GPT-3.5 Turbo model'
+    notes: 'GPT-3.5 Turbo model',
   },
   // === O-Series Models (Latest) ===
   {
@@ -188,7 +195,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'reasoning', 'analysis', 'pro'],
     category: 'reasoning',
     isLatest: true,
-    notes: 'Version of o3 with more compute for better responses'
+    notes: 'Version of o3 with more compute for better responses',
   },
   {
     id: 'o3-deep-research',
@@ -201,7 +208,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'research', 'analysis', 'deep'],
     category: 'research',
     isLatest: true,
-    notes: 'Our most powerful deep research model'
+    notes: 'Our most powerful deep research model',
   },
   {
     id: 'o4-mini',
@@ -210,11 +217,11 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     available: true,
     maxTokens: 128000,
     contextLength: 128000,
-    pricing: { input: 1.10, output: 4.40 },
+    pricing: { input: 1.1, output: 4.4 },
     capabilities: ['text', 'reasoning', 'efficient'],
     category: 'reasoning',
     isLatest: true,
-    notes: 'Fast, cost-efficient reasoning model, succeeded by GPT-5 mini'
+    notes: 'Fast, cost-efficient reasoning model, succeeded by GPT-5 mini',
   },
   {
     id: 'o4-mini-deep-research',
@@ -227,7 +234,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'research', 'analysis', 'efficient'],
     category: 'research',
     isLatest: true,
-    notes: 'Faster, more affordable deep research model'
+    notes: 'Faster, more affordable deep research model',
   },
   {
     id: 'o3',
@@ -240,7 +247,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'reasoning', 'analysis'],
     category: 'reasoning',
     isLatest: true,
-    notes: 'Reasoning model for complex tasks, succeeded by GPT-5'
+    notes: 'Reasoning model for complex tasks, succeeded by GPT-5',
   },
   {
     id: 'o1-pro',
@@ -253,7 +260,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'reasoning', 'analysis', 'premium'],
     category: 'reasoning',
     isLatest: true,
-    notes: 'Version of o1 with more compute for better responses'
+    notes: 'Version of o1 with more compute for better responses',
   },
   {
     id: 'o1',
@@ -266,7 +273,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'reasoning', 'analysis', 'advanced'],
     category: 'reasoning',
     isLatest: false,
-    notes: 'Previous full o-series reasoning model'
+    notes: 'Previous full o-series reasoning model',
   },
   // === Video Generation Models ===
   {
@@ -280,7 +287,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['video-generation', 'audio', 'synced-audio'],
     category: 'video',
     isLatest: true,
-    notes: 'Flagship video generation with synced audio (priced per second)'
+    notes: 'Flagship video generation with synced audio (priced per second)',
   },
   {
     id: 'sora-2-pro',
@@ -289,11 +296,11 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     available: true,
     maxTokens: 0,
     contextLength: 0,
-    pricing: { input: 0.10, output: 0.10 },
+    pricing: { input: 0.1, output: 0.1 },
     capabilities: ['video-generation', 'audio', 'synced-audio', 'advanced'],
     category: 'video',
     isLatest: true,
-    notes: 'Most advanced synced-audio video generation (priced per second)'
+    notes: 'Most advanced synced-audio video generation (priced per second)',
   },
   // === Image Generation Models ===
   {
@@ -307,7 +314,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['image-generation', 'text-to-image'],
     category: 'image',
     isLatest: true,
-    notes: 'State-of-the-art image generation model'
+    notes: 'State-of-the-art image generation model',
   },
   {
     id: 'gpt-image-1-mini',
@@ -320,7 +327,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['image-generation', 'text-to-image', 'cost-efficient'],
     category: 'image',
     isLatest: true,
-    notes: 'A cost-efficient version of GPT Image 1'
+    notes: 'A cost-efficient version of GPT Image 1',
   },
   // === Audio and Realtime Models ===
   {
@@ -334,7 +341,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'audio', 'realtime', 'multimodal'],
     category: 'realtime',
     isLatest: true,
-    notes: 'Model capable of realtime text and audio inputs and outputs'
+    notes: 'Model capable of realtime text and audio inputs and outputs',
   },
   {
     id: 'gpt-realtime-mini',
@@ -343,11 +350,11 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     available: true,
     maxTokens: 128000,
     contextLength: 128000,
-    pricing: { input: 0.60, output: 2.40 },
+    pricing: { input: 0.6, output: 2.4 },
     capabilities: ['text', 'audio', 'realtime', 'efficient'],
     category: 'realtime',
     isLatest: true,
-    notes: 'A cost-efficient version of GPT Realtime'
+    notes: 'A cost-efficient version of GPT Realtime',
   },
   {
     id: 'gpt-audio',
@@ -356,11 +363,11 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     available: true,
     maxTokens: 128000,
     contextLength: 128000,
-    pricing: { input: 2.50, output: 10.0 },
+    pricing: { input: 2.5, output: 10.0 },
     capabilities: ['text', 'audio', 'multimodal'],
     category: 'audio',
     isLatest: true,
-    notes: 'For audio inputs and outputs with Chat Completions API'
+    notes: 'For audio inputs and outputs with Chat Completions API',
   },
   {
     id: 'gpt-audio-mini',
@@ -369,11 +376,11 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     available: true,
     maxTokens: 128000,
     contextLength: 128000,
-    pricing: { input: 0.15, output: 0.60 },
+    pricing: { input: 0.15, output: 0.6 },
     capabilities: ['text', 'audio', 'efficient'],
     category: 'audio',
     isLatest: true,
-    notes: 'A cost-efficient version of GPT Audio'
+    notes: 'A cost-efficient version of GPT Audio',
   },
   // === Transcription Models ===
   {
@@ -387,7 +394,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['audio', 'transcription', 'speech-to-text'],
     category: 'audio',
     isLatest: true,
-    notes: 'Speech-to-text model powered by GPT-4o'
+    notes: 'Speech-to-text model powered by GPT-4o',
   },
   {
     id: 'gpt-4o-transcribe-diarize',
@@ -396,11 +403,11 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     available: true,
     maxTokens: 0,
     contextLength: 0,
-    pricing: { input: 0.20, output: 0.20 },
+    pricing: { input: 0.2, output: 0.2 },
     capabilities: ['audio', 'transcription', 'speech-to-text', 'diarization'],
     category: 'audio',
     isLatest: true,
-    notes: 'Transcription model that identifies who\'s speaking when'
+    notes: "Transcription model that identifies who's speaking when",
   },
   {
     id: 'gpt-4o-mini-transcribe',
@@ -409,11 +416,11 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     available: true,
     maxTokens: 0,
     contextLength: 0,
-    pricing: { input: 0.10, output: 0.10 },
+    pricing: { input: 0.1, output: 0.1 },
     capabilities: ['audio', 'transcription', 'speech-to-text', 'efficient'],
     category: 'audio',
     isLatest: true,
-    notes: 'Speech-to-text model powered by GPT-4o mini'
+    notes: 'Speech-to-text model powered by GPT-4o mini',
   },
   {
     id: 'whisper-1',
@@ -423,10 +430,15 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 0,
     contextLength: 0,
     pricing: { input: 0.006, output: 0.006 },
-    capabilities: ['audio', 'transcription', 'speech-to-text', 'general-purpose'],
+    capabilities: [
+      'audio',
+      'transcription',
+      'speech-to-text',
+      'general-purpose',
+    ],
     category: 'audio',
     isLatest: true,
-    notes: 'General-purpose speech recognition model (priced per minute)'
+    notes: 'General-purpose speech recognition model (priced per minute)',
   },
   // === Text-to-Speech Models ===
   {
@@ -440,7 +452,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['audio', 'text-to-speech', 'tts'],
     category: 'audio',
     isLatest: true,
-    notes: 'Text-to-speech model powered by GPT-4o mini'
+    notes: 'Text-to-speech model powered by GPT-4o mini',
   },
   {
     id: 'tts-1',
@@ -453,7 +465,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['audio', 'text-to-speech', 'tts', 'fast'],
     category: 'audio',
     isLatest: true,
-    notes: 'Text-to-speech model optimized for speed (priced per 1K characters)'
+    notes:
+      'Text-to-speech model optimized for speed (priced per 1K characters)',
   },
   {
     id: 'tts-1-hd',
@@ -462,11 +475,12 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     available: true,
     maxTokens: 0,
     contextLength: 0,
-    pricing: { input: 0.030, output: 0.030 },
+    pricing: { input: 0.03, output: 0.03 },
     capabilities: ['audio', 'text-to-speech', 'tts', 'high-quality'],
     category: 'audio',
     isLatest: true,
-    notes: 'Text-to-speech model optimized for quality (priced per 1K characters)'
+    notes:
+      'Text-to-speech model optimized for quality (priced per 1K characters)',
   },
   // === Open-Weight Models ===
   {
@@ -480,7 +494,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'open-source', 'open-weight'],
     category: 'text',
     isLatest: true,
-    notes: 'Most powerful open-weight model, fits into an H100 GPU. Licensed under Apache 2.0'
+    notes:
+      'Most powerful open-weight model, fits into an H100 GPU. Licensed under Apache 2.0',
   },
   {
     id: 'gpt-oss-20b',
@@ -493,7 +508,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'open-source', 'open-weight', 'low-latency'],
     category: 'text',
     isLatest: true,
-    notes: 'Medium-sized open-weight model for low latency. Licensed under Apache 2.0'
+    notes:
+      'Medium-sized open-weight model for low latency. Licensed under Apache 2.0',
   },
   {
     id: 'gpt-4.1',
@@ -506,7 +522,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'analysis', 'enhanced'],
     category: 'text',
     isLatest: true,
-    notes: 'Smartest non-reasoning model'
+    notes: 'Smartest non-reasoning model',
   },
   {
     id: 'gpt-4.1-mini',
@@ -515,11 +531,11 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     available: true,
     maxTokens: 128000,
     contextLength: 128000,
-    pricing: { input: 0.40, output: 1.60 },
+    pricing: { input: 0.4, output: 1.6 },
     capabilities: ['text', 'analysis', 'efficient'],
     category: 'text',
     isLatest: true,
-    notes: 'Smaller, faster version of GPT-4.1'
+    notes: 'Smaller, faster version of GPT-4.1',
   },
   {
     id: 'gpt-4.1-nano',
@@ -528,11 +544,11 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     available: true,
     maxTokens: 128000,
     contextLength: 128000,
-    pricing: { input: 0.10, output: 0.40 },
+    pricing: { input: 0.1, output: 0.4 },
     capabilities: ['text', 'fast', 'cost-effective'],
     category: 'text',
     isLatest: true,
-    notes: 'Fastest, most cost-efficient version of GPT-4.1'
+    notes: 'Fastest, most cost-efficient version of GPT-4.1',
   },
 
   // === Anthropic Models ===
@@ -544,10 +560,18 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 32000,
     contextLength: 200000,
     pricing: { input: 15.0, output: 75.0 },
-    capabilities: ['text', 'vision', 'multimodal', 'reasoning', 'extended-thinking', 'multilingual'],
+    capabilities: [
+      'text',
+      'vision',
+      'multimodal',
+      'reasoning',
+      'extended-thinking',
+      'multilingual',
+    ],
     category: 'multimodal',
     isLatest: true,
-    notes: 'Most capable and intelligent Claude model yet - superior reasoning and advanced coding (Mar 2025 cutoff)'
+    notes:
+      'Most capable and intelligent Claude model yet - superior reasoning and advanced coding (Mar 2025 cutoff)',
   },
   {
     id: 'claude-opus-4-20250514',
@@ -557,10 +581,18 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 32000,
     contextLength: 200000,
     pricing: { input: 15.0, output: 75.0 },
-    capabilities: ['text', 'vision', 'multimodal', 'reasoning', 'extended-thinking', 'multilingual'],
+    capabilities: [
+      'text',
+      'vision',
+      'multimodal',
+      'reasoning',
+      'extended-thinking',
+      'multilingual',
+    ],
     category: 'multimodal',
     isLatest: true,
-    notes: 'Previous flagship model with very high intelligence and capability (Mar 2025 cutoff)'
+    notes:
+      'Previous flagship model with very high intelligence and capability (Mar 2025 cutoff)',
   },
   {
     id: 'claude-sonnet-4-20250514',
@@ -570,10 +602,18 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 64000,
     contextLength: 200000,
     pricing: { input: 3.0, output: 15.0 },
-    capabilities: ['text', 'vision', 'multimodal', 'reasoning', 'extended-thinking', 'multilingual'],
+    capabilities: [
+      'text',
+      'vision',
+      'multimodal',
+      'reasoning',
+      'extended-thinking',
+      'multilingual',
+    ],
     category: 'multimodal',
     isLatest: false,
-    notes: 'High-performance model with exceptional reasoning (Mar 2025 cutoff, 1M context beta available). Use Claude Sonnet 4.5 for latest version'
+    notes:
+      'High-performance model with exceptional reasoning (Mar 2025 cutoff, 1M context beta available). Use Claude Sonnet 4.5 for latest version',
   },
   {
     id: 'claude-3-7-sonnet-20250219',
@@ -583,10 +623,18 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 64000,
     contextLength: 200000,
     pricing: { input: 3.0, output: 15.0 },
-    capabilities: ['text', 'vision', 'multimodal', 'reasoning', 'extended-thinking', 'multilingual'],
+    capabilities: [
+      'text',
+      'vision',
+      'multimodal',
+      'reasoning',
+      'extended-thinking',
+      'multilingual',
+    ],
     category: 'multimodal',
     isLatest: false,
-    notes: 'High-performance model with early extended thinking (Oct 2024 cutoff, 64k output). Deprecated - use Claude Sonnet 4.5 instead'
+    notes:
+      'High-performance model with early extended thinking (Oct 2024 cutoff, 64k output). Deprecated - use Claude Sonnet 4.5 instead',
   },
   {
     id: 'claude-3-5-sonnet-20241022',
@@ -599,7 +647,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'vision', 'multimodal', 'reasoning', 'multilingual'],
     category: 'multimodal',
     isLatest: false,
-    notes: 'Upgraded Claude 3.5 Sonnet (Apr 2024 cutoff, 8k output)'
+    notes: 'Upgraded Claude 3.5 Sonnet (Apr 2024 cutoff, 8k output)',
   },
   {
     id: 'claude-sonnet-4-5',
@@ -609,10 +657,18 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 200000,
     contextLength: 200000,
     pricing: { input: 3.0, output: 15.0 },
-    capabilities: ['text', 'vision', 'multimodal', 'reasoning', 'extended-thinking', 'multilingual'],
+    capabilities: [
+      'text',
+      'vision',
+      'multimodal',
+      'reasoning',
+      'extended-thinking',
+      'multilingual',
+    ],
     category: 'multimodal',
     isLatest: true,
-    notes: 'Latest Claude Sonnet model with enhanced capabilities and 1M context window support (beta)'
+    notes:
+      'Latest Claude Sonnet model with enhanced capabilities and 1M context window support (beta)',
   },
   {
     id: 'claude-haiku-4-5',
@@ -625,7 +681,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'vision', 'multimodal', 'multilingual'],
     category: 'multimodal',
     isLatest: true,
-    notes: 'Latest Claude Haiku model with improved performance and capabilities'
+    notes:
+      'Latest Claude Haiku model with improved performance and capabilities',
   },
   {
     id: 'claude-3-5-haiku-20241022',
@@ -638,7 +695,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'vision', 'multimodal', 'multilingual'],
     category: 'multimodal',
     isLatest: false,
-    notes: 'Fastest Claude model (July 2024 cutoff, 8k output)'
+    notes: 'Fastest Claude model (July 2024 cutoff, 8k output)',
   },
 
   // === Google AI Models ===
@@ -651,10 +708,18 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 2000000,
     contextLength: 2000000,
     pricing: { input: 1.25, output: 10.0 },
-    capabilities: ['text', 'multimodal', 'reasoning', 'coding', 'complex-problems', 'thinking'],
+    capabilities: [
+      'text',
+      'multimodal',
+      'reasoning',
+      'coding',
+      'complex-problems',
+      'thinking',
+    ],
     category: 'multimodal',
     isLatest: true,
-    notes: 'Our state-of-the-art thinking model, capable of reasoning over complex problems in code, math, and STEM, as well as analyzing large datasets, codebases, and documents using long context'
+    notes:
+      'Our state-of-the-art thinking model, capable of reasoning over complex problems in code, math, and STEM, as well as analyzing large datasets, codebases, and documents using long context',
   },
   {
     id: 'gemini-2.5-flash',
@@ -664,10 +729,20 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 1000000,
     contextLength: 1000000,
     pricing: { input: 0.3, output: 2.5 },
-    capabilities: ['text', 'image', 'video', 'multimodal', 'reasoning', 'thinking', 'live-api', 'agents'],
+    capabilities: [
+      'text',
+      'image',
+      'video',
+      'multimodal',
+      'reasoning',
+      'thinking',
+      'live-api',
+      'agents',
+    ],
     category: 'multimodal',
     isLatest: true,
-    notes: 'Our best model in terms of price-performance, offering well-rounded capabilities. Best for large scale processing, low-latency, high volume tasks that require thinking, and agentic use cases'
+    notes:
+      'Our best model in terms of price-performance, offering well-rounded capabilities. Best for large scale processing, low-latency, high volume tasks that require thinking, and agentic use cases',
   },
   {
     id: 'gemini-2.5-flash-lite-preview',
@@ -677,10 +752,19 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 1000000,
     contextLength: 1000000,
     pricing: { input: 0.1, output: 0.4 },
-    capabilities: ['text', 'image', 'video', 'multimodal', 'reasoning', 'thinking', 'high-throughput'],
+    capabilities: [
+      'text',
+      'image',
+      'video',
+      'multimodal',
+      'reasoning',
+      'thinking',
+      'high-throughput',
+    ],
     category: 'multimodal',
     isLatest: true,
-    notes: 'Our fastest flash model optimized for cost-efficiency and high throughput. Features 1M token context window and multimodal input'
+    notes:
+      'Our fastest flash model optimized for cost-efficiency and high throughput. Features 1M token context window and multimodal input',
   },
   {
     id: 'gemini-2.5-flash-lite',
@@ -690,10 +774,19 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 1000000,
     contextLength: 1000000,
     pricing: { input: 0.1, output: 0.4 },
-    capabilities: ['text', 'image', 'video', 'multimodal', 'reasoning', 'thinking', 'high-throughput'],
+    capabilities: [
+      'text',
+      'image',
+      'video',
+      'multimodal',
+      'reasoning',
+      'thinking',
+      'high-throughput',
+    ],
     category: 'multimodal',
     isLatest: true,
-    notes: 'Our fastest flash model optimized for cost-efficiency and high throughput (stable version)'
+    notes:
+      'Our fastest flash model optimized for cost-efficiency and high throughput (stable version)',
   },
   {
     id: 'gemini-2.5-flash-audio',
@@ -706,7 +799,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['audio', 'multimodal', 'audio-input'],
     category: 'audio',
     isLatest: true,
-    notes: 'Gemini 2.5 Flash with audio input capabilities'
+    notes: 'Gemini 2.5 Flash with audio input capabilities',
   },
   {
     id: 'gemini-2.5-flash-lite-audio-preview',
@@ -719,7 +812,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['audio', 'multimodal', 'audio-input', 'high-throughput'],
     category: 'audio',
     isLatest: true,
-    notes: 'Gemini 2.5 Flash-Lite with audio input capabilities'
+    notes: 'Gemini 2.5 Flash-Lite with audio input capabilities',
   },
   {
     id: 'gemini-2.5-flash-native-audio',
@@ -732,7 +825,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['audio', 'multimodal', 'native-audio'],
     category: 'audio',
     isLatest: true,
-    notes: 'Native audio model optimized for higher quality audio outputs'
+    notes: 'Native audio model optimized for higher quality audio outputs',
   },
   {
     id: 'gemini-2.5-flash-native-audio-output',
@@ -745,7 +838,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['audio', 'multimodal', 'native-audio', 'audio-output'],
     category: 'audio',
     isLatest: true,
-    notes: 'Native audio model with audio output capabilities'
+    notes: 'Native audio model with audio output capabilities',
   },
   {
     id: 'gemini-2.5-flash-preview-tts',
@@ -758,7 +851,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text-to-speech', 'audio', 'tts'],
     category: 'audio',
     isLatest: true,
-    notes: '2.5 Flash TTS model optimized for price-performant, low-latency speech generation'
+    notes:
+      '2.5 Flash TTS model optimized for price-performant, low-latency speech generation',
   },
   {
     id: 'gemini-2.5-pro-preview-tts',
@@ -771,7 +865,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text-to-speech', 'audio', 'tts'],
     category: 'audio',
     isLatest: true,
-    notes: '2.5 Pro TTS model optimized for powerful, low-latency speech generation'
+    notes:
+      '2.5 Pro TTS model optimized for powerful, low-latency speech generation',
   },
 
   // === Gemini 2.0 Models ===
@@ -783,10 +878,18 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 1000000,
     contextLength: 1000000,
     pricing: { input: 0.1, output: 0.4 },
-    capabilities: ['text', 'image', 'video', 'multimodal', 'agents', 'next-generation'],
+    capabilities: [
+      'text',
+      'image',
+      'video',
+      'multimodal',
+      'agents',
+      'next-generation',
+    ],
     category: 'multimodal',
     isLatest: false,
-    notes: 'Our second generation workhorse model, with a 1 million token context window'
+    notes:
+      'Our second generation workhorse model, with a 1 million token context window',
   },
   {
     id: 'gemini-2.0-flash-lite',
@@ -799,7 +902,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'multimodal', 'cost-efficient', 'low-latency'],
     category: 'multimodal',
     isLatest: false,
-    notes: 'Our second generation small workhorse model, with a 1 million token context window'
+    notes:
+      'Our second generation small workhorse model, with a 1 million token context window',
   },
   {
     id: 'gemini-2.0-flash-audio',
@@ -812,7 +916,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['audio', 'multimodal', 'audio-input'],
     category: 'audio',
     isLatest: false,
-    notes: 'Gemini 2.0 Flash with audio input capabilities'
+    notes: 'Gemini 2.0 Flash with audio input capabilities',
   },
 
   // === Gemini 1.5 Models ===
@@ -827,7 +931,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'image', 'video', 'multimodal'],
     category: 'multimodal',
     isLatest: false,
-    notes: 'Fastest multimodal model for diverse, repetitive tasks'
+    notes: 'Fastest multimodal model for diverse, repetitive tasks',
   },
   {
     id: 'gemini-1.5-flash-large-context',
@@ -840,7 +944,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'image', 'video', 'multimodal', 'large-context'],
     category: 'multimodal',
     isLatest: false,
-    notes: 'Gemini 1.5 Flash with large context pricing (>128k tokens)'
+    notes: 'Gemini 1.5 Flash with large context pricing (>128k tokens)',
   },
   {
     id: 'gemini-1.5-flash-8b',
@@ -853,7 +957,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'image', 'video', 'multimodal', 'efficient'],
     category: 'multimodal',
     isLatest: false,
-    notes: 'Smallest model for lower intelligence use cases'
+    notes: 'Smallest model for lower intelligence use cases',
   },
   {
     id: 'gemini-1.5-flash-8b-large-context',
@@ -863,10 +967,17 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 1000000,
     contextLength: 1000000,
     pricing: { input: 0.075, output: 0.3 },
-    capabilities: ['text', 'image', 'video', 'multimodal', 'efficient', 'large-context'],
+    capabilities: [
+      'text',
+      'image',
+      'video',
+      'multimodal',
+      'efficient',
+      'large-context',
+    ],
     category: 'multimodal',
     isLatest: false,
-    notes: 'Gemini 1.5 Flash-8B with large context pricing (>128k tokens)'
+    notes: 'Gemini 1.5 Flash-8B with large context pricing (>128k tokens)',
   },
   {
     id: 'gemini-1.5-pro',
@@ -879,7 +990,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'code', 'reasoning', 'multimodal'],
     category: 'text',
     isLatest: false,
-    notes: 'Highest intelligence Gemini 1.5 series model with 2M context'
+    notes: 'Highest intelligence Gemini 1.5 series model with 2M context',
   },
   {
     id: 'gemini-1.5-pro-large-context',
@@ -892,7 +1003,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'code', 'reasoning', 'multimodal', 'large-context'],
     category: 'text',
     isLatest: false,
-    notes: 'Gemini 1.5 Pro with large context pricing (>128k tokens)'
+    notes: 'Gemini 1.5 Pro with large context pricing (>128k tokens)',
   },
 
   // === Gemma Models (Open Source) ===
@@ -904,10 +1015,17 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 8192,
     contextLength: 8192,
     pricing: { input: 0.0, output: 0.0 },
-    capabilities: ['text', 'open-source', 'multimodal', '140-languages', 'mobile-optimized'],
+    capabilities: [
+      'text',
+      'open-source',
+      'multimodal',
+      '140-languages',
+      'mobile-optimized',
+    ],
     category: 'text',
     isLatest: true,
-    notes: 'The latest open models, designed for efficient execution on low-resource devices, capable of multimodal input (text, image, video, audio), and trained with data in over 140 spoken languages'
+    notes:
+      'The latest open models, designed for efficient execution on low-resource devices, capable of multimodal input (text, image, video, audio), and trained with data in over 140 spoken languages',
   },
   {
     id: 'gemma-3',
@@ -917,10 +1035,17 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 128000,
     contextLength: 128000,
     pricing: { input: 0.0, output: 0.0 },
-    capabilities: ['text', 'open-source', 'multimodal', '140-languages', 'wide-variety-tasks'],
+    capabilities: [
+      'text',
+      'open-source',
+      'multimodal',
+      '140-languages',
+      'wide-variety-tasks',
+    ],
     category: 'text',
     isLatest: true,
-    notes: 'The third generation of our open models, featuring the ability to solve a wide variety of tasks with text and image input, support for over 140 languages, and long 128K context window'
+    notes:
+      'The third generation of our open models, featuring the ability to solve a wide variety of tasks with text and image input, support for over 140 languages, and long 128K context window',
   },
   {
     id: 'gemma-2',
@@ -930,10 +1055,17 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 8192,
     contextLength: 8192,
     pricing: { input: 0.0, output: 0.0 },
-    capabilities: ['text', 'open-source', 'text-generation', 'summarization', 'extraction'],
+    capabilities: [
+      'text',
+      'open-source',
+      'text-generation',
+      'summarization',
+      'extraction',
+    ],
     category: 'text',
     isLatest: false,
-    notes: 'The second generation of our open models featuring text generation, summarization, and extraction'
+    notes:
+      'The second generation of our open models featuring text generation, summarization, and extraction',
   },
   {
     id: 'gemma',
@@ -943,10 +1075,18 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 8192,
     contextLength: 8192,
     pricing: { input: 0.0, output: 0.0 },
-    capabilities: ['text', 'open-source', 'text-generation', 'summarization', 'extraction', 'lightweight'],
+    capabilities: [
+      'text',
+      'open-source',
+      'text-generation',
+      'summarization',
+      'extraction',
+      'lightweight',
+    ],
     category: 'text',
     isLatest: false,
-    notes: 'A small-sized, lightweight open model supporting text generation, summarization, and extraction'
+    notes:
+      'A small-sized, lightweight open model supporting text generation, summarization, and extraction',
   },
 
   // === Specialized Gemma Models ===
@@ -958,10 +1098,16 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 8192,
     contextLength: 8192,
     pricing: { input: 0.0, output: 0.0 },
-    capabilities: ['text', 'open-source', 'safety-evaluation', 'instruction-tuned'],
+    capabilities: [
+      'text',
+      'open-source',
+      'safety-evaluation',
+      'instruction-tuned',
+    ],
     category: 'safety',
     isLatest: true,
-    notes: 'Instruction tuned models for evaluating the safety of text and images against a set of defined safety policies'
+    notes:
+      'Instruction tuned models for evaluating the safety of text and images against a set of defined safety policies',
   },
   {
     id: 'paligemma',
@@ -974,7 +1120,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'open-source', 'vision-language', 'siglip', 'gemma'],
     category: 'vision-language',
     isLatest: true,
-    notes: 'Our open vision-language model that combines SigLIP and Gemma'
+    notes: 'Our open vision-language model that combines SigLIP and Gemma',
   },
   {
     id: 'codegemma',
@@ -984,10 +1130,18 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 8192,
     contextLength: 8192,
     pricing: { input: 0.0, output: 0.0 },
-    capabilities: ['text', 'open-source', 'coding', 'fill-in-middle', 'code-generation', 'mathematical-reasoning'],
+    capabilities: [
+      'text',
+      'open-source',
+      'coding',
+      'fill-in-middle',
+      'code-generation',
+      'mathematical-reasoning',
+    ],
     category: 'coding',
     isLatest: true,
-    notes: 'Powerful, lightweight open model that can perform a variety of coding tasks like fill-in-the-middle code completion, code generation, natural language understanding, mathematical reasoning, and instruction following'
+    notes:
+      'Powerful, lightweight open model that can perform a variety of coding tasks like fill-in-the-middle code completion, code generation, natural language understanding, mathematical reasoning, and instruction following',
   },
   {
     id: 'txgemma',
@@ -997,10 +1151,18 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 8192,
     contextLength: 8192,
     pricing: { input: 0.0, output: 0.0 },
-    capabilities: ['text', 'open-source', 'therapeutic', 'predictions', 'classifications', 'efficient-training'],
+    capabilities: [
+      'text',
+      'open-source',
+      'therapeutic',
+      'predictions',
+      'classifications',
+      'efficient-training',
+    ],
     category: 'therapeutic',
     isLatest: true,
-    notes: 'Generates predictions, classifications or text based on therapeutic related data and can be used to efficiently build AI models for therapeutic-related tasks with less data and less compute'
+    notes:
+      'Generates predictions, classifications or text based on therapeutic related data and can be used to efficiently build AI models for therapeutic-related tasks with less data and less compute',
   },
   {
     id: 'medgemma',
@@ -1010,10 +1172,17 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 8192,
     contextLength: 8192,
     pricing: { input: 0.0, output: 0.0 },
-    capabilities: ['text', 'open-source', 'medical', 'medical-comprehension', 'variants'],
+    capabilities: [
+      'text',
+      'open-source',
+      'medical',
+      'medical-comprehension',
+      'variants',
+    ],
     category: 'medical',
     isLatest: true,
-    notes: 'Collection of Gemma 3 variants that are trained for performance on medical text and image comprehension'
+    notes:
+      'Collection of Gemma 3 variants that are trained for performance on medical text and image comprehension',
   },
   {
     id: 'medsiglip',
@@ -1023,10 +1192,17 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 8192,
     contextLength: 8192,
     pricing: { input: 0.0, output: 0.0 },
-    capabilities: ['text', 'open-source', 'medical', 'medical-images', 'embedding-space'],
+    capabilities: [
+      'text',
+      'open-source',
+      'medical',
+      'medical-images',
+      'embedding-space',
+    ],
     category: 'medical',
     isLatest: true,
-    notes: 'SigLIP variant that is trained to encode medical images and text into a common embedding space'
+    notes:
+      'SigLIP variant that is trained to encode medical images and text into a common embedding space',
   },
   {
     id: 't5gemma',
@@ -1036,10 +1212,18 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 8192,
     contextLength: 8192,
     pricing: { input: 0.0, output: 0.0 },
-    capabilities: ['text', 'open-source', 'encoder-decoder', 'research', 'lightweight', 'powerful'],
+    capabilities: [
+      'text',
+      'open-source',
+      'encoder-decoder',
+      'research',
+      'lightweight',
+      'powerful',
+    ],
     category: 'research',
     isLatest: true,
-    notes: 'A family of lightweight yet powerful encoder-decoder research models from Google'
+    notes:
+      'A family of lightweight yet powerful encoder-decoder research models from Google',
   },
 
   // === Embeddings Models ===
@@ -1051,10 +1235,16 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 2048,
     contextLength: 2048,
     pricing: { input: 0.0, output: 0.0 },
-    capabilities: ['embedding', 'semantic-search', 'classification', 'clustering'],
+    capabilities: [
+      'embedding',
+      'semantic-search',
+      'classification',
+      'clustering',
+    ],
     category: 'embedding',
     isLatest: true,
-    notes: 'State-of-the-art text embedding model for semantic search, classification, clustering, and similar tasks'
+    notes:
+      'State-of-the-art text embedding model for semantic search, classification, clustering, and similar tasks',
   },
   {
     id: 'multimodal-embeddings',
@@ -1064,10 +1254,16 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 2048,
     contextLength: 2048,
     pricing: { input: 0.0, output: 0.0 },
-    capabilities: ['embedding', 'multimodal', 'image-classification', 'image-search'],
+    capabilities: [
+      'embedding',
+      'multimodal',
+      'image-classification',
+      'image-search',
+    ],
     category: 'embedding',
     isLatest: true,
-    notes: 'Generates vectors based on images, which can be used for downstream tasks like image classification, image search, and more'
+    notes:
+      'Generates vectors based on images, which can be used for downstream tasks like image classification, image search, and more',
   },
 
   // === Imagen Models (Image Generation) ===
@@ -1082,7 +1278,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['image-generation', 'text-to-image', 'higher-quality'],
     category: 'image',
     isLatest: true,
-    notes: 'Use text prompts to generate novel images with higher quality than our previous image generation models'
+    notes:
+      'Use text prompts to generate novel images with higher quality than our previous image generation models',
   },
   {
     id: 'imagen-4-fast-generation',
@@ -1092,10 +1289,16 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 0,
     contextLength: 0,
     pricing: { input: 0.04, output: 0.04 },
-    capabilities: ['image-generation', 'text-to-image', 'higher-quality', 'lower-latency'],
+    capabilities: [
+      'image-generation',
+      'text-to-image',
+      'higher-quality',
+      'lower-latency',
+    ],
     category: 'image',
     isLatest: true,
-    notes: 'Use text prompts to generate novel images with higher quality and lower latency than our previous image generation models'
+    notes:
+      'Use text prompts to generate novel images with higher quality and lower latency than our previous image generation models',
   },
   {
     id: 'imagen-4-ultra-generation',
@@ -1105,10 +1308,16 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 0,
     contextLength: 0,
     pricing: { input: 0.06, output: 0.06 },
-    capabilities: ['image-generation', 'text-to-image', 'higher-quality', 'better-prompt-adherence'],
+    capabilities: [
+      'image-generation',
+      'text-to-image',
+      'higher-quality',
+      'better-prompt-adherence',
+    ],
     category: 'image',
     isLatest: true,
-    notes: 'Use text prompts to generate novel images with higher quality and better prompt adherence than our previous image generation models'
+    notes:
+      'Use text prompts to generate novel images with higher quality and better prompt adherence than our previous image generation models',
   },
   {
     id: 'imagen-3-generation',
@@ -1121,7 +1330,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['image-generation', 'text-to-image'],
     category: 'image',
     isLatest: false,
-    notes: 'Use text prompts to generate novel images'
+    notes: 'Use text prompts to generate novel images',
   },
   {
     id: 'imagen-3-editing-customization',
@@ -1131,10 +1340,17 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 0,
     contextLength: 0,
     pricing: { input: 0.03, output: 0.03 },
-    capabilities: ['image-generation', 'text-to-image', 'image-editing', 'customization', 'mask-editing'],
+    capabilities: [
+      'image-generation',
+      'text-to-image',
+      'image-editing',
+      'customization',
+      'mask-editing',
+    ],
     category: 'image',
     isLatest: false,
-    notes: 'Use text prompts to edit existing input images, or parts of an image with a mask or generate new images based upon the context provided by input reference images'
+    notes:
+      'Use text prompts to edit existing input images, or parts of an image with a mask or generate new images based upon the context provided by input reference images',
   },
   {
     id: 'imagen-3-fast-generation',
@@ -1147,7 +1363,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['image-generation', 'text-to-image', 'lower-latency'],
     category: 'image',
     isLatest: false,
-    notes: 'Use text prompts to generate novel images with lower latency than our other image generation models'
+    notes:
+      'Use text prompts to generate novel images with lower latency than our other image generation models',
   },
   {
     id: 'imagen-captioning-vqa',
@@ -1157,10 +1374,18 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 0,
     contextLength: 0,
     pricing: { input: 0.03, output: 0.03 },
-    capabilities: ['image-generation', 'text-to-image', 'image-editing', 'mask-editing', 'captioning', 'vqa'],
+    capabilities: [
+      'image-generation',
+      'text-to-image',
+      'image-editing',
+      'mask-editing',
+      'captioning',
+      'vqa',
+    ],
     category: 'image',
     isLatest: false,
-    notes: 'Use text prompts to generate novel images, edit existing ones, edit parts of an image with a mask and more'
+    notes:
+      'Use text prompts to generate novel images, edit existing ones, edit parts of an image with a mask and more',
   },
 
   // === Veo Models (Video Generation) ===
@@ -1172,10 +1397,16 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 0,
     contextLength: 0,
     pricing: { input: 0.35, output: 0.35 },
-    capabilities: ['video-generation', 'text-to-video', 'image-to-video', 'higher-quality'],
+    capabilities: [
+      'video-generation',
+      'text-to-video',
+      'image-to-video',
+      'higher-quality',
+    ],
     category: 'video',
     isLatest: true,
-    notes: 'Use text prompts and images to generate novel videos with higher quality than our previous video generation model (priced per second)'
+    notes:
+      'Use text prompts and images to generate novel videos with higher quality than our previous video generation model (priced per second)',
   },
   {
     id: 'veo-3',
@@ -1185,10 +1416,16 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 0,
     contextLength: 0,
     pricing: { input: 0.35, output: 0.35 },
-    capabilities: ['video-generation', 'text-to-video', 'image-to-video', 'higher-quality'],
+    capabilities: [
+      'video-generation',
+      'text-to-video',
+      'image-to-video',
+      'higher-quality',
+    ],
     category: 'video',
     isLatest: true,
-    notes: 'Use text prompts and images to generate novel videos with higher quality than our previous video generation model (priced per second)'
+    notes:
+      'Use text prompts and images to generate novel videos with higher quality than our previous video generation model (priced per second)',
   },
   {
     id: 'veo-3-fast',
@@ -1198,10 +1435,17 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 0,
     contextLength: 0,
     pricing: { input: 0.35, output: 0.35 },
-    capabilities: ['video-generation', 'text-to-video', 'image-to-video', 'higher-quality', 'lower-latency'],
+    capabilities: [
+      'video-generation',
+      'text-to-video',
+      'image-to-video',
+      'higher-quality',
+      'lower-latency',
+    ],
     category: 'video',
     isLatest: true,
-    notes: 'Use text prompts and images to generate novel videos with higher quality and lower latency than our previous video generation model (priced per second)'
+    notes:
+      'Use text prompts and images to generate novel videos with higher quality and lower latency than our previous video generation model (priced per second)',
   },
 
   // === Preview Models ===
@@ -1216,7 +1460,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['image-generation', 'virtual-try-on', 'clothing'],
     category: 'image',
     isLatest: true,
-    notes: 'Generate images of people wearing clothing products (preview model, free tier only)'
+    notes:
+      'Generate images of people wearing clothing products (preview model, free tier only)',
   },
   {
     id: 'veo-3-preview',
@@ -1226,10 +1471,17 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 0,
     contextLength: 0,
     pricing: { input: 0.35, output: 0.35 },
-    capabilities: ['video-generation', 'text-to-video', 'image-to-video', 'higher-quality', 'preview'],
+    capabilities: [
+      'video-generation',
+      'text-to-video',
+      'image-to-video',
+      'higher-quality',
+      'preview',
+    ],
     category: 'video',
     isLatest: true,
-    notes: 'Use text prompts and images to generate novel videos with higher quality than our previous video generation model (preview model, priced per second)'
+    notes:
+      'Use text prompts and images to generate novel videos with higher quality than our previous video generation model (preview model, priced per second)',
   },
   {
     id: 'veo-3-fast-preview',
@@ -1239,10 +1491,18 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 0,
     contextLength: 0,
     pricing: { input: 0.35, output: 0.35 },
-    capabilities: ['video-generation', 'text-to-video', 'image-to-video', 'higher-quality', 'lower-latency', 'preview'],
+    capabilities: [
+      'video-generation',
+      'text-to-video',
+      'image-to-video',
+      'higher-quality',
+      'lower-latency',
+      'preview',
+    ],
     category: 'video',
     isLatest: true,
-    notes: 'Use text prompts and images to generate novel videos with higher quality and lower latency than our previous video generation model (preview model, priced per second)'
+    notes:
+      'Use text prompts and images to generate novel videos with higher quality and lower latency than our previous video generation model (preview model, priced per second)',
   },
 
   // === Legacy Models for Backward Compatibility ===
@@ -1257,7 +1517,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'vision', 'multimodal'],
     category: 'text',
     isLatest: false,
-    notes: 'Earlier generation Gemini model (legacy)'
+    notes: 'Earlier generation Gemini model (legacy)',
   },
   {
     id: 'gemini-1.0-pro-vision',
@@ -1270,7 +1530,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'vision', 'multimodal'],
     category: 'text',
     isLatest: false,
-    notes: 'Earlier generation Gemini model with vision capabilities (legacy)'
+    notes: 'Earlier generation Gemini model with vision capabilities (legacy)',
   },
 
   // === AWS Bedrock Models ===
@@ -1285,7 +1545,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'long-context'],
     category: 'text',
     isLatest: true,
-    notes: 'AI21 Labs Jamba 1.5 Large via AWS Bedrock'
+    notes: 'AI21 Labs Jamba 1.5 Large via AWS Bedrock',
   },
   {
     id: 'ai21.jamba-1-5-mini-v1:0',
@@ -1298,7 +1558,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'long-context', 'efficient'],
     category: 'text',
     isLatest: true,
-    notes: 'AI21 Labs Jamba 1.5 Mini via AWS Bedrock'
+    notes: 'AI21 Labs Jamba 1.5 Mini via AWS Bedrock',
   },
   {
     id: 'amazon.nova-micro-v1:0',
@@ -1311,7 +1571,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'ultra-fast', 'cost-effective'],
     category: 'text',
     isLatest: true,
-    notes: 'Amazon Nova Micro via AWS Bedrock'
+    notes: 'Amazon Nova Micro via AWS Bedrock',
   },
   {
     id: 'amazon.nova-lite-v1:0',
@@ -1324,7 +1584,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'multimodal', 'fast'],
     category: 'multimodal',
     isLatest: true,
-    notes: 'Amazon Nova Lite via AWS Bedrock'
+    notes: 'Amazon Nova Lite via AWS Bedrock',
   },
   {
     id: 'amazon.nova-pro-v1:0',
@@ -1337,7 +1597,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'multimodal', 'reasoning'],
     category: 'multimodal',
     isLatest: true,
-    notes: 'Amazon Nova Pro via AWS Bedrock'
+    notes: 'Amazon Nova Pro via AWS Bedrock',
   },
   {
     id: 'amazon.nova-premier-v1:0',
@@ -1350,7 +1610,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'multimodal', 'advanced-reasoning'],
     category: 'multimodal',
     isLatest: true,
-    notes: 'Amazon Nova Premier via AWS Bedrock'
+    notes: 'Amazon Nova Premier via AWS Bedrock',
   },
   {
     id: 'amazon.nova-canvas-v1:0',
@@ -1363,7 +1623,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['image-generation'],
     category: 'image',
     isLatest: true,
-    notes: 'Amazon Nova Canvas via AWS Bedrock - image generation model'
+    notes: 'Amazon Nova Canvas via AWS Bedrock - image generation model',
   },
   {
     id: 'amazon.nova-reel-v1:0',
@@ -1376,7 +1636,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['video-generation'],
     category: 'video',
     isLatest: true,
-    notes: 'Amazon Nova Reel via AWS Bedrock - video generation model'
+    notes: 'Amazon Nova Reel via AWS Bedrock - video generation model',
   },
   {
     id: 'amazon.nova-sonic-v1:0',
@@ -1389,7 +1649,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['speech', 'multimodal', 'native-audio'],
     category: 'audio',
     isLatest: true,
-    notes: 'Amazon Nova Sonic via AWS Bedrock - speech model'
+    notes: 'Amazon Nova Sonic via AWS Bedrock - speech model',
   },
   {
     id: 'amazon.titan-text-express-v1',
@@ -1402,7 +1662,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text'],
     category: 'text',
     isLatest: true,
-    notes: 'Amazon Titan Text Express via AWS Bedrock'
+    notes: 'Amazon Titan Text Express via AWS Bedrock',
   },
   {
     id: 'amazon.titan-text-lite-v1',
@@ -1415,7 +1675,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text'],
     category: 'text',
     isLatest: true,
-    notes: 'Amazon Titan Text Lite via AWS Bedrock'
+    notes: 'Amazon Titan Text Lite via AWS Bedrock',
   },
   {
     id: 'amazon.titan-embed-text-v2:0',
@@ -1428,7 +1688,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['embedding'],
     category: 'embedding',
     isLatest: true,
-    notes: 'Amazon Titan Text Embeddings V2 via AWS Bedrock'
+    notes: 'Amazon Titan Text Embeddings V2 via AWS Bedrock',
   },
   {
     id: 'anthropic.claude-opus-4-1-20250805-v1:0',
@@ -1438,10 +1698,18 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 32000,
     contextLength: 200000,
     pricing: { input: 15.0, output: 75.0 },
-    capabilities: ['text', 'vision', 'multimodal', 'reasoning', 'extended-thinking', 'multilingual'],
+    capabilities: [
+      'text',
+      'vision',
+      'multimodal',
+      'reasoning',
+      'extended-thinking',
+      'multilingual',
+    ],
     category: 'multimodal',
     isLatest: true,
-    notes: 'Claude Opus 4.1 via AWS Bedrock - most capable and intelligent Claude model yet'
+    notes:
+      'Claude Opus 4.1 via AWS Bedrock - most capable and intelligent Claude model yet',
   },
   {
     id: 'anthropic.claude-opus-4-20250514-v1:0',
@@ -1451,10 +1719,17 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 32000,
     contextLength: 200000,
     pricing: { input: 15.0, output: 75.0 },
-    capabilities: ['text', 'vision', 'multimodal', 'reasoning', 'extended-thinking', 'multilingual'],
+    capabilities: [
+      'text',
+      'vision',
+      'multimodal',
+      'reasoning',
+      'extended-thinking',
+      'multilingual',
+    ],
     category: 'multimodal',
     isLatest: true,
-    notes: 'Claude Opus 4 via AWS Bedrock - previous flagship model'
+    notes: 'Claude Opus 4 via AWS Bedrock - previous flagship model',
   },
   {
     id: 'anthropic.claude-sonnet-4-5-v1:0',
@@ -1464,10 +1739,18 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 200000,
     contextLength: 200000,
     pricing: { input: 3.0, output: 15.0 },
-    capabilities: ['text', 'vision', 'multimodal', 'reasoning', 'extended-thinking', 'multilingual'],
+    capabilities: [
+      'text',
+      'vision',
+      'multimodal',
+      'reasoning',
+      'extended-thinking',
+      'multilingual',
+    ],
     category: 'multimodal',
     isLatest: true,
-    notes: 'Claude Sonnet 4.5 on AWS Bedrock - latest Claude Sonnet model with enhanced capabilities and 1M context window support (beta)'
+    notes:
+      'Claude Sonnet 4.5 on AWS Bedrock - latest Claude Sonnet model with enhanced capabilities and 1M context window support (beta)',
   },
   {
     id: 'anthropic.claude-haiku-4-5-v1:0',
@@ -1480,7 +1763,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'vision', 'multimodal', 'multilingual'],
     category: 'multimodal',
     isLatest: true,
-    notes: 'Claude Haiku 4.5 on AWS Bedrock - latest Claude Haiku model with improved performance'
+    notes:
+      'Claude Haiku 4.5 on AWS Bedrock - latest Claude Haiku model with improved performance',
   },
   {
     id: 'anthropic.claude-sonnet-4-20250514-v1:0',
@@ -1490,10 +1774,18 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 64000,
     contextLength: 200000,
     pricing: { input: 3.0, output: 15.0 },
-    capabilities: ['text', 'vision', 'multimodal', 'reasoning', 'extended-thinking', 'multilingual'],
+    capabilities: [
+      'text',
+      'vision',
+      'multimodal',
+      'reasoning',
+      'extended-thinking',
+      'multilingual',
+    ],
     category: 'multimodal',
     isLatest: false,
-    notes: 'Claude Sonnet 4 via AWS Bedrock - high-performance model with exceptional reasoning'
+    notes:
+      'Claude Sonnet 4 via AWS Bedrock - high-performance model with exceptional reasoning',
   },
   {
     id: 'anthropic.claude-3-7-sonnet-20250219-v1:0',
@@ -1503,10 +1795,18 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 64000,
     contextLength: 200000,
     pricing: { input: 3.0, output: 15.0 },
-    capabilities: ['text', 'vision', 'multimodal', 'reasoning', 'extended-thinking', 'multilingual'],
+    capabilities: [
+      'text',
+      'vision',
+      'multimodal',
+      'reasoning',
+      'extended-thinking',
+      'multilingual',
+    ],
     category: 'multimodal',
     isLatest: false,
-    notes: 'Claude Sonnet 3.7 via AWS Bedrock - high-performance model with early extended thinking. Deprecated - use Claude Sonnet 4.5 instead'
+    notes:
+      'Claude Sonnet 3.7 via AWS Bedrock - high-performance model with early extended thinking. Deprecated - use Claude Sonnet 4.5 instead',
   },
   {
     id: 'anthropic.claude-3-5-sonnet-20241022-v1:0',
@@ -1519,7 +1819,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'vision', 'multimodal', 'reasoning', 'multilingual'],
     category: 'multimodal',
     isLatest: false,
-    notes: 'Claude Sonnet 3.5 v2 via AWS Bedrock - upgraded version'
+    notes: 'Claude Sonnet 3.5 v2 via AWS Bedrock - upgraded version',
   },
   {
     id: 'anthropic.claude-3-5-haiku-20241022-v1:0',
@@ -1532,7 +1832,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'vision', 'multimodal', 'multilingual'],
     category: 'multimodal',
     isLatest: true,
-    notes: 'Claude Haiku 3.5 via AWS Bedrock - fastest Claude model'
+    notes: 'Claude Haiku 3.5 via AWS Bedrock - fastest Claude model',
   },
   {
     id: 'meta.llama3-70b-instruct-v1:0',
@@ -1545,7 +1845,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'instruction-following'],
     category: 'text',
     isLatest: true,
-    notes: 'Meta Llama 3 70B Instruct via AWS Bedrock'
+    notes: 'Meta Llama 3 70B Instruct via AWS Bedrock',
   },
   {
     id: 'meta.llama3-8b-instruct-v1:0',
@@ -1554,11 +1854,11 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     available: true,
     maxTokens: 8192,
     contextLength: 8192,
-    pricing: { input: 0.05, output: 0.10 },
+    pricing: { input: 0.05, output: 0.1 },
     capabilities: ['text', 'instruction-following', 'fast'],
     category: 'text',
     isLatest: true,
-    notes: 'Meta Llama 3 8B Instruct via AWS Bedrock'
+    notes: 'Meta Llama 3 8B Instruct via AWS Bedrock',
   },
   {
     id: 'meta.llama3-2-11b-instruct-v1:0',
@@ -1571,7 +1871,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'instruction-following', 'vision'],
     category: 'multimodal',
     isLatest: true,
-    notes: 'Meta Llama 3.2 11B Instruct via AWS Bedrock'
+    notes: 'Meta Llama 3.2 11B Instruct via AWS Bedrock',
   },
   {
     id: 'meta.llama3-2-90b-instruct-v1:0',
@@ -1584,7 +1884,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'instruction-following', 'vision'],
     category: 'multimodal',
     isLatest: true,
-    notes: 'Meta Llama 3.2 90B Instruct via AWS Bedrock'
+    notes: 'Meta Llama 3.2 90B Instruct via AWS Bedrock',
   },
   {
     id: 'meta.llama4-scout-17b-instruct-v1:0',
@@ -1597,7 +1897,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'instruction-following', 'vision'],
     category: 'multimodal',
     isLatest: true,
-    notes: 'Meta Llama 4 Scout 17B Instruct via AWS Bedrock'
+    notes: 'Meta Llama 4 Scout 17B Instruct via AWS Bedrock',
   },
   {
     id: 'meta.llama4-maverick-17b-instruct-v1:0',
@@ -1610,7 +1910,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'instruction-following', 'vision'],
     category: 'multimodal',
     isLatest: true,
-    notes: 'Meta Llama 4 Maverick 17B Instruct via AWS Bedrock'
+    notes: 'Meta Llama 4 Maverick 17B Instruct via AWS Bedrock',
   },
   {
     id: 'mistral.mistral-7b-instruct-v0:2',
@@ -1623,7 +1923,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'instruction-following', 'fast'],
     category: 'text',
     isLatest: true,
-    notes: 'Mistral 7B Instruct via AWS Bedrock'
+    notes: 'Mistral 7B Instruct via AWS Bedrock',
   },
   {
     id: 'mistral.mixtral-8x7b-instruct-v0:1',
@@ -1636,7 +1936,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'instruction-following', 'mixture-of-experts'],
     category: 'text',
     isLatest: true,
-    notes: 'Mistral Mixtral 8x7B Instruct via AWS Bedrock'
+    notes: 'Mistral Mixtral 8x7B Instruct via AWS Bedrock',
   },
   {
     id: 'mistral.mistral-large-2402-v1:0',
@@ -1645,11 +1945,11 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     available: true,
     maxTokens: 32768,
     contextLength: 32768,
-    pricing: { input: 6.50, output: 25.00 },
+    pricing: { input: 6.5, output: 25.0 },
     capabilities: ['text', 'instruction-following'],
     category: 'text',
     isLatest: true,
-    notes: 'Mistral Large via AWS Bedrock'
+    notes: 'Mistral Large via AWS Bedrock',
   },
   {
     id: 'mistral.mistral-small-2402-v1:0',
@@ -1658,11 +1958,11 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     available: true,
     maxTokens: 32768,
     contextLength: 32768,
-    pricing: { input: 2.00, output: 6.00 },
+    pricing: { input: 2.0, output: 6.0 },
     capabilities: ['text', 'instruction-following'],
     category: 'text',
     isLatest: true,
-    notes: 'Mistral Small via AWS Bedrock'
+    notes: 'Mistral Small via AWS Bedrock',
   },
   {
     id: 'mistral.pixtral-large-2502-v1:0',
@@ -1675,7 +1975,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['vision', 'multimodal', 'reasoning'],
     category: 'multimodal',
     isLatest: true,
-    notes: 'Mistral Pixtral Large via AWS Bedrock'
+    notes: 'Mistral Pixtral Large via AWS Bedrock',
   },
   {
     id: 'cohere.command-r-plus-v1:0',
@@ -1688,7 +1988,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'multilingual', 'enterprise'],
     category: 'text',
     isLatest: true,
-    notes: 'Cohere Command R+ via AWS Bedrock - updated pricing'
+    notes: 'Cohere Command R+ via AWS Bedrock - updated pricing',
   },
   {
     id: 'cohere.command-r-v1:0',
@@ -1701,7 +2001,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'multilingual', 'rag', 'tools'],
     category: 'text',
     isLatest: true,
-    notes: 'Cohere Command R via AWS Bedrock - updated pricing'
+    notes: 'Cohere Command R via AWS Bedrock - updated pricing',
   },
   {
     id: 'cohere.embed-english-v3',
@@ -1714,7 +2014,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['embedding'],
     category: 'embedding',
     isLatest: true,
-    notes: 'Cohere Embed English v3 via AWS Bedrock'
+    notes: 'Cohere Embed English v3 via AWS Bedrock',
   },
   {
     id: 'cohere.embed-multilingual-v3',
@@ -1727,7 +2027,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['embedding', 'multilingual'],
     category: 'embedding',
     isLatest: true,
-    notes: 'Cohere Embed Multilingual v3 via AWS Bedrock'
+    notes: 'Cohere Embed Multilingual v3 via AWS Bedrock',
   },
   // Latest Cohere Models
   {
@@ -1741,7 +2041,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'agentic', 'multilingual', 'human-evaluations'],
     category: 'text',
     isLatest: true,
-    notes: 'Most performant model to date, excelling at tool use, agents, RAG, and multilingual use cases'
+    notes:
+      'Most performant model to date, excelling at tool use, agents, RAG, and multilingual use cases',
   },
   {
     id: 'command-r7b-12-2024',
@@ -1754,7 +2055,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'rag', 'tool-use', 'agents'],
     category: 'text',
     isLatest: true,
-    notes: 'Small, fast update delivered in December 2024, excels at RAG, tool use, and complex reasoning'
+    notes:
+      'Small, fast update delivered in December 2024, excels at RAG, tool use, and complex reasoning',
   },
   {
     id: 'command-a-reasoning-08-2025',
@@ -1767,7 +2069,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'reasoning', 'agentic', 'multilingual'],
     category: 'text',
     isLatest: true,
-    notes: 'First reasoning model, able to think before generating output for nuanced problem-solving and agent-based tasks in 23 languages'
+    notes:
+      'First reasoning model, able to think before generating output for nuanced problem-solving and agent-based tasks in 23 languages',
   },
   {
     id: 'command-a-vision-07-2025',
@@ -1780,7 +2083,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'vision', 'multimodal', 'enterprise'],
     category: 'multimodal',
     isLatest: true,
-    notes: 'First model capable of processing images, excelling in enterprise use cases like charts, graphs, diagrams, table understanding, OCR, and object detection'
+    notes:
+      'First model capable of processing images, excelling in enterprise use cases like charts, graphs, diagrams, table understanding, OCR, and object detection',
   },
   {
     id: 'command-r-plus-04-2024',
@@ -1793,7 +2097,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'enterprise', 'rag', 'tools', 'multilingual'],
     category: 'text',
     isLatest: true,
-    notes: 'Instruction-following conversational model for complex RAG workflows and multi-step tool use'
+    notes:
+      'Instruction-following conversational model for complex RAG workflows and multi-step tool use',
   },
   {
     id: 'command-r-08-2024',
@@ -1806,7 +2111,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'rag', 'tools', 'agents'],
     category: 'text',
     isLatest: true,
-    notes: 'Update of Command R model delivered in August 2024'
+    notes: 'Update of Command R model delivered in August 2024',
   },
   {
     id: 'command-r-03-2024',
@@ -1819,7 +2124,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'rag', 'tools', 'agents'],
     category: 'text',
     isLatest: false,
-    notes: 'Instruction-following conversational model for complex workflows like code generation, RAG, tool use, and agents'
+    notes:
+      'Instruction-following conversational model for complex workflows like code generation, RAG, tool use, and agents',
   },
   {
     id: 'command',
@@ -1832,7 +2138,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'conversational'],
     category: 'text',
     isLatest: false,
-    notes: 'Instruction-following conversational model for language tasks with high quality and reliability'
+    notes:
+      'Instruction-following conversational model for language tasks with high quality and reliability',
   },
   {
     id: 'command-nightly',
@@ -1845,7 +2152,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'experimental', 'nightly'],
     category: 'text',
     isLatest: false,
-    notes: 'Latest experimental version, not recommended for production use'
+    notes: 'Latest experimental version, not recommended for production use',
   },
   {
     id: 'command-light',
@@ -1858,7 +2165,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'lightweight', 'fast'],
     category: 'text',
     isLatest: false,
-    notes: 'Smaller, faster version of command, almost as capable but much faster'
+    notes:
+      'Smaller, faster version of command, almost as capable but much faster',
   },
   {
     id: 'command-light-nightly',
@@ -1871,7 +2179,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'lightweight', 'experimental', 'nightly'],
     category: 'text',
     isLatest: false,
-    notes: 'Latest experimental version of command-light, not recommended for production use'
+    notes:
+      'Latest experimental version of command-light, not recommended for production use',
   },
   {
     id: 'rerank-v3.5',
@@ -1884,7 +2193,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['rerank', 'semantic-search', 'retrieval'],
     category: 'rerank',
     isLatest: true,
-    notes: 'Provides powerful semantic boost to search quality of any keyword or vector search system, $2.00 per 1K searches'
+    notes:
+      'Provides powerful semantic boost to search quality of any keyword or vector search system, $2.00 per 1K searches',
   },
   {
     id: 'rerank-english-v3.0',
@@ -1897,7 +2207,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['rerank', 'semantic-search', 'english'],
     category: 'rerank',
     isLatest: true,
-    notes: 'English language document and semi-structured data reranking model'
+    notes: 'English language document and semi-structured data reranking model',
   },
   {
     id: 'rerank-multilingual-v3.0',
@@ -1910,7 +2220,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['rerank', 'semantic-search', 'multilingual'],
     category: 'rerank',
     isLatest: true,
-    notes: 'Multilingual document and semi-structured data reranking model'
+    notes: 'Multilingual document and semi-structured data reranking model',
   },
   {
     id: 'embed-v4.0',
@@ -1923,7 +2233,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['embedding', 'multimodal', 'semantic-search', 'rag'],
     category: 'embedding',
     isLatest: true,
-    notes: 'Leading multimodal embedding model for text and images, acts as intelligent retrieval engine for semantic search and RAG systems'
+    notes:
+      'Leading multimodal embedding model for text and images, acts as intelligent retrieval engine for semantic search and RAG systems',
   },
   {
     id: 'embed-english-v3.0',
@@ -1936,7 +2247,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['embedding', 'english'],
     category: 'embedding',
     isLatest: true,
-    notes: 'English-only embedding model for text classification and embeddings'
+    notes:
+      'English-only embedding model for text classification and embeddings',
   },
   {
     id: 'embed-english-light-v3.0',
@@ -1949,7 +2261,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['embedding', 'english', 'lightweight'],
     category: 'embedding',
     isLatest: true,
-    notes: 'Smaller, faster version of embed-english-v3.0, almost as capable but much faster'
+    notes:
+      'Smaller, faster version of embed-english-v3.0, almost as capable but much faster',
   },
   {
     id: 'embed-multilingual-v3.0',
@@ -1962,7 +2275,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['embedding', 'multilingual'],
     category: 'embedding',
     isLatest: true,
-    notes: 'Multilingual embedding model for classification and embeddings in multiple languages'
+    notes:
+      'Multilingual embedding model for classification and embeddings in multiple languages',
   },
   {
     id: 'embed-multilingual-light-v3.0',
@@ -1975,7 +2289,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['embedding', 'multilingual', 'lightweight'],
     category: 'embedding',
     isLatest: true,
-    notes: 'Smaller, faster version of embed-multilingual-v3.0, almost as capable but much faster'
+    notes:
+      'Smaller, faster version of embed-multilingual-v3.0, almost as capable but much faster',
   },
   {
     id: 'c4ai-aya-expanse-8b',
@@ -1988,7 +2303,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'multilingual', '23-languages'],
     category: 'text',
     isLatest: true,
-    notes: 'Highly performant 8B multilingual model designed to rival monolingual performance, serves 23 languages'
+    notes:
+      'Highly performant 8B multilingual model designed to rival monolingual performance, serves 23 languages',
   },
   {
     id: 'c4ai-aya-expanse-32b',
@@ -2001,7 +2317,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'multilingual', '23-languages'],
     category: 'text',
     isLatest: true,
-    notes: 'Highly performant 32B multilingual model designed to rival monolingual performance, serves 23 languages'
+    notes:
+      'Highly performant 32B multilingual model designed to rival monolingual performance, serves 23 languages',
   },
   {
     id: 'c4ai-aya-vision-8b',
@@ -2014,7 +2331,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'vision', 'multimodal', 'multilingual'],
     category: 'multimodal',
     isLatest: true,
-    notes: 'State-of-the-art multimodal model excelling at language, text, and image capabilities, 8B variant focused on low latency'
+    notes:
+      'State-of-the-art multimodal model excelling at language, text, and image capabilities, 8B variant focused on low latency',
   },
   {
     id: 'c4ai-aya-vision-32b',
@@ -2024,10 +2342,17 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 16384,
     contextLength: 16384,
     pricing: { input: 0.15, output: 0.6 },
-    capabilities: ['text', 'vision', 'multimodal', 'multilingual', '23-languages'],
+    capabilities: [
+      'text',
+      'vision',
+      'multimodal',
+      'multilingual',
+      '23-languages',
+    ],
     category: 'multimodal',
     isLatest: true,
-    notes: 'State-of-the-art multimodal model excelling at language, text, and image capabilities, 32B variant focused on state-of-art multilingual performance'
+    notes:
+      'State-of-the-art multimodal model excelling at language, text, and image capabilities, 32B variant focused on state-of-art multilingual performance',
   },
   {
     id: 'deepseek.r1-v1:0',
@@ -2040,7 +2365,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'reasoning', 'cot'],
     category: 'reasoning',
     isLatest: true,
-    notes: 'DeepSeek-R1 reasoning model via AWS Bedrock'
+    notes: 'DeepSeek-R1 reasoning model via AWS Bedrock',
   },
   {
     id: 'stability.stable-diffusion-xl-v1:0',
@@ -2053,7 +2378,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['image-generation', 'creative-content'],
     category: 'image-generation',
     isLatest: true,
-    notes: 'Stability AI Stable Diffusion XL via AWS Bedrock'
+    notes: 'Stability AI Stable Diffusion XL via AWS Bedrock',
   },
   {
     id: 'twelvelabs.pegasus-1-2-v1:0',
@@ -2066,7 +2391,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'video', 'multimodal'],
     category: 'multimodal',
     isLatest: true,
-    notes: 'TwelveLabs Pegasus v1.2 via AWS Bedrock - video understanding model'
+    notes:
+      'TwelveLabs Pegasus v1.2 via AWS Bedrock - video understanding model',
   },
   {
     id: 'twelvelabs.marengo-embed-2-7-v1:0',
@@ -2079,9 +2405,10 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['embedding', 'multimodal'],
     category: 'embedding',
     isLatest: true,
-    notes: 'TwelveLabs Marengo Embed v2.7 via AWS Bedrock - multimodal embeddings'
+    notes:
+      'TwelveLabs Marengo Embed v2.7 via AWS Bedrock - multimodal embeddings',
   },
-  
+
   // === Mistral AI Models ===
   // Premier Models
   {
@@ -2092,10 +2419,18 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 128000,
     contextLength: 128000,
     pricing: { input: 0.4, output: 2.0 },
-    capabilities: ['text', 'multimodal', 'vision', 'analysis', 'reasoning', 'enterprise'],
+    capabilities: [
+      'text',
+      'multimodal',
+      'vision',
+      'analysis',
+      'reasoning',
+      'enterprise',
+    ],
     category: 'multimodal',
     isLatest: true,
-    notes: 'Our frontier-class multimodal model released August 2025. Improving tone and performance.'
+    notes:
+      'Our frontier-class multimodal model released August 2025. Improving tone and performance.',
   },
   {
     id: 'mistral-medium-latest',
@@ -2105,10 +2440,18 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 128000,
     contextLength: 128000,
     pricing: { input: 0.4, output: 2.0 },
-    capabilities: ['text', 'multimodal', 'vision', 'analysis', 'reasoning', 'enterprise'],
+    capabilities: [
+      'text',
+      'multimodal',
+      'vision',
+      'analysis',
+      'reasoning',
+      'enterprise',
+    ],
     category: 'multimodal',
     isLatest: true,
-    notes: 'Our frontier-class multimodal model released August 2025. Improving tone and performance.'
+    notes:
+      'Our frontier-class multimodal model released August 2025. Improving tone and performance.',
   },
   {
     id: 'magistral-medium-2509',
@@ -2118,10 +2461,18 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 40000,
     contextLength: 40000,
     pricing: { input: 2.0, output: 5.0 },
-    capabilities: ['text', 'reasoning', 'thinking', 'domain-specific', 'multilingual', 'multimodal'],
+    capabilities: [
+      'text',
+      'reasoning',
+      'thinking',
+      'domain-specific',
+      'multilingual',
+      'multimodal',
+    ],
     category: 'reasoning',
     isLatest: true,
-    notes: 'Our frontier-class multimodal reasoning model released September 2025 (v25.09).'
+    notes:
+      'Our frontier-class multimodal reasoning model released September 2025 (v25.09).',
   },
   {
     id: 'magistral-medium-latest',
@@ -2131,10 +2482,18 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 40000,
     contextLength: 40000,
     pricing: { input: 2.0, output: 5.0 },
-    capabilities: ['text', 'reasoning', 'thinking', 'domain-specific', 'multilingual', 'multimodal'],
+    capabilities: [
+      'text',
+      'reasoning',
+      'thinking',
+      'domain-specific',
+      'multilingual',
+      'multimodal',
+    ],
     category: 'reasoning',
     isLatest: true,
-    notes: 'Our frontier-class multimodal reasoning model released September 2025 (v25.09).'
+    notes:
+      'Our frontier-class multimodal reasoning model released September 2025 (v25.09).',
   },
   {
     id: 'magistral-medium-2507',
@@ -2144,10 +2503,17 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 40000,
     contextLength: 40000,
     pricing: { input: 2.0, output: 5.0 },
-    capabilities: ['text', 'reasoning', 'thinking', 'domain-specific', 'multilingual'],
+    capabilities: [
+      'text',
+      'reasoning',
+      'thinking',
+      'domain-specific',
+      'multilingual',
+    ],
     category: 'reasoning',
     isLatest: false,
-    notes: 'Our frontier-class reasoning model released July 2025 (v25.07). Deprecated October 31, 2025, retirement November 30, 2025. Use Magistral Medium 1.2 instead.'
+    notes:
+      'Our frontier-class reasoning model released July 2025 (v25.07). Deprecated October 31, 2025, retirement November 30, 2025. Use Magistral Medium 1.2 instead.',
   },
   {
     id: 'codestral-2508',
@@ -2157,10 +2523,18 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 256000,
     contextLength: 256000,
     pricing: { input: 0.3, output: 0.9 },
-    capabilities: ['code', 'programming', 'multilingual-code', 'fill-in-middle', 'code-correction', 'test-generation'],
+    capabilities: [
+      'code',
+      'programming',
+      'multilingual-code',
+      'fill-in-middle',
+      'code-correction',
+      'test-generation',
+    ],
     category: 'code',
     isLatest: true,
-    notes: 'Our cutting-edge language model for coding released end of July 2025, specializes in low-latency, high-frequency tasks.'
+    notes:
+      'Our cutting-edge language model for coding released end of July 2025, specializes in low-latency, high-frequency tasks.',
   },
   {
     id: 'codestral-latest',
@@ -2170,10 +2544,18 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 256000,
     contextLength: 256000,
     pricing: { input: 0.3, output: 0.9 },
-    capabilities: ['code', 'programming', 'multilingual-code', 'fill-in-middle', 'code-correction', 'test-generation'],
+    capabilities: [
+      'code',
+      'programming',
+      'multilingual-code',
+      'fill-in-middle',
+      'code-correction',
+      'test-generation',
+    ],
     category: 'code',
     isLatest: true,
-    notes: 'Our cutting-edge language model for coding released end of July 2025, specializes in low-latency, high-frequency tasks.'
+    notes:
+      'Our cutting-edge language model for coding released end of July 2025, specializes in low-latency, high-frequency tasks.',
   },
   {
     id: 'voxtral-mini-2507',
@@ -2186,7 +2568,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['audio', 'transcription', 'efficient'],
     category: 'audio',
     isLatest: true,
-    notes: 'An efficient audio input model, fine-tuned and optimized for transcription purposes only.'
+    notes:
+      'An efficient audio input model, fine-tuned and optimized for transcription purposes only.',
   },
   {
     id: 'voxtral-mini-latest',
@@ -2199,7 +2582,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['audio', 'transcription', 'efficient'],
     category: 'audio',
     isLatest: true,
-    notes: 'An efficient audio input model, fine-tuned and optimized for transcription purposes only.'
+    notes:
+      'An efficient audio input model, fine-tuned and optimized for transcription purposes only.',
   },
   {
     id: 'devstral-medium-2507',
@@ -2209,10 +2593,17 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 128000,
     contextLength: 128000,
     pricing: { input: 0.4, output: 2.0 },
-    capabilities: ['code', 'agents', 'advanced-coding', 'codebase-exploration', 'multi-file-editing'],
+    capabilities: [
+      'code',
+      'agents',
+      'advanced-coding',
+      'codebase-exploration',
+      'multi-file-editing',
+    ],
     category: 'code',
     isLatest: true,
-    notes: 'An enterprise grade text model that excels at using tools to explore codebases, editing multiple files and power software engineering agents.'
+    notes:
+      'An enterprise grade text model that excels at using tools to explore codebases, editing multiple files and power software engineering agents.',
   },
   {
     id: 'devstral-medium-latest',
@@ -2222,10 +2613,17 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 128000,
     contextLength: 128000,
     pricing: { input: 0.4, output: 2.0 },
-    capabilities: ['code', 'agents', 'advanced-coding', 'codebase-exploration', 'multi-file-editing'],
+    capabilities: [
+      'code',
+      'agents',
+      'advanced-coding',
+      'codebase-exploration',
+      'multi-file-editing',
+    ],
     category: 'code',
     isLatest: true,
-    notes: 'An enterprise grade text model that excels at using tools to explore codebases, editing multiple files and power software engineering agents.'
+    notes:
+      'An enterprise grade text model that excels at using tools to explore codebases, editing multiple files and power software engineering agents.',
   },
   {
     id: 'mistral-ocr-2505',
@@ -2235,10 +2633,16 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 0,
     contextLength: 0,
     pricing: { input: 1.0, output: 3.0 },
-    capabilities: ['ocr', 'document-understanding', 'annotations', 'text-extraction'],
+    capabilities: [
+      'ocr',
+      'document-understanding',
+      'annotations',
+      'text-extraction',
+    ],
     category: 'document',
     isLatest: true,
-    notes: 'Our OCR service powering our Document AI stack that enables our users to extract interleaved text and images.'
+    notes:
+      'Our OCR service powering our Document AI stack that enables our users to extract interleaved text and images.',
   },
   {
     id: 'mistral-ocr-latest',
@@ -2248,10 +2652,16 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 0,
     contextLength: 0,
     pricing: { input: 1.0, output: 3.0 },
-    capabilities: ['ocr', 'document-understanding', 'annotations', 'text-extraction'],
+    capabilities: [
+      'ocr',
+      'document-understanding',
+      'annotations',
+      'text-extraction',
+    ],
     category: 'document',
     isLatest: true,
-    notes: 'Our OCR service powering our Document AI stack that enables our users to extract interleaved text and images.'
+    notes:
+      'Our OCR service powering our Document AI stack that enables our users to extract interleaved text and images.',
   },
   {
     id: 'mistral-large-2411',
@@ -2264,7 +2674,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'reasoning', 'complex-tasks', 'high-complexity'],
     category: 'text',
     isLatest: true,
-    notes: 'Our top-tier large model for high-complexity tasks with the latest version released November 2024.'
+    notes:
+      'Our top-tier large model for high-complexity tasks with the latest version released November 2024.',
   },
   {
     id: 'mistral-large-latest',
@@ -2277,7 +2688,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'reasoning', 'complex-tasks', 'high-complexity'],
     category: 'text',
     isLatest: true,
-    notes: 'Our top-tier large model for high-complexity tasks with the latest version released November 2024.'
+    notes:
+      'Our top-tier large model for high-complexity tasks with the latest version released November 2024.',
   },
   {
     id: 'pixtral-large-2411',
@@ -2290,7 +2702,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['vision', 'multimodal', 'reasoning', 'frontier-class'],
     category: 'multimodal',
     isLatest: true,
-    notes: 'Our first frontier-class multimodal model released November 2024.'
+    notes: 'Our first frontier-class multimodal model released November 2024.',
   },
   {
     id: 'pixtral-large-latest',
@@ -2303,7 +2715,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['vision', 'multimodal', 'reasoning', 'frontier-class'],
     category: 'multimodal',
     isLatest: true,
-    notes: 'Our first frontier-class multimodal model released November 2024.'
+    notes: 'Our first frontier-class multimodal model released November 2024.',
   },
   {
     id: 'mistral-small-2407',
@@ -2316,7 +2728,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'multimodal', 'multilingual', 'open-source'],
     category: 'multimodal',
     isLatest: false,
-    notes: 'Our updated small version, released September 2024.'
+    notes: 'Our updated small version, released September 2024.',
   },
   {
     id: 'mistral-embed',
@@ -2329,7 +2741,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['embedding', 'text', 'semantic'],
     category: 'embedding',
     isLatest: true,
-    notes: 'Our state-of-the-art semantic for extracting representation of text extracts.'
+    notes:
+      'Our state-of-the-art semantic for extracting representation of text extracts.',
   },
   {
     id: 'codestral-embed-2505',
@@ -2342,7 +2755,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['embedding', 'code', 'semantic'],
     category: 'embedding',
     isLatest: true,
-    notes: 'Our state-of-the-art semantic for extracting representation of code extracts.'
+    notes:
+      'Our state-of-the-art semantic for extracting representation of code extracts.',
   },
   {
     id: 'mistral-moderation-2411',
@@ -2355,7 +2769,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['moderation', 'classification', 'harmful-content-detection'],
     category: 'moderation',
     isLatest: true,
-    notes: 'Our moderation service that enables our users to detect harmful text content.'
+    notes:
+      'Our moderation service that enables our users to detect harmful text content.',
   },
   {
     id: 'mistral-moderation-latest',
@@ -2368,9 +2783,10 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['moderation', 'classification', 'harmful-content-detection'],
     category: 'moderation',
     isLatest: true,
-    notes: 'Our moderation service that enables our users to detect harmful text content.'
+    notes:
+      'Our moderation service that enables our users to detect harmful text content.',
   },
-  
+
   // Open Models
   {
     id: 'magistral-small-2509',
@@ -2380,10 +2796,18 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 40000,
     contextLength: 40000,
     pricing: { input: 0.5, output: 1.5 },
-    capabilities: ['text', 'reasoning', 'thinking', 'domain-specific', 'multilingual', 'multimodal'],
+    capabilities: [
+      'text',
+      'reasoning',
+      'thinking',
+      'domain-specific',
+      'multilingual',
+      'multimodal',
+    ],
     category: 'reasoning',
     isLatest: true,
-    notes: 'Our small multimodal reasoning model released September 2025 (v25.09).'
+    notes:
+      'Our small multimodal reasoning model released September 2025 (v25.09).',
   },
   {
     id: 'magistral-small-latest',
@@ -2393,10 +2817,18 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 40000,
     contextLength: 40000,
     pricing: { input: 0.5, output: 1.5 },
-    capabilities: ['text', 'reasoning', 'thinking', 'domain-specific', 'multilingual', 'multimodal'],
+    capabilities: [
+      'text',
+      'reasoning',
+      'thinking',
+      'domain-specific',
+      'multilingual',
+      'multimodal',
+    ],
     category: 'reasoning',
     isLatest: true,
-    notes: 'Our small multimodal reasoning model released September 2025 (v25.09).'
+    notes:
+      'Our small multimodal reasoning model released September 2025 (v25.09).',
   },
   {
     id: 'magistral-small-2507',
@@ -2406,10 +2838,17 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 40000,
     contextLength: 40000,
     pricing: { input: 0.5, output: 1.5 },
-    capabilities: ['text', 'reasoning', 'thinking', 'domain-specific', 'multilingual'],
+    capabilities: [
+      'text',
+      'reasoning',
+      'thinking',
+      'domain-specific',
+      'multilingual',
+    ],
     category: 'reasoning',
     isLatest: false,
-    notes: 'Our small reasoning model released July 2025 (v25.07). Deprecated October 31, 2025, retirement November 30, 2025. Use Magistral Small 1.2 instead.'
+    notes:
+      'Our small reasoning model released July 2025 (v25.07). Deprecated October 31, 2025, retirement November 30, 2025. Use Magistral Small 1.2 instead.',
   },
   {
     id: 'voxtral-small-2507',
@@ -2422,7 +2861,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['audio', 'instruct', 'multimodal'],
     category: 'audio',
     isLatest: true,
-    notes: 'Our first model with audio input capabilities for instruct use cases.'
+    notes:
+      'Our first model with audio input capabilities for instruct use cases.',
   },
   {
     id: 'voxtral-small-latest',
@@ -2435,7 +2875,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['audio', 'instruct', 'multimodal'],
     category: 'audio',
     isLatest: true,
-    notes: 'Our first model with audio input capabilities for instruct use cases.'
+    notes:
+      'Our first model with audio input capabilities for instruct use cases.',
   },
   {
     id: 'mistral-small-2506',
@@ -2448,7 +2889,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'multimodal', 'multilingual', 'open-source'],
     category: 'multimodal',
     isLatest: true,
-    notes: 'An update to our previous small model, released June 2025.'
+    notes: 'An update to our previous small model, released June 2025.',
   },
   {
     id: 'mistral-small-2503',
@@ -2461,7 +2902,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'multimodal', 'multilingual', 'open-source'],
     category: 'multimodal',
     isLatest: false,
-    notes: 'Mistral Small 3.0 model released March 2025.'
+    notes: 'Mistral Small 3.0 model released March 2025.',
   },
   {
     id: 'ministral-3b',
@@ -2474,7 +2915,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'lightweight', 'edge', 'open-source'],
     category: 'text',
     isLatest: true,
-    notes: 'World\'s best edge model. 3B parameter model optimized for edge devices.'
+    notes:
+      "World's best edge model. 3B parameter model optimized for edge devices.",
   },
   {
     id: 'ministral-8b',
@@ -2483,11 +2925,12 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     available: true,
     maxTokens: 128000,
     contextLength: 128000,
-    pricing: { input: 0.10, output: 0.30 },
+    pricing: { input: 0.1, output: 0.3 },
     capabilities: ['text', 'edge', 'open-source', 'high-performance'],
     category: 'text',
     isLatest: true,
-    notes: 'Powerful edge model with extremely high performance/price ratio. 8B parameter model.'
+    notes:
+      'Powerful edge model with extremely high performance/price ratio. 8B parameter model.',
   },
   {
     id: 'devstral-small-2507',
@@ -2497,10 +2940,17 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 128000,
     contextLength: 128000,
     pricing: { input: 0.1, output: 0.3 },
-    capabilities: ['code', 'agents', 'open-source', 'codebase-exploration', 'multi-file-editing'],
+    capabilities: [
+      'code',
+      'agents',
+      'open-source',
+      'codebase-exploration',
+      'multi-file-editing',
+    ],
     category: 'code',
     isLatest: true,
-    notes: 'An update to our open source model that excels at using tools to explore codebases, editing multiple files and power software engineering agents.'
+    notes:
+      'An update to our open source model that excels at using tools to explore codebases, editing multiple files and power software engineering agents.',
   },
   {
     id: 'devstral-small-latest',
@@ -2510,10 +2960,17 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 128000,
     contextLength: 128000,
     pricing: { input: 0.1, output: 0.3 },
-    capabilities: ['code', 'agents', 'open-source', 'codebase-exploration', 'multi-file-editing'],
+    capabilities: [
+      'code',
+      'agents',
+      'open-source',
+      'codebase-exploration',
+      'multi-file-editing',
+    ],
     category: 'code',
     isLatest: true,
-    notes: 'An update to our open source model that excels at using tools to explore codebases, editing multiple files and power software engineering agents.'
+    notes:
+      'An update to our open source model that excels at using tools to explore codebases, editing multiple files and power software engineering agents.',
   },
   {
     id: 'mistral-small-2503',
@@ -2523,10 +2980,17 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 128000,
     contextLength: 128000,
     pricing: { input: 0.1, output: 0.3 },
-    capabilities: ['text', 'multimodal', 'multilingual', 'open-source', 'image-understanding'],
+    capabilities: [
+      'text',
+      'multimodal',
+      'multilingual',
+      'open-source',
+      'image-understanding',
+    ],
     category: 'multimodal',
     isLatest: false,
-    notes: 'A new leader in the small models category with image understanding capabilities, released March 2025.'
+    notes:
+      'A new leader in the small models category with image understanding capabilities, released March 2025.',
   },
   {
     id: 'mistral-small-2501',
@@ -2539,7 +3003,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'multimodal', 'multilingual', 'open-source'],
     category: 'multimodal',
     isLatest: false,
-    notes: 'A new leader in the small models category, released January 2025.'
+    notes: 'A new leader in the small models category, released January 2025.',
   },
   {
     id: 'devstral-small-2505',
@@ -2552,7 +3016,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['code', 'agents', 'open-source', '24b-parameter'],
     category: 'code',
     isLatest: false,
-    notes: 'A 24B text model, open source model that excels at using tools to explore codebases, editing multiple files and power software engineering agents.'
+    notes:
+      'A 24B text model, open source model that excels at using tools to explore codebases, editing multiple files and power software engineering agents.',
   },
   {
     id: 'pixtral-12b-2409',
@@ -2565,7 +3030,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['vision', 'multimodal', 'small', 'image-understanding'],
     category: 'multimodal',
     isLatest: true,
-    notes: 'A 12B model with image understanding capabilities in addition to text.'
+    notes:
+      'A 12B model with image understanding capabilities in addition to text.',
   },
   {
     id: 'pixtral-12b',
@@ -2578,7 +3044,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['vision', 'multimodal', 'small', 'image-understanding'],
     category: 'multimodal',
     isLatest: true,
-    notes: 'A 12B model with image understanding capabilities in addition to text.'
+    notes:
+      'A 12B model with image understanding capabilities in addition to text.',
   },
   {
     id: 'open-mistral-nemo-2407',
@@ -2591,7 +3058,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'multilingual', 'open-source', 'best-multilingual'],
     category: 'text',
     isLatest: true,
-    notes: 'Our best multilingual open source model released July 2024.'
+    notes: 'Our best multilingual open source model released July 2024.',
   },
   {
     id: 'open-mistral-nemo',
@@ -2604,7 +3071,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'multilingual', 'open-source', 'best-multilingual'],
     category: 'text',
     isLatest: true,
-    notes: 'Our best multilingual open source model released July 2024.'
+    notes: 'Our best multilingual open source model released July 2024.',
   },
   {
     id: 'mistral-nemo',
@@ -2617,7 +3084,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'code', 'specialized'],
     category: 'code',
     isLatest: true,
-    notes: 'State-of-the-art Mistral model trained specifically for code tasks.'
+    notes:
+      'State-of-the-art Mistral model trained specifically for code tasks.',
   },
   {
     id: 'open-mistral-7b',
@@ -2630,7 +3098,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'open-source', 'fast'],
     category: 'text',
     isLatest: false,
-    notes: 'A 7B transformer model, fast-deployed and easily customisable.'
+    notes: 'A 7B transformer model, fast-deployed and easily customisable.',
   },
   {
     id: 'open-mixtral-8x7b',
@@ -2643,7 +3111,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'mixture-of-experts', 'open-source'],
     category: 'text',
     isLatest: false,
-    notes: 'A 7B sparse Mixture-of-Experts (SMoE). Uses 12.9B active parameters out of 45B total.'
+    notes:
+      'A 7B sparse Mixture-of-Experts (SMoE). Uses 12.9B active parameters out of 45B total.',
   },
   {
     id: 'open-mixtral-8x22b',
@@ -2653,10 +3122,16 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 65000,
     contextLength: 65000,
     pricing: { input: 2.0, output: 6.0 },
-    capabilities: ['text', 'mixture-of-experts', 'open-source', 'high-performance'],
+    capabilities: [
+      'text',
+      'mixture-of-experts',
+      'open-source',
+      'high-performance',
+    ],
     category: 'text',
     isLatest: false,
-    notes: 'Most performant open model. A 22B sparse Mixture-of-Experts (SMoE). Uses only 39B active parameters out of 141B.'
+    notes:
+      'Most performant open model. A 22B sparse Mixture-of-Experts (SMoE). Uses only 39B active parameters out of 141B.',
   },
   // === Grok AI Models ===
   // === Grok 4 Fast Series (Latest) ===
@@ -2667,11 +3142,17 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     available: true,
     maxTokens: 2000000,
     contextLength: 2000000,
-    pricing: { input: 0.20, output: 0.50 },
-    capabilities: ['text', 'reasoning', 'function-calling', 'structured-outputs'],
+    pricing: { input: 0.2, output: 0.5 },
+    capabilities: [
+      'text',
+      'reasoning',
+      'function-calling',
+      'structured-outputs',
+    ],
     category: 'text',
     isLatest: true,
-    notes: 'Latest cost-efficient reasoning model with 2M context window. Lightning fast, low cost. 4M TPM, 480 RPM rate limits'
+    notes:
+      'Latest cost-efficient reasoning model with 2M context window. Lightning fast, low cost. 4M TPM, 480 RPM rate limits',
   },
   {
     id: 'grok-4-fast-non-reasoning',
@@ -2680,11 +3161,12 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     available: true,
     maxTokens: 2000000,
     contextLength: 2000000,
-    pricing: { input: 0.20, output: 0.50 },
+    pricing: { input: 0.2, output: 0.5 },
     capabilities: ['text', 'function-calling', 'structured-outputs'],
     category: 'text',
     isLatest: true,
-    notes: 'Latest cost-efficient non-reasoning model with 2M context window. Lightning fast, low cost. 4M TPM, 480 RPM rate limits'
+    notes:
+      'Latest cost-efficient non-reasoning model with 2M context window. Lightning fast, low cost. 4M TPM, 480 RPM rate limits',
   },
   {
     id: 'grok-code-fast-1',
@@ -2693,11 +3175,17 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     available: true,
     maxTokens: 256000,
     contextLength: 256000,
-    pricing: { input: 0.20, output: 1.50 },
-    capabilities: ['code', 'programming', 'function-calling', 'structured-outputs'],
+    pricing: { input: 0.2, output: 1.5 },
+    capabilities: [
+      'code',
+      'programming',
+      'function-calling',
+      'structured-outputs',
+    ],
     category: 'code',
     isLatest: true,
-    notes: 'Cost-efficient coding model optimized for code generation and programming tasks. 2M TPM, 480 RPM rate limits'
+    notes:
+      'Cost-efficient coding model optimized for code generation and programming tasks. 2M TPM, 480 RPM rate limits',
   },
   // === Grok 4 Series ===
   {
@@ -2708,10 +3196,16 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 256000,
     contextLength: 256000,
     pricing: { input: 3.0, output: 15.0 },
-    capabilities: ['text', 'reasoning', 'function-calling', 'structured-outputs'],
+    capabilities: [
+      'text',
+      'reasoning',
+      'function-calling',
+      'structured-outputs',
+    ],
     category: 'text',
     isLatest: true,
-    notes: 'Latest Grok 4 reasoning model. Note: Grok 4 is always a reasoning model with no non-reasoning mode. 2M TPM, 480 RPM rate limits. Knowledge cutoff: November 2024'
+    notes:
+      'Latest Grok 4 reasoning model. Note: Grok 4 is always a reasoning model with no non-reasoning mode. 2M TPM, 480 RPM rate limits. Knowledge cutoff: November 2024',
   },
   {
     id: 'grok-4',
@@ -2721,10 +3215,16 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 256000,
     contextLength: 256000,
     pricing: { input: 3.0, output: 15.0 },
-    capabilities: ['text', 'reasoning', 'function-calling', 'structured-outputs'],
+    capabilities: [
+      'text',
+      'reasoning',
+      'function-calling',
+      'structured-outputs',
+    ],
     category: 'text',
     isLatest: true,
-    notes: 'Alias for latest stable Grok 4 version. Points to grok-4-0709. 2M TPM, 480 RPM rate limits'
+    notes:
+      'Alias for latest stable Grok 4 version. Points to grok-4-0709. 2M TPM, 480 RPM rate limits',
   },
   {
     id: 'grok-4-latest',
@@ -2734,10 +3234,16 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 256000,
     contextLength: 256000,
     pricing: { input: 3.0, output: 15.0 },
-    capabilities: ['text', 'reasoning', 'function-calling', 'structured-outputs'],
+    capabilities: [
+      'text',
+      'reasoning',
+      'function-calling',
+      'structured-outputs',
+    ],
     category: 'text',
     isLatest: true,
-    notes: 'Alias for latest Grok 4 version (may include preview features). Auto-updates with new releases. 2M TPM, 480 RPM rate limits'
+    notes:
+      'Alias for latest Grok 4 version (may include preview features). Auto-updates with new releases. 2M TPM, 480 RPM rate limits',
   },
   // === Grok 3 Series ===
   {
@@ -2751,7 +3257,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'vision', 'function-calling', 'structured-outputs'],
     category: 'multimodal',
     isLatest: false,
-    notes: 'Standard Grok 3 model. 600 RPM rate limits. Knowledge cutoff: November 2024'
+    notes:
+      'Standard Grok 3 model. 600 RPM rate limits. Knowledge cutoff: November 2024',
   },
   {
     id: 'grok-3-mini',
@@ -2764,7 +3271,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'vision', 'function-calling', 'structured-outputs'],
     category: 'multimodal',
     isLatest: false,
-    notes: 'Cost-effective Grok 3 Mini model. 480 RPM rate limits. Knowledge cutoff: November 2024'
+    notes:
+      'Cost-effective Grok 3 Mini model. 480 RPM rate limits. Knowledge cutoff: November 2024',
   },
   // === Grok 2 Vision Series ===
   {
@@ -2778,7 +3286,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'vision', 'image-understanding'],
     category: 'multimodal',
     isLatest: false,
-    notes: 'Grok 2 Vision model for image understanding. 600 RPM rate limits (us-east-1) or 50 RPS (eu-west-1)'
+    notes:
+      'Grok 2 Vision model for image understanding. 600 RPM rate limits (us-east-1) or 50 RPS (eu-west-1)',
   },
   {
     id: 'grok-2-vision-1212-us-east-1',
@@ -2791,7 +3300,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'vision', 'image-understanding'],
     category: 'multimodal',
     isLatest: false,
-    notes: 'Grok 2 Vision model for us-east-1 region. 600 RPM rate limits'
+    notes: 'Grok 2 Vision model for us-east-1 region. 600 RPM rate limits',
   },
   {
     id: 'grok-2-vision-1212-eu-west-1',
@@ -2804,7 +3313,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'vision', 'image-understanding'],
     category: 'multimodal',
     isLatest: false,
-    notes: 'Grok 2 Vision model for eu-west-1 region. 50 RPS rate limits'
+    notes: 'Grok 2 Vision model for eu-west-1 region. 50 RPS rate limits',
   },
   // === Grok 2 Image Generation ===
   {
@@ -2818,7 +3327,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['image-generation'],
     category: 'image',
     isLatest: true,
-    notes: 'Grok 2 image generation model. $0.07 per image output, 300 RPM rate limits'
+    notes:
+      'Grok 2 image generation model. $0.07 per image output, 300 RPM rate limits',
   },
   {
     id: 'grok-2-image',
@@ -2831,7 +3341,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['image-generation'],
     category: 'image',
     isLatest: true,
-    notes: 'Alias for latest stable Grok 2 Image version. Points to grok-2-image-1212. $0.07 per image, 300 RPM rate limits'
+    notes:
+      'Alias for latest stable Grok 2 Image version. Points to grok-2-image-1212. $0.07 per image, 300 RPM rate limits',
   },
   {
     id: 'grok-2-image-latest',
@@ -2844,7 +3355,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['image-generation'],
     category: 'image',
     isLatest: true,
-    notes: 'Alias for latest Grok 2 Image version. Auto-updates with new releases. $0.07 per image, 300 RPM rate limits'
+    notes:
+      'Alias for latest Grok 2 Image version. Auto-updates with new releases. $0.07 per image, 300 RPM rate limits',
   },
   // === Meta Llama Models ===
   // === Llama 4 Series (Latest) ===
@@ -2856,10 +3368,18 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 10000000,
     contextLength: 10000000,
     pricing: { input: 0.19, output: 0.49 },
-    capabilities: ['text', 'vision', 'multimodal', 'long-context', 'multilingual', 'image-grounding'],
+    capabilities: [
+      'text',
+      'vision',
+      'multimodal',
+      'long-context',
+      'multilingual',
+      'image-grounding',
+    ],
     category: 'multimodal',
     isLatest: true,
-    notes: 'Class-leading natively multimodal model with superior text and visual intelligence. 17B active params x 16 experts, 109B total params. Includes Llama Guard 4 12B, Llama Prompt Guard 2 22M and 86M. Licensed under Llama 4 Community License Agreement'
+    notes:
+      'Class-leading natively multimodal model with superior text and visual intelligence. 17B active params x 16 experts, 109B total params. Includes Llama Guard 4 12B, Llama Prompt Guard 2 22M and 86M. Licensed under Llama 4 Community License Agreement',
   },
   {
     id: 'llama-4-maverick',
@@ -2869,10 +3389,19 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 10000000,
     contextLength: 10000000,
     pricing: { input: 0.19, output: 0.49 },
-    capabilities: ['text', 'vision', 'multimodal', 'long-context', 'multilingual', 'image-grounding', 'fast-responses'],
+    capabilities: [
+      'text',
+      'vision',
+      'multimodal',
+      'long-context',
+      'multilingual',
+      'image-grounding',
+      'fast-responses',
+    ],
     category: 'multimodal',
     isLatest: true,
-    notes: 'Industry-leading natively multimodal model with groundbreaking intelligence and fast responses at a low cost. 17B active params x 128 experts, 400B total params. Includes Llama Guard 4 12B, Llama Prompt Guard 2 22M and 86M. Licensed under Llama 4 Community License Agreement'
+    notes:
+      'Industry-leading natively multimodal model with groundbreaking intelligence and fast responses at a low cost. 17B active params x 128 experts, 400B total params. Includes Llama Guard 4 12B, Llama Prompt Guard 2 22M and 86M. Licensed under Llama 4 Community License Agreement',
   },
   {
     id: 'llama-4-behemoth-preview',
@@ -2882,10 +3411,19 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     maxTokens: 10000000,
     contextLength: 10000000,
     pricing: { input: 0.19, output: 0.49 },
-    capabilities: ['text', 'vision', 'multimodal', 'long-context', 'multilingual', 'image-grounding', 'teacher-model'],
+    capabilities: [
+      'text',
+      'vision',
+      'multimodal',
+      'long-context',
+      'multilingual',
+      'image-grounding',
+      'teacher-model',
+    ],
     category: 'multimodal',
     isLatest: true,
-    notes: 'Early preview of the Llama 4 teacher model used to distill Llama 4 Scout and Llama 4 Maverick. Still in training phase. Licensed under Llama 4 Community License Agreement'
+    notes:
+      'Early preview of the Llama 4 teacher model used to distill Llama 4 Scout and Llama 4 Maverick. Still in training phase. Licensed under Llama 4 Community License Agreement',
   },
   // === Llama 3.3 Series ===
   {
@@ -2899,7 +3437,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'multilingual', 'open-source'],
     category: 'text',
     isLatest: true,
-    notes: 'Multilingual open source large language model. Experience 405B performance and quality at a fraction of the cost. Licensed under Llama 3.3 Community License Agreement'
+    notes:
+      'Multilingual open source large language model. Experience 405B performance and quality at a fraction of the cost. Licensed under Llama 3.3 Community License Agreement',
   },
   // === Llama 3.2 Series ===
   {
@@ -2913,7 +3452,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'vision', 'multimodal', 'open-source'],
     category: 'multimodal',
     isLatest: true,
-    notes: 'Open multimodal model that is flexible and can reason on high resolution images and output text. Includes Llama Guard 3 11B Vision. Licensed under Llama 3.2 Community License Agreement'
+    notes:
+      'Open multimodal model that is flexible and can reason on high resolution images and output text. Includes Llama Guard 3 11B Vision. Licensed under Llama 3.2 Community License Agreement',
   },
   {
     id: 'llama-3.2-90b',
@@ -2926,7 +3466,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'vision', 'multimodal', 'open-source'],
     category: 'multimodal',
     isLatest: true,
-    notes: 'Open multimodal model that is flexible and can reason on high resolution images and output text. Includes Llama Guard 3 11B Vision. Licensed under Llama 3.2 Community License Agreement'
+    notes:
+      'Open multimodal model that is flexible and can reason on high resolution images and output text. Includes Llama Guard 3 11B Vision. Licensed under Llama 3.2 Community License Agreement',
   },
   {
     id: 'llama-3.2-3b',
@@ -2935,11 +3476,12 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     available: true,
     maxTokens: 128000,
     contextLength: 128000,
-    pricing: { input: 0.05, output: 0.10 },
+    pricing: { input: 0.05, output: 0.1 },
     capabilities: ['text', 'lightweight', 'mobile', 'edge', 'open-source'],
     category: 'text',
     isLatest: true,
-    notes: 'Lightweight and most cost-efficient model you can run anywhere on mobile and on edge devices. Includes Llama Guard 3 1B. Quantized models available. Licensed under Llama 3.2 Community License Agreement'
+    notes:
+      'Lightweight and most cost-efficient model you can run anywhere on mobile and on edge devices. Includes Llama Guard 3 1B. Quantized models available. Licensed under Llama 3.2 Community License Agreement',
   },
   {
     id: 'llama-3.2-1b',
@@ -2948,11 +3490,12 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     available: true,
     maxTokens: 128000,
     contextLength: 128000,
-    pricing: { input: 0.05, output: 0.10 },
+    pricing: { input: 0.05, output: 0.1 },
     capabilities: ['text', 'lightweight', 'mobile', 'edge', 'open-source'],
     category: 'text',
     isLatest: true,
-    notes: 'Lightweight and most cost-efficient model you can run anywhere on mobile and on edge devices. Includes Llama Guard 3 1B. Quantized models available. Licensed under Llama 3.2 Community License Agreement'
+    notes:
+      'Lightweight and most cost-efficient model you can run anywhere on mobile and on edge devices. Includes Llama Guard 3 1B. Quantized models available. Licensed under Llama 3.2 Community License Agreement',
   },
   // === Llama 3.1 Series ===
   {
@@ -2966,7 +3509,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'multilingual', 'open-source'],
     category: 'text',
     isLatest: false,
-    notes: 'Multilingual open source large language model. Includes Llama Guard 3 8B and Llama Prompt Guard 2. Licensed under Llama 3.1 Community License Agreement'
+    notes:
+      'Multilingual open source large language model. Includes Llama Guard 3 8B and Llama Prompt Guard 2. Licensed under Llama 3.1 Community License Agreement',
   },
   {
     id: 'llama-3.1-8b',
@@ -2975,11 +3519,12 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     available: true,
     maxTokens: 131072,
     contextLength: 131072,
-    pricing: { input: 0.05, output: 0.10 },
+    pricing: { input: 0.05, output: 0.1 },
     capabilities: ['text', 'multilingual', 'open-source'],
     category: 'text',
     isLatest: false,
-    notes: 'Multilingual open source large language model. Includes Llama Guard 3 8B and Llama Prompt Guard 2. Licensed under Llama 3.1 Community License Agreement'
+    notes:
+      'Multilingual open source large language model. Includes Llama Guard 3 8B and Llama Prompt Guard 2. Licensed under Llama 3.1 Community License Agreement',
   },
   // === Llama 3 Series (Legacy) ===
   {
@@ -2993,7 +3538,8 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     capabilities: ['text', 'open-source'],
     category: 'text',
     isLatest: false,
-    notes: 'Legacy Llama 3 70B model. Licensed under Llama 3 Community License Agreement'
+    notes:
+      'Legacy Llama 3 70B model. Licensed under Llama 3 Community License Agreement',
   },
   {
     id: 'llama-3-8b',
@@ -3002,42 +3548,44 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     available: true,
     maxTokens: 8192,
     contextLength: 8192,
-    pricing: { input: 0.05, output: 0.10 },
+    pricing: { input: 0.05, output: 0.1 },
     capabilities: ['text', 'open-source'],
     category: 'text',
     isLatest: false,
-    notes: 'Legacy Llama 3 8B model. Licensed under Llama 3 Community License Agreement'
-  }
+    notes:
+      'Legacy Llama 3 8B model. Licensed under Llama 3 Community License Agreement',
+  },
 ];
 
 export const getModelsByProvider = (provider?: string): ModelInfo[] => {
   if (!provider) {
     return AVAILABLE_MODELS;
   }
-  return AVAILABLE_MODELS.filter(model => 
+  return AVAILABLE_MODELS.filter((model) =>
     model.provider.toLowerCase().includes(provider.toLowerCase())
   );
 };
 
 export const getLatestModels = (): ModelInfo[] => {
-  return AVAILABLE_MODELS.filter(model => model.isLatest);
+  return AVAILABLE_MODELS.filter((model) => model.isLatest);
 };
 
 export const getModelsByCategory = (category?: string): ModelInfo[] => {
   if (!category) {
     return AVAILABLE_MODELS;
   }
-  return AVAILABLE_MODELS.filter(model => 
-    model.category.toLowerCase() === category.toLowerCase()
+  return AVAILABLE_MODELS.filter(
+    (model) => model.category.toLowerCase() === category.toLowerCase()
   );
 };
 
 export const searchModels = (query: string): ModelInfo[] => {
   const lowerQuery = query.toLowerCase();
-  return AVAILABLE_MODELS.filter(model => 
-    model.name.toLowerCase().includes(lowerQuery) ||
-    model.id.toLowerCase().includes(lowerQuery) ||
-    model.provider.toLowerCase().includes(lowerQuery) ||
-    model.capabilities.some(cap => cap.toLowerCase().includes(lowerQuery))
+  return AVAILABLE_MODELS.filter(
+    (model) =>
+      model.name.toLowerCase().includes(lowerQuery) ||
+      model.id.toLowerCase().includes(lowerQuery) ||
+      model.provider.toLowerCase().includes(lowerQuery) ||
+      model.capabilities.some((cap) => cap.toLowerCase().includes(lowerQuery))
   );
-}; 
+};

@@ -12,7 +12,11 @@ export function analyticsCommand(program: Command) {
     .option('-r, --range <range>', 'Time range (1h, 24h, 7d, 30d)', '30d')
     .option('-p, --project <project>', 'Filter by specific project')
     .option('-u, --user <user>', 'Filter by specific user')
-    .option('-f, --format <format>', 'Output format (table, json, csv)', 'table')
+    .option(
+      '-f, --format <format>',
+      'Output format (table, json, csv)',
+      'table'
+    )
     .option('-v, --verbose', 'Show detailed breakdowns')
     .option('--export <path>', 'Export analytics to file')
     .action(async (options) => {
@@ -43,21 +47,29 @@ async function fetchAnalytics(options: any) {
 
   if (!baseUrl || !apiKey) {
     console.log(chalk.red.bold('\n❌ Configuration Missing'));
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
-    
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+    );
+
     if (!apiKey) {
       console.log(chalk.yellow('• API Key is not set'));
     }
     if (!baseUrl) {
       console.log(chalk.yellow('• Base URL is not set'));
     }
-    
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+    );
     console.log(chalk.cyan('To set up your configuration, run:'));
     console.log(chalk.white('  cost-katana init'));
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'));
-    
-    throw new Error('Configuration incomplete. Please run "cost-katana init" to set up your API key and base URL.');
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n')
+    );
+
+    throw new Error(
+      'Configuration incomplete. Please run "cost-katana init" to set up your API key and base URL.'
+    );
   }
 
   // Convert range to days if specified
@@ -82,13 +94,16 @@ async function fetchAnalytics(options: any) {
   }
 
   try {
-    const response = await axios.get(`${baseUrl}/api/usage/analytics/cli?${params}`, {
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      timeout: 30000,
-    });
+    const response = await axios.get(
+      `${baseUrl}/api/usage/analytics/cli?${params}`,
+      {
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        timeout: 30000,
+      }
+    );
 
     if (response.status !== 200) {
       throw new Error(`API returned status ${response.status}`);
@@ -97,7 +112,9 @@ async function fetchAnalytics(options: any) {
     return response.data;
   } catch (error: any) {
     if (error.response) {
-      throw new Error(`API Error: ${error.response.status} - ${error.response.data?.message || 'Unknown error'}`);
+      throw new Error(
+        `API Error: ${error.response.status} - ${error.response.data?.message || 'Unknown error'}`
+      );
     } else if (error.request) {
       throw new Error('No response received from API');
     } else {
@@ -153,11 +170,16 @@ function displayAnalytics(analytics: any, options: any) {
 
 function displayAnalyticsTable(analytics: any, verbose: boolean) {
   console.log(chalk.cyan.bold('\n📊 Usage Analytics Report'));
-  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+  console.log(
+    chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
 
   // Show project info if available
   if (analytics.project) {
-    console.log(chalk.yellow.bold('\n🏢 Project:'), chalk.white(analytics.project));
+    console.log(
+      chalk.yellow.bold('\n🏢 Project:'),
+      chalk.white(analytics.project)
+    );
   }
 
   // 1. Total Cost
@@ -177,28 +199,51 @@ function displayAnalyticsTable(analytics: any, verbose: boolean) {
     displayInsights(analytics.insights);
   }
 
-  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+  console.log(
+    chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
 }
 
 function displayTotalCost(totalCost: any) {
   console.log(chalk.yellow.bold('\n💰 Total Cost'));
   console.log(chalk.gray('─'.repeat(30)));
-  
+
   if (totalCost) {
-    const currentPeriod = chalk.green(`$${totalCost.currentPeriod?.toFixed(4) || '0.00'}`);
-    const previousPeriod = chalk.gray(`$${totalCost.previousPeriod?.toFixed(4) || '0.00'}`);
+    const currentPeriod = chalk.green(
+      `$${totalCost.currentPeriod?.toFixed(4) || '0.00'}`
+    );
+    const previousPeriod = chalk.gray(
+      `$${totalCost.previousPeriod?.toFixed(4) || '0.00'}`
+    );
     const change = totalCost.change || 0;
-    const changeSymbol = change > 0 ? chalk.red('↗') : change < 0 ? chalk.green('↘') : chalk.gray('→');
-    const changeColor = change > 0 ? chalk.red : change < 0 ? chalk.green : chalk.gray;
-    
+    const changeSymbol =
+      change > 0
+        ? chalk.red('↗')
+        : change < 0
+          ? chalk.green('↘')
+          : chalk.gray('→');
+    const changeColor =
+      change > 0 ? chalk.red : change < 0 ? chalk.green : chalk.gray;
+
     console.log(chalk.white('Current Period:'), currentPeriod);
     console.log(chalk.white('Previous Period:'), previousPeriod);
-    console.log(chalk.white('Change:'), `${changeColor(`${changeSymbol} ${Math.abs(change).toFixed(2)}%`)}`);
-    
+    console.log(
+      chalk.white('Change:'),
+      `${changeColor(`${changeSymbol} ${Math.abs(change).toFixed(2)}%`)}`
+    );
+
     if (totalCost.budget && totalCost.budget > 0) {
       const budgetUsage = (totalCost.currentPeriod / totalCost.budget) * 100;
-      const budgetColor = budgetUsage > 80 ? chalk.red : budgetUsage > 60 ? chalk.yellow : chalk.green;
-      console.log(chalk.white('Budget Usage:'), budgetColor(`${budgetUsage.toFixed(1)}%`));
+      const budgetColor =
+        budgetUsage > 80
+          ? chalk.red
+          : budgetUsage > 60
+            ? chalk.yellow
+            : chalk.green;
+      console.log(
+        chalk.white('Budget Usage:'),
+        budgetColor(`${budgetUsage.toFixed(1)}%`)
+      );
     }
   } else {
     console.log(chalk.gray('No cost data available'));
@@ -208,18 +253,24 @@ function displayTotalCost(totalCost: any) {
 function displayTokenUsageBreakdown(tokenUsage: any, verbose: boolean) {
   console.log(chalk.yellow.bold('\n🔢 Token Usage Breakdown'));
   console.log(chalk.gray('─'.repeat(30)));
-  
+
   if (tokenUsage && tokenUsage.total) {
     const total = tokenUsage.total.toLocaleString();
     const input = tokenUsage.input?.toLocaleString() || '0';
     const output = tokenUsage.output?.toLocaleString() || '0';
     const inputPercentage = tokenUsage.inputPercentage?.toFixed(1) || '0';
     const outputPercentage = tokenUsage.outputPercentage?.toFixed(1) || '0';
-    
+
     console.log(chalk.white('Total Tokens:'), chalk.cyan(total));
-    console.log(chalk.white('Input Tokens:'), chalk.blue(`${input} (${inputPercentage}%)`));
-    console.log(chalk.white('Output Tokens:'), chalk.green(`${output} (${outputPercentage}%)`));
-    
+    console.log(
+      chalk.white('Input Tokens:'),
+      chalk.blue(`${input} (${inputPercentage}%)`)
+    );
+    console.log(
+      chalk.white('Output Tokens:'),
+      chalk.green(`${output} (${outputPercentage}%)`)
+    );
+
     if (verbose && tokenUsage.byModel) {
       console.log(chalk.gray('\n  Breakdown by Model:'));
       tokenUsage.byModel.forEach((model: any) => {
@@ -237,21 +288,35 @@ function displayTokenUsageBreakdown(tokenUsage: any, verbose: boolean) {
 function displayTopModelsBySpend(topModels: any, verbose: boolean) {
   console.log(chalk.yellow.bold('\n🤖 Top Models by Spend'));
   console.log(chalk.gray('─'.repeat(30)));
-  
+
   if (topModels && topModels.length > 0) {
     topModels.forEach((model: any, index: number) => {
       const rank = chalk.yellow(`#${index + 1}`);
       const name = chalk.white(model.model);
       const cost = chalk.green(`$${model.totalCost?.toFixed(4) || '0.00'}`);
-      const requests = chalk.gray(`${model.requests?.toLocaleString() || '0'} requests`);
+      const requests = chalk.gray(
+        `${model.requests?.toLocaleString() || '0'} requests`
+      );
       const percentage = chalk.blue(`${model.percentage?.toFixed(1) || '0'}%`);
-      
+
       console.log(`${rank} ${name}: ${cost} (${requests}, ${percentage})`);
-      
+
       if (verbose && model.details) {
-        console.log(chalk.gray(`    Avg cost/request: $${model.details.avgCostPerRequest?.toFixed(4) || '0.00'}`));
-        console.log(chalk.gray(`    Total tokens: ${model.details.totalTokens?.toLocaleString() || '0'}`));
-        console.log(chalk.gray(`    Success rate: ${model.details.successRate?.toFixed(1) || '0'}%`));
+        console.log(
+          chalk.gray(
+            `    Avg cost/request: $${model.details.avgCostPerRequest?.toFixed(4) || '0.00'}`
+          )
+        );
+        console.log(
+          chalk.gray(
+            `    Total tokens: ${model.details.totalTokens?.toLocaleString() || '0'}`
+          )
+        );
+        console.log(
+          chalk.gray(
+            `    Success rate: ${model.details.successRate?.toFixed(1) || '0'}%`
+          )
+        );
         console.log('');
       }
     });
@@ -263,21 +328,31 @@ function displayTopModelsBySpend(topModels: any, verbose: boolean) {
 function displayTeamMemberUsage(teamUsage: any, verbose: boolean) {
   console.log(chalk.yellow.bold('\n👥 Team Member Usage'));
   console.log(chalk.gray('─'.repeat(30)));
-  
+
   if (teamUsage && teamUsage.length > 0) {
     teamUsage.forEach((member: any, index: number) => {
       const rank = chalk.yellow(`#${index + 1}`);
       const name = chalk.white(member.name || member.email);
       const cost = chalk.green(`$${member.totalCost?.toFixed(4) || '0.00'}`);
-      const requests = chalk.gray(`${member.requests?.toLocaleString() || '0'} requests`);
+      const requests = chalk.gray(
+        `${member.requests?.toLocaleString() || '0'} requests`
+      );
       const percentage = chalk.blue(`${member.percentage?.toFixed(1) || '0'}%`);
-      
+
       console.log(`${rank} ${name}: ${cost} (${requests}, ${percentage})`);
-      
+
       if (verbose && member.details) {
-        console.log(chalk.gray(`    Top model: ${member.details.topModel || 'N/A'}`));
-        console.log(chalk.gray(`    Avg cost/request: $${member.details.avgCostPerRequest?.toFixed(4) || '0.00'}`));
-        console.log(chalk.gray(`    Last active: ${member.details.lastActive || 'N/A'}`));
+        console.log(
+          chalk.gray(`    Top model: ${member.details.topModel || 'N/A'}`)
+        );
+        console.log(
+          chalk.gray(
+            `    Avg cost/request: $${member.details.avgCostPerRequest?.toFixed(4) || '0.00'}`
+          )
+        );
+        console.log(
+          chalk.gray(`    Last active: ${member.details.lastActive || 'N/A'}`)
+        );
         console.log('');
       }
     });
@@ -289,24 +364,30 @@ function displayTeamMemberUsage(teamUsage: any, verbose: boolean) {
 function displayInsights(insights: any[]) {
   console.log(chalk.yellow.bold('\n💡 Insights'));
   console.log(chalk.gray('─'.repeat(30)));
-  
+
   insights.forEach((insight: any) => {
-    const type = insight.type === 'warning' ? chalk.red('⚠️') : 
-                 insight.type === 'suggestion' ? chalk.blue('💡') : 
-                 insight.type === 'success' ? chalk.green('✅') :
-                 chalk.yellow('ℹ️');
+    const type =
+      insight.type === 'warning'
+        ? chalk.red('⚠️')
+        : insight.type === 'suggestion'
+          ? chalk.blue('💡')
+          : insight.type === 'success'
+            ? chalk.green('✅')
+            : chalk.yellow('ℹ️');
     console.log(`${type} ${insight.message}`);
   });
 }
 
 function displayAnalyticsJson(analytics: any, verbose: boolean) {
-  const output = verbose ? analytics : {
-    totalCost: analytics.totalCost,
-    tokenUsage: analytics.tokenUsage,
-    topModelsBySpend: analytics.topModelsBySpend,
-    teamUsage: analytics.teamUsage,
-    insights: analytics.insights,
-  };
+  const output = verbose
+    ? analytics
+    : {
+        totalCost: analytics.totalCost,
+        tokenUsage: analytics.tokenUsage,
+        topModelsBySpend: analytics.topModelsBySpend,
+        teamUsage: analytics.teamUsage,
+        insights: analytics.insights,
+      };
 
   console.log(JSON.stringify(output, null, 2));
 }
@@ -317,8 +398,13 @@ function displayAnalyticsCsv(analytics: any, _verbose: boolean) {
     console.log('Total Cost');
     console.log('Current Period,Previous Period,Change %,Budget Usage %');
     const cost = analytics.totalCost;
-    const budgetUsage = cost.budget && cost.budget > 0 ? (cost.currentPeriod / cost.budget) * 100 : 0;
-    console.log(`${cost.currentPeriod || 0},${cost.previousPeriod || 0},${cost.change || 0},${budgetUsage.toFixed(2)}`);
+    const budgetUsage =
+      cost.budget && cost.budget > 0
+        ? (cost.currentPeriod / cost.budget) * 100
+        : 0;
+    console.log(
+      `${cost.currentPeriod || 0},${cost.previousPeriod || 0},${cost.change || 0},${budgetUsage.toFixed(2)}`
+    );
     console.log('');
   }
 
@@ -327,7 +413,9 @@ function displayAnalyticsCsv(analytics: any, _verbose: boolean) {
     console.log('Token Usage');
     console.log('Total Tokens,Input Tokens,Output Tokens,Input %,Output %');
     const usage = analytics.tokenUsage;
-    console.log(`${usage.total || 0},${usage.input || 0},${usage.output || 0},${usage.inputPercentage || 0},${usage.outputPercentage || 0}`);
+    console.log(
+      `${usage.total || 0},${usage.input || 0},${usage.output || 0},${usage.inputPercentage || 0},${usage.outputPercentage || 0}`
+    );
     console.log('');
   }
 
@@ -336,7 +424,9 @@ function displayAnalyticsCsv(analytics: any, _verbose: boolean) {
     console.log('Top Models by Spend');
     console.log('Rank,Model,Total Cost,Requests,Percentage,Avg Cost/Request');
     analytics.topModelsBySpend.forEach((model: any, index: number) => {
-      console.log(`${index + 1},"${model.model || 'Unknown'}",${model.totalCost || 0},${model.requests || 0},${model.percentage || 0},${model.details?.avgCostPerRequest || 0}`);
+      console.log(
+        `${index + 1},"${model.model || 'Unknown'}",${model.totalCost || 0},${model.requests || 0},${model.percentage || 0},${model.details?.avgCostPerRequest || 0}`
+      );
     });
     console.log('');
   }
@@ -346,7 +436,9 @@ function displayAnalyticsCsv(analytics: any, _verbose: boolean) {
     console.log('Team Member Usage');
     console.log('Rank,Name,Total Cost,Requests,Percentage,Top Model');
     analytics.teamUsage.forEach((member: any, index: number) => {
-      console.log(`${index + 1},"${member.name || member.email || 'Unknown'}",${member.totalCost || 0},${member.requests || 0},${member.percentage || 0},"${member.details?.topModel || 'N/A'}"`);
+      console.log(
+        `${index + 1},"${member.name || member.email || 'Unknown'}",${member.totalCost || 0},${member.requests || 0},${member.percentage || 0},"${member.details?.topModel || 'N/A'}"`
+      );
     });
   }
 }
@@ -363,14 +455,19 @@ function exportAnalytics(analytics: any, filePath: string, format: string) {
       content = JSON.stringify(analytics, null, 2);
     } else if (format === 'csv') {
       const lines = [];
-      
+
       // Total Cost
       if (analytics.totalCost) {
         lines.push('Total Cost');
         lines.push('Current Period,Previous Period,Change %,Budget Usage %');
         const cost = analytics.totalCost;
-        const budgetUsage = cost.budget && cost.budget > 0 ? (cost.currentPeriod / cost.budget) * 100 : 0;
-        lines.push(`${cost.currentPeriod || 0},${cost.previousPeriod || 0},${cost.change || 0},${budgetUsage.toFixed(2)}`);
+        const budgetUsage =
+          cost.budget && cost.budget > 0
+            ? (cost.currentPeriod / cost.budget) * 100
+            : 0;
+        lines.push(
+          `${cost.currentPeriod || 0},${cost.previousPeriod || 0},${cost.change || 0},${budgetUsage.toFixed(2)}`
+        );
         lines.push('');
       }
 
@@ -379,16 +476,22 @@ function exportAnalytics(analytics: any, filePath: string, format: string) {
         lines.push('Token Usage');
         lines.push('Total Tokens,Input Tokens,Output Tokens,Input %,Output %');
         const usage = analytics.tokenUsage;
-        lines.push(`${usage.total || 0},${usage.input || 0},${usage.output || 0},${usage.inputPercentage || 0},${usage.outputPercentage || 0}`);
+        lines.push(
+          `${usage.total || 0},${usage.input || 0},${usage.output || 0},${usage.inputPercentage || 0},${usage.outputPercentage || 0}`
+        );
         lines.push('');
       }
 
       // Top Models
       if (analytics.topModelsBySpend) {
         lines.push('Top Models by Spend');
-        lines.push('Rank,Model,Total Cost,Requests,Percentage,Avg Cost/Request');
+        lines.push(
+          'Rank,Model,Total Cost,Requests,Percentage,Avg Cost/Request'
+        );
         analytics.topModelsBySpend.forEach((model: any, index: number) => {
-          lines.push(`${index + 1},"${model.model || 'Unknown'}",${model.totalCost || 0},${model.requests || 0},${model.percentage || 0},${model.details?.avgCostPerRequest || 0}`);
+          lines.push(
+            `${index + 1},"${model.model || 'Unknown'}",${model.totalCost || 0},${model.requests || 0},${model.percentage || 0},${model.details?.avgCostPerRequest || 0}`
+          );
         });
         lines.push('');
       }
@@ -398,7 +501,9 @@ function exportAnalytics(analytics: any, filePath: string, format: string) {
         lines.push('Team Member Usage');
         lines.push('Rank,Name,Total Cost,Requests,Percentage,Top Model');
         analytics.teamUsage.forEach((member: any, index: number) => {
-          lines.push(`${index + 1},"${member.name || member.email || 'Unknown'}",${member.totalCost || 0},${member.requests || 0},${member.percentage || 0},"${member.details?.topModel || 'N/A'}"`);
+          lines.push(
+            `${index + 1},"${member.name || member.email || 'Unknown'}",${member.totalCost || 0},${member.requests || 0},${member.percentage || 0},"${member.details?.topModel || 'N/A'}"`
+          );
         });
       }
 

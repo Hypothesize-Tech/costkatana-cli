@@ -102,20 +102,42 @@ export function agentInspectCommand(program: Command) {
 
 async function handleAgentInspect(_options: any) {
   console.log(chalk.cyan.bold('\n🔍 Agent Inspection & Audit Analysis'));
-  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
-  
+  console.log(
+    chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
+
   console.log(chalk.yellow('Available commands:'));
-  console.log(chalk.white('  costkatana agent-inspect id <agentId>           Audit specific agent by ID'));
-  console.log(chalk.white('  costkatana agent-inspect name <agentName>       Audit agents by name'));
-  console.log(chalk.white('  costkatana agent-inspect workflow <workflowId>  Audit all agents in workflow'));
-  console.log(chalk.white('  costkatana agent-inspect recent                 Show recent agent inspections'));
-  
+  console.log(
+    chalk.white(
+      '  costkatana agent-inspect id <agentId>           Audit specific agent by ID'
+    )
+  );
+  console.log(
+    chalk.white(
+      '  costkatana agent-inspect name <agentName>       Audit agents by name'
+    )
+  );
+  console.log(
+    chalk.white(
+      '  costkatana agent-inspect workflow <workflowId>  Audit all agents in workflow'
+    )
+  );
+  console.log(
+    chalk.white(
+      '  costkatana agent-inspect recent                 Show recent agent inspections'
+    )
+  );
+
   console.log(chalk.gray('\nExamples:'));
   console.log(chalk.white('  costkatana agent-inspect id agent-buyer-ranker'));
-  console.log(chalk.white('  costkatana agent-inspect name buyer-ranker --days 30'));
-  console.log(chalk.white('  costkatana agent-inspect workflow workflow-98765'));
+  console.log(
+    chalk.white('  costkatana agent-inspect name buyer-ranker --days 30')
+  );
+  console.log(
+    chalk.white('  costkatana agent-inspect workflow workflow-98765')
+  );
   console.log(chalk.white('  costkatana agent-inspect recent --number 5'));
-  
+
   console.log(chalk.gray('\nInspection Information:'));
   console.log(chalk.white('  • Prompts issued by agent (with timestamps)'));
   console.log(chalk.white('  • Response patterns and behavior analysis'));
@@ -123,8 +145,10 @@ async function handleAgentInspect(_options: any) {
   console.log(chalk.white('  • Failure cases and retry log'));
   console.log(chalk.white('  • Model switching behavior (if used)'));
   console.log(chalk.white('  • Performance metrics and trends'));
-  
-  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+
+  console.log(
+    chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
 }
 
 async function handleAgentInspectById(agentId: string, options: any) {
@@ -140,27 +164,39 @@ async function handleAgentInspectById(agentId: string, options: any) {
   }
 }
 
-async function getAgentInspectById(agentId: string, days: number, options: any) {
+async function getAgentInspectById(
+  agentId: string,
+  days: number,
+  options: any
+) {
   const baseUrl = configManager.get('baseUrl');
   const apiKey = configManager.get('apiKey');
 
   if (!baseUrl || !apiKey) {
     console.log(chalk.red.bold('\n❌ Configuration Missing'));
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
-    
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+    );
+
     if (!apiKey) {
       console.log(chalk.yellow('• API Key is not set'));
     }
     if (!baseUrl) {
       console.log(chalk.yellow('• Base URL is not set'));
     }
-    
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+    );
     console.log(chalk.cyan('To set up your configuration, run:'));
     console.log(chalk.white('  cost-katana init'));
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'));
-    
-    throw new Error('Configuration incomplete. Please run "cost-katana init" to set up your API key and base URL.');
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n')
+    );
+
+    throw new Error(
+      'Configuration incomplete. Please run "cost-katana init" to set up your API key and base URL.'
+    );
   }
 
   try {
@@ -168,15 +204,19 @@ async function getAgentInspectById(agentId: string, days: number, options: any) 
     params.append('days', days.toString());
     if (options.includePrompts) params.append('includePrompts', 'true');
     if (options.includeFailures) params.append('includeFailures', 'true');
-    if (options.includeModelSwitching) params.append('includeModelSwitching', 'true');
+    if (options.includeModelSwitching)
+      params.append('includeModelSwitching', 'true');
 
-    const response = await axios.get(`${baseUrl}/api/agent/inspect/${agentId}?${params}`, {
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      timeout: 30000,
-    });
+    const response = await axios.get(
+      `${baseUrl}/api/agent/inspect/${agentId}?${params}`,
+      {
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        timeout: 30000,
+      }
+    );
 
     if (response.status !== 200) {
       throw new Error(`API returned status ${response.status}`);
@@ -189,7 +229,9 @@ async function getAgentInspectById(agentId: string, days: number, options: any) 
     }
   } catch (error: any) {
     if (error.response) {
-      throw new Error(`API Error: ${error.response.status} - ${error.response.data?.message || 'Unknown error'}`);
+      throw new Error(
+        `API Error: ${error.response.status} - ${error.response.data?.message || 'Unknown error'}`
+      );
     } else if (error.request) {
       throw new Error('No response received from API');
     } else {
@@ -200,18 +242,24 @@ async function getAgentInspectById(agentId: string, days: number, options: any) 
 
 function displayAgentInspectResult(inspect: any, options: any) {
   const format = options.format || 'table';
-  
+
   if (format === 'json') {
     console.log(JSON.stringify(inspect, null, 2));
     return;
   } else if (format === 'csv') {
-    console.log('Agent ID,Name,Role,Total Requests,Success Rate,Total Cost,Total Tokens,Average Latency');
-    console.log(`"${inspect.agentId}","${inspect.name}","${inspect.role}","${inspect.totalRequests}","${inspect.successRate}","${inspect.totalCost}","${inspect.totalTokens}","${inspect.averageLatency}"`);
+    console.log(
+      'Agent ID,Name,Role,Total Requests,Success Rate,Total Cost,Total Tokens,Average Latency'
+    );
+    console.log(
+      `"${inspect.agentId}","${inspect.name}","${inspect.role}","${inspect.totalRequests}","${inspect.successRate}","${inspect.totalCost}","${inspect.totalTokens}","${inspect.averageLatency}"`
+    );
     return;
   }
 
   console.log(chalk.cyan.bold('\n🔍 Agent Inspection Report'));
-  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+  console.log(
+    chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
 
   // Basic Agent Information
   console.log(chalk.yellow.bold('\n📋 Agent Information'));
@@ -219,54 +267,110 @@ function displayAgentInspectResult(inspect: any, options: any) {
   console.log(chalk.white('🆔 Agent ID:'), chalk.cyan(inspect.agentId));
   console.log(chalk.white('📝 Name:'), chalk.cyan(inspect.name));
   console.log(chalk.white('🎭 Role:'), chalk.cyan(inspect.role));
-  console.log(chalk.white('📅 Created:'), chalk.cyan(new Date(inspect.createdAt).toLocaleString()));
-  console.log(chalk.white('📊 Status:'), inspect.status === 'active' ? chalk.green(inspect.status) : chalk.red(inspect.status));
+  console.log(
+    chalk.white('📅 Created:'),
+    chalk.cyan(new Date(inspect.createdAt).toLocaleString())
+  );
+  console.log(
+    chalk.white('📊 Status:'),
+    inspect.status === 'active'
+      ? chalk.green(inspect.status)
+      : chalk.red(inspect.status)
+  );
 
   // Usage Statistics
   console.log(chalk.yellow.bold('\n📊 Usage Statistics'));
   console.log(chalk.gray('─'.repeat(50)));
-  console.log(chalk.white('📈 Total Requests:'), chalk.cyan(inspect.totalRequests.toLocaleString()));
-  console.log(chalk.white('✅ Successful Requests:'), chalk.green(inspect.successfulRequests.toLocaleString()));
-  console.log(chalk.white('❌ Failed Requests:'), chalk.red(inspect.failedRequests.toLocaleString()));
-  console.log(chalk.white('📊 Success Rate:'), chalk.cyan(`${(inspect.successRate * 100).toFixed(1)}%`));
-  console.log(chalk.white('⏱️  Average Latency:'), chalk.cyan(`${inspect.averageLatency}ms`));
+  console.log(
+    chalk.white('📈 Total Requests:'),
+    chalk.cyan(inspect.totalRequests.toLocaleString())
+  );
+  console.log(
+    chalk.white('✅ Successful Requests:'),
+    chalk.green(inspect.successfulRequests.toLocaleString())
+  );
+  console.log(
+    chalk.white('❌ Failed Requests:'),
+    chalk.red(inspect.failedRequests.toLocaleString())
+  );
+  console.log(
+    chalk.white('📊 Success Rate:'),
+    chalk.cyan(`${(inspect.successRate * 100).toFixed(1)}%`)
+  );
+  console.log(
+    chalk.white('⏱️  Average Latency:'),
+    chalk.cyan(`${inspect.averageLatency}ms`)
+  );
 
   // Cost and Performance
   console.log(chalk.yellow.bold('\n💰 Cost & Performance'));
   console.log(chalk.gray('─'.repeat(50)));
-  console.log(chalk.white('💵 Total Cost:'), chalk.green(`$${inspect.totalCost.toFixed(4)}`));
-  console.log(chalk.white('🔢 Total Tokens:'), chalk.cyan(inspect.totalTokens.toLocaleString()));
-  console.log(chalk.white('📊 Average Cost per Request:'), chalk.cyan(`$${(inspect.totalCost / inspect.totalRequests).toFixed(4)}`));
-  console.log(chalk.white('📈 Average Tokens per Request:'), chalk.cyan(Math.round(inspect.totalTokens / inspect.totalRequests)));
-  console.log(chalk.white('⚡ Throughput:'), chalk.cyan(`${inspect.throughput?.toFixed(2) || 'N/A'} requests/min`));
+  console.log(
+    chalk.white('💵 Total Cost:'),
+    chalk.green(`$${inspect.totalCost.toFixed(4)}`)
+  );
+  console.log(
+    chalk.white('🔢 Total Tokens:'),
+    chalk.cyan(inspect.totalTokens.toLocaleString())
+  );
+  console.log(
+    chalk.white('📊 Average Cost per Request:'),
+    chalk.cyan(`$${(inspect.totalCost / inspect.totalRequests).toFixed(4)}`)
+  );
+  console.log(
+    chalk.white('📈 Average Tokens per Request:'),
+    chalk.cyan(Math.round(inspect.totalTokens / inspect.totalRequests))
+  );
+  console.log(
+    chalk.white('⚡ Throughput:'),
+    chalk.cyan(`${inspect.throughput?.toFixed(2) || 'N/A'} requests/min`)
+  );
 
   // Model Usage
   if (inspect.modelUsage && Object.keys(inspect.modelUsage).length > 0) {
     console.log(chalk.yellow.bold('\n🤖 Model Usage'));
     console.log(chalk.gray('─'.repeat(50)));
-    Object.entries(inspect.modelUsage).forEach(([model, usage]: [string, any]) => {
-      console.log(chalk.white(`• ${model}:`));
-      console.log(chalk.gray(`  Requests: ${usage.requests}`));
-      console.log(chalk.gray(`  Cost: $${usage.cost.toFixed(4)}`));
-      console.log(chalk.gray(`  Tokens: ${usage.tokens.toLocaleString()}`));
-      console.log(chalk.gray(`  Success Rate: ${(usage.successRate * 100).toFixed(1)}%`));
-    });
+    Object.entries(inspect.modelUsage).forEach(
+      ([model, usage]: [string, any]) => {
+        console.log(chalk.white(`• ${model}:`));
+        console.log(chalk.gray(`  Requests: ${usage.requests}`));
+        console.log(chalk.gray(`  Cost: $${usage.cost.toFixed(4)}`));
+        console.log(chalk.gray(`  Tokens: ${usage.tokens.toLocaleString()}`));
+        console.log(
+          chalk.gray(`  Success Rate: ${(usage.successRate * 100).toFixed(1)}%`)
+        );
+      }
+    );
   }
 
   // Model Switching Behavior
   if (options.includeModelSwitching && inspect.modelSwitching) {
     console.log(chalk.yellow.bold('\n🔄 Model Switching Behavior'));
     console.log(chalk.gray('─'.repeat(50)));
-    console.log(chalk.white('Total Switches:'), chalk.cyan(inspect.modelSwitching.totalSwitches));
-    console.log(chalk.white('Switch Frequency:'), chalk.cyan(`${inspect.modelSwitching.switchFrequency} switches/day`));
-    console.log(chalk.white('Primary Model:'), chalk.cyan(inspect.modelSwitching.primaryModel));
-    console.log(chalk.white('Fallback Models:'), chalk.cyan(inspect.modelSwitching.fallbackModels?.join(', ') || 'None'));
-    
+    console.log(
+      chalk.white('Total Switches:'),
+      chalk.cyan(inspect.modelSwitching.totalSwitches)
+    );
+    console.log(
+      chalk.white('Switch Frequency:'),
+      chalk.cyan(`${inspect.modelSwitching.switchFrequency} switches/day`)
+    );
+    console.log(
+      chalk.white('Primary Model:'),
+      chalk.cyan(inspect.modelSwitching.primaryModel)
+    );
+    console.log(
+      chalk.white('Fallback Models:'),
+      chalk.cyan(inspect.modelSwitching.fallbackModels?.join(', ') || 'None')
+    );
+
     if (inspect.modelSwitching.switchReasons) {
       console.log(chalk.white('Switch Reasons:'));
-      Object.entries(inspect.modelSwitching.switchReasons).forEach(([reason, count]: [string, any]) => {
-        console.log(chalk.gray(`  • ${reason}: ${count} times`));
-      });
+      Object.entries(inspect.modelSwitching.switchReasons).forEach(
+        ([reason, count]: [string, any]) => {
+          console.log(chalk.gray(`  • ${reason}: ${count} times`));
+        }
+      );
     }
   }
 
@@ -274,33 +378,61 @@ function displayAgentInspectResult(inspect: any, options: any) {
   if (inspect.responsePatterns) {
     console.log(chalk.yellow.bold('\n📝 Response Patterns'));
     console.log(chalk.gray('─'.repeat(50)));
-    console.log(chalk.white('Average Response Length:'), chalk.cyan(`${inspect.responsePatterns.averageLength} characters`));
-    console.log(chalk.white('Response Length Range:'), chalk.cyan(`${inspect.responsePatterns.minLength} - ${inspect.responsePatterns.maxLength} characters`));
-    console.log(chalk.white('Common Response Types:'), chalk.cyan(inspect.responsePatterns.commonTypes?.join(', ') || 'N/A'));
-    console.log(chalk.white('Response Quality Score:'), chalk.cyan(inspect.responsePatterns.qualityScore?.toFixed(2) || 'N/A'));
+    console.log(
+      chalk.white('Average Response Length:'),
+      chalk.cyan(`${inspect.responsePatterns.averageLength} characters`)
+    );
+    console.log(
+      chalk.white('Response Length Range:'),
+      chalk.cyan(
+        `${inspect.responsePatterns.minLength} - ${inspect.responsePatterns.maxLength} characters`
+      )
+    );
+    console.log(
+      chalk.white('Common Response Types:'),
+      chalk.cyan(inspect.responsePatterns.commonTypes?.join(', ') || 'N/A')
+    );
+    console.log(
+      chalk.white('Response Quality Score:'),
+      chalk.cyan(inspect.responsePatterns.qualityScore?.toFixed(2) || 'N/A')
+    );
   }
 
   // Failure Analysis
-  if (options.includeFailures && inspect.failures && inspect.failures.length > 0) {
+  if (
+    options.includeFailures &&
+    inspect.failures &&
+    inspect.failures.length > 0
+  ) {
     console.log(chalk.yellow.bold('\n❌ Failure Analysis'));
     console.log(chalk.gray('─'.repeat(50)));
-    console.log(chalk.white('Total Failures:'), chalk.red(inspect.failures.length));
-    console.log(chalk.white('Failure Rate:'), chalk.red(`${(inspect.failures.length / inspect.totalRequests * 100).toFixed(1)}%`));
-    
+    console.log(
+      chalk.white('Total Failures:'),
+      chalk.red(inspect.failures.length)
+    );
+    console.log(
+      chalk.white('Failure Rate:'),
+      chalk.red(
+        `${((inspect.failures.length / inspect.totalRequests) * 100).toFixed(1)}%`
+      )
+    );
+
     const failureTypes = inspect.failures.reduce((acc: any, failure: any) => {
       acc[failure.type] = (acc[failure.type] || 0) + 1;
       return acc;
     }, {});
-    
+
     console.log(chalk.white('Failure Types:'));
     Object.entries(failureTypes).forEach(([type, count]: [string, any]) => {
       console.log(chalk.gray(`  • ${type}: ${count} occurrences`));
     });
-    
+
     if (options.verbose) {
       console.log(chalk.white('\nRecent Failures:'));
       inspect.failures.slice(0, 5).forEach((failure: any, index: number) => {
-        console.log(chalk.gray(`${index + 1}. ${failure.timestamp}: ${failure.error}`));
+        console.log(
+          chalk.gray(`${index + 1}. ${failure.timestamp}: ${failure.error}`)
+        );
       });
     }
   }
@@ -309,22 +441,43 @@ function displayAgentInspectResult(inspect: any, options: any) {
   if (options.includePrompts && inspect.prompts && inspect.prompts.length > 0) {
     console.log(chalk.yellow.bold('\n💬 Prompt Analysis'));
     console.log(chalk.gray('─'.repeat(50)));
-    console.log(chalk.white('Total Prompts:'), chalk.cyan(inspect.prompts.length));
-    console.log(chalk.white('Average Prompt Length:'), chalk.cyan(`${inspect.prompts.averageLength} characters`));
-    console.log(chalk.white('Prompt Complexity:'), chalk.cyan(inspect.prompts.complexity || 'N/A'));
-    
+    console.log(
+      chalk.white('Total Prompts:'),
+      chalk.cyan(inspect.prompts.length)
+    );
+    console.log(
+      chalk.white('Average Prompt Length:'),
+      chalk.cyan(`${inspect.prompts.averageLength} characters`)
+    );
+    console.log(
+      chalk.white('Prompt Complexity:'),
+      chalk.cyan(inspect.prompts.complexity || 'N/A')
+    );
+
     if (inspect.prompts.commonPatterns) {
       console.log(chalk.white('Common Patterns:'));
       inspect.prompts.commonPatterns.forEach((pattern: any, index: number) => {
-        console.log(chalk.gray(`  ${index + 1}. ${pattern.description} (${pattern.frequency} times)`));
+        console.log(
+          chalk.gray(
+            `  ${index + 1}. ${pattern.description} (${pattern.frequency} times)`
+          )
+        );
       });
     }
-    
+
     if (options.verbose) {
       console.log(chalk.white('\nRecent Prompts:'));
       inspect.prompts.slice(0, 3).forEach((prompt: any, index: number) => {
-        console.log(chalk.gray(`${index + 1}. ${new Date(prompt.timestamp).toLocaleString()}:`));
-        console.log(chalk.gray(`   ${prompt.content.substring(0, 100)}${prompt.content.length > 100 ? '...' : ''}`));
+        console.log(
+          chalk.gray(
+            `${index + 1}. ${new Date(prompt.timestamp).toLocaleString()}:`
+          )
+        );
+        console.log(
+          chalk.gray(
+            `   ${prompt.content.substring(0, 100)}${prompt.content.length > 100 ? '...' : ''}`
+          )
+        );
       });
     }
   }
@@ -333,10 +486,22 @@ function displayAgentInspectResult(inspect: any, options: any) {
   if (inspect.performanceTrends) {
     console.log(chalk.yellow.bold('\n📈 Performance Trends'));
     console.log(chalk.gray('─'.repeat(50)));
-    console.log(chalk.white('Cost Trend:'), chalk.cyan(inspect.performanceTrends.costTrend));
-    console.log(chalk.white('Latency Trend:'), chalk.cyan(inspect.performanceTrends.latencyTrend));
-    console.log(chalk.white('Success Rate Trend:'), chalk.cyan(inspect.performanceTrends.successRateTrend));
-    console.log(chalk.white('Usage Trend:'), chalk.cyan(inspect.performanceTrends.usageTrend));
+    console.log(
+      chalk.white('Cost Trend:'),
+      chalk.cyan(inspect.performanceTrends.costTrend)
+    );
+    console.log(
+      chalk.white('Latency Trend:'),
+      chalk.cyan(inspect.performanceTrends.latencyTrend)
+    );
+    console.log(
+      chalk.white('Success Rate Trend:'),
+      chalk.cyan(inspect.performanceTrends.successRateTrend)
+    );
+    console.log(
+      chalk.white('Usage Trend:'),
+      chalk.cyan(inspect.performanceTrends.usageTrend)
+    );
   }
 
   // Recommendations
@@ -355,7 +520,9 @@ function displayAgentInspectResult(inspect: any, options: any) {
     });
   }
 
-  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+  console.log(
+    chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
 }
 
 async function handleAgentInspectByName(agentName: string, options: any) {
@@ -371,27 +538,39 @@ async function handleAgentInspectByName(agentName: string, options: any) {
   }
 }
 
-async function getAgentInspectByName(agentName: string, days: number, options: any) {
+async function getAgentInspectByName(
+  agentName: string,
+  days: number,
+  options: any
+) {
   const baseUrl = configManager.get('baseUrl');
   const apiKey = configManager.get('apiKey');
 
   if (!baseUrl || !apiKey) {
     console.log(chalk.red.bold('\n❌ Configuration Missing'));
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
-    
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+    );
+
     if (!apiKey) {
       console.log(chalk.yellow('• API Key is not set'));
     }
     if (!baseUrl) {
       console.log(chalk.yellow('• Base URL is not set'));
     }
-    
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+    );
     console.log(chalk.cyan('To set up your configuration, run:'));
     console.log(chalk.white('  cost-katana init'));
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'));
-    
-    throw new Error('Configuration incomplete. Please run "cost-katana init" to set up your API key and base URL.');
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n')
+    );
+
+    throw new Error(
+      'Configuration incomplete. Please run "cost-katana init" to set up your API key and base URL.'
+    );
   }
 
   try {
@@ -400,15 +579,19 @@ async function getAgentInspectByName(agentName: string, days: number, options: a
     params.append('days', days.toString());
     if (options.includePrompts) params.append('includePrompts', 'true');
     if (options.includeFailures) params.append('includeFailures', 'true');
-    if (options.includeModelSwitching) params.append('includeModelSwitching', 'true');
+    if (options.includeModelSwitching)
+      params.append('includeModelSwitching', 'true');
 
-    const response = await axios.get(`${baseUrl}/api/agent/inspect/name?${params}`, {
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      timeout: 30000,
-    });
+    const response = await axios.get(
+      `${baseUrl}/api/agent/inspect/name?${params}`,
+      {
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        timeout: 30000,
+      }
+    );
 
     if (response.status !== 200) {
       throw new Error(`API returned status ${response.status}`);
@@ -421,7 +604,9 @@ async function getAgentInspectByName(agentName: string, days: number, options: a
     }
   } catch (error: any) {
     if (error.response) {
-      throw new Error(`API Error: ${error.response.status} - ${error.response.data?.message || 'Unknown error'}`);
+      throw new Error(
+        `API Error: ${error.response.status} - ${error.response.data?.message || 'Unknown error'}`
+      );
     } else if (error.request) {
       throw new Error('No response received from API');
     } else {
@@ -448,36 +633,48 @@ async function getAgentInspectByWorkflow(workflowId: string, options: any) {
 
   if (!baseUrl || !apiKey) {
     console.log(chalk.red.bold('\n❌ Configuration Missing'));
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
-    
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+    );
+
     if (!apiKey) {
       console.log(chalk.yellow('• API Key is not set'));
     }
     if (!baseUrl) {
       console.log(chalk.yellow('• Base URL is not set'));
     }
-    
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+    );
     console.log(chalk.cyan('To set up your configuration, run:'));
     console.log(chalk.white('  cost-katana init'));
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'));
-    
-    throw new Error('Configuration incomplete. Please run "cost-katana init" to set up your API key and base URL.');
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n')
+    );
+
+    throw new Error(
+      'Configuration incomplete. Please run "cost-katana init" to set up your API key and base URL.'
+    );
   }
 
   try {
     const params = new URLSearchParams();
     if (options.includePrompts) params.append('includePrompts', 'true');
     if (options.includeFailures) params.append('includeFailures', 'true');
-    if (options.includeModelSwitching) params.append('includeModelSwitching', 'true');
+    if (options.includeModelSwitching)
+      params.append('includeModelSwitching', 'true');
 
-    const response = await axios.get(`${baseUrl}/api/agent/inspect/workflow/${workflowId}?${params}`, {
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      timeout: 30000,
-    });
+    const response = await axios.get(
+      `${baseUrl}/api/agent/inspect/workflow/${workflowId}?${params}`,
+      {
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        timeout: 30000,
+      }
+    );
 
     if (response.status !== 200) {
       throw new Error(`API returned status ${response.status}`);
@@ -490,7 +687,9 @@ async function getAgentInspectByWorkflow(workflowId: string, options: any) {
     }
   } catch (error: any) {
     if (error.response) {
-      throw new Error(`API Error: ${error.response.status} - ${error.response.data?.message || 'Unknown error'}`);
+      throw new Error(
+        `API Error: ${error.response.status} - ${error.response.data?.message || 'Unknown error'}`
+      );
     } else if (error.request) {
       throw new Error('No response received from API');
     } else {
@@ -499,26 +698,36 @@ async function getAgentInspectByWorkflow(workflowId: string, options: any) {
   }
 }
 
-function displayWorkflowAgentInspectResult(inspect: any, workflowId: string, options: any) {
+function displayWorkflowAgentInspectResult(
+  inspect: any,
+  workflowId: string,
+  options: any
+) {
   const format = options.format || 'table';
-  
+
   if (format === 'json') {
     console.log(JSON.stringify(inspect, null, 2));
     return;
   } else if (format === 'csv') {
     console.log('Agent ID,Name,Role,Requests,Success Rate,Cost,Tokens,Latency');
     inspect.agents.forEach((agent: any) => {
-      console.log(`"${agent.agentId}","${agent.name}","${agent.role}","${agent.totalRequests}","${agent.successRate}","${agent.totalCost}","${agent.totalTokens}","${agent.averageLatency}"`);
+      console.log(
+        `"${agent.agentId}","${agent.name}","${agent.role}","${agent.totalRequests}","${agent.successRate}","${agent.totalCost}","${agent.totalTokens}","${agent.averageLatency}"`
+      );
     });
     return;
   }
 
   console.log(chalk.cyan.bold(`\n🔍 Workflow Agent Inspection: ${workflowId}`));
-  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+  console.log(
+    chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
 
   if (!inspect.agents || inspect.agents.length === 0) {
     console.log(chalk.yellow('No agents found in this workflow.'));
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+    );
     return;
   }
 
@@ -526,29 +735,63 @@ function displayWorkflowAgentInspectResult(inspect: any, workflowId: string, opt
   console.log(chalk.yellow.bold('\n📊 Summary Statistics'));
   console.log(chalk.gray('─'.repeat(50)));
   console.log(chalk.white('Total Agents:'), chalk.cyan(inspect.agents.length));
-  console.log(chalk.white('Total Requests:'), chalk.cyan(inspect.totalRequests.toLocaleString()));
-  console.log(chalk.white('Total Cost:'), chalk.green(`$${inspect.totalCost.toFixed(4)}`));
-  console.log(chalk.white('Average Success Rate:'), chalk.cyan(`${(inspect.averageSuccessRate * 100).toFixed(1)}%`));
+  console.log(
+    chalk.white('Total Requests:'),
+    chalk.cyan(inspect.totalRequests.toLocaleString())
+  );
+  console.log(
+    chalk.white('Total Cost:'),
+    chalk.green(`$${inspect.totalCost.toFixed(4)}`)
+  );
+  console.log(
+    chalk.white('Average Success Rate:'),
+    chalk.cyan(`${(inspect.averageSuccessRate * 100).toFixed(1)}%`)
+  );
 
   // Agent Details
   console.log(chalk.yellow.bold('\n🤖 Agent Details'));
   console.log(chalk.gray('─'.repeat(50)));
 
   inspect.agents.forEach((agent: any, index: number) => {
-    const successColor = agent.successRate > 0.8 ? chalk.green : agent.successRate > 0.6 ? chalk.yellow : chalk.red;
-    
-    console.log(chalk.white(`\n${index + 1}. ${agent.name} (${agent.agentId})`));
+    const successColor =
+      agent.successRate > 0.8
+        ? chalk.green
+        : agent.successRate > 0.6
+          ? chalk.yellow
+          : chalk.red;
+
+    console.log(
+      chalk.white(`\n${index + 1}. ${agent.name} (${agent.agentId})`)
+    );
     console.log(chalk.gray('   ─'.repeat(40)));
-    
+
     console.log(chalk.white('   🎭 Role:'), chalk.cyan(agent.role));
-    console.log(chalk.white('   📈 Requests:'), chalk.cyan(agent.totalRequests));
-    console.log(chalk.white('   📊 Success Rate:'), successColor(`${(agent.successRate * 100).toFixed(1)}%`));
-    console.log(chalk.white('   💰 Cost:'), chalk.green(`$${agent.totalCost.toFixed(4)}`));
-    console.log(chalk.white('   🔢 Tokens:'), chalk.cyan(agent.totalTokens.toLocaleString()));
-    console.log(chalk.white('   ⏱️  Avg Latency:'), chalk.cyan(`${agent.averageLatency}ms`));
-    
+    console.log(
+      chalk.white('   📈 Requests:'),
+      chalk.cyan(agent.totalRequests)
+    );
+    console.log(
+      chalk.white('   📊 Success Rate:'),
+      successColor(`${(agent.successRate * 100).toFixed(1)}%`)
+    );
+    console.log(
+      chalk.white('   💰 Cost:'),
+      chalk.green(`$${agent.totalCost.toFixed(4)}`)
+    );
+    console.log(
+      chalk.white('   🔢 Tokens:'),
+      chalk.cyan(agent.totalTokens.toLocaleString())
+    );
+    console.log(
+      chalk.white('   ⏱️  Avg Latency:'),
+      chalk.cyan(`${agent.averageLatency}ms`)
+    );
+
     if (agent.primaryModel) {
-      console.log(chalk.white('   🤖 Primary Model:'), chalk.cyan(agent.primaryModel));
+      console.log(
+        chalk.white('   🤖 Primary Model:'),
+        chalk.cyan(agent.primaryModel)
+      );
     }
   });
 
@@ -556,19 +799,36 @@ function displayWorkflowAgentInspectResult(inspect: any, workflowId: string, opt
   if (inspect.interactions) {
     console.log(chalk.yellow.bold('\n🔄 Agent Interactions'));
     console.log(chalk.gray('─'.repeat(50)));
-    console.log(chalk.white('Sequential Calls:'), chalk.cyan(inspect.interactions.sequentialCalls));
-    console.log(chalk.white('Parallel Calls:'), chalk.cyan(inspect.interactions.parallelCalls));
-    console.log(chalk.white('Dependencies:'), chalk.cyan(inspect.interactions.dependencies?.length || 0));
-    
+    console.log(
+      chalk.white('Sequential Calls:'),
+      chalk.cyan(inspect.interactions.sequentialCalls)
+    );
+    console.log(
+      chalk.white('Parallel Calls:'),
+      chalk.cyan(inspect.interactions.parallelCalls)
+    );
+    console.log(
+      chalk.white('Dependencies:'),
+      chalk.cyan(inspect.interactions.dependencies?.length || 0)
+    );
+
     if (inspect.interactions.bottlenecks) {
       console.log(chalk.white('Bottlenecks:'));
-      inspect.interactions.bottlenecks.forEach((bottleneck: any, index: number) => {
-        console.log(chalk.gray(`  ${index + 1}. ${bottleneck.agent}: ${bottleneck.reason}`));
-      });
+      inspect.interactions.bottlenecks.forEach(
+        (bottleneck: any, index: number) => {
+          console.log(
+            chalk.gray(
+              `  ${index + 1}. ${bottleneck.agent}: ${bottleneck.reason}`
+            )
+          );
+        }
+      );
     }
   }
 
-  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+  console.log(
+    chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
 }
 
 async function handleAgentInspectRecent(options: any) {
@@ -590,31 +850,42 @@ async function getRecentAgentInspect(count: number) {
 
   if (!baseUrl || !apiKey) {
     console.log(chalk.red.bold('\n❌ Configuration Missing'));
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
-    
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+    );
+
     if (!apiKey) {
       console.log(chalk.yellow('• API Key is not set'));
     }
     if (!baseUrl) {
       console.log(chalk.yellow('• Base URL is not set'));
     }
-    
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+    );
     console.log(chalk.cyan('To set up your configuration, run:'));
     console.log(chalk.white('  cost-katana init'));
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'));
-    
-    throw new Error('Configuration incomplete. Please run "cost-katana init" to set up your API key and base URL.');
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n')
+    );
+
+    throw new Error(
+      'Configuration incomplete. Please run "cost-katana init" to set up your API key and base URL.'
+    );
   }
 
   try {
-    const response = await axios.get(`${baseUrl}/api/agent/inspect/recent?count=${count}`, {
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      timeout: 30000,
-    });
+    const response = await axios.get(
+      `${baseUrl}/api/agent/inspect/recent?count=${count}`,
+      {
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        timeout: 30000,
+      }
+    );
 
     if (response.status !== 200) {
       throw new Error(`API returned status ${response.status}`);
@@ -627,7 +898,9 @@ async function getRecentAgentInspect(count: number) {
     }
   } catch (error: any) {
     if (error.response) {
-      throw new Error(`API Error: ${error.response.status} - ${error.response.data?.message || 'Unknown error'}`);
+      throw new Error(
+        `API Error: ${error.response.status} - ${error.response.data?.message || 'Unknown error'}`
+      );
     } else if (error.request) {
       throw new Error('No response received from API');
     } else {
@@ -638,45 +911,92 @@ async function getRecentAgentInspect(count: number) {
 
 function displayRecentAgentInspect(agents: any[], options: any) {
   const format = options.format || 'table';
-  
+
   if (format === 'json') {
     console.log(JSON.stringify(agents, null, 2));
     return;
   } else if (format === 'csv') {
-    console.log('Agent ID,Name,Role,Requests,Success Rate,Cost,Tokens,Last Active');
-    agents.forEach(agent => {
-      console.log(`"${agent.agentId}","${agent.name}","${agent.role}","${agent.totalRequests}","${agent.successRate}","${agent.totalCost}","${agent.totalTokens}","${agent.lastActive}"`);
+    console.log(
+      'Agent ID,Name,Role,Requests,Success Rate,Cost,Tokens,Last Active'
+    );
+    agents.forEach((agent) => {
+      console.log(
+        `"${agent.agentId}","${agent.name}","${agent.role}","${agent.totalRequests}","${agent.successRate}","${agent.totalCost}","${agent.totalTokens}","${agent.lastActive}"`
+      );
     });
     return;
   }
 
   console.log(chalk.cyan.bold('\n📋 Recent Agent Inspections'));
-  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+  console.log(
+    chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
 
   if (agents.length === 0) {
     console.log(chalk.yellow('No recent agents found.'));
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+    );
     return;
   }
 
   agents.forEach((agent, index) => {
-    const successColor = agent.successRate > 0.8 ? chalk.green : agent.successRate > 0.6 ? chalk.yellow : chalk.red;
-    
-    console.log(chalk.white(`\n${index + 1}. ${agent.name} (${agent.agentId})`));
+    const successColor =
+      agent.successRate > 0.8
+        ? chalk.green
+        : agent.successRate > 0.6
+          ? chalk.yellow
+          : chalk.red;
+
+    console.log(
+      chalk.white(`\n${index + 1}. ${agent.name} (${agent.agentId})`)
+    );
     console.log(chalk.gray('   ─'.repeat(40)));
-    
+
     console.log(chalk.white('   🎭 Role:'), chalk.cyan(agent.role));
-    console.log(chalk.white('   📈 Requests:'), chalk.cyan(agent.totalRequests));
-    console.log(chalk.white('   📊 Success Rate:'), successColor(`${(agent.successRate * 100).toFixed(1)}%`));
-    console.log(chalk.white('   💰 Cost:'), chalk.green(`$${agent.totalCost.toFixed(4)}`));
-    console.log(chalk.white('   🔢 Tokens:'), chalk.cyan(agent.totalTokens.toLocaleString()));
-    console.log(chalk.white('   ⏱️  Avg Latency:'), chalk.cyan(`${agent.averageLatency}ms`));
-    console.log(chalk.white('   📅 Last Active:'), chalk.cyan(new Date(agent.lastActive).toLocaleString()));
+    console.log(
+      chalk.white('   📈 Requests:'),
+      chalk.cyan(agent.totalRequests)
+    );
+    console.log(
+      chalk.white('   📊 Success Rate:'),
+      successColor(`${(agent.successRate * 100).toFixed(1)}%`)
+    );
+    console.log(
+      chalk.white('   💰 Cost:'),
+      chalk.green(`$${agent.totalCost.toFixed(4)}`)
+    );
+    console.log(
+      chalk.white('   🔢 Tokens:'),
+      chalk.cyan(agent.totalTokens.toLocaleString())
+    );
+    console.log(
+      chalk.white('   ⏱️  Avg Latency:'),
+      chalk.cyan(`${agent.averageLatency}ms`)
+    );
+    console.log(
+      chalk.white('   📅 Last Active:'),
+      chalk.cyan(new Date(agent.lastActive).toLocaleString())
+    );
   });
 
-  console.log(chalk.gray('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+  console.log(
+    chalk.gray('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
   console.log(chalk.yellow('💡 Commands:'));
-  console.log(chalk.white('  • Inspect specific agent: costkatana agent-inspect id <agentId>'));
-  console.log(chalk.white('  • Inspect by name: costkatana agent-inspect name <agentName>'));
-  console.log(chalk.white('  • Inspect workflow agents: costkatana agent-inspect workflow <workflowId>'));
+  console.log(
+    chalk.white(
+      '  • Inspect specific agent: costkatana agent-inspect id <agentId>'
+    )
+  );
+  console.log(
+    chalk.white(
+      '  • Inspect by name: costkatana agent-inspect name <agentName>'
+    )
+  );
+  console.log(
+    chalk.white(
+      '  • Inspect workflow agents: costkatana agent-inspect workflow <workflowId>'
+    )
+  );
 }

@@ -11,7 +11,11 @@ export function analyzeCommand(program: Command) {
     .option('-d, --days <number>', 'Number of days to analyze', '30')
     .option('-m, --model <model>', 'Filter by specific model')
     .option('-p, --provider <provider>', 'Filter by provider')
-    .option('-f, --format <format>', 'Output format (table, json, csv)', 'table')
+    .option(
+      '-f, --format <format>',
+      'Output format (table, json, csv)',
+      'table'
+    )
     .option('-v, --verbose', 'Show detailed analysis')
     .option('--export <path>', 'Export analysis to file')
     .action(async (options) => {
@@ -42,21 +46,29 @@ async function fetchAnalysis(options: any) {
 
   if (!baseUrl || !apiKey) {
     console.log(chalk.red.bold('\n❌ Configuration Missing'));
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
-    
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+    );
+
     if (!apiKey) {
       console.log(chalk.yellow('• API Key is not set'));
     }
     if (!baseUrl) {
       console.log(chalk.yellow('• Base URL is not set'));
     }
-    
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+    );
     console.log(chalk.cyan('To set up your configuration, run:'));
     console.log(chalk.white('  cost-katana init'));
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'));
-    
-    throw new Error('Configuration incomplete. Please run "cost-katana init" to set up your API key and base URL.');
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n')
+    );
+
+    throw new Error(
+      'Configuration incomplete. Please run "cost-katana init" to set up your API key and base URL.'
+    );
   }
 
   const params = new URLSearchParams({
@@ -75,7 +87,7 @@ async function fetchAnalysis(options: any) {
   try {
     const response = await axios.get(`${baseUrl}/api/analytics?${params}`, {
       headers: {
-        'Authorization': `Bearer ${apiKey}`,
+        Authorization: `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
       },
       timeout: 30000,
@@ -88,7 +100,9 @@ async function fetchAnalysis(options: any) {
     return response.data;
   } catch (error: any) {
     if (error.response) {
-      throw new Error(`API Error: ${error.response.status} - ${error.response.data?.message || 'Unknown error'}`);
+      throw new Error(
+        `API Error: ${error.response.status} - ${error.response.data?.message || 'Unknown error'}`
+      );
     } else if (error.request) {
       throw new Error('No response received from API');
     } else {
@@ -122,38 +136,69 @@ function displayAnalysis(analysis: any, options: any) {
 
 function displayAnalysisTable(analysis: any, verbose: boolean) {
   console.log(chalk.cyan.bold('\n📈 Cost Analysis Report'));
-  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+  console.log(
+    chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
 
   // Summary
   if (analysis.summary) {
     console.log(chalk.yellow.bold('\n📊 Summary'));
     console.log(chalk.gray('─'.repeat(20)));
-    
+
     const summary = analysis.summary;
-    console.log(chalk.yellow('Total Cost:'), `$${summary.totalCost?.toFixed(4) || '0.00'}`);
-    console.log(chalk.yellow('Total Requests:'), summary.totalRequests?.toLocaleString() || '0');
-    console.log(chalk.yellow('Total Tokens:'), summary.totalTokens?.toLocaleString() || '0');
-    console.log(chalk.yellow('Average Cost/Request:'), `$${summary.avgCostPerRequest?.toFixed(4) || '0.00'}`);
-    console.log(chalk.yellow('Average Tokens/Request:'), summary.avgTokensPerRequest?.toFixed(0) || '0');
+    console.log(
+      chalk.yellow('Total Cost:'),
+      `$${summary.totalCost?.toFixed(4) || '0.00'}`
+    );
+    console.log(
+      chalk.yellow('Total Requests:'),
+      summary.totalRequests?.toLocaleString() || '0'
+    );
+    console.log(
+      chalk.yellow('Total Tokens:'),
+      summary.totalTokens?.toLocaleString() || '0'
+    );
+    console.log(
+      chalk.yellow('Average Cost/Request:'),
+      `$${summary.avgCostPerRequest?.toFixed(4) || '0.00'}`
+    );
+    console.log(
+      chalk.yellow('Average Tokens/Request:'),
+      summary.avgTokensPerRequest?.toFixed(0) || '0'
+    );
   }
 
   // Cost by Model
   if (analysis.costsByModel && analysis.costsByModel.length > 0) {
     console.log(chalk.yellow.bold('\n🤖 Cost by Model'));
     console.log(chalk.gray('─'.repeat(20)));
-    
+
     analysis.costsByModel.forEach((model: any) => {
       const name = chalk.white(model.model || 'Unknown');
       const cost = chalk.green(`$${model.totalCost?.toFixed(4) || '0.00'}`);
-      const requests = chalk.gray(`${model.requests?.toLocaleString() || '0'} requests`);
+      const requests = chalk.gray(
+        `${model.requests?.toLocaleString() || '0'} requests`
+      );
       const percentage = chalk.blue(`${model.percentage?.toFixed(1) || '0'}%`);
-      
+
       console.log(`${name}: ${cost} (${requests}, ${percentage})`);
-      
+
       if (verbose && model.details) {
-        console.log(chalk.gray(`  Input tokens: ${model.details.inputTokens?.toLocaleString() || '0'}`));
-        console.log(chalk.gray(`  Output tokens: ${model.details.outputTokens?.toLocaleString() || '0'}`));
-        console.log(chalk.gray(`  Avg cost/request: $${model.details.avgCostPerRequest?.toFixed(4) || '0.00'}`));
+        console.log(
+          chalk.gray(
+            `  Input tokens: ${model.details.inputTokens?.toLocaleString() || '0'}`
+          )
+        );
+        console.log(
+          chalk.gray(
+            `  Output tokens: ${model.details.outputTokens?.toLocaleString() || '0'}`
+          )
+        );
+        console.log(
+          chalk.gray(
+            `  Avg cost/request: $${model.details.avgCostPerRequest?.toFixed(4) || '0.00'}`
+          )
+        );
         console.log('');
       }
     });
@@ -163,13 +208,17 @@ function displayAnalysisTable(analysis: any, verbose: boolean) {
   if (analysis.costsByProvider && analysis.costsByProvider.length > 0) {
     console.log(chalk.yellow.bold('\n🏢 Cost by Provider'));
     console.log(chalk.gray('─'.repeat(20)));
-    
+
     analysis.costsByProvider.forEach((provider: any) => {
       const name = chalk.white(provider.provider || 'Unknown');
       const cost = chalk.green(`$${provider.totalCost?.toFixed(4) || '0.00'}`);
-      const requests = chalk.gray(`${provider.requests?.toLocaleString() || '0'} requests`);
-      const percentage = chalk.blue(`${provider.percentage?.toFixed(1) || '0'}%`);
-      
+      const requests = chalk.gray(
+        `${provider.requests?.toLocaleString() || '0'} requests`
+      );
+      const percentage = chalk.blue(
+        `${provider.percentage?.toFixed(1) || '0'}%`
+      );
+
       console.log(`${name}: ${cost} (${requests}, ${percentage})`);
     });
   }
@@ -178,63 +227,78 @@ function displayAnalysisTable(analysis: any, verbose: boolean) {
   if (analysis.dailyTrends && analysis.dailyTrends.length > 0) {
     console.log(chalk.yellow.bold('\n📅 Daily Trends'));
     console.log(chalk.gray('─'.repeat(20)));
-    
+
     const recentDays = analysis.dailyTrends.slice(-7); // Last 7 days
     recentDays.forEach((day: any) => {
       const date = chalk.white(day.date);
       const cost = chalk.green(`$${day.cost?.toFixed(4) || '0.00'}`);
       const requests = chalk.gray(`${day.requests || '0'} requests`);
-      
+
       console.log(`${date}: ${cost} (${requests})`);
     });
   }
 
   // Top Expensive Requests
-  if (analysis.topExpensiveRequests && analysis.topExpensiveRequests.length > 0) {
+  if (
+    analysis.topExpensiveRequests &&
+    analysis.topExpensiveRequests.length > 0
+  ) {
     console.log(chalk.yellow.bold('\n💰 Top Expensive Requests'));
     console.log(chalk.gray('─'.repeat(20)));
-    
-    analysis.topExpensiveRequests.slice(0, 5).forEach((request: any, index: number) => {
-      const rank = chalk.yellow(`#${index + 1}`);
-      const cost = chalk.red(`$${request.cost?.toFixed(4) || '0.00'}`);
-      const model = chalk.blue(request.model || 'Unknown');
-      const tokens = chalk.gray(`${request.tokens?.toLocaleString() || '0'} tokens`);
-      
-      console.log(`${rank} ${cost} - ${model} (${tokens})`);
-      
-      if (verbose && request.prompt) {
-        const preview = request.prompt.length > 100 
-          ? request.prompt.substring(0, 100) + '...'
-          : request.prompt;
-        console.log(chalk.gray(`  Prompt: ${preview}`));
-      }
-      console.log('');
-    });
+
+    analysis.topExpensiveRequests
+      .slice(0, 5)
+      .forEach((request: any, index: number) => {
+        const rank = chalk.yellow(`#${index + 1}`);
+        const cost = chalk.red(`$${request.cost?.toFixed(4) || '0.00'}`);
+        const model = chalk.blue(request.model || 'Unknown');
+        const tokens = chalk.gray(
+          `${request.tokens?.toLocaleString() || '0'} tokens`
+        );
+
+        console.log(`${rank} ${cost} - ${model} (${tokens})`);
+
+        if (verbose && request.prompt) {
+          const preview =
+            request.prompt.length > 100
+              ? request.prompt.substring(0, 100) + '...'
+              : request.prompt;
+          console.log(chalk.gray(`  Prompt: ${preview}`));
+        }
+        console.log('');
+      });
   }
 
   // Insights
   if (analysis.insights && analysis.insights.length > 0) {
     console.log(chalk.yellow.bold('\n💡 Insights'));
     console.log(chalk.gray('─'.repeat(20)));
-    
+
     analysis.insights.forEach((insight: any) => {
-      const type = insight.type === 'warning' ? chalk.red('⚠️') : 
-                   insight.type === 'suggestion' ? chalk.blue('💡') : 
-                   chalk.green('✅');
+      const type =
+        insight.type === 'warning'
+          ? chalk.red('⚠️')
+          : insight.type === 'suggestion'
+            ? chalk.blue('💡')
+            : chalk.green('✅');
       console.log(`${type} ${insight.message}`);
     });
   }
 
-  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+  console.log(
+    chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
 }
 
 function displayAnalysisJson(analysis: any, verbose: boolean) {
-  const output = verbose ? analysis : {
-    summary: analysis.summary,
-    costsByModel: analysis.costsByModel,
-    costsByProvider: analysis.costsByProvider,
-    insights: analysis.insights,
-  };
+  const output = verbose
+    ? analysis
+    : {
+        summary: analysis.summary,
+        costsByModel: analysis.costsByModel,
+        costsByProvider: analysis.costsByProvider,
+        insights: analysis.insights,
+      };
 
   console.log(JSON.stringify(output, null, 2));
 }
@@ -243,17 +307,25 @@ function displayAnalysisCsv(analysis: any, _verbose: boolean) {
   // Summary CSV
   if (analysis.summary) {
     console.log('Summary');
-    console.log('Total Cost,Total Requests,Total Tokens,Avg Cost/Request,Avg Tokens/Request');
+    console.log(
+      'Total Cost,Total Requests,Total Tokens,Avg Cost/Request,Avg Tokens/Request'
+    );
     const summary = analysis.summary;
-    console.log(`${summary.totalCost || 0},${summary.totalRequests || 0},${summary.totalTokens || 0},${summary.avgCostPerRequest || 0},${summary.avgTokensPerRequest || 0}`);
+    console.log(
+      `${summary.totalCost || 0},${summary.totalRequests || 0},${summary.totalTokens || 0},${summary.avgCostPerRequest || 0},${summary.avgTokensPerRequest || 0}`
+    );
     console.log('');
   }
 
   // Models CSV
   if (analysis.costsByModel) {
-    console.log('Model,Total Cost,Requests,Percentage,Input Tokens,Output Tokens');
+    console.log(
+      'Model,Total Cost,Requests,Percentage,Input Tokens,Output Tokens'
+    );
     analysis.costsByModel.forEach((model: any) => {
-      console.log(`"${model.model || 'Unknown'}",${model.totalCost || 0},${model.requests || 0},${model.percentage || 0},${model.details?.inputTokens || 0},${model.details?.outputTokens || 0}`);
+      console.log(
+        `"${model.model || 'Unknown'}",${model.totalCost || 0},${model.requests || 0},${model.percentage || 0},${model.details?.inputTokens || 0},${model.details?.outputTokens || 0}`
+      );
     });
     console.log('');
   }
@@ -262,7 +334,9 @@ function displayAnalysisCsv(analysis: any, _verbose: boolean) {
   if (analysis.costsByProvider) {
     console.log('Provider,Total Cost,Requests,Percentage');
     analysis.costsByProvider.forEach((provider: any) => {
-      console.log(`"${provider.provider || 'Unknown'}",${provider.totalCost || 0},${provider.requests || 0},${provider.percentage || 0}`);
+      console.log(
+        `"${provider.provider || 'Unknown'}",${provider.totalCost || 0},${provider.requests || 0},${provider.percentage || 0}`
+      );
     });
   }
 }
@@ -280,21 +354,29 @@ function exportAnalysis(analysis: any, filePath: string, format: string) {
     } else if (format === 'csv') {
       // Generate CSV content
       const lines = [];
-      
+
       // Summary
       if (analysis.summary) {
         lines.push('Summary');
-        lines.push('Total Cost,Total Requests,Total Tokens,Avg Cost/Request,Avg Tokens/Request');
+        lines.push(
+          'Total Cost,Total Requests,Total Tokens,Avg Cost/Request,Avg Tokens/Request'
+        );
         const summary = analysis.summary;
-        lines.push(`${summary.totalCost || 0},${summary.totalRequests || 0},${summary.totalTokens || 0},${summary.avgCostPerRequest || 0},${summary.avgTokensPerRequest || 0}`);
+        lines.push(
+          `${summary.totalCost || 0},${summary.totalRequests || 0},${summary.totalTokens || 0},${summary.avgCostPerRequest || 0},${summary.avgTokensPerRequest || 0}`
+        );
         lines.push('');
       }
 
       // Models
       if (analysis.costsByModel) {
-        lines.push('Model,Total Cost,Requests,Percentage,Input Tokens,Output Tokens');
+        lines.push(
+          'Model,Total Cost,Requests,Percentage,Input Tokens,Output Tokens'
+        );
         analysis.costsByModel.forEach((model: any) => {
-          lines.push(`"${model.model || 'Unknown'}",${model.totalCost || 0},${model.requests || 0},${model.percentage || 0},${model.details?.inputTokens || 0},${model.details?.outputTokens || 0}`);
+          lines.push(
+            `"${model.model || 'Unknown'}",${model.totalCost || 0},${model.requests || 0},${model.percentage || 0},${model.details?.inputTokens || 0},${model.details?.outputTokens || 0}`
+          );
         });
         lines.push('');
       }
@@ -303,7 +385,9 @@ function exportAnalysis(analysis: any, filePath: string, format: string) {
       if (analysis.costsByProvider) {
         lines.push('Provider,Total Cost,Requests,Percentage');
         analysis.costsByProvider.forEach((provider: any) => {
-          lines.push(`"${provider.provider || 'Unknown'}",${provider.totalCost || 0},${provider.requests || 0},${provider.percentage || 0}`);
+          lines.push(
+            `"${provider.provider || 'Unknown'}",${provider.totalCost || 0},${provider.requests || 0},${provider.percentage || 0}`
+          );
         });
       }
 
@@ -321,4 +405,4 @@ function exportAnalysis(analysis: any, filePath: string, format: string) {
   } catch (error) {
     logger.error('Failed to export analysis:', error);
   }
-} 
+}

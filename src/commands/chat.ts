@@ -53,21 +53,29 @@ class ChatSession {
 
     if (!this.baseUrl || !this.apiKey) {
       console.log(chalk.red.bold('\n❌ Configuration Missing'));
-      console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
-      
+      console.log(
+        chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+      );
+
       if (!this.apiKey) {
         console.log(chalk.yellow('• API Key is not set'));
       }
       if (!this.baseUrl) {
         console.log(chalk.yellow('• Base URL is not set'));
       }
-      
-      console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+
+      console.log(
+        chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+      );
       console.log(chalk.cyan('To set up your configuration, run:'));
       console.log(chalk.white('  cost-katana init'));
-      console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'));
-      
-      throw new Error('Configuration incomplete. Please run "cost-katana init" to set up your API key and base URL.');
+      console.log(
+        chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n')
+      );
+
+      throw new Error(
+        'Configuration incomplete. Please run "cost-katana init" to set up your API key and base URL.'
+      );
     }
 
     // Add system message
@@ -80,12 +88,16 @@ class ChatSession {
 
   async start() {
     console.log(chalk.cyan.bold('\n💬 Cost Katana Chat Session'));
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+    );
     console.log(chalk.yellow(`Model: ${this.model}`));
     console.log(chalk.yellow(`Temperature: ${this.temperature}`));
     console.log(chalk.gray('Type "quit", "exit", or "bye" to end the session'));
     console.log(chalk.gray('Type "help" for available commands'));
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'));
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n')
+    );
 
     const rl = readline.createInterface({
       input: process.stdin,
@@ -95,7 +107,7 @@ class ChatSession {
     while (true) {
       try {
         const input = await this.promptUser(rl);
-        
+
         if (this.isExitCommand(input)) {
           break;
         }
@@ -122,7 +134,6 @@ class ChatSession {
 
         // Send message to AI
         await this.sendMessage(input);
-        
       } catch (error) {
         logger.error('Error in chat session:', error);
         console.log(chalk.red('An error occurred. Please try again.'));
@@ -163,13 +174,17 @@ class ChatSession {
 
   private showHelp() {
     console.log(chalk.cyan.bold('\n📖 Available Commands:'));
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+    );
     console.log(chalk.yellow('help') + '     - Show this help message');
     console.log(chalk.yellow('clear') + '    - Clear conversation history');
     console.log(chalk.yellow('history') + '  - Show conversation history');
     console.log(chalk.yellow('stats') + '    - Show session statistics');
     console.log(chalk.yellow('quit/exit') + ' - End the session');
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'));
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n')
+    );
   }
 
   private clearHistory() {
@@ -184,35 +199,55 @@ class ChatSession {
     }
 
     console.log(chalk.cyan.bold('\n📜 Conversation History:'));
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+    );
 
     this.messages.slice(1).forEach((message) => {
-      const role = message.role === 'user' ? chalk.green('You') : chalk.blue('AI');
+      const role =
+        message.role === 'user' ? chalk.green('You') : chalk.blue('AI');
       const time = message.timestamp.toLocaleTimeString();
-      const cost = message.cost ? chalk.gray(`($${message.cost.toFixed(4)})`) : '';
-      
+      const cost = message.cost
+        ? chalk.gray(`($${message.cost.toFixed(4)})`)
+        : '';
+
       console.log(`${role} [${time}] ${cost}:`);
       console.log(chalk.white(message.content));
       console.log('');
     });
 
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'));
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n')
+    );
   }
 
   private showStats() {
-    const userMessages = this.messages.filter(m => m.role === 'user').length;
-    const aiMessages = this.messages.filter(m => m.role === 'assistant').length;
+    const userMessages = this.messages.filter((m) => m.role === 'user').length;
+    const aiMessages = this.messages.filter(
+      (m) => m.role === 'assistant'
+    ).length;
     const totalCost = this.messages.reduce((sum, m) => sum + (m.cost || 0), 0);
-    const totalTokens = this.messages.reduce((sum, m) => sum + (m.tokens || 0), 0);
+    const totalTokens = this.messages.reduce(
+      (sum, m) => sum + (m.tokens || 0),
+      0
+    );
 
     console.log(chalk.cyan.bold('\n📊 Session Statistics:'));
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
-    console.log(chalk.yellow('Messages:') + ` ${userMessages} user, ${aiMessages} AI`);
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+    );
+    console.log(
+      chalk.yellow('Messages:') + ` ${userMessages} user, ${aiMessages} AI`
+    );
     console.log(chalk.yellow('Total Cost:') + ` $${totalCost.toFixed(4)}`);
-    console.log(chalk.yellow('Total Tokens:') + ` ${totalTokens.toLocaleString()}`);
+    console.log(
+      chalk.yellow('Total Tokens:') + ` ${totalTokens.toLocaleString()}`
+    );
     console.log(chalk.yellow('Model:') + ` ${this.model}`);
     console.log(chalk.yellow('Temperature:') + ` ${this.temperature}`);
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'));
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n')
+    );
   }
 
   private async sendMessage(content: string) {
@@ -228,7 +263,7 @@ class ChatSession {
 
     try {
       const response = await this.callAPI();
-      
+
       spinner.succeed('Response received');
 
       // Add AI response
@@ -243,7 +278,6 @@ class ChatSession {
       // Display response
       console.log(chalk.blue('AI:'), response.content);
       console.log('');
-
     } catch (error) {
       spinner.fail('Failed to get response');
       logger.error('API call failed:', error);
@@ -252,31 +286,35 @@ class ChatSession {
   }
 
   private async callAPI() {
-    const messages = this.historyEnabled 
-      ? this.messages 
+    const messages = this.historyEnabled
+      ? this.messages
       : [this.messages[0], this.messages[this.messages.length - 1]];
 
     const requestData = {
       modelId: this.model,
-      message: messages[messages.length - 1].content, 
+      message: messages[messages.length - 1].content,
       temperature: this.temperature,
       maxTokens: configManager.get('defaultMaxTokens') || 2000,
     };
 
-    const response = await axios.post(`${this.baseUrl}/api/chat/message`, requestData, {
-      headers: {
-        'Authorization': `Bearer ${this.apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      timeout: 30000,
-    });
+    const response = await axios.post(
+      `${this.baseUrl}/api/chat/message`,
+      requestData,
+      {
+        headers: {
+          Authorization: `Bearer ${this.apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        timeout: 30000,
+      }
+    );
 
     if (response.status !== 200) {
       throw new Error(`API returned status ${response.status}`);
     }
 
     const data = response.data;
-    
+
     // Handle the backend's response format
     if (data.success && data.data) {
       return {
@@ -292,12 +330,16 @@ class ChatSession {
   private endSession() {
     const totalMessages = this.messages.length - 1; // Exclude system message
     const totalCost = this.messages.reduce((sum, m) => sum + (m.cost || 0), 0);
-    
+
     console.log(chalk.cyan.bold('\n👋 Chat session ended'));
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+    );
     console.log(chalk.yellow('Total messages:'), totalMessages);
     console.log(chalk.yellow('Total cost:'), `$${totalCost.toFixed(4)}`);
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+    );
   }
 }
 
@@ -309,4 +351,4 @@ async function handleChat(options: any) {
     logger.error('Failed to start chat session:', error);
     process.exit(1);
   }
-} 
+}

@@ -13,7 +13,10 @@ export function trackCommand(program: Command) {
     .option('-t, --tokens <number>', 'Number of tokens used')
     .option('-p, --project <project>', 'Project name')
     .option('-u, --user <user>', 'User who made the request')
-    .option('-f, --feedback <feedback>', 'User feedback (positive, negative, neutral)')
+    .option(
+      '-f, --feedback <feedback>',
+      'User feedback (positive, negative, neutral)'
+    )
     .option('-c, --cost <cost>', 'Actual cost in USD')
     .option('-d, --description <description>', 'Request description')
     .option('--provider <provider>', 'AI provider (openai, anthropic, etc.)')
@@ -38,10 +41,10 @@ async function handleTrack(options: any) {
   try {
     // Collect missing information interactively if not provided
     const trackingData = await collectTrackingData(options);
-    
+
     // Send tracking data to backend
     const result = await trackRequest(trackingData);
-    
+
     // Display results
     displayTrackingResult(result, options);
   } catch (error) {
@@ -105,7 +108,7 @@ async function collectTrackingData(options: any) {
         default: true,
       },
     ]);
-    
+
     if (useProject) {
       const { project } = await inquirer.prompt([
         {
@@ -215,7 +218,7 @@ async function collectTrackingData(options: any) {
         default: false,
       },
     ]);
-    
+
     if (includePrompt) {
       const { prompt } = await inquirer.prompt([
         {
@@ -240,7 +243,7 @@ async function collectTrackingData(options: any) {
         default: false,
       },
     ]);
-    
+
     if (includeResponse) {
       const { response } = await inquirer.prompt([
         {
@@ -262,31 +265,43 @@ async function trackRequest(trackingData: any) {
 
   if (!baseUrl || !apiKey) {
     console.log(chalk.red.bold('\n❌ Configuration Missing'));
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
-    
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+    );
+
     if (!apiKey) {
       console.log(chalk.yellow('• API Key is not set'));
     }
     if (!baseUrl) {
       console.log(chalk.yellow('• Base URL is not set'));
     }
-    
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+    );
     console.log(chalk.cyan('To set up your configuration, run:'));
     console.log(chalk.white('  cost-katana init'));
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'));
-    
-    throw new Error('Configuration incomplete. Please run "cost-katana init" to set up your API key and base URL.');
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n')
+    );
+
+    throw new Error(
+      'Configuration incomplete. Please run "cost-katana init" to set up your API key and base URL.'
+    );
   }
 
   try {
-    const response = await axios.post(`${baseUrl}/api/tracking/manual`, trackingData, {
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      timeout: 30000,
-    });
+    const response = await axios.post(
+      `${baseUrl}/api/tracking/manual`,
+      trackingData,
+      {
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        timeout: 30000,
+      }
+    );
 
     if (response.status !== 200) {
       throw new Error(`API returned status ${response.status}`);
@@ -299,7 +314,9 @@ async function trackRequest(trackingData: any) {
     }
   } catch (error: any) {
     if (error.response) {
-      throw new Error(`API Error: ${error.response.status} - ${error.response.data?.message || 'Unknown error'}`);
+      throw new Error(
+        `API Error: ${error.response.status} - ${error.response.data?.message || 'Unknown error'}`
+      );
     } else if (error.request) {
       throw new Error('No response received from API');
     } else {
@@ -310,7 +327,7 @@ async function trackRequest(trackingData: any) {
 
 function displayTrackingResult(result: any, options: any) {
   const format = options.format || 'table';
-  
+
   if (format === 'json') {
     displayTrackingJson(result);
     return;
@@ -320,17 +337,28 @@ function displayTrackingResult(result: any, options: any) {
   }
 
   console.log(chalk.cyan.bold('\n📦 Request Tracking Result'));
-  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+  console.log(
+    chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
 
   // Tracking Summary
   console.log(chalk.yellow.bold('\n✅ Request Tracked Successfully'));
   console.log(chalk.gray('─'.repeat(50)));
-  
-  console.log(chalk.white('📝 Request ID:'), chalk.cyan(result.requestId || 'N/A'));
+
+  console.log(
+    chalk.white('📝 Request ID:'),
+    chalk.cyan(result.requestId || 'N/A')
+  );
   console.log(chalk.white('🤖 Model:'), chalk.cyan(result.model || 'N/A'));
-  console.log(chalk.white('🔢 Tokens:'), chalk.cyan(result.tokens?.toLocaleString() || 'N/A'));
-  console.log(chalk.white('💰 Cost:'), chalk.green(`$${result.cost?.toFixed(4) || '0.0000'}`));
-  
+  console.log(
+    chalk.white('🔢 Tokens:'),
+    chalk.cyan(result.tokens?.toLocaleString() || 'N/A')
+  );
+  console.log(
+    chalk.white('💰 Cost:'),
+    chalk.green(`$${result.cost?.toFixed(4) || '0.0000'}`)
+  );
+
   if (result.project) {
     console.log(chalk.white('📁 Project:'), chalk.cyan(result.project));
   }
@@ -341,8 +369,12 @@ function displayTrackingResult(result: any, options: any) {
     console.log(chalk.white('🏢 Provider:'), chalk.cyan(result.provider));
   }
   if (result.feedback) {
-    const feedbackColor = result.feedback === 'positive' ? chalk.green : 
-                         result.feedback === 'negative' ? chalk.red : chalk.yellow;
+    const feedbackColor =
+      result.feedback === 'positive'
+        ? chalk.green
+        : result.feedback === 'negative'
+          ? chalk.red
+          : chalk.yellow;
     console.log(chalk.white('💬 Feedback:'), feedbackColor(result.feedback));
   }
 
@@ -350,14 +382,26 @@ function displayTrackingResult(result: any, options: any) {
   if (result.costAnalysis) {
     console.log(chalk.yellow.bold('\n📊 Cost Analysis'));
     console.log(chalk.gray('─'.repeat(50)));
-    
+
     const analysis = result.costAnalysis;
-    console.log(chalk.white('Token Cost:'), chalk.cyan(`$${analysis.tokenCost?.toFixed(4) || '0.0000'}`));
-    console.log(chalk.white('API Cost:'), chalk.cyan(`$${analysis.apiCost?.toFixed(4) || '0.0000'}`));
-    console.log(chalk.white('Total Cost:'), chalk.green(`$${analysis.totalCost?.toFixed(4) || '0.0000'}`));
-    
+    console.log(
+      chalk.white('Token Cost:'),
+      chalk.cyan(`$${analysis.tokenCost?.toFixed(4) || '0.0000'}`)
+    );
+    console.log(
+      chalk.white('API Cost:'),
+      chalk.cyan(`$${analysis.apiCost?.toFixed(4) || '0.0000'}`)
+    );
+    console.log(
+      chalk.white('Total Cost:'),
+      chalk.green(`$${analysis.totalCost?.toFixed(4) || '0.0000'}`)
+    );
+
     if (analysis.costPerToken) {
-      console.log(chalk.white('Cost per Token:'), chalk.cyan(`$${analysis.costPerToken.toFixed(6)}`));
+      console.log(
+        chalk.white('Cost per Token:'),
+        chalk.cyan(`$${analysis.costPerToken.toFixed(6)}`)
+      );
     }
   }
 
@@ -365,14 +409,26 @@ function displayTrackingResult(result: any, options: any) {
   if (result.usageImpact) {
     console.log(chalk.yellow.bold('\n📈 Usage Impact'));
     console.log(chalk.gray('─'.repeat(50)));
-    
+
     const impact = result.usageImpact;
-    console.log(chalk.white('Monthly Usage:'), chalk.cyan(`${impact.monthlyUsage?.toLocaleString() || 0} tokens`));
-    console.log(chalk.white('Monthly Cost:'), chalk.cyan(`$${impact.monthlyCost?.toFixed(2) || '0.00'}`));
-    console.log(chalk.white('Budget Usage:'), chalk.cyan(`${impact.budgetUsage?.toFixed(1) || 0}%`));
-    
+    console.log(
+      chalk.white('Monthly Usage:'),
+      chalk.cyan(`${impact.monthlyUsage?.toLocaleString() || 0} tokens`)
+    );
+    console.log(
+      chalk.white('Monthly Cost:'),
+      chalk.cyan(`$${impact.monthlyCost?.toFixed(2) || '0.00'}`)
+    );
+    console.log(
+      chalk.white('Budget Usage:'),
+      chalk.cyan(`${impact.budgetUsage?.toFixed(1) || 0}%`)
+    );
+
     if (impact.budgetRemaining) {
-      console.log(chalk.white('Budget Remaining:'), chalk.cyan(`${impact.budgetRemaining.toLocaleString()} tokens`));
+      console.log(
+        chalk.white('Budget Remaining:'),
+        chalk.cyan(`${impact.budgetRemaining.toLocaleString()} tokens`)
+      );
     }
   }
 
@@ -381,7 +437,9 @@ function displayTrackingResult(result: any, options: any) {
     exportTrackingData(result, options.export);
   }
 
-  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+  console.log(
+    chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
 }
 
 function displayTrackingJson(result: any) {
@@ -389,8 +447,10 @@ function displayTrackingJson(result: any) {
 }
 
 function displayTrackingCsv(result: any) {
-  console.log('Request ID,Model,Tokens,Cost,Project,User,Provider,Feedback,Timestamp');
-  
+  console.log(
+    'Request ID,Model,Tokens,Cost,Project,User,Provider,Feedback,Timestamp'
+  );
+
   const requestId = result.requestId || 'N/A';
   const model = result.model || 'N/A';
   const tokens = result.tokens || 0;
@@ -400,8 +460,10 @@ function displayTrackingCsv(result: any) {
   const provider = result.provider || 'N/A';
   const feedback = result.feedback || 'N/A';
   const timestamp = result.timestamp || new Date().toISOString();
-  
-  console.log(`"${requestId}","${model}",${tokens},${cost},"${project}","${user}","${provider}","${feedback}","${timestamp}"`);
+
+  console.log(
+    `"${requestId}","${model}",${tokens},${cost},"${project}","${user}","${provider}","${feedback}","${timestamp}"`
+  );
 }
 
 function exportTrackingData(trackingData: any, filePath: string) {
@@ -409,7 +471,7 @@ function exportTrackingData(trackingData: any, filePath: string) {
     const fullPath = require('path').resolve(filePath);
     const fs = require('fs');
     const content = JSON.stringify(trackingData, null, 2);
-    
+
     // Ensure directory exists
     const dir = require('path').dirname(fullPath);
     if (!fs.existsSync(dir)) {

@@ -10,7 +10,9 @@ import { createObjectCsvWriter } from 'csv-writer';
 export function bulkOptimizeCommand(program: Command) {
   const bulkGroup = program
     .command('bulk-optimize')
-    .description('🚀 Analyze and optimize multiple high-frequency prompts in one go');
+    .description(
+      '🚀 Analyze and optimize multiple high-frequency prompts in one go'
+    );
 
   // Main bulk-optimize command
   bulkGroup
@@ -20,7 +22,10 @@ export function bulkOptimizeCommand(program: Command) {
     .option('-v, --verbose', 'Show detailed optimization analysis')
     .option('--include-token-analysis', 'Include detailed token analysis')
     .option('--include-cost-breakdown', 'Include detailed cost breakdown')
-    .option('--include-optimization-suggestions', 'Include optimization suggestions')
+    .option(
+      '--include-optimization-suggestions',
+      'Include optimization suggestions'
+    )
     .option('--include-priority-ranking', 'Include priority ranking')
     .action(async (options) => {
       try {
@@ -36,7 +41,10 @@ export function bulkOptimizeCommand(program: Command) {
     .command('strategies')
     .description('🚀 Optimize prompts using different strategies')
     .option('--file <path>', 'CSV file with prompts to optimize')
-    .option('--strategies <strategies>', 'Comma-separated optimization strategies')
+    .option(
+      '--strategies <strategies>',
+      'Comma-separated optimization strategies'
+    )
     .option('--format <format>', 'Output format (table, json, csv)', 'table')
     .option('--export <path>', 'Export strategy results to file')
     .option('-v, --verbose', 'Show detailed strategy analysis')
@@ -57,7 +65,11 @@ export function bulkOptimizeCommand(program: Command) {
     .command('priority')
     .description('🚀 Optimize prompts based on priority and impact')
     .option('--file <path>', 'CSV file with prompts to optimize')
-    .option('--priority-criteria <criteria>', 'Priority criteria (cost, frequency, impact)', 'cost')
+    .option(
+      '--priority-criteria <criteria>',
+      'Priority criteria (cost, frequency, impact)',
+      'cost'
+    )
     .option('--format <format>', 'Output format (table, json, csv)', 'table')
     .option('--export <path>', 'Export priority results to file')
     .option('-v, --verbose', 'Show detailed priority analysis')
@@ -99,7 +111,11 @@ export function bulkOptimizeCommand(program: Command) {
     .command('frequency')
     .description('🚀 Optimize prompts based on usage frequency')
     .option('--file <path>', 'CSV file with prompts to optimize')
-    .option('--frequency-threshold <threshold>', 'Minimum frequency threshold', '100')
+    .option(
+      '--frequency-threshold <threshold>',
+      'Minimum frequency threshold',
+      '100'
+    )
     .option('--format <format>', 'Output format (table, json, csv)', 'table')
     .option('--export <path>', 'Export frequency results to file')
     .option('-v, --verbose', 'Show detailed frequency analysis')
@@ -153,7 +169,7 @@ async function handleBulkOptimize(options: any) {
 async function loadPromptsFromFile(filePath: string): Promise<any[]> {
   return new Promise((resolve, reject) => {
     const prompts: any[] = [];
-    
+
     fs.createReadStream(filePath)
       .pipe(csv())
       .on('data', (row: any) => {
@@ -162,7 +178,7 @@ async function loadPromptsFromFile(filePath: string): Promise<any[]> {
           promptText: row.prompt_text,
           model: row.model,
           frequency: parseInt(row.frequency) || 1,
-          currentCost: parseFloat(row.current_cost) || 0
+          currentCost: parseFloat(row.current_cost) || 0,
         });
       })
       .on('end', () => {
@@ -180,45 +196,62 @@ async function runBulkOptimization(prompts: any[], options: any) {
 
   if (!baseUrl || !apiKey) {
     console.log(chalk.red.bold('\n❌ Configuration Missing'));
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
-    
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+    );
+
     if (!apiKey) {
       console.log(chalk.yellow('• API Key is not set'));
     }
     if (!baseUrl) {
       console.log(chalk.yellow('• Base URL is not set'));
     }
-    
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+    );
     console.log(chalk.cyan('To set up your configuration, run:'));
     console.log(chalk.white('  cost-katana init'));
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'));
-    
-    throw new Error('Configuration incomplete. Please run "cost-katana init" to set up your API key and base URL.');
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n')
+    );
+
+    throw new Error(
+      'Configuration incomplete. Please run "cost-katana init" to set up your API key and base URL.'
+    );
   }
 
   try {
     const params = new URLSearchParams();
-    if (options.includeTokenAnalysis) params.append('includeTokenAnalysis', 'true');
-    if (options.includeCostBreakdown) params.append('includeCostBreakdown', 'true');
-    if (options.includeOptimizationSuggestions) params.append('includeOptimizationSuggestions', 'true');
-    if (options.includePriorityRanking) params.append('includePriorityRanking', 'true');
+    if (options.includeTokenAnalysis)
+      params.append('includeTokenAnalysis', 'true');
+    if (options.includeCostBreakdown)
+      params.append('includeCostBreakdown', 'true');
+    if (options.includeOptimizationSuggestions)
+      params.append('includeOptimizationSuggestions', 'true');
+    if (options.includePriorityRanking)
+      params.append('includePriorityRanking', 'true');
 
-    const response = await axios.post(`${baseUrl}/api/bulk-optimize?${params}`, {
-      prompts: prompts,
-      options: {
-        includeTokenAnalysis: options.includeTokenAnalysis,
-        includeCostBreakdown: options.includeCostBreakdown,
-        includeOptimizationSuggestions: options.includeOptimizationSuggestions,
-        includePriorityRanking: options.includePriorityRanking
-      }
-    }, {
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
+    const response = await axios.post(
+      `${baseUrl}/api/bulk-optimize?${params}`,
+      {
+        prompts: prompts,
+        options: {
+          includeTokenAnalysis: options.includeTokenAnalysis,
+          includeCostBreakdown: options.includeCostBreakdown,
+          includeOptimizationSuggestions:
+            options.includeOptimizationSuggestions,
+          includePriorityRanking: options.includePriorityRanking,
+        },
       },
-      timeout: 60000,
-    });
+      {
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        timeout: 60000,
+      }
+    );
 
     if (response.status !== 200) {
       throw new Error(`API returned status ${response.status}`);
@@ -231,7 +264,9 @@ async function runBulkOptimization(prompts: any[], options: any) {
     }
   } catch (error: any) {
     if (error.response) {
-      throw new Error(`API Error: ${error.response.status} - ${error.response.data?.message || 'Unknown error'}`);
+      throw new Error(
+        `API Error: ${error.response.status} - ${error.response.data?.message || 'Unknown error'}`
+      );
     } else if (error.request) {
       throw new Error('No response received from API');
     } else {
@@ -242,62 +277,114 @@ async function runBulkOptimization(prompts: any[], options: any) {
 
 function displayBulkOptimizationResults(optimization: any, options: any) {
   const format = options.format || 'table';
-  
+
   if (format === 'json') {
     console.log(JSON.stringify(optimization, null, 2));
     return;
   } else if (format === 'csv') {
-    console.log('Prompt ID,Original Tokens,Optimized Tokens,Token Reduction,Original Cost,Optimized Cost,Cost Savings,Priority');
+    console.log(
+      'Prompt ID,Original Tokens,Optimized Tokens,Token Reduction,Original Cost,Optimized Cost,Cost Savings,Priority'
+    );
     optimization.results.forEach((result: any) => {
-      console.log(`"${result.promptId}","${result.originalTokens}","${result.optimizedTokens}","${result.tokenReduction}","${result.originalCost}","${result.optimizedCost}","${result.costSavings}","${result.priority}"`);
+      console.log(
+        `"${result.promptId}","${result.originalTokens}","${result.optimizedTokens}","${result.tokenReduction}","${result.originalCost}","${result.optimizedCost}","${result.costSavings}","${result.priority}"`
+      );
     });
     return;
   }
 
   console.log(chalk.cyan.bold('\n🚀 Bulk Optimization Results'));
-  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+  console.log(
+    chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
 
   // Summary Statistics
   console.log(chalk.yellow.bold('\n📊 Summary Statistics'));
   console.log(chalk.gray('─'.repeat(50)));
-  console.log(chalk.white('Total Prompts:'), chalk.cyan(optimization.totalPrompts));
-  console.log(chalk.white('Total Token Reduction:'), chalk.green(`${optimization.totalTokenReduction.toLocaleString()} tokens`));
-  console.log(chalk.white('Total Cost Savings:'), chalk.green(`$${optimization.totalCostSavings.toFixed(4)}`));
-  console.log(chalk.white('Average Token Reduction:'), chalk.cyan(`${optimization.averageTokenReduction}%`));
-  console.log(chalk.white('Average Cost Savings:'), chalk.cyan(`${optimization.averageCostSavings}%`));
-  console.log(chalk.white('High Impact Prompts:'), chalk.yellow(optimization.highImpactPrompts));
+  console.log(
+    chalk.white('Total Prompts:'),
+    chalk.cyan(optimization.totalPrompts)
+  );
+  console.log(
+    chalk.white('Total Token Reduction:'),
+    chalk.green(`${optimization.totalTokenReduction.toLocaleString()} tokens`)
+  );
+  console.log(
+    chalk.white('Total Cost Savings:'),
+    chalk.green(`$${optimization.totalCostSavings.toFixed(4)}`)
+  );
+  console.log(
+    chalk.white('Average Token Reduction:'),
+    chalk.cyan(`${optimization.averageTokenReduction}%`)
+  );
+  console.log(
+    chalk.white('Average Cost Savings:'),
+    chalk.cyan(`${optimization.averageCostSavings}%`)
+  );
+  console.log(
+    chalk.white('High Impact Prompts:'),
+    chalk.yellow(optimization.highImpactPrompts)
+  );
 
   // Individual Results
   console.log(chalk.yellow.bold('\n🔍 Individual Results'));
   console.log(chalk.gray('─'.repeat(50)));
-  
+
   optimization.results.forEach((result: any, index: number) => {
-    const priorityColor = result.priority === 'high' ? chalk.red : 
-                         result.priority === 'medium' ? chalk.yellow : chalk.green;
+    const priorityColor =
+      result.priority === 'high'
+        ? chalk.red
+        : result.priority === 'medium'
+          ? chalk.yellow
+          : chalk.green;
     const savingsColor = result.costSavings > 0 ? chalk.green : chalk.red;
-    
+
     console.log(chalk.white(`\n${index + 1}. ${result.promptId}:`));
     console.log(chalk.gray('   ─'.repeat(40)));
-    
+
     // Basic Info
     console.log(chalk.white('   Model:'), chalk.cyan(result.model));
     console.log(chalk.white('   Priority:'), priorityColor(result.priority));
     console.log(chalk.white('   Frequency:'), chalk.cyan(result.frequency));
-    
+
     // Token Analysis
-    console.log(chalk.white('   Original Tokens:'), chalk.cyan(result.originalTokens.toLocaleString()));
-    console.log(chalk.white('   Optimized Tokens:'), chalk.cyan(result.optimizedTokens.toLocaleString()));
-    console.log(chalk.white('   Token Reduction:'), chalk.green(`${result.tokenReduction}%`));
-    
+    console.log(
+      chalk.white('   Original Tokens:'),
+      chalk.cyan(result.originalTokens.toLocaleString())
+    );
+    console.log(
+      chalk.white('   Optimized Tokens:'),
+      chalk.cyan(result.optimizedTokens.toLocaleString())
+    );
+    console.log(
+      chalk.white('   Token Reduction:'),
+      chalk.green(`${result.tokenReduction}%`)
+    );
+
     // Cost Analysis
-    console.log(chalk.white('   Original Cost:'), chalk.cyan(`$${result.originalCost.toFixed(4)}`));
-    console.log(chalk.white('   Optimized Cost:'), chalk.cyan(`$${result.optimizedCost.toFixed(4)}`));
-    console.log(chalk.white('   Cost Savings:'), savingsColor(`$${result.costSavings.toFixed(4)}`));
-    
+    console.log(
+      chalk.white('   Original Cost:'),
+      chalk.cyan(`$${result.originalCost.toFixed(4)}`)
+    );
+    console.log(
+      chalk.white('   Optimized Cost:'),
+      chalk.cyan(`$${result.optimizedCost.toFixed(4)}`)
+    );
+    console.log(
+      chalk.white('   Cost Savings:'),
+      savingsColor(`$${result.costSavings.toFixed(4)}`)
+    );
+
     // Impact Analysis
     if (result.impact) {
-      console.log(chalk.white('   Impact Score:'), chalk.cyan(result.impact.score));
-      console.log(chalk.white('   Impact Notes:'), chalk.gray(result.impact.notes));
+      console.log(
+        chalk.white('   Impact Score:'),
+        chalk.cyan(result.impact.score)
+      );
+      console.log(
+        chalk.white('   Impact Notes:'),
+        chalk.gray(result.impact.notes)
+      );
     }
   });
 
@@ -305,16 +392,32 @@ function displayBulkOptimizationResults(optimization: any, options: any) {
   if (optimization.tokenAnalysis) {
     console.log(chalk.yellow.bold('\n🔢 Token Analysis'));
     console.log(chalk.gray('─'.repeat(50)));
-    console.log(chalk.white('Total Token Reduction:'), chalk.green(`${optimization.tokenAnalysis.totalReduction.toLocaleString()} tokens`));
-    console.log(chalk.white('Average Token Reduction:'), chalk.cyan(`${optimization.tokenAnalysis.averageReduction}%`));
-    console.log(chalk.white('Max Token Reduction:'), chalk.green(`${optimization.tokenAnalysis.maxReduction}%`));
-    console.log(chalk.white('Min Token Reduction:'), chalk.cyan(`${optimization.tokenAnalysis.minReduction}%`));
-    
+    console.log(
+      chalk.white('Total Token Reduction:'),
+      chalk.green(
+        `${optimization.tokenAnalysis.totalReduction.toLocaleString()} tokens`
+      )
+    );
+    console.log(
+      chalk.white('Average Token Reduction:'),
+      chalk.cyan(`${optimization.tokenAnalysis.averageReduction}%`)
+    );
+    console.log(
+      chalk.white('Max Token Reduction:'),
+      chalk.green(`${optimization.tokenAnalysis.maxReduction}%`)
+    );
+    console.log(
+      chalk.white('Min Token Reduction:'),
+      chalk.cyan(`${optimization.tokenAnalysis.minReduction}%`)
+    );
+
     if (optimization.tokenAnalysis.breakdown) {
       console.log(chalk.white('\nToken Reduction Breakdown:'));
-      Object.entries(optimization.tokenAnalysis.breakdown).forEach(([range, count]: [string, any]) => {
-        console.log(chalk.gray(`   ${range}: ${count} prompts`));
-      });
+      Object.entries(optimization.tokenAnalysis.breakdown).forEach(
+        ([range, count]: [string, any]) => {
+          console.log(chalk.gray(`   ${range}: ${count} prompts`));
+        }
+      );
     }
   }
 
@@ -322,16 +425,34 @@ function displayBulkOptimizationResults(optimization: any, options: any) {
   if (optimization.costBreakdown) {
     console.log(chalk.yellow.bold('\n💰 Cost Breakdown'));
     console.log(chalk.gray('─'.repeat(50)));
-    console.log(chalk.white('Total Cost Savings:'), chalk.green(`$${optimization.costBreakdown.totalSavings.toFixed(4)}`));
-    console.log(chalk.white('Average Cost Savings:'), chalk.cyan(`${optimization.costBreakdown.averageSavings}%`));
-    console.log(chalk.white('Max Cost Savings:'), chalk.green(`$${optimization.costBreakdown.maxSavings.toFixed(4)}`));
-    console.log(chalk.white('ROI Impact:'), chalk.cyan(`${optimization.costBreakdown.roiImpact}%`));
-    
+    console.log(
+      chalk.white('Total Cost Savings:'),
+      chalk.green(`$${optimization.costBreakdown.totalSavings.toFixed(4)}`)
+    );
+    console.log(
+      chalk.white('Average Cost Savings:'),
+      chalk.cyan(`${optimization.costBreakdown.averageSavings}%`)
+    );
+    console.log(
+      chalk.white('Max Cost Savings:'),
+      chalk.green(`$${optimization.costBreakdown.maxSavings.toFixed(4)}`)
+    );
+    console.log(
+      chalk.white('ROI Impact:'),
+      chalk.cyan(`${optimization.costBreakdown.roiImpact}%`)
+    );
+
     if (optimization.costBreakdown.byModel) {
       console.log(chalk.white('\nSavings by Model:'));
-      Object.entries(optimization.costBreakdown.byModel).forEach(([model, data]: [string, any]) => {
-        console.log(chalk.gray(`   ${model}: $${data.savings.toFixed(4)} (${data.percentage}%)`));
-      });
+      Object.entries(optimization.costBreakdown.byModel).forEach(
+        ([model, data]: [string, any]) => {
+          console.log(
+            chalk.gray(
+              `   ${model}: $${data.savings.toFixed(4)} (${data.percentage}%)`
+            )
+          );
+        }
+      );
     }
   }
 
@@ -340,11 +461,16 @@ function displayBulkOptimizationResults(optimization: any, options: any) {
     console.log(chalk.yellow.bold('\n🏆 Priority Ranking'));
     console.log(chalk.gray('─'.repeat(50)));
     optimization.priorityRanking.forEach((prompt: any, index: number) => {
-      const rankColor = index < 3 ? chalk.green : index < 6 ? chalk.yellow : chalk.gray;
+      const rankColor =
+        index < 3 ? chalk.green : index < 6 ? chalk.yellow : chalk.gray;
       console.log(chalk.white(`${index + 1}. ${prompt.promptId}:`));
       console.log(chalk.gray(`   Priority: ${rankColor(prompt.priority)}`));
       console.log(chalk.gray(`   Impact Score: ${prompt.impactScore}`));
-      console.log(chalk.gray(`   Potential Savings: $${prompt.potentialSavings.toFixed(4)}`));
+      console.log(
+        chalk.gray(
+          `   Potential Savings: $${prompt.potentialSavings.toFixed(4)}`
+        )
+      );
     });
   }
 
@@ -355,8 +481,14 @@ function displayBulkOptimizationResults(optimization: any, options: any) {
     optimization.suggestions.forEach((suggestion: any, index: number) => {
       console.log(chalk.white(`\n${index + 1}. ${suggestion.type}:`));
       console.log(chalk.gray(`   ${suggestion.description}`));
-      console.log(chalk.gray(`   Potential Savings: $${suggestion.potentialSavings.toFixed(4)}`));
-      console.log(chalk.gray(`   Implementation: ${suggestion.implementation}`));
+      console.log(
+        chalk.gray(
+          `   Potential Savings: $${suggestion.potentialSavings.toFixed(4)}`
+        )
+      );
+      console.log(
+        chalk.gray(`   Implementation: ${suggestion.implementation}`)
+      );
       console.log(chalk.gray(`   Priority: ${suggestion.priority}`));
     });
   }
@@ -371,10 +503,16 @@ function displayBulkOptimizationResults(optimization: any, options: any) {
     }
   }
 
-  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+  console.log(
+    chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
 }
 
-async function exportResults(optimization: any, filePath: string, format: string) {
+async function exportResults(
+  optimization: any,
+  filePath: string,
+  format: string
+) {
   if (format === 'json') {
     fs.writeFileSync(filePath, JSON.stringify(optimization, null, 2));
   } else if (format === 'csv') {
@@ -390,10 +528,10 @@ async function exportResults(optimization: any, filePath: string, format: string
         { id: 'optimizedCost', title: 'Optimized Cost' },
         { id: 'costSavings', title: 'Cost Savings' },
         { id: 'priority', title: 'Priority' },
-        { id: 'frequency', title: 'Frequency' }
-      ]
+        { id: 'frequency', title: 'Frequency' },
+      ],
     });
-    
+
     await csvWriter.writeRecords(optimization.results);
   }
 }
@@ -403,8 +541,14 @@ async function handleStrategyOptimization(options: any) {
 
   try {
     const prompts = await loadPromptsFromFile(options.file);
-    const strategies = options.strategies ? options.strategies.split(',') : ['token-reduction', 'cost-optimization', 'quality-preservation'];
-    const optimization = await runStrategyOptimization(prompts, strategies, options);
+    const strategies = options.strategies
+      ? options.strategies.split(',')
+      : ['token-reduction', 'cost-optimization', 'quality-preservation'];
+    const optimization = await runStrategyOptimization(
+      prompts,
+      strategies,
+      options
+    );
     displayStrategyOptimizationResults(optimization, options);
   } catch (error) {
     logger.error('Failed to run strategy optimization:', error);
@@ -412,36 +556,48 @@ async function handleStrategyOptimization(options: any) {
   }
 }
 
-async function runStrategyOptimization(prompts: any[], strategies: string[], options: any) {
+async function runStrategyOptimization(
+  prompts: any[],
+  strategies: string[],
+  options: any
+) {
   const baseUrl = configManager.get('baseUrl');
   const apiKey = configManager.get('apiKey');
 
   if (!baseUrl || !apiKey) {
-    throw new Error('Configuration incomplete. Please run "cost-katana init" to set up your API key and base URL.');
+    throw new Error(
+      'Configuration incomplete. Please run "cost-katana init" to set up your API key and base URL.'
+    );
   }
 
   try {
     const params = new URLSearchParams();
     params.append('strategies', strategies.join(','));
-    if (options.includeTokenAnalysis) params.append('includeTokenAnalysis', 'true');
-    if (options.includeCostBreakdown) params.append('includeCostBreakdown', 'true');
+    if (options.includeTokenAnalysis)
+      params.append('includeTokenAnalysis', 'true');
+    if (options.includeCostBreakdown)
+      params.append('includeCostBreakdown', 'true');
     if (options.includeComparison) params.append('includeComparison', 'true');
 
-    const response = await axios.post(`${baseUrl}/api/bulk-optimize/strategies?${params}`, {
-      prompts: prompts,
-      strategies: strategies,
-      options: {
-        includeTokenAnalysis: options.includeTokenAnalysis,
-        includeCostBreakdown: options.includeCostBreakdown,
-        includeComparison: options.includeComparison
-      }
-    }, {
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
+    const response = await axios.post(
+      `${baseUrl}/api/bulk-optimize/strategies?${params}`,
+      {
+        prompts: prompts,
+        strategies: strategies,
+        options: {
+          includeTokenAnalysis: options.includeTokenAnalysis,
+          includeCostBreakdown: options.includeCostBreakdown,
+          includeComparison: options.includeComparison,
+        },
       },
-      timeout: 60000,
-    });
+      {
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        timeout: 60000,
+      }
+    );
 
     if (response.status !== 200) {
       throw new Error(`API returned status ${response.status}`);
@@ -454,7 +610,9 @@ async function runStrategyOptimization(prompts: any[], strategies: string[], opt
     }
   } catch (error: any) {
     if (error.response) {
-      throw new Error(`API Error: ${error.response.status} - ${error.response.data?.message || 'Unknown error'}`);
+      throw new Error(
+        `API Error: ${error.response.status} - ${error.response.data?.message || 'Unknown error'}`
+      );
     } else if (error.request) {
       throw new Error('No response received from API');
     } else {
@@ -465,38 +623,69 @@ async function runStrategyOptimization(prompts: any[], strategies: string[], opt
 
 function displayStrategyOptimizationResults(optimization: any, options: any) {
   const format = options.format || 'table';
-  
+
   if (format === 'json') {
     console.log(JSON.stringify(optimization, null, 2));
     return;
   }
 
   console.log(chalk.cyan.bold('\n🚀 Strategy Optimization Results'));
-  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+  console.log(
+    chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
 
   // Strategy Comparison
   console.log(chalk.yellow.bold('\n📊 Strategy Comparison'));
   console.log(chalk.gray('─'.repeat(50)));
-  
+
   optimization.strategyResults.forEach((strategy: any) => {
     console.log(chalk.white(`\n${strategy.name}:`));
     console.log(chalk.gray('   ─'.repeat(40)));
-    console.log(chalk.white('   Total Savings:'), chalk.green(`$${strategy.totalSavings.toFixed(4)}`));
-    console.log(chalk.white('   Token Reduction:'), chalk.cyan(`${strategy.tokenReduction}%`));
-    console.log(chalk.white('   Cost Reduction:'), chalk.green(`${strategy.costReduction}%`));
-    console.log(chalk.white('   Quality Impact:'), chalk.cyan(`${strategy.qualityImpact}%`));
-    console.log(chalk.white('   Prompts Optimized:'), chalk.cyan(strategy.promptsOptimized));
+    console.log(
+      chalk.white('   Total Savings:'),
+      chalk.green(`$${strategy.totalSavings.toFixed(4)}`)
+    );
+    console.log(
+      chalk.white('   Token Reduction:'),
+      chalk.cyan(`${strategy.tokenReduction}%`)
+    );
+    console.log(
+      chalk.white('   Cost Reduction:'),
+      chalk.green(`${strategy.costReduction}%`)
+    );
+    console.log(
+      chalk.white('   Quality Impact:'),
+      chalk.cyan(`${strategy.qualityImpact}%`)
+    );
+    console.log(
+      chalk.white('   Prompts Optimized:'),
+      chalk.cyan(strategy.promptsOptimized)
+    );
   });
 
   // Best Strategy
   console.log(chalk.yellow.bold('\n🏆 Best Strategy'));
   console.log(chalk.gray('─'.repeat(50)));
-  console.log(chalk.white('Strategy:'), chalk.cyan(optimization.bestStrategy.name));
-  console.log(chalk.white('Total Savings:'), chalk.green(`$${optimization.bestStrategy.savings.toFixed(4)}`));
-  console.log(chalk.white('Efficiency Score:'), chalk.cyan(`${optimization.bestStrategy.efficiencyScore}%`));
-  console.log(chalk.white('Implementation:'), chalk.gray(optimization.bestStrategy.implementation));
+  console.log(
+    chalk.white('Strategy:'),
+    chalk.cyan(optimization.bestStrategy.name)
+  );
+  console.log(
+    chalk.white('Total Savings:'),
+    chalk.green(`$${optimization.bestStrategy.savings.toFixed(4)}`)
+  );
+  console.log(
+    chalk.white('Efficiency Score:'),
+    chalk.cyan(`${optimization.bestStrategy.efficiencyScore}%`)
+  );
+  console.log(
+    chalk.white('Implementation:'),
+    chalk.gray(optimization.bestStrategy.implementation)
+  );
 
-  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+  console.log(
+    chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
 }
 
 async function handlePriorityOptimization(options: any) {
@@ -517,31 +706,40 @@ async function runPriorityOptimization(prompts: any[], options: any) {
   const apiKey = configManager.get('apiKey');
 
   if (!baseUrl || !apiKey) {
-    throw new Error('Configuration incomplete. Please run "cost-katana init" to set up your API key and base URL.');
+    throw new Error(
+      'Configuration incomplete. Please run "cost-katana init" to set up your API key and base URL.'
+    );
   }
 
   try {
     const params = new URLSearchParams();
     params.append('priorityCriteria', options.priorityCriteria || 'cost');
-    if (options.includeTokenAnalysis) params.append('includeTokenAnalysis', 'true');
-    if (options.includeCostBreakdown) params.append('includeCostBreakdown', 'true');
-    if (options.includeImpactAnalysis) params.append('includeImpactAnalysis', 'true');
+    if (options.includeTokenAnalysis)
+      params.append('includeTokenAnalysis', 'true');
+    if (options.includeCostBreakdown)
+      params.append('includeCostBreakdown', 'true');
+    if (options.includeImpactAnalysis)
+      params.append('includeImpactAnalysis', 'true');
 
-    const response = await axios.post(`${baseUrl}/api/bulk-optimize/priority?${params}`, {
-      prompts: prompts,
-      priorityCriteria: options.priorityCriteria || 'cost',
-      options: {
-        includeTokenAnalysis: options.includeTokenAnalysis,
-        includeCostBreakdown: options.includeCostBreakdown,
-        includeImpactAnalysis: options.includeImpactAnalysis
-      }
-    }, {
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
+    const response = await axios.post(
+      `${baseUrl}/api/bulk-optimize/priority?${params}`,
+      {
+        prompts: prompts,
+        priorityCriteria: options.priorityCriteria || 'cost',
+        options: {
+          includeTokenAnalysis: options.includeTokenAnalysis,
+          includeCostBreakdown: options.includeCostBreakdown,
+          includeImpactAnalysis: options.includeImpactAnalysis,
+        },
       },
-      timeout: 60000,
-    });
+      {
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        timeout: 60000,
+      }
+    );
 
     if (response.status !== 200) {
       throw new Error(`API returned status ${response.status}`);
@@ -554,7 +752,9 @@ async function runPriorityOptimization(prompts: any[], options: any) {
     }
   } catch (error: any) {
     if (error.response) {
-      throw new Error(`API Error: ${error.response.status} - ${error.response.data?.message || 'Unknown error'}`);
+      throw new Error(
+        `API Error: ${error.response.status} - ${error.response.data?.message || 'Unknown error'}`
+      );
     } else if (error.request) {
       throw new Error('No response received from API');
     } else {
@@ -565,32 +765,58 @@ async function runPriorityOptimization(prompts: any[], options: any) {
 
 function displayPriorityOptimizationResults(optimization: any, options: any) {
   const format = options.format || 'table';
-  
+
   if (format === 'json') {
     console.log(JSON.stringify(optimization, null, 2));
     return;
   }
 
   console.log(chalk.cyan.bold('\n🚀 Priority Optimization Results'));
-  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+  console.log(
+    chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
 
   // Priority Breakdown
   console.log(chalk.yellow.bold('\n📊 Priority Breakdown'));
   console.log(chalk.gray('─'.repeat(50)));
-  console.log(chalk.white('High Priority:'), chalk.red(`${optimization.priorityBreakdown.high} prompts`));
-  console.log(chalk.white('Medium Priority:'), chalk.yellow(`${optimization.priorityBreakdown.medium} prompts`));
-  console.log(chalk.white('Low Priority:'), chalk.green(`${optimization.priorityBreakdown.low} prompts`));
+  console.log(
+    chalk.white('High Priority:'),
+    chalk.red(`${optimization.priorityBreakdown.high} prompts`)
+  );
+  console.log(
+    chalk.white('Medium Priority:'),
+    chalk.yellow(`${optimization.priorityBreakdown.medium} prompts`)
+  );
+  console.log(
+    chalk.white('Low Priority:'),
+    chalk.green(`${optimization.priorityBreakdown.low} prompts`)
+  );
 
   // Impact Analysis
   if (optimization.impactAnalysis) {
     console.log(chalk.yellow.bold('\n🎯 Impact Analysis'));
     console.log(chalk.gray('─'.repeat(50)));
-    console.log(chalk.white('High Impact Savings:'), chalk.green(`$${optimization.impactAnalysis.highImpactSavings.toFixed(4)}`));
-    console.log(chalk.white('Medium Impact Savings:'), chalk.yellow(`$${optimization.impactAnalysis.mediumImpactSavings.toFixed(4)}`));
-    console.log(chalk.white('Low Impact Savings:'), chalk.cyan(`$${optimization.impactAnalysis.lowImpactSavings.toFixed(4)}`));
+    console.log(
+      chalk.white('High Impact Savings:'),
+      chalk.green(
+        `$${optimization.impactAnalysis.highImpactSavings.toFixed(4)}`
+      )
+    );
+    console.log(
+      chalk.white('Medium Impact Savings:'),
+      chalk.yellow(
+        `$${optimization.impactAnalysis.mediumImpactSavings.toFixed(4)}`
+      )
+    );
+    console.log(
+      chalk.white('Low Impact Savings:'),
+      chalk.cyan(`$${optimization.impactAnalysis.lowImpactSavings.toFixed(4)}`)
+    );
   }
 
-  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+  console.log(
+    chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
 }
 
 async function handleModelOptimization(options: any) {
@@ -598,8 +824,14 @@ async function handleModelOptimization(options: any) {
 
   try {
     const prompts = await loadPromptsFromFile(options.file);
-    const targetModels = options.targetModels ? options.targetModels.split(',') : ['gpt-4', 'gpt-3.5-turbo', 'claude-3-sonnet'];
-    const optimization = await runModelOptimization(prompts, targetModels, options);
+    const targetModels = options.targetModels
+      ? options.targetModels.split(',')
+      : ['gpt-4', 'gpt-3.5-turbo', 'claude-3-sonnet'];
+    const optimization = await runModelOptimization(
+      prompts,
+      targetModels,
+      options
+    );
     displayModelOptimizationResults(optimization, options);
   } catch (error) {
     logger.error('Failed to run model optimization:', error);
@@ -607,36 +839,49 @@ async function handleModelOptimization(options: any) {
   }
 }
 
-async function runModelOptimization(prompts: any[], targetModels: string[], options: any) {
+async function runModelOptimization(
+  prompts: any[],
+  targetModels: string[],
+  options: any
+) {
   const baseUrl = configManager.get('baseUrl');
   const apiKey = configManager.get('apiKey');
 
   if (!baseUrl || !apiKey) {
-    throw new Error('Configuration incomplete. Please run "cost-katana init" to set up your API key and base URL.');
+    throw new Error(
+      'Configuration incomplete. Please run "cost-katana init" to set up your API key and base URL.'
+    );
   }
 
   try {
     const params = new URLSearchParams();
     params.append('targetModels', targetModels.join(','));
-    if (options.includeTokenAnalysis) params.append('includeTokenAnalysis', 'true');
-    if (options.includeCostBreakdown) params.append('includeCostBreakdown', 'true');
-    if (options.includeModelComparison) params.append('includeModelComparison', 'true');
+    if (options.includeTokenAnalysis)
+      params.append('includeTokenAnalysis', 'true');
+    if (options.includeCostBreakdown)
+      params.append('includeCostBreakdown', 'true');
+    if (options.includeModelComparison)
+      params.append('includeModelComparison', 'true');
 
-    const response = await axios.post(`${baseUrl}/api/bulk-optimize/models?${params}`, {
-      prompts: prompts,
-      targetModels: targetModels,
-      options: {
-        includeTokenAnalysis: options.includeTokenAnalysis,
-        includeCostBreakdown: options.includeCostBreakdown,
-        includeModelComparison: options.includeModelComparison
-      }
-    }, {
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
+    const response = await axios.post(
+      `${baseUrl}/api/bulk-optimize/models?${params}`,
+      {
+        prompts: prompts,
+        targetModels: targetModels,
+        options: {
+          includeTokenAnalysis: options.includeTokenAnalysis,
+          includeCostBreakdown: options.includeCostBreakdown,
+          includeModelComparison: options.includeModelComparison,
+        },
       },
-      timeout: 60000,
-    });
+      {
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        timeout: 60000,
+      }
+    );
 
     if (response.status !== 200) {
       throw new Error(`API returned status ${response.status}`);
@@ -649,7 +894,9 @@ async function runModelOptimization(prompts: any[], targetModels: string[], opti
     }
   } catch (error: any) {
     if (error.response) {
-      throw new Error(`API Error: ${error.response.status} - ${error.response.data?.message || 'Unknown error'}`);
+      throw new Error(
+        `API Error: ${error.response.status} - ${error.response.data?.message || 'Unknown error'}`
+      );
     } else if (error.request) {
       throw new Error('No response received from API');
     } else {
@@ -660,29 +907,45 @@ async function runModelOptimization(prompts: any[], targetModels: string[], opti
 
 function displayModelOptimizationResults(optimization: any, options: any) {
   const format = options.format || 'table';
-  
+
   if (format === 'json') {
     console.log(JSON.stringify(optimization, null, 2));
     return;
   }
 
   console.log(chalk.cyan.bold('\n🚀 Model Optimization Results'));
-  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+  console.log(
+    chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
 
   // Model Comparison
   console.log(chalk.yellow.bold('\n📊 Model Comparison'));
   console.log(chalk.gray('─'.repeat(50)));
-  
+
   optimization.modelResults.forEach((model: any) => {
     console.log(chalk.white(`\n${model.name}:`));
     console.log(chalk.gray('   ─'.repeat(40)));
-    console.log(chalk.white('   Total Savings:'), chalk.green(`$${model.totalSavings.toFixed(4)}`));
-    console.log(chalk.white('   Token Reduction:'), chalk.cyan(`${model.tokenReduction}%`));
-    console.log(chalk.white('   Cost Reduction:'), chalk.green(`${model.costReduction}%`));
-    console.log(chalk.white('   Prompts Optimized:'), chalk.cyan(model.promptsOptimized));
+    console.log(
+      chalk.white('   Total Savings:'),
+      chalk.green(`$${model.totalSavings.toFixed(4)}`)
+    );
+    console.log(
+      chalk.white('   Token Reduction:'),
+      chalk.cyan(`${model.tokenReduction}%`)
+    );
+    console.log(
+      chalk.white('   Cost Reduction:'),
+      chalk.green(`${model.costReduction}%`)
+    );
+    console.log(
+      chalk.white('   Prompts Optimized:'),
+      chalk.cyan(model.promptsOptimized)
+    );
   });
 
-  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+  console.log(
+    chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
 }
 
 async function handleFrequencyOptimization(options: any) {
@@ -691,7 +954,11 @@ async function handleFrequencyOptimization(options: any) {
   try {
     const prompts = await loadPromptsFromFile(options.file);
     const threshold = parseInt(options.frequencyThreshold) || 100;
-    const optimization = await runFrequencyOptimization(prompts, threshold, options);
+    const optimization = await runFrequencyOptimization(
+      prompts,
+      threshold,
+      options
+    );
     displayFrequencyOptimizationResults(optimization, options);
   } catch (error) {
     logger.error('Failed to run frequency optimization:', error);
@@ -699,36 +966,49 @@ async function handleFrequencyOptimization(options: any) {
   }
 }
 
-async function runFrequencyOptimization(prompts: any[], threshold: number, options: any) {
+async function runFrequencyOptimization(
+  prompts: any[],
+  threshold: number,
+  options: any
+) {
   const baseUrl = configManager.get('baseUrl');
   const apiKey = configManager.get('apiKey');
 
   if (!baseUrl || !apiKey) {
-    throw new Error('Configuration incomplete. Please run "cost-katana init" to set up your API key and base URL.');
+    throw new Error(
+      'Configuration incomplete. Please run "cost-katana init" to set up your API key and base URL.'
+    );
   }
 
   try {
     const params = new URLSearchParams();
     params.append('threshold', threshold.toString());
-    if (options.includeTokenAnalysis) params.append('includeTokenAnalysis', 'true');
-    if (options.includeCostBreakdown) params.append('includeCostBreakdown', 'true');
-    if (options.includeFrequencyAnalysis) params.append('includeFrequencyAnalysis', 'true');
+    if (options.includeTokenAnalysis)
+      params.append('includeTokenAnalysis', 'true');
+    if (options.includeCostBreakdown)
+      params.append('includeCostBreakdown', 'true');
+    if (options.includeFrequencyAnalysis)
+      params.append('includeFrequencyAnalysis', 'true');
 
-    const response = await axios.post(`${baseUrl}/api/bulk-optimize/frequency?${params}`, {
-      prompts: prompts,
-      threshold: threshold,
-      options: {
-        includeTokenAnalysis: options.includeTokenAnalysis,
-        includeCostBreakdown: options.includeCostBreakdown,
-        includeFrequencyAnalysis: options.includeFrequencyAnalysis
-      }
-    }, {
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
+    const response = await axios.post(
+      `${baseUrl}/api/bulk-optimize/frequency?${params}`,
+      {
+        prompts: prompts,
+        threshold: threshold,
+        options: {
+          includeTokenAnalysis: options.includeTokenAnalysis,
+          includeCostBreakdown: options.includeCostBreakdown,
+          includeFrequencyAnalysis: options.includeFrequencyAnalysis,
+        },
       },
-      timeout: 60000,
-    });
+      {
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        timeout: 60000,
+      }
+    );
 
     if (response.status !== 200) {
       throw new Error(`API returned status ${response.status}`);
@@ -741,7 +1021,9 @@ async function runFrequencyOptimization(prompts: any[], threshold: number, optio
     }
   } catch (error: any) {
     if (error.response) {
-      throw new Error(`API Error: ${error.response.status} - ${error.response.data?.message || 'Unknown error'}`);
+      throw new Error(
+        `API Error: ${error.response.status} - ${error.response.data?.message || 'Unknown error'}`
+      );
     } else if (error.request) {
       throw new Error('No response received from API');
     } else {
@@ -752,33 +1034,61 @@ async function runFrequencyOptimization(prompts: any[], threshold: number, optio
 
 function displayFrequencyOptimizationResults(optimization: any, options: any) {
   const format = options.format || 'table';
-  
+
   if (format === 'json') {
     console.log(JSON.stringify(optimization, null, 2));
     return;
   }
 
   console.log(chalk.cyan.bold('\n🚀 Frequency Optimization Results'));
-  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+  console.log(
+    chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
 
   // Frequency Analysis
   console.log(chalk.yellow.bold('\n📊 Frequency Analysis'));
   console.log(chalk.gray('─'.repeat(50)));
   console.log(chalk.white('Threshold:'), chalk.cyan(optimization.threshold));
-  console.log(chalk.white('High Frequency Prompts:'), chalk.red(optimization.highFrequencyPrompts));
-  console.log(chalk.white('Medium Frequency Prompts:'), chalk.yellow(optimization.mediumFrequencyPrompts));
-  console.log(chalk.white('Low Frequency Prompts:'), chalk.green(optimization.lowFrequencyPrompts));
+  console.log(
+    chalk.white('High Frequency Prompts:'),
+    chalk.red(optimization.highFrequencyPrompts)
+  );
+  console.log(
+    chalk.white('Medium Frequency Prompts:'),
+    chalk.yellow(optimization.mediumFrequencyPrompts)
+  );
+  console.log(
+    chalk.white('Low Frequency Prompts:'),
+    chalk.green(optimization.lowFrequencyPrompts)
+  );
 
   // Frequency Impact
   if (optimization.frequencyImpact) {
     console.log(chalk.yellow.bold('\n🎯 Frequency Impact'));
     console.log(chalk.gray('─'.repeat(50)));
-    console.log(chalk.white('High Frequency Savings:'), chalk.green(`$${optimization.frequencyImpact.highFrequencySavings.toFixed(4)}`));
-    console.log(chalk.white('Medium Frequency Savings:'), chalk.yellow(`$${optimization.frequencyImpact.mediumFrequencySavings.toFixed(4)}`));
-    console.log(chalk.white('Low Frequency Savings:'), chalk.cyan(`$${optimization.frequencyImpact.lowFrequencySavings.toFixed(4)}`));
+    console.log(
+      chalk.white('High Frequency Savings:'),
+      chalk.green(
+        `$${optimization.frequencyImpact.highFrequencySavings.toFixed(4)}`
+      )
+    );
+    console.log(
+      chalk.white('Medium Frequency Savings:'),
+      chalk.yellow(
+        `$${optimization.frequencyImpact.mediumFrequencySavings.toFixed(4)}`
+      )
+    );
+    console.log(
+      chalk.white('Low Frequency Savings:'),
+      chalk.cyan(
+        `$${optimization.frequencyImpact.lowFrequencySavings.toFixed(4)}`
+      )
+    );
   }
 
-  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+  console.log(
+    chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
 }
 
 async function handleCostOptimization(options: any) {
@@ -795,36 +1105,49 @@ async function handleCostOptimization(options: any) {
   }
 }
 
-async function runCostOptimization(prompts: any[], threshold: number, options: any) {
+async function runCostOptimization(
+  prompts: any[],
+  threshold: number,
+  options: any
+) {
   const baseUrl = configManager.get('baseUrl');
   const apiKey = configManager.get('apiKey');
 
   if (!baseUrl || !apiKey) {
-    throw new Error('Configuration incomplete. Please run "cost-katana init" to set up your API key and base URL.');
+    throw new Error(
+      'Configuration incomplete. Please run "cost-katana init" to set up your API key and base URL.'
+    );
   }
 
   try {
     const params = new URLSearchParams();
     params.append('threshold', threshold.toString());
-    if (options.includeTokenAnalysis) params.append('includeTokenAnalysis', 'true');
-    if (options.includeCostBreakdown) params.append('includeCostBreakdown', 'true');
-    if (options.includeCostAnalysis) params.append('includeCostAnalysis', 'true');
+    if (options.includeTokenAnalysis)
+      params.append('includeTokenAnalysis', 'true');
+    if (options.includeCostBreakdown)
+      params.append('includeCostBreakdown', 'true');
+    if (options.includeCostAnalysis)
+      params.append('includeCostAnalysis', 'true');
 
-    const response = await axios.post(`${baseUrl}/api/bulk-optimize/cost?${params}`, {
-      prompts: prompts,
-      threshold: threshold,
-      options: {
-        includeTokenAnalysis: options.includeTokenAnalysis,
-        includeCostBreakdown: options.includeCostBreakdown,
-        includeCostAnalysis: options.includeCostAnalysis
-      }
-    }, {
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
+    const response = await axios.post(
+      `${baseUrl}/api/bulk-optimize/cost?${params}`,
+      {
+        prompts: prompts,
+        threshold: threshold,
+        options: {
+          includeTokenAnalysis: options.includeTokenAnalysis,
+          includeCostBreakdown: options.includeCostBreakdown,
+          includeCostAnalysis: options.includeCostAnalysis,
+        },
       },
-      timeout: 60000,
-    });
+      {
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        timeout: 60000,
+      }
+    );
 
     if (response.status !== 200) {
       throw new Error(`API returned status ${response.status}`);
@@ -837,7 +1160,9 @@ async function runCostOptimization(prompts: any[], threshold: number, options: a
     }
   } catch (error: any) {
     if (error.response) {
-      throw new Error(`API Error: ${error.response.status} - ${error.response.data?.message || 'Unknown error'}`);
+      throw new Error(
+        `API Error: ${error.response.status} - ${error.response.data?.message || 'Unknown error'}`
+      );
     } else if (error.request) {
       throw new Error('No response received from API');
     } else {
@@ -848,31 +1173,56 @@ async function runCostOptimization(prompts: any[], threshold: number, options: a
 
 function displayCostOptimizationResults(optimization: any, options: any) {
   const format = options.format || 'table';
-  
+
   if (format === 'json') {
     console.log(JSON.stringify(optimization, null, 2));
     return;
   }
 
   console.log(chalk.cyan.bold('\n🚀 Cost Optimization Results'));
-  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+  console.log(
+    chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
 
   // Cost Analysis
   console.log(chalk.yellow.bold('\n📊 Cost Analysis'));
   console.log(chalk.gray('─'.repeat(50)));
-  console.log(chalk.white('Threshold:'), chalk.cyan(`$${optimization.threshold}`));
-  console.log(chalk.white('High Cost Prompts:'), chalk.red(optimization.highCostPrompts));
-  console.log(chalk.white('Medium Cost Prompts:'), chalk.yellow(optimization.mediumCostPrompts));
-  console.log(chalk.white('Low Cost Prompts:'), chalk.green(optimization.lowCostPrompts));
+  console.log(
+    chalk.white('Threshold:'),
+    chalk.cyan(`$${optimization.threshold}`)
+  );
+  console.log(
+    chalk.white('High Cost Prompts:'),
+    chalk.red(optimization.highCostPrompts)
+  );
+  console.log(
+    chalk.white('Medium Cost Prompts:'),
+    chalk.yellow(optimization.mediumCostPrompts)
+  );
+  console.log(
+    chalk.white('Low Cost Prompts:'),
+    chalk.green(optimization.lowCostPrompts)
+  );
 
   // Cost Impact
   if (optimization.costImpact) {
     console.log(chalk.yellow.bold('\n🎯 Cost Impact'));
     console.log(chalk.gray('─'.repeat(50)));
-    console.log(chalk.white('High Cost Savings:'), chalk.green(`$${optimization.costImpact.highCostSavings.toFixed(4)}`));
-    console.log(chalk.white('Medium Cost Savings:'), chalk.yellow(`$${optimization.costImpact.mediumCostSavings.toFixed(4)}`));
-    console.log(chalk.white('Low Cost Savings:'), chalk.cyan(`$${optimization.costImpact.lowCostSavings.toFixed(4)}`));
+    console.log(
+      chalk.white('High Cost Savings:'),
+      chalk.green(`$${optimization.costImpact.highCostSavings.toFixed(4)}`)
+    );
+    console.log(
+      chalk.white('Medium Cost Savings:'),
+      chalk.yellow(`$${optimization.costImpact.mediumCostSavings.toFixed(4)}`)
+    );
+    console.log(
+      chalk.white('Low Cost Savings:'),
+      chalk.cyan(`$${optimization.costImpact.lowCostSavings.toFixed(4)}`)
+    );
   }
 
-  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+  console.log(
+    chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
 }

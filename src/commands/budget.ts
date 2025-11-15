@@ -40,21 +40,29 @@ async function getBudgetStatus(options: any) {
 
   if (!baseUrl || !apiKey) {
     console.log(chalk.red.bold('\n❌ Configuration Missing'));
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
-    
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+    );
+
     if (!apiKey) {
       console.log(chalk.yellow('• API Key is not set'));
     }
     if (!baseUrl) {
       console.log(chalk.yellow('• Base URL is not set'));
     }
-    
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+    );
     console.log(chalk.cyan('To set up your configuration, run:'));
     console.log(chalk.white('  cost-katana init'));
-    console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'));
-    
-    throw new Error('Configuration incomplete. Please run "cost-katana init" to set up your API key and base URL.');
+    console.log(
+      chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n')
+    );
+
+    throw new Error(
+      'Configuration incomplete. Please run "cost-katana init" to set up your API key and base URL.'
+    );
   }
 
   try {
@@ -65,7 +73,7 @@ async function getBudgetStatus(options: any) {
 
     const response = await axios.get(`${baseUrl}/api/budget/status?${params}`, {
       headers: {
-        'Authorization': `Bearer ${apiKey}`,
+        Authorization: `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
       },
       timeout: 30000,
@@ -82,7 +90,9 @@ async function getBudgetStatus(options: any) {
     }
   } catch (error: any) {
     if (error.response) {
-      throw new Error(`API Error: ${error.response.status} - ${error.response.data?.message || 'Unknown error'}`);
+      throw new Error(
+        `API Error: ${error.response.status} - ${error.response.data?.message || 'Unknown error'}`
+      );
     } else if (error.request) {
       throw new Error('No response received from API');
     } else {
@@ -93,7 +103,7 @@ async function getBudgetStatus(options: any) {
 
 function displayBudgetStatus(budgetData: any, options: any) {
   const format = options.format || 'table';
-  
+
   if (format === 'json') {
     displayBudgetJson(budgetData);
     return;
@@ -103,7 +113,9 @@ function displayBudgetStatus(budgetData: any, options: any) {
   }
 
   console.log(chalk.cyan.bold('\n💸 Budget Status'));
-  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+  console.log(
+    chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
 
   // Overall Budget Status
   if (budgetData.overall) {
@@ -114,7 +126,7 @@ function displayBudgetStatus(budgetData: any, options: any) {
   if (budgetData.projects && budgetData.projects.length > 0) {
     console.log(chalk.yellow.bold('\n📊 Project Budgets'));
     console.log(chalk.gray('─'.repeat(50)));
-    
+
     budgetData.projects.forEach((project: any, index: number) => {
       displayProjectBudget(project, index + 1);
     });
@@ -124,7 +136,7 @@ function displayBudgetStatus(budgetData: any, options: any) {
   if (budgetData.alerts && budgetData.alerts.length > 0) {
     console.log(chalk.yellow.bold('\n🚨 Budget Alerts'));
     console.log(chalk.gray('─'.repeat(50)));
-    
+
     budgetData.alerts.forEach((alert: any, index: number) => {
       displayBudgetAlert(alert, index + 1);
     });
@@ -134,7 +146,7 @@ function displayBudgetStatus(budgetData: any, options: any) {
   if (budgetData.recommendations && budgetData.recommendations.length > 0) {
     console.log(chalk.yellow.bold('\n💡 Budget Recommendations'));
     console.log(chalk.gray('─'.repeat(50)));
-    
+
     budgetData.recommendations.forEach((rec: any, index: number) => {
       displayBudgetRecommendation(rec, index + 1);
     });
@@ -145,7 +157,9 @@ function displayBudgetStatus(budgetData: any, options: any) {
     exportBudgetData(budgetData, options.export);
   }
 
-  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+  console.log(
+    chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
 }
 
 function displayOverallBudget(overall: any) {
@@ -158,7 +172,7 @@ function displayOverallBudget(overall: any) {
   // Determine status color and icon
   let statusIcon = '🟢';
   let statusColor = chalk.green;
-  
+
   if (usagePercentage >= 90) {
     statusIcon = '🔴';
     statusColor = chalk.red;
@@ -172,15 +186,21 @@ function displayOverallBudget(overall: any) {
 
   console.log(chalk.yellow.bold('\n📈 Overall Budget Status'));
   console.log(chalk.gray('─'.repeat(50)));
-  
-  console.log(`${statusIcon} ${statusColor(`You've used ${usagePercentage.toFixed(1)}% of your ${budget.toLocaleString()} token budget this month.`)}`);
+
+  console.log(
+    `${statusIcon} ${statusColor(`You've used ${usagePercentage.toFixed(1)}% of your ${budget.toLocaleString()} token budget this month.`)}`
+  );
   console.log(chalk.white(`📊 Tokens Used: ${used.toLocaleString()}`));
   console.log(chalk.white(`💰 Cost: $${cost.toFixed(2)}`));
-  console.log(chalk.white(`📉 Remaining: ${remaining.toLocaleString()} tokens`));
-  
+  console.log(
+    chalk.white(`📉 Remaining: ${remaining.toLocaleString()} tokens`)
+  );
+
   // Progress bar
   const progressBar = generateProgressBar(usagePercentage);
-  console.log(chalk.gray(`Progress: ${progressBar} ${usagePercentage.toFixed(1)}%`));
+  console.log(
+    chalk.gray(`Progress: ${progressBar} ${usagePercentage.toFixed(1)}%`)
+  );
 }
 
 function displayProjectBudget(project: any, index: number) {
@@ -200,8 +220,12 @@ function displayProjectBudget(project: any, index: number) {
   }
 
   console.log(chalk.white(`${index}. ${name}`));
-  console.log(chalk.gray(`   Usage: ${statusColor(`${usagePercentage.toFixed(1)}%`)} | Tokens: ${used.toLocaleString()} | Cost: $${cost.toFixed(2)}`));
-  
+  console.log(
+    chalk.gray(
+      `   Usage: ${statusColor(`${usagePercentage.toFixed(1)}%`)} | Tokens: ${used.toLocaleString()} | Cost: $${cost.toFixed(2)}`
+    )
+  );
+
   // Progress bar for project
   const progressBar = generateProgressBar(usagePercentage);
   console.log(chalk.gray(`   ${progressBar} ${usagePercentage.toFixed(1)}%`));
@@ -216,7 +240,7 @@ function displayBudgetAlert(alert: any, index: number) {
 
   let severityColor = chalk.yellow;
   let severityIcon = '⚠️';
-  
+
   if (severity === 'high') {
     severityColor = chalk.red;
     severityIcon = '🚨';
@@ -225,7 +249,11 @@ function displayBudgetAlert(alert: any, index: number) {
     severityIcon = 'ℹ️';
   }
 
-  console.log(chalk.white(`${index}. ${severityIcon} ${severityColor(type.toUpperCase())}`));
+  console.log(
+    chalk.white(
+      `${index}. ${severityIcon} ${severityColor(type.toUpperCase())}`
+    )
+  );
   console.log(chalk.gray(`   ${message}`));
   if (timestamp) {
     console.log(chalk.gray(`   Time: ${timestamp}`));
@@ -241,7 +269,7 @@ function displayBudgetRecommendation(rec: any, index: number) {
 
   let impactColor = chalk.yellow;
   let impactIcon = '💡';
-  
+
   if (impact === 'high') {
     impactColor = chalk.green;
     impactIcon = '💰';
@@ -250,7 +278,9 @@ function displayBudgetRecommendation(rec: any, index: number) {
     impactIcon = '💭';
   }
 
-  console.log(chalk.white(`${index}. ${impactIcon} ${impactColor(type.toUpperCase())}`));
+  console.log(
+    chalk.white(`${index}. ${impactIcon} ${impactColor(type.toUpperCase())}`)
+  );
   console.log(chalk.gray(`   ${message}`));
   if (savings > 0) {
     console.log(chalk.green(`   Estimated Savings: $${savings.toFixed(2)}`));
@@ -263,10 +293,10 @@ function generateProgressBar(percentage: number): string {
   const clampedPercentage = Math.min(100, Math.max(0, percentage));
   const filled = Math.round((clampedPercentage / 100) * width);
   const empty = width - filled;
-  
+
   const filledBar = '█'.repeat(filled);
   const emptyBar = '░'.repeat(empty);
-  
+
   return filledBar + emptyBar;
 }
 
@@ -276,23 +306,37 @@ function displayBudgetJson(budgetData: any) {
 
 function displayBudgetCsv(budgetData: any) {
   console.log('Project,Usage %,Budget,Used,Cost,Remaining,Status');
-  
+
   if (budgetData.overall) {
     const overall = budgetData.overall;
-    const status = overall.usagePercentage >= 90 ? 'CRITICAL' : 
-                   overall.usagePercentage >= 75 ? 'WARNING' : 
-                   overall.usagePercentage >= 50 ? 'NOTICE' : 'GOOD';
-    
-    console.log(`Overall,${overall.usagePercentage?.toFixed(1) || 0},${overall.budget || 0},${overall.used || 0},${overall.cost || 0},${overall.remaining || 0},"${status}"`);
+    const status =
+      overall.usagePercentage >= 90
+        ? 'CRITICAL'
+        : overall.usagePercentage >= 75
+          ? 'WARNING'
+          : overall.usagePercentage >= 50
+            ? 'NOTICE'
+            : 'GOOD';
+
+    console.log(
+      `Overall,${overall.usagePercentage?.toFixed(1) || 0},${overall.budget || 0},${overall.used || 0},${overall.cost || 0},${overall.remaining || 0},"${status}"`
+    );
   }
-  
+
   if (budgetData.projects) {
     budgetData.projects.forEach((project: any) => {
-      const status = project.usagePercentage >= 90 ? 'CRITICAL' : 
-                     project.usagePercentage >= 75 ? 'WARNING' : 
-                     project.usagePercentage >= 50 ? 'NOTICE' : 'GOOD';
-      
-      console.log(`"${project.name || 'Unknown'}",${project.usagePercentage?.toFixed(1) || 0},${project.budget || 0},${project.used || 0},${project.cost || 0},${project.remaining || 0},"${status}"`);
+      const status =
+        project.usagePercentage >= 90
+          ? 'CRITICAL'
+          : project.usagePercentage >= 75
+            ? 'WARNING'
+            : project.usagePercentage >= 50
+              ? 'NOTICE'
+              : 'GOOD';
+
+      console.log(
+        `"${project.name || 'Unknown'}",${project.usagePercentage?.toFixed(1) || 0},${project.budget || 0},${project.used || 0},${project.cost || 0},${project.remaining || 0},"${status}"`
+      );
     });
   }
 }
@@ -302,7 +346,7 @@ function exportBudgetData(budgetData: any, filePath: string) {
     const fullPath = require('path').resolve(filePath);
     const fs = require('fs');
     const content = JSON.stringify(budgetData, null, 2);
-    
+
     // Ensure directory exists
     const dir = require('path').dirname(fullPath);
     if (!fs.existsSync(dir)) {
