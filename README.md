@@ -226,10 +226,19 @@ cost-katana config set daily-limit 5
 ### Environment Variables
 
 ```bash
-# Alternative to init command
+# Option 1: Cost Katana API Key (Recommended)
 export COST_KATANA_API_KEY="dak_your_key"
 export COST_KATANA_MODEL="gpt-4"
+
+# Option 2: Direct Provider Keys (for self-hosted)
+# ⚠️ USER PROVIDED - CostKATANA does not include these keys
+export OPENAI_API_KEY="sk-..."        # Required for OpenAI models (GPT-4, GPT-3.5)
+export GEMINI_API_KEY="..."           # Required for Gemini models (Gemini 2.5, etc.)
+export AWS_ACCESS_KEY_ID="..."        # For AWS Bedrock (Claude, Nova)
+export AWS_SECRET_ACCESS_KEY="..."
 ```
+
+> **⚠️ Important**: When using self-hosted mode, you must provide your own OpenAI and Gemini API keys.
 
 ## Real-World Examples
 
