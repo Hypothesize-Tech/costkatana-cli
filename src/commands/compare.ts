@@ -4,6 +4,7 @@ import ora from 'ora';
 import { table } from 'table';
 import { logger } from '../utils/logger';
 import { ai } from 'cost-katana';
+import { OPENAI, ANTHROPIC } from '../constants/models';
 
 export function compareCommand(program: Command) {
   program
@@ -12,7 +13,7 @@ export function compareCommand(program: Command) {
     .option(
       '-m, --models <models>',
       'Comma-separated list of models',
-      'gpt-4,gpt-3.5-turbo,claude-3-sonnet'
+      `${OPENAI.GPT_4},${OPENAI.GPT_3_5_TURBO},${ANTHROPIC.CLAUDE_3_5_SONNET_20241022}`
     )
     .option('--max-tokens <tokens>', 'Maximum tokens per response', '200')
     .option('--show-responses', 'Show full responses (not just summaries)')

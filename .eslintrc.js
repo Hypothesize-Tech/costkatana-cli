@@ -22,4 +22,12 @@ module.exports = {
     'no-constant-condition': 'off', // Allow while(true) loops
   },
   ignorePatterns: ['dist/', 'node_modules/', '*.js'],
+  overrides: [
+    {
+      files: ['tests/**/*.ts', '**/*.test.ts', '**/*.spec.ts'],
+      env: {
+        jest: true,
+      },
+    },
+  ],
 }; 

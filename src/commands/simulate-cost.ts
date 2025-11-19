@@ -4,6 +4,7 @@ import { logger } from '../utils/logger';
 import { configManager } from '../utils/config';
 import axios from 'axios';
 import * as fs from 'fs';
+import { OPENAI, ANTHROPIC } from '../constants/models';
 
 export function simulateCostCommand(program: Command) {
   const simulateGroup = program
@@ -615,7 +616,12 @@ async function runModelComparison(options: any) {
   try {
     const models = options.models
       ? options.models.split(',')
-      : ['gpt-4', 'gpt-3.5-turbo', 'claude-3-sonnet', 'claude-3-haiku'];
+      : [
+          OPENAI.GPT_4,
+          OPENAI.GPT_3_5_TURBO,
+          ANTHROPIC.CLAUDE_3_5_SONNET_20241022,
+          ANTHROPIC.CLAUDE_3_HAIKU_20240307,
+        ];
 
     const params = new URLSearchParams();
     if (options.promptId) params.append('promptId', options.promptId);

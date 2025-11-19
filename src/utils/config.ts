@@ -2,6 +2,7 @@ import Conf from 'conf';
 import { logger } from './logger';
 import * as fs from 'fs';
 import * as path from 'path';
+import { OPENAI } from '../constants/models';
 
 export interface CLIConfig {
   apiKey?: string;
@@ -51,7 +52,7 @@ export class ConfigManager {
         },
         defaultModel: {
           type: 'string',
-          default: 'gpt-4',
+          default: OPENAI.GPT_4,
         },
         defaultTemperature: {
           type: 'number',

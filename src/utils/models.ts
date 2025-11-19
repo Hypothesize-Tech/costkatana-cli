@@ -1,3 +1,9 @@
+import {
+  getAllModelConstants,
+  getProviderFromModel,
+  isModelConstant,
+} from '../constants/models';
+
 export interface ModelInfo {
   id: string;
   name: string;
@@ -13,6 +19,22 @@ export interface ModelInfo {
   category: string;
   isLatest: boolean;
   notes?: string;
+}
+
+// Model validation helpers
+export function validateModel(model: string): boolean {
+  return isModelConstant(model);
+}
+
+export function suggestModel(partialName: string): string[] {
+  const allModels = getAllModelConstants();
+  return allModels.filter((m) =>
+    m.toLowerCase().includes(partialName.toLowerCase())
+  );
+}
+
+export function getModelProvider(model: string): string {
+  return getProviderFromModel(model);
 }
 
 export const AVAILABLE_MODELS: ModelInfo[] = [

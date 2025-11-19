@@ -5,6 +5,7 @@ import { logger } from '../utils/logger';
 import { configManager } from '../utils/config';
 import { ai } from 'cost-katana';
 import * as fs from 'fs';
+import { OPENAI } from '../constants/models';
 
 export function askCommand(program: Command) {
   program
@@ -28,7 +29,8 @@ export function askCommand(program: Command) {
 
 async function handleAsk(question: string, options: any) {
   // Get configuration
-  const model = options.model || configManager.get('defaultModel') || 'gpt-4';
+  const model =
+    options.model || configManager.get('defaultModel') || OPENAI.GPT_4;
   const apiKey = configManager.get('apiKey');
 
   if (!apiKey) {

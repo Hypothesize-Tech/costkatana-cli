@@ -5,6 +5,7 @@ import { logger } from '../utils/logger';
 import { configManager } from '../utils/config';
 import axios from 'axios';
 import * as readline from 'readline';
+import { OPENAI } from '../constants/models';
 
 export function chatCommand(program: Command) {
   program
@@ -44,7 +45,8 @@ class ChatSession {
   private historyEnabled: boolean;
 
   constructor(options: any) {
-    this.model = options.model || configManager.get('defaultModel') || 'gpt-4';
+    this.model =
+      options.model || configManager.get('defaultModel') || OPENAI.GPT_4;
     this.temperature = parseFloat(options.temperature) || 0.7;
     this.systemPrompt = options.system || 'You are a helpful AI assistant.';
     this.baseUrl = configManager.get('baseUrl');

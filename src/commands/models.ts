@@ -2,6 +2,7 @@ import { Command } from 'commander';
 import chalk from 'chalk';
 import { table } from 'table';
 import { logger } from '../utils/logger';
+import { OPENAI, ANTHROPIC } from '../constants/models';
 
 export function modelsCommand(program: Command) {
   program
@@ -30,31 +31,31 @@ async function handleModels(options: any) {
     // OpenAI
     {
       provider: 'OpenAI',
-      name: 'gpt-4',
+      name: OPENAI.GPT_4,
       description: 'Most capable, best for complex tasks',
       price: '$0.03/1K',
     },
     {
       provider: 'OpenAI',
-      name: 'gpt-4-turbo',
+      name: OPENAI.GPT_4_TURBO,
       description: 'Fast and capable',
       price: '$0.01/1K',
     },
     {
       provider: 'OpenAI',
-      name: 'gpt-4o',
+      name: OPENAI.GPT_4O,
       description: 'Optimized GPT-4',
       price: '$0.005/1K',
     },
     {
       provider: 'OpenAI',
-      name: 'gpt-4o-mini',
+      name: OPENAI.GPT_4O_MINI,
       description: 'Small and affordable',
       price: '$0.0015/1K',
     },
     {
       provider: 'OpenAI',
-      name: 'gpt-3.5-turbo',
+      name: OPENAI.GPT_3_5_TURBO,
       description: 'Fast and cheap, good for simple tasks',
       price: '$0.0005/1K',
     },
@@ -62,25 +63,25 @@ async function handleModels(options: any) {
     // Anthropic
     {
       provider: 'Anthropic',
-      name: 'claude-3-opus',
+      name: ANTHROPIC.CLAUDE_3_OPUS_20240229,
       description: 'Most intelligent Claude model',
       price: '$0.015/1K',
     },
     {
       provider: 'Anthropic',
-      name: 'claude-3-sonnet',
+      name: ANTHROPIC.CLAUDE_3_SONNET_20240229,
       description: 'Balanced intelligence and speed',
       price: '$0.003/1K',
     },
     {
       provider: 'Anthropic',
-      name: 'claude-3-haiku',
+      name: ANTHROPIC.CLAUDE_3_HAIKU_20240307,
       description: 'Fast and affordable',
       price: '$0.00025/1K',
     },
     {
       provider: 'Anthropic',
-      name: 'claude-3-5-sonnet',
+      name: ANTHROPIC.CLAUDE_3_5_SONNET_20241022,
       description: 'Latest and most capable',
       price: '$0.003/1K',
     },

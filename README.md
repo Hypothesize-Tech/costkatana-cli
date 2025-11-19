@@ -124,6 +124,41 @@ cost-katana models --provider openai
 cost-katana models --prices
 ```
 
+### Supported Models
+
+The CLI uses type-safe model constants internally for reliability and autocomplete support. All models from the following providers are supported:
+
+**OpenAI**
+- GPT-5, GPT-5 Mini, GPT-5 Nano, GPT-5 Pro
+- GPT-4, GPT-4 Turbo, GPT-4o, GPT-4o Mini
+- GPT-3.5 Turbo
+- O1, O1 Mini, O1 Preview
+- DALL-E, Whisper, TTS
+
+**Anthropic**
+- Claude Sonnet 4.5
+- Claude 3.5 Sonnet, Claude 3.5 Haiku
+- Claude 3 Opus, Claude 3 Sonnet, Claude 3 Haiku
+
+**Google**
+- Gemini 2.5 Pro, Gemini 2.5 Flash
+- Gemini 1.5 Pro, Gemini 1.5 Flash
+
+**AWS Bedrock**
+- Claude models via Bedrock
+- Titan models
+- Mistral models
+
+**Others**
+- xAI Grok models
+- DeepSeek models
+- Mistral AI models
+- Cohere models
+- Groq models
+- Meta Llama models
+
+For the complete list, run `cost-katana models` or visit [costkatana.com/docs](https://costkatana.com/docs)
+
 ## Chat Session Commands
 
 While in a chat session, you can use:

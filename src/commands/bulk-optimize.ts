@@ -6,6 +6,7 @@ import axios from 'axios';
 import * as fs from 'fs';
 import csv from 'csv-parser';
 import { createObjectCsvWriter } from 'csv-writer';
+import { OPENAI, ANTHROPIC } from '../constants/models';
 
 export function bulkOptimizeCommand(program: Command) {
   const bulkGroup = program
@@ -826,7 +827,11 @@ async function handleModelOptimization(options: any) {
     const prompts = await loadPromptsFromFile(options.file);
     const targetModels = options.targetModels
       ? options.targetModels.split(',')
-      : ['gpt-4', 'gpt-3.5-turbo', 'claude-3-sonnet'];
+      : [
+          OPENAI.GPT_4,
+          OPENAI.GPT_3_5_TURBO,
+          ANTHROPIC.CLAUDE_3_5_SONNET_20241022,
+        ];
     const optimization = await runModelOptimization(
       prompts,
       targetModels,
