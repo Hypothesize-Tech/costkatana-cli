@@ -416,7 +416,7 @@ export function getProviderFromModel(modelId: string): string {
   if (deepseekModels.includes(modelId)) return 'DeepSeek';
   if (mistralModels.includes(modelId)) return 'Mistral AI';
   if (cohereModels.includes(modelId)) return 'Cohere';
-  if (groqModels.includes(modelId)) return 'Groq';
+  if (groqModels.includes(modelId)) return 'Grok';
   if (metaModels.includes(modelId)) return 'Meta';
 
   return 'unknown';

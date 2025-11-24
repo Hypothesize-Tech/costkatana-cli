@@ -195,7 +195,7 @@ async function handleModels(options: any) {
   console.log(chalk.white('   • Use Gemini-Flash for ultra-low cost'));
   console.log(
     chalk.white(
-      '   • Enable --cortex for 70-95% additional savings on any model'
+      '   • Enable --cortex for 40-75% additional savings on any model'
     )
   );
 

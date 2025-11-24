@@ -154,7 +154,7 @@ The CLI uses type-safe model constants internally for reliability and autocomple
 - DeepSeek models
 - Mistral AI models
 - Cohere models
-- Groq models
+- Grok models
 - Meta Llama models
 
 For the complete list, run `cost-katana models` or visit [costkatana.com/docs](https://costkatana.com/docs)
@@ -288,7 +288,7 @@ $ cost-katana ask "Python sort list by date" --output answer.md
 cost-katana chat --model gpt-3.5-turbo    # 10x cheaper
 
 # Enable optimization for long content
-cost-katana chat --cortex                  # 70-95% savings
+cost-katana chat --cortex                  # 40-75% savings
 
 # Cache repeated queries
 cost-katana chat --cache                   # Free repeated answers
@@ -386,7 +386,7 @@ cost-katana ask "Hello"
 ✅ **Simple**: 2-step setup, then just `cost-katana chat`  
 ✅ **Universal**: Works with all AI providers  
 ✅ **Cost-Aware**: See costs in real-time  
-✅ **Optimized**: Built-in 70-95% cost reduction  
+✅ **Optimized**: Built-in 40-75% cost reduction  
 ✅ **Tracked**: Everything logged to dashboard  
 ✅ **Beautiful**: Clean, colorful terminal UI  
 
