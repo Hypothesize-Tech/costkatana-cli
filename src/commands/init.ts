@@ -165,7 +165,7 @@ async function collectConfiguration(options: any): Promise<any> {
         type: 'input',
         name: 'baseUrl',
         message: 'Enter base URL:',
-        default: 'https://cost-katana-backend.store',
+        default: 'https://api.costkatana.com',
       },
     ]);
     config.baseUrl = baseUrl;

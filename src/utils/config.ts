@@ -44,7 +44,7 @@ export class ConfigManager {
         },
         baseUrl: {
           type: 'string',
-          default: 'https://cost-katana-backend.store',
+          default: 'https://api.costkatana.com',
         },
         projectName: {
           type: 'string',
@@ -214,7 +214,7 @@ export class ConfigManager {
   createSampleConfig(): CLIConfig {
     return {
       apiKey: 'your_api_key_here',
-      baseUrl: 'https://cost-katana-backend.store',
+      baseUrl: 'https://api.costkatana.com',
       projectName: 'My AI Project',
       defaultModel: 'gpt-4',
       defaultTemperature: 0.7,

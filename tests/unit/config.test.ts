@@ -25,7 +25,7 @@ describe('ConfigManager', () => {
     // Create a fresh config manager for each test
     tempConfigPath = '/tmp/test-config.json';
     configManager = new ConfigManager(tempConfigPath);
-    
+
     // Mock path.resolve to return our temp path
     (path.resolve as jest.Mock).mockReturnValue(tempConfigPath);
   });
@@ -41,7 +41,7 @@ describe('ConfigManager', () => {
 
     it('should initialize with default values', () => {
       const config = configManager.getAll();
-      expect(config.baseUrl).toBe('https://cost-katana-backend.store');
+      expect(config.baseUrl).toBe('https://api.costkatana.com');
       expect(config.defaultModel).toBe('gpt-4');
       expect(config.defaultTemperature).toBe(0.7);
       expect(config.defaultMaxTokens).toBe(2000);
@@ -53,7 +53,7 @@ describe('ConfigManager', () => {
     it('should set and get configuration values', () => {
       configManager.set('apiKey', 'test-key');
       configManager.set('baseUrl', 'https://test.com');
-      
+
       expect(configManager.get('apiKey')).toBe('test-key');
       expect(configManager.get('baseUrl')).toBe('https://test.com');
     });
@@ -73,9 +73,9 @@ describe('ConfigManager', () => {
     it('should delete specific configuration keys', () => {
       configManager.set('apiKey', 'test-key');
       configManager.set('baseUrl', 'https://test.com');
-      
+
       configManager.delete('apiKey');
-      
+
       expect(configManager.has('apiKey')).toBe(false);
       expect(configManager.has('baseUrl')).toBe(true);
     });
@@ -83,13 +83,13 @@ describe('ConfigManager', () => {
     it('should clear all configuration', () => {
       configManager.set('apiKey', 'test-key');
       configManager.set('baseUrl', 'https://test.com');
-      
+
       configManager.clear();
-      
+
       expect(configManager.has('apiKey')).toBe(false);
       // baseUrl should still exist with default value after clear
       expect(configManager.has('baseUrl')).toBe(true);
-      expect(configManager.get('baseUrl')).toBe('https://cost-katana-backend.store');
+      expect(configManager.get('baseUrl')).toBe('https://api.costkatana.com');
     });
   });
 
@@ -97,9 +97,9 @@ describe('ConfigManager', () => {
     it('should return all configuration values', () => {
       configManager.set('apiKey', 'test-key');
       configManager.set('baseUrl', 'https://test.com');
-      
+
       const allConfig = configManager.getAll();
-      
+
       expect(allConfig.apiKey).toBe('test-key');
       expect(allConfig.baseUrl).toBe('https://test.com');
       expect(allConfig.defaultModel).toBe('gpt-4'); // default value
@@ -123,7 +123,9 @@ describe('ConfigManager', () => {
       };
 
       (fs.existsSync as jest.Mock).mockReturnValue(true);
-      (fs.readFileSync as jest.Mock).mockReturnValue(JSON.stringify(mockConfigData));
+      (fs.readFileSync as jest.Mock).mockReturnValue(
+        JSON.stringify(mockConfigData)
+      );
 
       const result = configManager.loadFromFile('/path/to/config.json');
 
@@ -165,7 +167,7 @@ describe('ConfigManager', () => {
       expect(result).toBe(true);
       expect(fs.mkdirSync).toHaveBeenCalled();
       expect(fs.writeFileSync).toHaveBeenCalled();
-      
+
       const writeCall = (fs.writeFileSync as jest.Mock).mock.calls[0];
       const writtenContent = writeCall[1];
       expect(writtenContent).toContain('test-key');
@@ -189,7 +191,7 @@ describe('ConfigManager', () => {
       const sampleConfig = configManager.createSampleConfig();
 
       expect(sampleConfig.apiKey).toBe('your_api_key_here');
-      expect(sampleConfig.baseUrl).toBe('https://cost-katana-backend.store');
+      expect(sampleConfig.baseUrl).toBe('https://api.costkatana.com');
       expect(sampleConfig.defaultModel).toBe('gpt-4');
       expect(sampleConfig.defaultTemperature).toBe(0.7);
       expect(sampleConfig.defaultMaxTokens).toBe(2000);
@@ -223,9 +225,15 @@ describe('ConfigManager', () => {
 
       expect(result.isValid).toBe(false);
       expect(result.errors).toContain('API key is required');
-      expect(result.errors).toContain('Default temperature must be between 0 and 2');
-      expect(result.errors).toContain('Default max tokens must be greater than 0');
-      expect(result.errors).toContain('Cost limit per day must be greater than 0');
+      expect(result.errors).toContain(
+        'Default temperature must be between 0 and 2'
+      );
+      expect(result.errors).toContain(
+        'Default max tokens must be greater than 0'
+      );
+      expect(result.errors).toContain(
+        'Cost limit per day must be greater than 0'
+      );
     });
   });
 
@@ -252,7 +260,7 @@ describe('ConfigManager', () => {
       const env = configManager.exportAsEnv();
 
       expect(env.API_KEY).toBeUndefined();
-      expect(env.COST_KATANA_BASE_URL).toBe('https://cost-katana-backend.store');
+      expect(env.COST_KATANA_BASE_URL).toBe('https://api.costkatana.com');
     });
   });
-}); 
+});
