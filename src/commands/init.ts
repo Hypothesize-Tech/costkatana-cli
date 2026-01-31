@@ -240,12 +240,12 @@ async function collectAdvancedConfiguration(config: any) {
   ]);
   config.costLimitPerDay = costLimit;
 
-  // Features
+  // Features (usage/cost tracking is always on; no option to disable)
   const { features } = await inquirer.prompt([
     {
       type: 'checkbox',
       name: 'features',
-      message: 'Enable features:',
+      message: 'Enable features (usage & cost tracking is always on):',
       choices: [
         { name: 'Analytics', value: 'analytics', checked: true },
         { name: 'Optimization', value: 'optimization', checked: true },
@@ -300,6 +300,11 @@ function displayNextSteps() {
 
   console.log(
     chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+  );
+  console.log(
+    chalk.gray(
+      '   Usage and cost tracking is always on (no configuration required).'
+    )
   );
   console.log(chalk.blue('💡 Tip: Run "cost-katana --help" for more commands'));
   console.log(

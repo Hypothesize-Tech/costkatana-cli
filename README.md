@@ -36,7 +36,7 @@ AI: Here's a Python function...
 💰 Session: $0.0023
 ```
 
-**That's it.** You're now chatting with AI and tracking every cent.
+**That's it.** You're now chatting with AI and tracking every cent. Usage and cost tracking is always on—there is no option to disable it (required for usage attribution and cost visibility).
 
 ---
 

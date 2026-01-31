@@ -4,6 +4,10 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { OPENAI } from '../constants/models';
 
+/**
+ * CLI configuration. Usage and cost tracking is always on; there is no option to disable it
+ * (required for usage attribution and cost visibility).
+ */
 export interface CLIConfig {
   apiKey?: string;
   baseUrl?: string;

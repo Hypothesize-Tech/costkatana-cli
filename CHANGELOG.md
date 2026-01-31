@@ -2,6 +2,13 @@
 
 All notable changes to Cost Katana CLI will be documented in this file.
 
+## [2.2.5] - 2025-01-31
+
+### Changed
+
+- **Tracking is always on**: Aligned with cost-katana core; usage and cost tracking cannot be disabled. Documentation and init/track command copy updated to state that tracking is always on (no configuration required).
+- Bumped `cost-katana` dependency to `^2.2.0`.
+
 ## [2.0.0] - 2025-01-XX
 
 ### 🚀 Major Release: Complete Simplification

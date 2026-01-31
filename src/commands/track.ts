@@ -8,7 +8,9 @@ import axios from 'axios';
 export function trackCommand(program: Command) {
   program
     .command('track')
-    .description('📦 Track requests manually for cost monitoring')
+    .description(
+      '📦 Track requests manually for cost monitoring (CLI usage is also auto-tracked; no option to disable)'
+    )
     .option('-m, --model <model>', 'AI model used (e.g., gpt-4, claude-3)')
     .option('-t, --tokens <number>', 'Number of tokens used')
     .option('-p, --project <project>', 'Project name')
