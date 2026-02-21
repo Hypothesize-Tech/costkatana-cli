@@ -1360,7 +1360,32 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
   },
 
   // === Anthropic Models ===
-  // === Claude 4.5 Series (Latest) ===
+  // === Claude 4.6 Series (Latest) ===
+  {
+    id: 'claude-sonnet-4-6',
+    name: 'Claude Sonnet 4.6',
+    provider: 'Anthropic',
+    available: true,
+    maxTokens: 64000,
+    contextLength: 200000,
+    pricing: { input: 3.0, output: 15.0 },
+    capabilities: [
+      'text',
+      'vision',
+      'multimodal',
+      'reasoning',
+      'coding',
+      'agents',
+      'extended-thinking',
+      'multilingual',
+      'computer-use',
+    ],
+    category: 'multimodal',
+    isLatest: true,
+    notes:
+      'Latest Claude Sonnet model. Full upgrade for coding, computer use, long-context reasoning, agents. 1M context (beta). Same pricing as 4.5',
+  },
+  // === Claude 4.5 Series ===
   {
     id: 'claude-sonnet-4-5-20250929',
     name: 'Claude Sonnet 4.5',
@@ -1380,7 +1405,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
       'multilingual',
     ],
     category: 'multimodal',
-    isLatest: true,
+    isLatest: false,
     notes:
       'Latest Claude Sonnet model with enhanced capabilities and 1M context window support (beta). Reliable knowledge cutoff: Jan 2025. Training data cutoff: Jul 2025. Max output: 64K tokens',
   },
@@ -1403,7 +1428,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
       'multilingual',
     ],
     category: 'multimodal',
-    isLatest: true,
+    isLatest: false,
     notes:
       'Alias for claude-sonnet-4-5-20250929 - automatically points to latest snapshot',
   },
@@ -3277,6 +3302,30 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
     notes: 'Amazon Titan Text Embeddings V2 via AWS Bedrock',
   },
   {
+    id: 'anthropic.claude-sonnet-4-6-v1:0',
+    name: 'Claude Sonnet 4.6 (Bedrock)',
+    provider: 'AWS Bedrock',
+    available: true,
+    maxTokens: 64000,
+    contextLength: 200000,
+    pricing: { input: 3.3, output: 16.5 },
+    capabilities: [
+      'text',
+      'vision',
+      'multimodal',
+      'reasoning',
+      'coding',
+      'agents',
+      'extended-thinking',
+      'multilingual',
+      'computer-use',
+    ],
+    category: 'multimodal',
+    isLatest: true,
+    notes:
+      'Claude Sonnet 4.6 on AWS Bedrock (Geo/In-region). Latest Sonnet. 1M context (beta). Cache read: $0.33/1M. Global: $3/$15 per 1M',
+  },
+  {
     id: 'anthropic.claude-sonnet-4-5-v1:0',
     name: 'Claude Sonnet 4.5 (Bedrock)',
     provider: 'AWS Bedrock',
@@ -3293,7 +3342,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
       'multilingual',
     ],
     category: 'multimodal',
-    isLatest: true,
+    isLatest: false,
     notes:
       'Claude Sonnet 4.5 on AWS Bedrock (Geo/In-region) - Input: $3.3/1M, Output: $16.5/1M. Batch: $1.65/$8.25 per 1M. Cache (5m write): $4.125/1M, Cache (1h write): $6.6/1M, Cache read: $0.33/1M. Global: $3/$15 per 1M',
   },

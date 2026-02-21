@@ -255,6 +255,7 @@ export class ConfigManager {
         anthropic: {
           priority: 2,
           models: [
+            'claude-sonnet-4-6',
             'claude-opus-4-6',
             'claude-opus-4-20250514',
             'claude-sonnet-4-20250514',
