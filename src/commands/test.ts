@@ -98,7 +98,7 @@ async function testConnectivity(): Promise<boolean> {
       return false;
     }
 
-    const response = await axios.get(`${baseUrl}/health`, {
+    const response = await axios.get(`${baseUrl}/api/health`, {
       headers: {
         Authorization: `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
