@@ -96,6 +96,9 @@ temp/
 test-results/
 test-coverage/
 
+# Local npm auth (never commit tokens)
+.npmrc
+
 # Config files that might contain secrets
 config.json
 config.local.json

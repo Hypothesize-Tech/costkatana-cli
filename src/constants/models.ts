@@ -305,7 +305,7 @@ export namespace AWS_BEDROCK {
     'global.anthropic.claude-opus-4-5-20250514-v1:0';
 
   // Meta Llama Models on Bedrock
-  export const LLAMA_3_2_1B_INSTRUCT = 'meta.llama3-2-1b-instruct-v1:0';
+  export const LLAMA_3_2_1B_INSTRUCT = 'meta.llama4-scout-17b-instruct-v1:0';
   export const LLAMA_3_2_3B_INSTRUCT = 'meta.llama3-2-3b-instruct-v1:0';
   export const LLAMA_3_2_11B_INSTRUCT = 'meta.llama3-2-11b-instruct-v1:0';
   export const LLAMA_3_2_90B_INSTRUCT = 'meta.llama3-2-90b-instruct-v1:0';

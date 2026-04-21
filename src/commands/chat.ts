@@ -17,6 +17,14 @@ export function chatCommand(program: Command) {
     .option('-f, --file <path>', 'Load conversation from file')
     .option('-o, --output <path>', 'Save conversation to file')
     .option('--no-history', 'Disable conversation history')
+    .option(
+      '--thinking',
+      'Enable Claude extended thinking for supported models (budget auto-sized per task)'
+    )
+    .option(
+      '--thinking-effort <level>',
+      'Adaptive thinking effort: low | medium | high | max'
+    )
     .action(async (options) => {
       try {
         await handleChat(options);
@@ -43,6 +51,8 @@ class ChatSession {
   private baseUrl: string;
   private apiKey: string;
   private historyEnabled: boolean;
+  private thinkingEnabled: boolean;
+  private thinkingEffort?: 'low' | 'medium' | 'high' | 'max';
 
   constructor(options: any) {
     this.model =
@@ -52,6 +62,8 @@ class ChatSession {
     this.baseUrl = configManager.get('baseUrl');
     this.apiKey = configManager.get('apiKey');
     this.historyEnabled = options.history !== false;
+    this.thinkingEnabled = Boolean(options.thinking);
+    this.thinkingEffort = options.thinkingEffort;
 
     if (!this.baseUrl || !this.apiKey) {
       console.log(chalk.red.bold('\n❌ Configuration Missing'));
@@ -292,12 +304,19 @@ class ChatSession {
       ? this.messages
       : [this.messages[0], this.messages[this.messages.length - 1]];
 
-    const requestData = {
+    const requestData: Record<string, unknown> = {
       modelId: this.model,
       message: messages[messages.length - 1].content,
       temperature: this.temperature,
       maxTokens: configManager.get('defaultMaxTokens') || 2000,
     };
+
+    if (this.thinkingEnabled) {
+      requestData.thinking = {
+        enabled: true,
+        ...(this.thinkingEffort ? { effort: this.thinkingEffort } : {}),
+      };
+    }
 
     const response = await axios.post(
       `${this.baseUrl}/api/chat/message`,

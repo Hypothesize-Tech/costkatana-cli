@@ -3616,7 +3616,7 @@ export const AVAILABLE_MODELS: ModelInfo[] = [
       'Meta Llama 3.3 Instruct (70B) on AWS Bedrock (US East Ohio) - Input: $0.72/1M, Output: $0.72/1M. Batch: $0.36/$0.36 per 1M tokens',
   },
   {
-    id: 'meta.llama3-2-1b-instruct-v1:0',
+    id: 'meta.llama4-scout-17b-instruct-v1:0',
     name: 'Llama 3.2 Instruct 1B (Bedrock)',
     provider: 'AWS Bedrock',
     available: true,

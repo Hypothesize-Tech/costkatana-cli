@@ -50,6 +50,13 @@ Start a conversation that remembers context:
 cost-katana chat
 ```
 
+**CLI flags (before you start):** use `--thinking` to enable Claude extended thinking on supported models (the gateway sizes the reasoning budget per task). Optionally set `--thinking-effort` to `low`, `medium`, `high`, or `max` (adaptive effort on Opus 4.6/4.7 and Sonnet 4.6).
+
+```bash
+cost-katana chat --thinking
+cost-katana chat --thinking --thinking-effort high
+```
+
 **In-session commands:**
 | Command | Action |
 |---------|--------|
@@ -73,6 +80,10 @@ cost-katana ask "Explain recursion" --output answer.md
 
 # Use a specific model
 cost-katana ask "Write a haiku" --model gpt-4
+
+# Claude extended thinking (supported models only; effort optional)
+cost-katana ask "Prove this inequality step by step" --thinking
+cost-katana ask "Design a migration plan" --thinking --thinking-effort medium
 ```
 
 ### Part 3: Choose Your Model
@@ -127,6 +138,8 @@ cost-katana chat                              # Start interactive chat
 cost-katana chat --model claude-3-sonnet      # Use specific model
 cost-katana chat --system "Be concise"        # Add system prompt
 cost-katana chat --cortex                     # Enable optimization
+cost-katana chat --thinking                   # Claude extended thinking (supported models)
+cost-katana chat --thinking --thinking-effort high
 ```
 
 ### Ask
@@ -135,6 +148,8 @@ cost-katana chat --cortex                     # Enable optimization
 cost-katana ask "Your question"               # Quick answer
 cost-katana ask "Question" --output file.md   # Save to file
 cost-katana ask "Question" --model gpt-4      # Use specific model
+cost-katana ask "Hard reasoning task" --thinking
+cost-katana ask "Hard reasoning task" --thinking --thinking-effort medium
 ```
 
 ### Analyze
@@ -180,13 +195,13 @@ cost-katana config set daily-limit 5          # Set spending limit
 
 ## 🤖 Supported Models
 
-| Provider | Models |
-|----------|--------|
-| **OpenAI** | GPT-5, GPT-4, GPT-4 Turbo, GPT-4o, GPT-3.5 Turbo, O1, O3 |
-| **Anthropic** | Claude Sonnet 4.5, Claude 3.5 Sonnet, Claude 3.5 Haiku, Claude 3 Opus |
-| **Google** | Gemini 2.5 Pro, Gemini 2.5 Flash, Gemini 1.5 Pro, Gemini 1.5 Flash |
-| **AWS Bedrock** | Claude, Titan, Mistral, Nova models |
-| **Others** | xAI Grok, DeepSeek, Mistral AI, Cohere, Meta Llama |
+| Provider        | Models                                                                        |
+| --------------- | ----------------------------------------------------------------------------- |
+| **OpenAI**      | GPT-5, GPT-4, GPT-4 Turbo, GPT-4o, GPT-3.5 Turbo, O1, O3                      |
+| **Anthropic**   | Claude Sonnet 4.5, Claude 3.5 Sonnet, Claude 3.5 Haiku, Claude 3 Opus         |
+| **Google**      | Gemini 2.5 Pro, Gemini 2.5 Flash, Gemini 1.5 Pro, Gemini 1.5 Flash            |
+| **AWS Bedrock** | Claude, Titan, Mistral, Nova, Meta Llama (including Llama 4 Scout on Bedrock) |
+| **Others**      | xAI Grok, DeepSeek, Mistral AI, Cohere, Meta Llama                            |
 
 Run `cost-katana models` for the complete list with pricing.
 
@@ -253,6 +268,19 @@ $ cost-katana ask "Python datetime format examples" --output cheatsheet.md
 💰 Cost: $0.0003
 ```
 
+### Reasoning-heavy questions (Claude extended thinking)
+
+Use `--thinking` for one-shot asks or an entire chat session when you want visible extended reasoning on models that support it. Tune depth with `--thinking-effort` (`low` | `medium` | `high` | `max`).
+
+```bash
+$ cost-katana ask "Walk through the edge cases for this API design" --thinking --thinking-effort medium
+> [Answer with deeper reasoning where the model supports it]
+💰 Cost: $0.00xx
+
+$ cost-katana chat --thinking --system "You are a careful reviewer."
+You: ...
+```
+
 ### Model Cost Comparison
 
 ```bash
@@ -273,12 +301,12 @@ gemini-pro         $0.0003     435       1.1s
 
 ## 💰 Cost Optimization Tips
 
-| Strategy | Savings | Command |
-|----------|---------|---------|
-| Use GPT-3.5 for simple tasks | 90% | `--model gpt-3.5-turbo` |
-| Enable Cortex for long content | 40-75% | `--cortex` |
-| Cache repeated queries | 100% | `--cache` |
-| Use Gemini for high-volume | 95% | `--model gemini-pro` |
+| Strategy                       | Savings | Command                 |
+| ------------------------------ | ------- | ----------------------- |
+| Use GPT-3.5 for simple tasks   | 90%     | `--model gpt-3.5-turbo` |
+| Enable Cortex for long content | 40-75%  | `--cortex`              |
+| Cache repeated queries         | 100%    | `--cache`               |
+| Use Gemini for high-volume     | 95%     | `--model gemini-pro`    |
 
 ```bash
 # ❌ Expensive
@@ -337,36 +365,36 @@ Explore 45+ complete examples:
 
 **🔗 [github.com/Hypothesize-Tech/costkatana-examples](https://github.com/Hypothesize-Tech/costkatana-examples)**
 
-| Section | Description |
-|---------|-------------|
-| [CLI Examples](https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/9-cli) | Complete CLI guides |
+| Section                                                                                              | Description                  |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------- |
+| [CLI Examples](https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/9-cli)            | Complete CLI guides          |
 | [Cost Tracking](https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/1-cost-tracking) | Track costs across providers |
-| [Semantic Caching](https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/14-cache) | 30-40% cost reduction |
-| [Workflows](https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/13-workflows) | Multi-step AI orchestration |
+| [Semantic Caching](https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/14-cache)     | 30-40% cost reduction        |
+| [Workflows](https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/13-workflows)        | Multi-step AI orchestration  |
 
 ---
 
 ## 🆚 Why Cost Katana CLI?
 
-| Feature | Traditional CLIs | Cost Katana CLI |
-|---------|------------------|-----------------|
-| Setup | Multiple API keys | One command: `cost-katana init` |
-| Providers | One per tool | All providers, one command |
-| Cost tracking | ❌ | ✅ Real-time |
-| Optimization | ❌ | ✅ 40-75% savings |
-| Dashboard | ❌ | ✅ Full analytics |
+| Feature       | Traditional CLIs  | Cost Katana CLI                 |
+| ------------- | ----------------- | ------------------------------- |
+| Setup         | Multiple API keys | One command: `cost-katana init` |
+| Providers     | One per tool      | All providers, one command      |
+| Cost tracking | ❌                | ✅ Real-time                    |
+| Optimization  | ❌                | ✅ 40-75% savings               |
+| Dashboard     | ❌                | ✅ Full analytics               |
 
 ---
 
 ## 📞 Support
 
-| Channel | Link |
-|---------|------|
-| **Documentation** | [docs.costkatana.com/cli](https://docs.costkatana.com/cli) |
-| **Dashboard** | [costkatana.com](https://costkatana.com) |
-| **GitHub** | [github.com/Hypothesize-Tech/costkatana-cli](https://github.com/Hypothesize-Tech/costkatana-cli) |
-| **Discord** | [discord.gg/D8nDArmKbY](https://discord.gg/D8nDArmKbY) |
-| **Email** | support@costkatana.com |
+| Channel           | Link                                                                                             |
+| ----------------- | ------------------------------------------------------------------------------------------------ |
+| **Documentation** | [docs.costkatana.com/cli](https://docs.costkatana.com/cli)                                       |
+| **Dashboard**     | [costkatana.com](https://costkatana.com)                                                         |
+| **GitHub**        | [github.com/Hypothesize-Tech/costkatana-cli](https://github.com/Hypothesize-Tech/costkatana-cli) |
+| **Discord**       | [discord.gg/D8nDArmKbY](https://discord.gg/D8nDArmKbY)                                           |
+| **Email**         | support@costkatana.com                                                                           |
 
 ---
 

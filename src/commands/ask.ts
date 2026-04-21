@@ -15,6 +15,14 @@ export function askCommand(program: Command) {
     .option('-o, --output <path>', 'Save answer to file')
     .option('--cortex', 'Enable Cortex optimization (40-75% savings)')
     .option('--cache', 'Enable caching')
+    .option(
+      '--thinking',
+      'Enable Claude extended thinking (reasoning) for supported models. Budget is chosen automatically per task.'
+    )
+    .option(
+      '--thinking-effort <level>',
+      'Adaptive thinking effort: low | medium | high | max (Opus 4.6/4.7, Sonnet 4.6 only)'
+    )
     .option('-t, --temperature <temp>', 'Temperature (0-2)', '0.7')
     .option('--max-tokens <tokens>', 'Maximum response tokens', '1000')
     .action(async (question, options) => {
@@ -51,13 +59,22 @@ async function handleAsk(question: string, options: any) {
   try {
     const startTime = Date.now();
 
-    // Make the AI request
+    // Make the AI request. When --thinking is set and the model supports it,
+    // the backend / gateway computes a reasoning budget automatically.
+    const thinkingOpts = options.thinking
+      ? {
+          enabled: true,
+          ...(options.thinkingEffort ? { effort: options.thinkingEffort } : {}),
+        }
+      : undefined;
+
     const response = await ai(model, question, {
       temperature: parseFloat(options.temperature),
       maxTokens: parseInt(options.maxTokens),
       cache: options.cache,
       cortex: options.cortex,
-    });
+      ...(thinkingOpts ? { thinking: thinkingOpts } : {}),
+    } as any);
 
     const responseTime = Date.now() - startTime;
 
