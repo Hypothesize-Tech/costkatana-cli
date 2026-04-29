@@ -243,6 +243,13 @@ export class ConfigManager {
         openai: {
           priority: 1,
           models: [
+            'gpt-5.5',
+            'gpt-5.5-pro',
+            'gpt-5.4',
+            'gpt-5.4-mini',
+            'gpt-5',
+            'gpt-5-mini',
+            'gpt-5-chat',
             'gpt-4o',
             'gpt-4o-mini',
             'gpt-4o-mini-2024-07-18',
@@ -256,6 +263,7 @@ export class ConfigManager {
           priority: 2,
           models: [
             'claude-sonnet-4-6',
+            'claude-opus-4-7',
             'claude-opus-4-6',
             'claude-opus-4-20250514',
             'claude-sonnet-4-20250514',
@@ -267,6 +275,8 @@ export class ConfigManager {
         google: {
           priority: 3,
           models: [
+            'gemini-3.1-pro',
+            'gemini-3-pro-preview',
             'gemini-2.5-pro',
             'gemini-2.5-flash',
             'gemini-2.5-flash-lite-preview',
@@ -281,6 +291,8 @@ export class ConfigManager {
             'ai21.jamba-1-5-mini-v1:0',
             'amazon.nova-micro-v1:0',
             'amazon.nova-lite-v1:0',
+            'anthropic.claude-opus-4-7-v1:0',
+            'anthropic.claude-opus-4-6-v1',
             'anthropic.claude-3-5-sonnet-20241022-v1:0',
             'anthropic.claude-3-5-haiku-20241022-v1:0',
           ],

@@ -17,11 +17,35 @@
 // ============================================================================
 
 export namespace OPENAI {
+  // GPT-5.5 / GPT-5.4 (API)
+  export const GPT_5_5 = 'gpt-5.5';
+  export const GPT_5_5_2026_04_23 = 'gpt-5.5-2026-04-23';
+  export const GPT_5_5_PRO = 'gpt-5.5-pro';
+  export const GPT_5_4 = 'gpt-5.4';
+  export const GPT_5_4_MINI = 'gpt-5.4-mini';
+
   // GPT-5.2 Series (Latest)
   export const GPT_5_2 = 'gpt-5.2';
   export const GPT_5_2_PRO = 'gpt-5.2-pro';
   export const GPT_5_2_CODEX = 'gpt-5.2-codex';
   export const GPT_5_2_CHAT_LATEST = 'gpt-5.2-chat-latest';
+
+  // GPT-5.1 Series
+  export const GPT_5_1 = 'gpt-5.1';
+  export const GPT_5_1_CODEX_MAX = 'gpt-5.1-codex-max';
+  export const GPT_5_1_CODEX = 'gpt-5.1-codex';
+  export const GPT_5_1_CODEX_MINI = 'gpt-5.1-codex-mini';
+  export const GPT_5_1_CHAT_LATEST = 'gpt-5.1-chat-latest';
+  export const GPT_5_1_SEARCH_API = 'gpt-5.1-search-api';
+
+  // GPT-5 Series
+  export const GPT_5 = 'gpt-5';
+  export const GPT_5_MINI = 'gpt-5-mini';
+  export const GPT_5_NANO = 'gpt-5-nano';
+  export const GPT_5_PRO = 'gpt-5-pro';
+  export const GPT_5_CODEX = 'gpt-5-codex';
+  export const GPT_5_CHAT = 'gpt-5-chat';
+  export const GPT_5_CHAT_LATEST = 'gpt-5-chat-latest';
 
   // GPT-4.1 Series
   export const GPT_4_1 = 'gpt-4.1';
@@ -127,9 +151,10 @@ export namespace OPENAI {
 // ============================================================================
 
 export namespace ANTHROPIC {
-  // Claude 4.6 Series (Latest)
+  // Claude 4.6 + 4.7 (Latest)
   export const CLAUDE_OPUS_4_6 = 'claude-opus-4-6';
   export const CLAUDE_OPUS_4_6_V1 = 'claude-opus-4-6-v1';
+  export const CLAUDE_OPUS_4_7 = 'claude-opus-4-7';
   export const CLAUDE_SONNET_4_6 = 'claude-sonnet-4-6';
 
   // Claude 4.5 Series
@@ -169,6 +194,12 @@ export namespace ANTHROPIC {
 // ============================================================================
 
 export namespace GOOGLE {
+  // Gemini 3 (preview / latest)
+  export const GEMINI_3_PRO_PREVIEW = 'gemini-3-pro-preview';
+  export const GEMINI_3_PRO_IMAGE_PREVIEW = 'gemini-3-pro-image-preview';
+  export const GEMINI_3_FLASH_PREVIEW = 'gemini-3-flash-preview';
+  export const GEMINI_3_1_PRO = 'gemini-3.1-pro';
+
   // Gemini 2.5 Series (Latest)
   export const GEMINI_2_5_PRO = 'gemini-2.5-pro';
   export const GEMINI_2_5_PRO_COMPUTER_USE_PREVIEW =
@@ -285,6 +316,7 @@ export namespace AWS_BEDROCK {
 
   // Claude 4 Series
   export const CLAUDE_OPUS_4_6 = 'anthropic.claude-opus-4-6-v1';
+  export const CLAUDE_OPUS_4_7_V1_0 = 'anthropic.claude-opus-4-7-v1:0';
   export const CLAUDE_SONNET_4_6 = 'anthropic.claude-sonnet-4-6-v1:0';
   export const CLAUDE_SONNET_4_5 = 'anthropic.claude-sonnet-4-5-v1:0';
   export const CLAUDE_HAIKU_4_5 = 'anthropic.claude-haiku-4-5-v1:0';
@@ -572,6 +604,15 @@ export namespace PERPLEXITY {
 }
 
 // ============================================================================
+// GROQ (Groq Cloud) MODELS
+// ============================================================================
+
+export namespace GROQ {
+  export const LLAMA_3_3_70B_VERSATILE = 'llama-3.3-70b-versatile';
+  export const LLAMA_3_1_8B_INSTANT = 'llama-3.1-8b-instant';
+}
+
+// ============================================================================
 // UTILITY FUNCTIONS
 // ============================================================================
 
@@ -591,6 +632,7 @@ Object.values(MISTRAL).forEach((v) => ALL_MODEL_VALUES.add(v as string));
 Object.values(COHERE).forEach((v) => ALL_MODEL_VALUES.add(v as string));
 Object.values(META).forEach((v) => ALL_MODEL_VALUES.add(v as string));
 Object.values(PERPLEXITY).forEach((v) => ALL_MODEL_VALUES.add(v as string));
+Object.values(GROQ).forEach((v) => ALL_MODEL_VALUES.add(v as string));
 
 /**
  * Check if a string is a known model constant value
@@ -625,6 +667,7 @@ export function getProviderFromModel(modelId: string): string {
   const cohereModels = Object.values(COHERE) as string[];
   const metaModels = Object.values(META) as string[];
   const perplexityModels = Object.values(PERPLEXITY) as string[];
+  const groqModels = Object.values(GROQ) as string[];
 
   if (openaiModels.includes(modelId)) return 'OpenAI';
   if (anthropicModels.includes(modelId)) return 'Anthropic';
@@ -636,6 +679,7 @@ export function getProviderFromModel(modelId: string): string {
   if (cohereModels.includes(modelId)) return 'Cohere';
   if (metaModels.includes(modelId)) return 'Meta';
   if (perplexityModels.includes(modelId)) return 'Perplexity';
+  if (groqModels.includes(modelId)) return 'Groq';
 
   return 'unknown';
 }
